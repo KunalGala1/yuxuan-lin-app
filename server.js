@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 
 // routes
 app.get('/', async (req, res) => {
-  res.send(`<h1>Ready to get started!</h1>`);
+  res.send(`<h1>Yuxuan Lin's Website</h1>`);
 });
 
 app.listen(PORT, () => {
