@@ -1,0 +1,33 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+.toast-notification {
+  position: fixed;
+  top: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 9999;
+
+  width: max-content;
+
+  @include l.padding(xs, sm);
+  @include t.sans;
+  @include a.boxshadow(md);
+  @include a.transition;
+  @include l.radius(sm);
+
+  color: var(--247);
+  font-size: 14px;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+  &.success {
+    background-color: var(--success);
+  }
+  &.danger {
+    background-color: var(--danger);
+  }
+}

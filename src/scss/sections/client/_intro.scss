@@ -1,0 +1,67 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+#intro {
+  padding: 30px;
+  @include l.max-width(sm);
+
+  .card {
+    display: flex;
+
+    margin-bottom: 30px;
+
+    img {
+      aspect-ratio: 1/1;
+      width: 100%;
+      @include a.boxshadow(md);
+    }
+
+    .block:first-child {
+      width: 90%;
+    }
+
+    .block + .block {
+      padding-left: 20px;
+    }
+
+    .text {
+      @include t.serif;
+      h2 {
+        margin-bottom: 8px;
+
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--main);
+      }
+
+      h3 {
+        margin-bottom: 8px;
+
+        font-size: 18px;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--second);
+      }
+
+      p {
+        font-size: 16px;
+        color: var(--main-dark);
+      }
+    }
+  }
+
+  a {
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+
+    color: var(--link);
+
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

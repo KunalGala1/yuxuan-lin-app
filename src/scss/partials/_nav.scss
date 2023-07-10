@@ -1,0 +1,104 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+nav {
+  background-color: var(--second);
+  @include t.sans;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  @include l.min(navBar) {
+    justify-content: center;
+  }
+  padding: 0 25px;
+  align-items: center;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  @include a.text_shadow;
+  @include a.boxshadow(sharp);
+
+  ul {
+    display: flex;
+    position: relative;
+    @include l.min(navBar) {
+      justify-content: center;
+    }
+    width: 100%;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    overflow-y: hidden;
+    @include a.hide_scrollbar;
+
+    $fade-amount: 2%;
+
+    li {
+      & + li {
+        margin-left: 50px;
+      }
+      &:first-child {
+        margin-left: $fade-amount;
+      }
+      &.last-child {
+        padding-right: $fade-amount;
+      }
+    }
+
+    a {
+      color: var(--200);
+      &:hover,
+      &.active {
+        color: white;
+        @include a.transition;
+      }
+    }
+
+    #gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, var(--second), transparent $fade-amount, transparent 98%, var(--second));
+
+      pointer-events: none;
+
+      @include l.min(navBar) {
+        display: none;
+      }
+    }
+  }
+}
+
+#burger {
+  @include a.boxshadow(sharp);
+  margin-left: 12px;
+
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    div {
+      background-color: white;
+      @include a.transition;
+    }
+  }
+
+  div {
+    background-color: var(--200);
+    width: 16px;
+    height: 3px;
+
+    & + div {
+      margin-top: 2px;
+    }
+  }
+
+  @include l.min(navBar) {
+    display: none;
+  }
+}

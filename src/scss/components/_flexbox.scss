@@ -1,0 +1,24 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.start {
+    justify-content: flex-start;
+  }
+  &.between {
+    justify-content: space-between;
+  }
+  &.gap {
+    gap: 30px;
+  }
+  &.stretch {
+    align-items: stretch;
+  }
+  &.top {
+    align-items: flex-start;
+  }
+}

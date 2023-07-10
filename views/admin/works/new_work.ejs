@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yuxuan Lin | Dashboard | New Event</title>
+    <%- include('../../partials/head') %>
+  </head>
+  <body class="dashboard">
+    <%- include('../../partials/aside') %>
+    <script>
+      document.querySelector('aside .middle ul li:nth-child(2) a').classList.add('active');
+    </script>
+    <main>
+      <h1 class="secondary-header">New Work</h1>
+      <%- include('../../partials/form', { metadata: { method: 'post', action: '/dashboard/works', name: 'work' }, fields: [ { name: 'title', required: true, }, { type: 'hidden', name: 'slug' }, {name:'subtitle'} , {tag: 'select', name: 'tag', options: ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral']} , {name:'instrumentation',label:`detailed insturmentation (fl.cl...)`},{name:'duration'},{name:'year'},{tag:'textarea',name:'commission',label:'commission information'},{tag:'textarea',name:'programNote',label:'program note'},{tag:'textarea',name:'performanceNote',label:'performance note'},{type:'url',name:'url',label:'URL to purchase music'} ] }) %>
+    </main>
+
+    <script src="/js/previewImage.js" defer></script>
+  </body>
+</html>

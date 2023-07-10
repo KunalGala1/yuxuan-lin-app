@@ -1,0 +1,39 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+#hero {
+  padding: 30px;
+  .content {
+    @include l.max-width(lg);
+
+    @include l.min(md) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      blockquote {
+        padding: 60px;
+      }
+    }
+  }
+
+  background-color: var(--main-light);
+
+  img {
+    margin: 0 auto;
+    width: 100%;
+
+    @include a.boxshadow(md);
+
+    margin-bottom: 30px;
+
+    @include l.radius(sm);
+  }
+
+  blockquote {
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    color: var(--60);
+  }
+}

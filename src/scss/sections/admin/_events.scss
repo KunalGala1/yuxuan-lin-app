@@ -1,0 +1,17 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+#events[data-dashboard] {
+  .no-padding {
+    padding: 0;
+  }
+
+  .box {
+    max-width: 75px;
+  }
+  img {
+    object-fit: cover;
+    object-position: center;
+  }
+}

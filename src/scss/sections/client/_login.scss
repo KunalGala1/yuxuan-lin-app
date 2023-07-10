@@ -1,0 +1,41 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+#login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    @include t.sans;
+    color: var(--main-dark);
+    font-size: 24px;
+    font-weight: 400;
+  }
+  form {
+    width: 500px;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+
+  p,
+  a {
+    @include t.sans;
+    margin: 15px 0;
+    color: var(--60);
+  }
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  a {
+    &:hover {
+      color: var(--100);
+      @include a.transition;
+    }
+  }
+}

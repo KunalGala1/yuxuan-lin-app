@@ -1,0 +1,84 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+blockquote {
+  font-style: italic;
+  @include t.serif;
+}
+
+.engraved {
+  @include t.fancy();
+  color: var(--engraved);
+  font-weight: 600;
+  font-size: 25px;
+  font-style: italic;
+  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
+  text-align: left;
+}
+
+.main-header {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  color: var(--grey);
+  text-align: center;
+  @include t.sans;
+}
+
+.secondary-header {
+  color: var(--mid-grey);
+  text-align: center;
+  @include t.serif;
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--light-grey);
+    margin: 30px auto;
+  }
+}
+
+.third-header {
+  color: var(--main);
+  @include t.serif;
+  font-size: 24px;
+}
+
+.event-header {
+  @include t.serif;
+  color: var(--off-white);
+  font-size: 80px;
+  text-align: center;
+  margin: 100px 0;
+}
+
+.table-link {
+  color: var(--form);
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+  display: block;
+  width: max-content;
+  margin: 15px 0 30px;
+
+  i {
+    margin-left: 5px;
+  }
+}
+
+.edit-link {
+  color: var(--form);
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+  display: block;
+  width: max-content;
+  margin: 15px auto 30px;
+
+  i {
+    margin-left: 5px;
+  }
+}

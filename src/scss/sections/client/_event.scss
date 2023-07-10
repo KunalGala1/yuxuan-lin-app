@@ -1,0 +1,39 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+#event {
+  padding-bottom: 60px;
+  .banner {
+    background-color: rgba(50, 50, 50, 0.5);
+    overflow: hidden;
+    img {
+      max-height: 100vh;
+      object-position: center;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  .header {
+    @include l.max-width(md);
+    span {
+      @include t.serif;
+      display: block;
+      font-style: italic;
+      color: var(--8);
+    }
+    margin-bottom: 60px;
+
+    @include l.padding(0, md);
+  }
+  .content {
+    @include l.max-width(md);
+    color: var(--8);
+    font-size: 18px;
+    p + p {
+      margin-top: 30px;
+    }
+
+    @include l.padding(0, md);
+  }
+}

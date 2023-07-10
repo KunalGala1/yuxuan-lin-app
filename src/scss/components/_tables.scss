@@ -1,0 +1,41 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+.primary-table {
+  color: var(--40);
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid var(--200);
+  border-radius: 4px;
+  overflow: hidden;
+
+  @include t.util;
+
+  td,
+  th {
+    border: 1px solid var(--200);
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+  }
+
+  col.icon {
+    width: 1%;
+  }
+
+  a.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 100%;
+  }
+}

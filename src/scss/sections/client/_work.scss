@@ -1,0 +1,140 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+main[name='work'] {
+  .wrapper {
+    // Layout
+
+    @include l.max-width(md);
+
+    @include l.padding(lg);
+    padding-top: 120px;
+    @include l.max(md) {
+      @include l.padding(md);
+    }
+    @include l.max(sm) {
+      @include l.padding(sm);
+    }
+
+    // Heading
+    .heading {
+      text-align: center;
+      .title {
+        font-size: 110px;
+        @include a.text_shadow;
+        @include t.serif;
+        @include l.max(md) {
+          font-size: 40px;
+        }
+        @include l.max(sm) {
+          font-size: 30px;
+        }
+        font-weight: 900;
+      }
+      .subtitle {
+        margin-top: 30px;
+        font-weight: 400;
+        @include t.serif;
+        font-style: italic;
+        font-size: 24px;
+        @include l.max(md) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    // Metadata
+    .metadata {
+      color: rgb(50, 50, 50);
+      border-radius: 10px;
+      margin-top: 60px;
+      background-color: rgba(150, 150, 150, 0.1);
+      @include a.boxshadow(dark);
+
+      @include t.util;
+
+      .metadata-wrapper {
+        @include l.padding(md);
+        @include l.max(md) {
+          @include l.padding(sm);
+        }
+
+        span {
+          color: var(--160);
+        }
+      }
+
+      .commission-info {
+        margin-top: 45px;
+        line-height: 2;
+      }
+
+      .purchase-link-wrapper {
+        border-radius: 0 0 10px 10px;
+
+        margin-top: 45px;
+        background-color: var(--main);
+        @include l.padding(sm);
+        text-align: center;
+        color: white;
+        p {
+          font-weight: 500;
+          a {
+            text-decoration: underline;
+            &:hover {
+              text-decoration: none;
+              color: var(--main-light);
+            }
+          }
+        }
+      }
+    }
+
+    // Program Note
+    .program-note {
+      line-height: 2;
+      margin-top: 100px;
+      @include t.serif;
+      p {
+        font-size: 17px;
+      }
+      p + p {
+        margin-top: 30px;
+      }
+      h3 {
+        margin-bottom: 30px;
+        font-weight: 900;
+        font-size: 20px;
+      }
+    }
+
+    // Performance Note
+    .performance-note {
+      line-height: 2;
+      hr {
+        margin: 100px 0;
+        border-top: solid 1px rgba(0, 0, 0, 0.1);
+      }
+      p {
+        font-size: 17px;
+      }
+      p + p {
+        margin-top: 30px;
+      }
+      h3 {
+        margin-bottom: 30px;
+        font-weight: 900;
+        font-size: 20px;
+      }
+    }
+
+    // Btn Wrapper
+    .btn-wrapper {
+      margin-top: 60px;
+      .btn-primary {
+        margin: 0;
+      }
+    }
+  }
+}

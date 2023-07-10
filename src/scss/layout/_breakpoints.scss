@@ -1,0 +1,42 @@
+$bp: (
+  xs: 340px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+
+  // Custom breakpoints
+  navBar: 650px,
+) !default;
+
+//mixin for media queries
+@mixin min($key, $tune: 0px) {
+  @if map-has-key($bp, $key) {
+    @media (min-width: calc(map-get($bp, $key) + $tune)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $key) {
+      @content;
+    }
+  }
+}
+
+@mixin max($key, $tune: 0px) {
+  @if map-has-key($bp, $key) {
+    @media (max-width: calc(map-get($bp, $key) + $tune)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $key) {
+      @content;
+    }
+  }
+}
+
+@mixin minmax($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}

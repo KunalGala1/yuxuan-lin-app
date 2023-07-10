@@ -1,0 +1,87 @@
+<% const body = JSON.parse(work.body); %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yuxuan Lin | <%= body.title %></title>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/header') %> <%- include('../partials/nav') %>
+    <script>
+      document.querySelector('nav ul li:nth-child(3) a').classList.add('active');
+    </script>
+    <main name="work">
+      <div class="wrapper">
+        <div class="heading">
+          <h1 class="title"><%= body.title %></h1>
+          <% if (body.subtitle != '') { %>
+          <h2 class="subtitle"><%= body.subtitle %></h2>
+          <% } %>
+        </div>
+        <div class="metadata">
+          <div class="metadata-wrapper">
+            <% if (body.instrumentation != '') { %>
+            <p class="detailed-info">
+              <span>Instrumentation:</span>
+              <%= body.instrumentation %>
+            </p>
+            <% } %> <% if (body.duration != '') { %>
+            <p class="duration">
+              <span>Duration:</span>
+              <%= body.duration %>
+            </p>
+            <% } %> <% if (body.year != '') { %>
+            <p class="year">
+              <span>Year(s) of Composition:</span>
+              <%= body.year %>
+            </p>
+            <% } %> <% if (body.commission != '') { %>
+            <div class="commission-info"><%- body.commission %></div>
+            <% } %>
+          </div>
+          <% if (body.url != '') { %>
+          <div class="purchase-link-wrapper">
+            <p>
+              Available for purchase at:
+              <a href="<%= body.url %>" target="_blank"><%= body.url %></a>
+            </p>
+          </div>
+          <% } %>
+        </div>
+        <% if (body.programNote != '') { %>
+        <div class="program-note">
+          <h3>Program Note</h3>
+          <p><%- body.programNote %></p>
+        </div>
+        <% } %> <% if (body.performanceNote != '') { %>
+        <div class="performance-note">
+          <hr />
+          <h3>Performance Note</h3>
+          <p><%- body.performanceNote %></p>
+        </div>
+        <% } %>
+        <div class="btn-wrapper">
+          <a href="/works" class="btn btn-primary">Back to Works</a>
+        </div>
+      </div>
+    </main>
+    <%- include('../partials/footer') %>
+  </body>
+
+  <script></script>
+</html>
+
+<script type="module">
+  import { convertTime } from '../js/utils.js';
+  import { formatDate } from '../js/utils.js';
+
+  // Convert time to 12 hour format
+  document.querySelector('span.time').innerText = convertTime(document.querySelector('span.time').innerText);
+
+  // Format date
+  document.querySelector('span.date').innerText = formatDate(document.querySelector('span.date').innerText);
+</script>

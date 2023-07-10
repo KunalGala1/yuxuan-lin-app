@@ -1,0 +1,28 @@
+<% console.log(lang); %> <% const id = data._id; const body = JSON.parse(data.body); const quote = body['quote_' + lang]; const bio = body['bio_' + lang]; %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head') %>
+    <title>Yuxuan Lin | Bio</title>
+  </head>
+  <body>
+    <%- include('../partials/header') %> <%- include('../partials/nav') %>
+    <script>
+      document.querySelector('nav ul li:nth-child(2) a').classList.add('active');
+    </script>
+
+    <main id="bio">
+      <div class="img-parent">
+        <img src="/img/main.jpg" alt="headshot" />
+        <blockquote class="engraved">&ldquo;<%= quote %>&rdquo;</blockquote>
+      </div>
+      <div class="text"><%- bio %></div>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

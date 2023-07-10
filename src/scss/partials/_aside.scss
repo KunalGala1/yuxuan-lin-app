@@ -1,0 +1,45 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: map-get(l.$size, aside);
+  height: 100vh;
+  background-color: var(--second);
+  display: flex;
+  flex-direction: column;
+  @include t.sans;
+  padding: 10px 0;
+  text-transform: capitalize;
+
+  a {
+    display: block;
+    padding: 15px;
+    color: var(--main-light);
+    span {
+      margin-left: 5px;
+    }
+
+    &:hover {
+      background-color: var(--main);
+      color: white;
+    }
+
+    &.active {
+      border-left: solid 5px var(--main);
+    }
+
+    @include a.transition;
+  }
+
+  .top {
+  }
+  .middle {
+  }
+  .bottom {
+    margin-top: auto;
+  }
+}

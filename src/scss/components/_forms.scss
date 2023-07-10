@@ -1,0 +1,135 @@
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
+
+.primary-form {
+  .item {
+    &:first-child {
+      display: flex;
+      justify-content: space-between;
+      .subitem {
+        width: 100%;
+        & + .subitem {
+          margin-left: 30px;
+        }
+      }
+    }
+
+    & + .item {
+      margin-top: 17.5px;
+    }
+
+    &:last-child {
+      margin-top: 60px;
+      button {
+        width: 100%;
+      }
+    }
+
+    .subitem {
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--main-dark);
+        @include t.util;
+        font-size: 12px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid rgba(210, 210, 210, 0.15);
+        background-color: var(--second);
+        color: var(--main-light);
+        @include t.sans;
+        font-size: 18px;
+        resize: none;
+        &:focus {
+          outline: none;
+          border-color: var(--60);
+        }
+      }
+
+      textarea {
+        height: 200px;
+      }
+    }
+  }
+}
+
+.dashboard-form {
+  @include l.max-width(md);
+
+  input[type='hidden'] + .item {
+    margin-top: 17.5px;
+  }
+
+  .item {
+    & + .item {
+      margin-top: 17.5px;
+    }
+
+    &.flex {
+      display: flex;
+      justify-content: flex-end;
+      .subitem + .subitem {
+        margin-left: 10px;
+      }
+    }
+
+    .subitem {
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--main);
+        @include t.util;
+        font-size: 12px;
+      }
+
+      label,
+      select {
+        text-transform: capitalize;
+      }
+      select option {
+        text-transform: capitalize;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid rgba(210, 210, 210, 0.15);
+
+        background-color: var(--main-dark);
+        color: var(--247);
+
+        @include t.util;
+        @include l.radius(sm);
+
+        font-size: 18px;
+        resize: none;
+
+        &:focus {
+          outline: none;
+          border-color: rgba(50, 50, 50, 0.15);
+        }
+      }
+
+      textarea {
+        height: 100px;
+
+        &.lg {
+          height: 400px;
+        }
+      }
+
+      img {
+        max-width: 400px;
+        margin: 15px 0;
+        @include l.radius(md);
+      }
+    }
+  }
+}

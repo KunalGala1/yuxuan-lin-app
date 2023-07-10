@@ -1,0 +1,73 @@
+$max-width: 1000px;
+
+$mw: (
+  xxs: 250px,
+  xs: 350px,
+  sm: 767.98px,
+  md: 991.98px,
+  lg: 1199.98px,
+  xl: 1399.98px,
+) !default;
+
+@mixin max-width($key, $margin-horitonzal: auto, $margin-vertical: 0) {
+  @if map-has-key($mw, $key) {
+    max-width: map-get($mw, $key);
+  } @else {
+    max-width: $key;
+  }
+
+  margin-left: $margin-horitonzal;
+  margin-right: $margin-horitonzal;
+
+  margin-top: $margin-vertical;
+  margin-bottom: $margin-vertical;
+}
+
+$size: (
+  aside: 200px,
+  login: 400px,
+  nav: 180px,
+);
+
+$padding: (
+  xxs: 2.5px,
+  xs: 5px,
+  sm: 15px,
+  md: 30px,
+  lg: 60px,
+  xl: 120px,
+) !default;
+
+@mixin padding($vertical-padding, $horizontal-padding: $vertical-padding) {
+  @if map-has-key($padding, $vertical-padding) {
+    padding-top: map-get($padding, $vertical-padding);
+    padding-bottom: map-get($padding, $vertical-padding);
+  } @else {
+    padding-top: $vertical-padding;
+    padding-bottom: $vertical-padding;
+  }
+  @if map-has-key($padding, $horizontal-padding) {
+    padding-left: map-get($padding, $horizontal-padding);
+    padding-right: map-get($padding, $horizontal-padding);
+  } @else {
+    padding-left: $horizontal-padding;
+    padding-right: $horizontal-padding;
+  }
+}
+
+$radius: (
+  xxs: 0.1rem,
+  xs: 0.2rem,
+  sm: 5px,
+  md: 10px,
+  lg: 15px,
+  xl: 0.6rem,
+) !default;
+
+@mixin radius($key) {
+  @if map-has-key($radius, $key) {
+    border-radius: map-get($radius, $key);
+  } @else {
+    border-radius: $key;
+  }
+}

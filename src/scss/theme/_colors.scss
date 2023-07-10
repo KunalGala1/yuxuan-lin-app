@@ -1,0 +1,52 @@
+:root {
+  /* Utility */
+  --success: #198754;
+  --success-hover: #198754;
+  --danger: #b00020;
+  --danger-hover: #b00020;
+
+  /* Components */
+
+  // Buttons
+  --btn-primary: rgb(40, 76, 92);
+  --btn-primary-hover: rgb(77, 132, 139);
+
+  // Typography
+  --engraved: rgb(49, 139, 139);
+  --link: #618bdb;
+  --footer-link-hover: #36124a;
+
+  /* Monochrome */
+  --247: rgb(247, 247, 247);
+  --235: rgb(235, 235, 235);
+  --220: rgb(220, 220, 220);
+  --200: rgb(200, 200, 200);
+  --180: rgb(180, 180, 180);
+  --160: rgb(160, 160, 160);
+  --140: rgb(140, 140, 140);
+  --120: rgb(120, 120, 120);
+  --100: rgb(100, 100, 100);
+  --80: rgb(80, 80, 80);
+  --60: rgb(60, 60, 60);
+  --40: rgb(40, 40, 40);
+  --20: rgb(20, 20, 20);
+  --8: rgb(8, 8, 8);
+
+  /* Theme Colors */
+
+  // Main =======
+  --main: rgb(85, 130, 167);
+
+  // ...light
+  --main-light: rgb(213, 226, 232);
+  --main-lighter: rgba(213, 226, 232, 0.5);
+
+  // ...dark
+  --main-dark: rgb(18, 25, 62);
+
+  // Second =======
+  --second: rgb(50, 81, 126);
+
+  // Third =======
+  --third: rgb(68, 105, 160);
+}

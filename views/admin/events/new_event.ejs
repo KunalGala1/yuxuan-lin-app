@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yuxuan Lin | Dashboard | New Event</title>
+    <%- include('../../partials/head') %>
+  </head>
+  <body class="dashboard">
+    <%- include('../../partials/aside') %>
+    <script>
+      document.querySelector('aside .middle ul li:nth-child(1) a').classList.add('active');
+    </script>
+    <main>
+      <h1 class="secondary-header">New Event</h1>
+
+      <!-- New Event Form -->
+      <%- include('../../partials/form', { metadata: { method: 'post', action: '/dashboard/events', enctype: 'multipart/form-data', name: 'event' }, fields: [ { name: 'title', required: true, }, { type: 'hidden', name: 'slug' }, { tag: 'textarea', name: 'shortDescription', label: 'short description', }, { type: 'date', }, { type: 'time', }, { type: 'url', label: 'URL' }, { name: 'location' }, { type: 'file', label: 'image', }, { tag: 'textarea', name: 'longDescription', label: 'long description', height: 500 } ] }) %>
+    </main>
+
+    <script src="/js/previewImage.js" defer></script>
+  </body>
+</html>
