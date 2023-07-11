@@ -7,6 +7,8 @@ const Event = require('../models/Event');
 const Work = require('../models/Work');
 
 router.get('/', async (req, res) => {
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+
   res.render('client/index');
 });
 
@@ -18,12 +20,16 @@ router.get('/bio', async (req, res) => {
 
 router.get('/works', async (req, res) => {
   const works = await Work.find();
-  res.render('client/works', { works });
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+  console.log(lang);
+  res.render('client/works', { works, lang });
 });
 
 router.get('/work/:slug', async (req, res) => {
   const works = await Work.find();
   const work = works.find(work => JSON.parse(work.body).slug === req.params.slug);
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+
   if (work == undefined) res.redirect('/works');
   else {
     res.render('client/work', { work });
@@ -31,25 +37,32 @@ router.get('/work/:slug', async (req, res) => {
 });
 
 router.get('/contact', async (req, res) => {
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+
   res.render('client/contact');
 });
 
 router.get('/events', async (req, res) => {
   const events = await Event.find();
-  res.render('client/events', { events });
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+
+  res.render('client/events', { events, lang });
 });
 
 router.get('/event/:slug', async (req, res) => {
   const events = await Event.find();
-  const event = events.find(event => JSON.parse(event.body).slug === req.params.slug);
+  const event = events.find(event => JSON.parse(event.body).slug_en === req.params.slug);
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+
   if (event == undefined) res.redirect('/events');
   else {
-    res.render('client/event', { event });
+    res.render('client/event', { event, lang });
   }
 });
 
 router.get('/arranger', async (req, res) => {
   res.render('client/arranger');
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
 });
 
 module.exports = router;

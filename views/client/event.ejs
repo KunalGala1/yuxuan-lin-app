@@ -1,46 +1,59 @@
-<% const eventObject = JSON.parse(event.body); %>
+<% const body = JSON.parse(event.body); %>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yuxuan Lin | <%= eventObject.title %></title>
-    <%- include('../partials/head') %>
-  </head>
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <script>
-      document.querySelector('nav ul li:nth-child(5) a').classList.add('active');
-    </script>
-    <main id="event">
-      <div class="banner">
-        <div class="image-container">
-          <img src="/uploads/<%= eventObject.file.filename %>" alt="" />
-        </div>
-      </div>
-      <div class="header">
-        <h1 class="event-header"><%= eventObject.title %></h1>
-        <span class="date"><%= eventObject.date %></span>
-        <span class="time"><%= eventObject.time %></span>
-        <span class="location"><%= eventObject.location %></span>
-      </div>
-      <div class="content"><%- eventObject.longDescription %></div>
-    </main>
-    <%- include('../partials/footer') %>
-  </body>
 
-  <script></script>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Yuxuan Lin | <%= body.title %></title>
+		<%- include('../partials/head') %>
+	</head>
+
+	<body>
+		<%- include('../partials/header') %>
+		<%- include('../partials/nav') %>
+		<script>
+			document.querySelector( 'nav ul li:nth-child(5) a' )
+				.classList.add( 'active' );
+		</script>
+		<main id="event">
+			<div class="banner">
+				<div class="image-container">
+					<img src="/uploads/<%= body.file.filename %>" alt="" />
+				</div>
+			</div>
+			<div class="header">
+				<h1 class="event-header"><%= body.title_en %></h1>
+				<span class="date"><%= body.date_en %></span>
+				<span class="time"><%= body.time_en %></span>
+				<span class="location"><%= body.location_en %></span>
+			</div>
+			<div class="content"><%- body['longDescription_' + lang] %></div>
+		</main>
+		<%- include('../partials/footer') %>
+	</body>
+
+	<script></script>
+
 </html>
 
 <script type="module">
-  import { convertTime } from '../js/utils.js';
-  import { formatDate } from '../js/utils.js';
+	import {
+		convertTime
+	} from '../js/utils.js';
+	import {
+		formatDate
+	} from '../js/utils.js';
 
-  // Convert time to 12 hour format
-  document.querySelector('span.time').innerText = convertTime(document.querySelector('span.time').innerText);
+	// Convert time to 12 hour format
+	document.querySelector( 'span.time' )
+		.innerText = convertTime( document.querySelector( 'span.time' )
+			.innerText );
 
-  // Format date
-  document.querySelector('span.date').innerText = formatDate(document.querySelector('span.date').innerText);
+	// Format date
+	document.querySelector( 'span.date' )
+		.innerText = formatDate( document.querySelector( 'span.date' )
+			.innerText );
 </script>

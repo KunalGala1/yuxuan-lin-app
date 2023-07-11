@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yuxuan Lin | Dashboard | Edit Event</title>
-    <%- include('../../partials/head') %>
-  </head>
 
-  <body class="dashboard">
-    <%- include('../../partials/aside') %>
-    <script>
-      document.querySelector('aside .middle ul li:nth-child(1) a').classList.add('active');
-    </script>
-    <main>
-      <h1 class="secondary-header">Edit Event</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Yuxuan Lin | Dashboard | Edit Event</title>
+		<%- include('../../partials/head') %>
+	</head>
 
-      <a href="/event/<%= JSON.parse(event.body).slug %>" class="edit-link" target="_blank">
-        <%= JSON.parse(event.body).slug %>
-        <i class="fa-solid fa-up-right-from-square"></i>
-      </a>
+	<body class="dashboard">
+		<%- include('../../partials/aside') %>
+		<script>
+			document.querySelector( 'aside .middle ul li:nth-child(1) a' )
+				.classList.add( 'active' );
+		</script>
+		<main>
+			<h1 class="secondary-header">Edit Event</h1>
+			<a href="/event/<%= JSON.parse(event.body).slug_en %>" class="edit-link" target="_blank">
+				<%= JSON.parse(event.body).slug_en %>
+				<i class="fa-solid fa-up-right-from-square"></i>
+			</a>
+			<% const body = JSON.parse(event.body); %>
+			<!-- prettier ignore -->
+			<%- include('../../partials/form', {
+				metadata: {
+					method: 'put',
+					action: '/dashboard/events/' + event._id,
+					enctype: 'multipart/form-data',
+					id: event._id,
+					name: 'event'
+				},
+				fields: [
+					{ name: 'title', required: true, value: body.title_en },
+					{ type: 'hidden', name: 'slug' },
+					{ tag: 'textarea', name: 'shortDescription', label: 'short description (EN)', value: body.shortDescription_en, selector: 'shortDescription-en', lang: 'en' },
+					{ tag: 'textarea', name: 'shortDescription', label: 'short description (ZH)', value: body.shortDescription_zh, selector: 'shortDescription-zh', lang: 'zh' },
+					{ type: 'date', value: body.date_en },
+					{ type: 'time', value: body.time_en },
+					{ type: 'url', label: 'URL', value: body.url_en },
+					{ name: 'location', value: body.location_en },
+					{ type: 'file', label: 'image', file: body.file },
+					{ tag: 'textarea', name: 'longDescription', label: 'long description (EN)', value: body.longDescription_en, selector: 'longDescription-en' },
+					{ tag: 'textarea', name: 'longDescription', label: 'long description (ZH)', value: body.longDescription_zh, selector: 'longDescription-zh' },
+				]
+			}) %>
+		</main>
+		<script src="/js/previewImage.js" defer></script>
+	</body>
 
-      <% const body = JSON.parse(event.body);%>
-
-      <!-- prettier ignore -->
-      <%- include('../../partials/form', { metadata: { method: 'put' , action: '/dashboard/events/' + event._id, enctype: 'multipart/form-data' , id: event._id , name: 'event' }, fields: [ { name: 'title' , required: true, value: body.title }, { type: 'hidden' , name: 'slug' }, { tag: 'textarea' , name: 'shortDescription' , label: 'short description' , value: body.shortDescription }, { type: 'date' , value: body.date}, { type: 'time' , value: body.time }, { type: 'url' , label: 'URL' ,value: body.url }, { name: 'location' , value: body.location }, { type: 'file' , label: 'image' , file: body.file }, { tag: 'textarea' , name: 'longDescription' , label: 'long description' , height: 500 ,value: body.longDescription } ] }) %>
-    </main>
-  </body>
-
-  <script src="/js/previewImage.js" defer></script>
 </html>

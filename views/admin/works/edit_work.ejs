@@ -2,27 +2,52 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yuxuan Lin | Dashboard | Edit Event</title>
-    <%- include('../../partials/head') %>
-  </head>
-  <body class="dashboard">
-    <%- include('../../partials/aside') %>
-    <script>
-      document.querySelector('aside .middle ul li:nth-child(2) a').classList.add('active');
-    </script>
-    <main>
-      <h1 class="secondary-header">Edit Work</h1>
-      <a href="/work/<%= JSON.parse(work.body).slug %>" class="edit-link" target="_blank">
-        <%= JSON.parse(work.body).slug %>
-        <i class="fa-solid fa-up-right-from-square"></i>
-      </a>
-      <%- include('../../partials/form', { metadata: { method: 'put', action: '/dashboard/works/' + work._id, name: 'work' }, fields: [ { name: 'title', required: true, value: body.title }, { type: 'hidden', name: 'slug' }, {name:'subtitle', value: body.subtitle}, {tag: 'select', name: 'tag', options: ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral'], value: body.tag} , {name:'instrumentation',label:`detailed insturmentation (fl.cl...)`, value: body.instrumentation},{name:'duration', value: body.duration},{name:'year', value: body.year},{tag:'textarea',name:'commission',label:'commission information', value: body.commission},{tag:'textarea',name:'programNote',label:'program note', value: body.programNote},{tag:'textarea',name:'performanceNote',label:'performance note', value: body.performanceNote},{type:'url',name:'url',label:'URL to purchase music', value: body.url} ] }) %>
-    </main>
 
-    <script src="/js/previewImage.js" defer></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Yuxuan Lin | Dashboard | Edit Event</title>
+		<%- include('../../partials/head') %>
+	</head>
+
+	<body class="dashboard">
+		<%- include('../../partials/aside') %>
+		<script>
+			document.querySelector( 'aside .middle ul li:nth-child(2) a' )
+				.classList.add( 'active' );
+		</script>
+		<main>
+			<h1 class="secondary-header">Edit Work</h1>
+			<a href="/work/<%= JSON.parse(work.body).slug_en %>" class="edit-link" target="_blank">
+				<%= JSON.parse(work.body).slug_en %>
+				<i class="fa-solid fa-up-right-from-square"></i>
+			</a>
+			<%- include('../../partials/form', {
+        metadata: {
+          method: 'put',
+          action: '/dashboard/works/' + work._id,
+          name: 'work'
+        },
+        fields: [
+          { name: 'title', required: true, value: body.title_en },
+          { type: 'hidden', name: 'slug' },
+          { name: 'subtitle', value: body.subtitle_en },
+          { tag: 'select', name: 'tag', options: ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral'], value: body.tag_en },
+          { name: 'instrumentation', label: 'detailed insturmentation (fl.cl...)', value: body.instrumentation_en },
+          { name: 'duration', value: body.duration_en },
+          { name: 'year', value: body.year_en },
+          { tag: 'textarea', name: 'commission', label: 'commission information (EN)', value: body.commission_en, selector: 'commission_en' },
+          { tag: 'textarea', name: 'commission', label: 'commission information (ZH)', value: body.commission_zh, selector: 'commission_zh', lang: 'zh' },
+          { tag: 'textarea', name: 'programNote', label: 'program note (EN)', value: body.programNote_en, selector: 'programNote_en' },
+          { tag: 'textarea', name: 'programNote', label: 'program note (ZH)', value: body.programNote_zh, selector: 'programNote_zh', lang: 'zh' },
+          { tag: 'textarea', name: 'performanceNote', label: 'performance note (EN)', value: body.performanceNote_en, selector: 'performanceNote_en' },
+          { tag: 'textarea', name: 'performanceNote', label: 'performance note (ZH)', value: body.performanceNote_zh, selector: 'performanceNote_zh', lang: 'zh' },
+          { type: 'url', name: 'url', label: 'URL to purchase music', value: body.url_en }
+        ]
+      }) %>
+		</main>
+		<script src="/js/previewImage.js" defer></script>
+	</body>
+
 </html>

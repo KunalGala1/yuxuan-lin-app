@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head') %>
-    <title>Yuxuan Lin | Events</title>
-  </head>
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <script>
-      document.querySelector('nav ul li:nth-child(5) a').classList.add('active');
-    </script>
 
-    <main id="events" data-cli>
-      <div class="container">
-        <% for( let i = 0; i < events.length; i++ ) { %>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/head') %>
+		<title>Yuxuan Lin | Events</title>
+	</head>
 
-        <div class="card">
-          <a href="/event/<%= JSON.parse(events[i].body).slug %>">
-            <div class="image-container">
-              <img src="/uploads/<%= JSON.parse(events[i].body).file.filename %>" alt="" />
-            </div>
-          </a>
-          <div class="content">
-            <h3 class="title">
-              <a href="/event/<%= JSON.parse(events[i].body).slug %>"><%= JSON.parse(events[i].body).title %></a>
-            </h3>
-            <span class="date"><%= JSON.parse(events[i].body).date.toLocaleString('en-US') %></span>
-            <span class="time"><%= JSON.parse(events[i].body).time %></span>
+	<body>
+		<%- include('../partials/header') %> <%- include('../partials/nav') %>
+		<script>
+			document.querySelector( 'nav ul li:nth-child(5) a' )
+				.classList.add( 'active' );
+		</script>
 
-            <span class="location"><%= JSON.parse(events[i].body).location %></span>
-            <p><%- JSON.parse(events[i].body).shortDescription %></p>
-          </div>
-        </div>
-        <% } %>
-      </div>
-    </main>
+		<main id="events" data-cli>
+			<div class="container">
+				<% for( let i = 0; i < events.length; i++ ) { %>
 
-    <%- include('../partials/footer') %>
-  </body>
+				<div class="card">
+					<a href="/event/<%= JSON.parse(events[i].body).slug_en %>">
+						<div class="image-container">
+							<img src="/uploads/<%= JSON.parse(events[i].body).file.filename %>" alt="" />
+						</div>
+					</a>
+					<div class="content">
+						<h3 class="title">
+							<a href="/event/<%= JSON.parse(events[i].body).slug_en %>"><%= JSON.parse(events[i].body).title_en %></a>
+						</h3>
+						<span class="date"><%= JSON.parse(events[i].body).date_en.toLocaleString('en-US') %></span>
+						<span class="time"><%= JSON.parse(events[i].body).time_en %></span>
 
-  <script type="module">
-    import { convertTime } from '../js/utils.js';
-    import { formatDate } from '../js/utils.js';
+						<span class="location"><%= JSON.parse(events[i].body).location_en %></span>
+						<p><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></p>
+					</div>
+				</div>
+				<% } %>
+			</div>
+		</main>
 
-    document.querySelectorAll('#events[data-cli] .card').forEach(card => {
-      // Convert time to 12 hour format
-      card.querySelector('span.time').innerText = convertTime(card.querySelector('span.time').innerText);
+		<%- include('../partials/footer') %>
+	</body>
 
-      // Format date
-      card.querySelector('span.date').innerText = formatDate(card.querySelector('span.date').innerText);
-    });
-  </script>
+	<script type="module">
+		import {
+			convertTime
+		} from '../js/utils.js';
+		import {
+			formatDate
+		} from '../js/utils.js';
+
+		document.querySelectorAll( '#events[data-cli] .card' )
+			.forEach( card => {
+				// Convert time to 12 hour format
+				card.querySelector( 'span.time' )
+					.innerText = convertTime( card.querySelector( 'span.time' )
+						.innerText );
+
+				// Format date
+				card.querySelector( 'span.date' )
+					.innerText = formatDate( card.querySelector( 'span.date' )
+						.innerText );
+			} );
+	</script>
+
 </html>

@@ -1,51 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head') %>
-    <title>Yuxuan Lin | Works</title>
-  </head>
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <script>
-      document.querySelector('nav ul li:nth-child(3) a').classList.add('active');
-    </script>
 
-    <main id="works">
-      <%- include('../sections/search') %> <% const tags = ['orchestral', 'chamber', 'solo', 'dance', 'choral'] %>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/head') %>
+		<title>Yuxuan Lin | Works</title>
+	</head>
 
-      <section id="work-list">
-        <% for( let j = 0; j < tags.length; j++ ) { %>
-        <div class="subsection">
-          <h2 class="main-header"><%= tags[j] %></h2>
-          <div class="cards-wrapper flex gap">
-            <% for( let i = 0; i < works.length; i++ ) { %> <% if (JSON.parse(works[i].body).tag === tags[j]) { %> <% const body = JSON.parse(works[i].body) %>
-            <div class="card">
-              <a href="/work/<%= body.slug %>">
-                <div class="heading">
-                  <h3 class="third-header"><%= body.title %></h3>
-                  <% if (body.subtitle != '') { %>
-                  <p><%= body.subtitle %></p>
-                  <% } %>
-                </div>
-                <% if (body.programNote != '') { %>
-                <div class="description">
-                  <p><%- body.programNote %></p>
-                </div>
-                <% } %>
-              </a>
-            </div>
+	<body>
+		<%- include('../partials/header') %>
+		<%- include('../partials/nav') %>
+		<script>
+			document.querySelector( 'nav ul li:nth-child(3) a' )
+				.classList.add( 'active' );
+		</script>
+		<main id="works">
+			<%- include('../sections/search') %>
+			<% const tags = ['orchestral', 'chamber', 'solo', 'dance', 'choral'] %>
+			<section id="work-list">
+				<% for (let j = 0; j < tags.length; j++) { %>
+				<div class="subsection">
+					<h2 class="main-header"><%= tags[j] %></h2>
+					<div class="cards-wrapper flex gap">
+						<% for (let i = 0; i < works.length; i++) { %>
+						<% const body = JSON.parse(works[i].body) %>
+						<% if (body.tag_en === tags[j]) { %>
+						<% const slug = body['slug_en'];
+								const title = body['title_en'];
+								const subtitle = body['subtitle_en'];
+								const programNote = body['programNote_' + lang];
+								%>
+						<div class="card">
+							<a href="/work/<%= slug %>">
+								<div class="heading">
+									<h3 class="third-header"><%= title %></h3>
+									<% if (subtitle != '') { %>
+									<p><%= subtitle %></p>
+									<% } %>
+								</div>
+								<% if (programNote != '') { %>
+								<div class="description">
+									<p><%- programNote %></p>
+								</div>
+								<% } %>
+							</a>
+						</div>
+						<% } %>
+						<% } %>
+					</div>
+				</div>
+				<% } %>
+			</section>
+		</main>
+		<%- include('../partials/footer') %>
+	</body>
 
-            <% } %> <% } %>
-          </div>
-        </div>
-
-        <% } %>
-      </section>
-    </main>
-
-    <%- include('../partials/footer') %>
-  </body>
 </html>
