@@ -27,12 +27,12 @@ router.get('/works', async (req, res) => {
 
 router.get('/work/:slug', async (req, res) => {
   const works = await Work.find();
-  const work = works.find(work => JSON.parse(work.body).slug === req.params.slug);
+  const work = works.find(work => JSON.parse(work.body).slug_en === req.params.slug);
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
 
   if (work == undefined) res.redirect('/works');
   else {
-    res.render('client/work', { work });
+    res.render('client/work', { work, lang });
   }
 });
 

@@ -1,5 +1,5 @@
-<% const id = data._id;
-const body = JSON.parse(data.body);
+<% const id = work._id;
+const body = JSON.parse(work.body);
 const title = body['title_' + lang];
 const subtitle = body['subtitle_' + lang];
 const instrumentation = body['instrumentation_' + lang];
@@ -18,7 +18,7 @@ const performanceNote = body['performanceNote_' + lang];
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | <%= body.title %></title>
+		<title>Yuxuan Lin | <%= title %></title>
 		<%- include('../partials/head') %>
 	</head>
 
@@ -31,51 +31,51 @@ const performanceNote = body['performanceNote_' + lang];
 		<main name="work">
 			<div class="wrapper">
 				<div class="heading">
-					<h1 class="title"><%= body.title %></h1>
-					<% if (body.subtitle != '') { %>
-					<h2 class="subtitle"><%= body.subtitle %></h2>
+					<h1 class="title"><%= title %></h1>
+					<% if (subtitle != '') { %>
+					<h2 class="subtitle"><%= subtitle %></h2>
 					<% } %>
 				</div>
 				<div class="metadata">
 					<div class="metadata-wrapper">
-						<% if (body.instrumentation != '') { %>
+						<% if (instrumentation != '') { %>
 						<p class="detailed-info">
 							<span>Instrumentation:</span>
-							<%= body.instrumentation %>
+							<%= instrumentation %>
 						</p>
-						<% } %> <% if (body.duration != '') { %>
+						<% } %> <% if (duration != '') { %>
 						<p class="duration">
 							<span>Duration:</span>
-							<%= body.duration %>
+							<%= duration %>
 						</p>
-						<% } %> <% if (body.year != '') { %>
+						<% } %> <% if (year != '') { %>
 						<p class="year">
 							<span>Year(s) of Composition:</span>
-							<%= body.year %>
+							<%= year %>
 						</p>
-						<% } %> <% if (body.commission != '') { %>
-						<div class="commission-info"><%- body.commission %></div>
+						<% } %> <% if (commission != '') { %>
+						<div class="commission-info"><%- commission %></div>
 						<% } %>
 					</div>
-					<% if (body.url != '') { %>
+					<% if (url != '') { %>
 					<div class="purchase-link-wrapper">
 						<p>
 							Available for purchase at:
-							<a href="<%= body.url %>" target="_blank"><%= body.url %></a>
+							<a href="<%= url %>" target="_blank"><%= url %></a>
 						</p>
 					</div>
 					<% } %>
 				</div>
-				<% if (body.programNote != '') { %>
+				<% if (programNote != '') { %>
 				<div class="program-note">
 					<h3>Program Note</h3>
-					<p><%- body.programNote %></p>
+					<p><%- programNote %></p>
 				</div>
-				<% } %> <% if (body.performanceNote != '') { %>
+				<% } %> <% if (performanceNote != '') { %>
 				<div class="performance-note">
 					<hr />
 					<h3>Performance Note</h3>
-					<p><%- body.performanceNote %></p>
+					<p><%- performanceNote %></p>
 				</div>
 				<% } %>
 				<div class="btn-wrapper">
