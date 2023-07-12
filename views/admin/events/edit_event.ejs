@@ -1,3 +1,19 @@
+<% 
+const id = event._id;
+const body = JSON.parse(event.body);
+const slug = body.slug;
+const title = body.title;
+const shortDescription_en = body.shortDescription_en;
+const shortDescription_zh = body.shortDescription_zh;
+const date = body.date;
+const time = body.time;
+const url = body.url;
+const location = body.location;
+const file = body.file;
+const longDescription_en = body.longDescription_en;
+const longDescription_zh = body.longDescription_zh;
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,32 +33,30 @@
 		</script>
 		<main>
 			<h1 class="secondary-header">Edit Event</h1>
-			<a href="/event/<%= JSON.parse(event.body).slug_en %>" class="edit-link" target="_blank">
-				<%= JSON.parse(event.body).slug_en %>
+			<a href="/event/<%= slug %>" class="edit-link" target="_blank">
+				<%= slug %>
 				<i class="fa-solid fa-up-right-from-square"></i>
 			</a>
-			<% const body = JSON.parse(event.body); %>
-			<!-- prettier ignore -->
 			<%- include('../../partials/form', {
 				metadata: {
 					method: 'put',
-					action: '/dashboard/events/' + event._id,
+					action: '/dashboard/events/' + id,
 					enctype: 'multipart/form-data',
-					id: event._id,
+					id: id,
 					name: 'event'
 				},
 				fields: [
-					{ name: 'title', required: true, value: body.title_en },
+					{ name: 'title', required: true, value: title },
 					{ type: 'hidden', name: 'slug' },
-					{ tag: 'textarea', name: 'shortDescription', label: 'short description (EN)', value: body.shortDescription_en, selector: 'shortDescription-en', lang: 'en' },
-					{ tag: 'textarea', name: 'shortDescription', label: 'short description (ZH)', value: body.shortDescription_zh, selector: 'shortDescription-zh', lang: 'zh' },
-					{ type: 'date', value: body.date_en },
-					{ type: 'time', value: body.time_en },
-					{ type: 'url', label: 'URL', value: body.url_en },
-					{ name: 'location', value: body.location_en },
-					{ type: 'file', label: 'image', file: body.file },
-					{ tag: 'textarea', name: 'longDescription', label: 'long description (EN)', value: body.longDescription_en, selector: 'longDescription-en' },
-					{ tag: 'textarea', name: 'longDescription', label: 'long description (ZH)', value: body.longDescription_zh, selector: 'longDescription-zh' },
+					{ tag: 'textarea', name: 'shortDescription_en', label: 'short description (EN)', value: shortDescription_en, },
+					{ tag: 'textarea', name: 'shortDescription_zh', label: 'short description (ZH)', value: shortDescription_zh, },
+					{ type: 'date', value: date },
+					{ type: 'time', value: time },
+					{ type: 'url', label: 'URL', value: url },
+					{ name: 'location', value: location },
+					{ type: 'file', label: 'image', file: file },
+					{ tag: 'textarea', name: 'longDescription_en', label: 'long description (EN)', value: longDescription_en, },
+					{ tag: 'textarea', name: 'longDescription_zh', label: 'long description (ZH)', value: longDescription_zh, },
 				]
 			}) %>
 		</main>

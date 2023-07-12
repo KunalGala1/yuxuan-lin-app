@@ -26,12 +26,13 @@
 					<div class="cards-wrapper flex gap">
 						<% for (let i = 0; i < works.length; i++) { %>
 						<% const body = JSON.parse(works[i].body) %>
-						<% if (body.tag_en === tags[j]) { %>
-						<% const slug = body['slug_en'];
-								const title = body['title_en'];
-								const subtitle = body['subtitle_en'];
-								const programNote = body['programNote_' + lang];
-								%>
+						<% if (body.tag === tags[j]) { %>
+						<%
+						const slug = body.slug;
+						const title = body.title;
+						const subtitle = body.subtitle;
+						const programNote = body['programNote_' + lang];
+						%>
 						<div class="card">
 							<a href="/work/<%= slug %>">
 								<div class="heading">

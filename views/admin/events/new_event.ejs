@@ -29,15 +29,15 @@
         fields: [
           { name: 'title', required: true },
           { type: 'hidden', name: 'slug' },
-          { tag: 'textarea', name: 'shortDescription', label: 'short description (EN)', selector: 'shortDescription_en' },
-          { tag: 'textarea', name: 'shortDescription', label: 'short description (ZH)', selector: 'shortDescription_zh', lang: 'zh' },
+          { tag: 'textarea', name: 'shortDescription_en', label: 'short description (EN)' },
+          { tag: 'textarea', name: 'shortDescription_zh', label: 'short description (ZH)' },
           { type: 'date' },
           { type: 'time' },
           { type: 'url', label: 'URL' },
           { name: 'location' },
           { type: 'file', label: 'image' },
-          { tag: 'textarea', name: 'longDescription', label: 'long description (EN)', selector: 'longDescription_en', },
-          { tag: 'textarea', name: 'longDescription', label: 'long description (ZH)', selector: 'longDescription_zh', lang: 'zh' },
+          { tag: 'textarea', name: 'longDescription_en', label: 'long description (EN)' },
+          { tag: 'textarea', name: 'longDescription_zh', label: 'long description (ZH)' },
         ]
       }) %>
 		</main>

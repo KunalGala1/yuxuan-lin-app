@@ -1,4 +1,13 @@
-<% const body = JSON.parse(event.body); %>
+<%
+const body = JSON.parse(event.body);
+const title = body.title;
+const image = body.file ? body.file.filename : null;
+const date = body.date;
+const time = body.time;
+const location = body.location;
+const shortDescription = body['shortDescription_' + lang];
+const longDescription = body['longDescription_' + lang];
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +16,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | <%= body.title %></title>
+		<title>Yuxuan Lin | <%= title %></title>
 		<%- include('../partials/head') %>
 	</head>
 
@@ -21,16 +30,18 @@
 		<main id="event">
 			<div class="banner">
 				<div class="image-container">
-					<img src="/uploads/<%= body.file.filename %>" alt="" />
+					<% if (image) { %>
+					<img src="/uploads/<%= image %>" alt="" />
+					<% } %>
 				</div>
 			</div>
 			<div class="header">
-				<h1 class="event-header"><%= body.title_en %></h1>
-				<span class="date"><%= body.date_en %></span>
-				<span class="time"><%= body.time_en %></span>
-				<span class="location"><%= body.location_en %></span>
+				<h1 class="event-header"><%= title %></h1>
+				<span class="date"><%= date %></span>
+				<span class="time"><%= time %></span>
+				<span class="location"><%= location %></span>
 			</div>
-			<div class="content"><%- body['longDescription_' + lang] %></div>
+			<div class="content"><%- longDescription || '' %></div>
 		</main>
 		<%- include('../partials/footer') %>
 	</body>
@@ -48,12 +59,14 @@
 	} from '../js/utils.js';
 
 	// Convert time to 12 hour format
-	document.querySelector( 'span.time' )
-		.innerText = convertTime( document.querySelector( 'span.time' )
-			.innerText );
+	const timeElement = document.querySelector( 'span.time' );
+	if ( timeElement ) {
+		timeElement.innerText = convertTime( timeElement.innerText );
+	}
 
 	// Format date
-	document.querySelector( 'span.date' )
-		.innerText = formatDate( document.querySelector( 'span.date' )
-			.innerText );
+	const dateElement = document.querySelector( 'span.date' );
+	if ( dateElement ) {
+		dateElement.innerText = formatDate( dateElement.innerText );
+	}
 </script>

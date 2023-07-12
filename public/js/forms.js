@@ -4,8 +4,6 @@ import { responseAction } from './actions.js';
 
 const forms = document.querySelectorAll('form.handle-form-submission');
 
-let isCodeExecuted = false;
-
 forms.forEach(form => {
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -24,19 +22,6 @@ forms.forEach(form => {
 
     // Update slugs
     updateSlugs(form);
-
-    // Update names with appropriate language
-    if (!isCodeExecuted) {
-      // Check if code has already been executed
-      const addLangtoForm = new FormData(form);
-      addLangtoForm.forEach((value, key) => {
-        document.querySelectorAll(`form [name="${key}"]`).forEach(el => {
-          el.name = el.name + '_' + el.lang;
-        });
-      });
-
-      isCodeExecuted = true; // Set flag to true after executing the code
-    }
 
     /* ====================================================== */
 

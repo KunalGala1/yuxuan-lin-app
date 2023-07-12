@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Get language from URL or default to 'en'
   const lang = urlParams.get('lang') || 'en';
-  console.log(lang);
 
   // Add 'active' class to the appropriate language button
   if (lang === 'en') {

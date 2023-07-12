@@ -19,21 +19,32 @@
 		<main id="events" data-cli>
 			<div class="container">
 				<% for( let i = 0; i < events.length; i++ ) { %>
+				<% 
+						const body = JSON.parse(events[i].body);
+						const title = body.title;
+						const slug = body.slug;
+						const image = body.file.filename;
+						const date = body.date;
+						const time = body.time;
+						const location = body.location;
+						const shortDescription = body['shortDescription_' + lang];
+
+						%>
 
 				<div class="card">
-					<a href="/event/<%= JSON.parse(events[i].body).slug_en %>">
+					<a href="/event/<%= slug %>">
 						<div class="image-container">
-							<img src="/uploads/<%= JSON.parse(events[i].body).file.filename %>" alt="" />
+							<img src="/uploads/<%= image %>" alt="" />
 						</div>
 					</a>
 					<div class="content">
 						<h3 class="title">
-							<a href="/event/<%= JSON.parse(events[i].body).slug_en %>"><%= JSON.parse(events[i].body).title_en %></a>
+							<a href="/event/<%= slug %>"><%= title %></a>
 						</h3>
-						<span class="date"><%= JSON.parse(events[i].body).date_en.toLocaleString('en-US') %></span>
-						<span class="time"><%= JSON.parse(events[i].body).time_en %></span>
+						<span class="date"><%= date.toLocaleString('en-US') %></span>
+						<span class="time"><%= time %></span>
 
-						<span class="location"><%= JSON.parse(events[i].body).location_en %></span>
+						<span class="location"><%= location %></span>
 						<p><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></p>
 					</div>
 				</div>

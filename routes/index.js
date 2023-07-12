@@ -8,8 +8,7 @@ const Work = require('../models/Work');
 
 router.get('/', async (req, res) => {
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
-
-  res.render('client/index');
+  res.render('client/index', { lang });
 });
 
 router.get('/bio', async (req, res) => {
@@ -21,13 +20,12 @@ router.get('/bio', async (req, res) => {
 router.get('/works', async (req, res) => {
   const works = await Work.find();
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
-  console.log(lang);
   res.render('client/works', { works, lang });
 });
 
 router.get('/work/:slug', async (req, res) => {
   const works = await Work.find();
-  const work = works.find(work => JSON.parse(work.body).slug_en === req.params.slug);
+  const work = works.find(work => JSON.parse(work.body).slug === req.params.slug);
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
 
   if (work == undefined) res.redirect('/works');
@@ -51,7 +49,7 @@ router.get('/events', async (req, res) => {
 
 router.get('/event/:slug', async (req, res) => {
   const events = await Event.find();
-  const event = events.find(event => JSON.parse(event.body).slug_en === req.params.slug);
+  const event = events.find(event => JSON.parse(event.body).slug === req.params.slug);
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
 
   if (event == undefined) res.redirect('/events');

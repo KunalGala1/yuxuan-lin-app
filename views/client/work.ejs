@@ -1,11 +1,11 @@
 <% const id = work._id;
 const body = JSON.parse(work.body);
-const title = body['title_' + lang];
-const subtitle = body['subtitle_' + lang];
-const instrumentation = body['instrumentation_' + lang];
-const duration = body['duration_' + lang];
-const year = body['year_' + lang];
-const url = body['url_' + lang];
+const title = body.title;
+const subtitle = body.subtitle;
+const instrumentation = body.instrumentation;
+const duration = body.duration;
+const year = body.year;
+const url = body.url;
 const commission = body['commission_' + lang];
 const programNote = body['programNote_' + lang];
 const performanceNote = body['performanceNote_' + lang];
@@ -32,32 +32,32 @@ const performanceNote = body['performanceNote_' + lang];
 			<div class="wrapper">
 				<div class="heading">
 					<h1 class="title"><%= title %></h1>
-					<% if (subtitle != '') { %>
+					<% if (subtitle && subtitle !== '') { %>
 					<h2 class="subtitle"><%= subtitle %></h2>
 					<% } %>
 				</div>
 				<div class="metadata">
 					<div class="metadata-wrapper">
-						<% if (instrumentation != '') { %>
+						<% if (instrumentation && instrumentation !== '') { %>
 						<p class="detailed-info">
 							<span>Instrumentation:</span>
 							<%= instrumentation %>
 						</p>
-						<% } %> <% if (duration != '') { %>
+						<% } %> <% if (duration && duration !== '') { %>
 						<p class="duration">
 							<span>Duration:</span>
 							<%= duration %>
 						</p>
-						<% } %> <% if (year != '') { %>
+						<% } %> <% if (year && year !== '') { %>
 						<p class="year">
 							<span>Year(s) of Composition:</span>
 							<%= year %>
 						</p>
-						<% } %> <% if (commission != '') { %>
+						<% } %> <% if (commission && commission !== '') { %>
 						<div class="commission-info"><%- commission %></div>
 						<% } %>
 					</div>
-					<% if (url != '') { %>
+					<% if (url && url !== '') { %>
 					<div class="purchase-link-wrapper">
 						<p>
 							Available for purchase at:
@@ -66,12 +66,12 @@ const performanceNote = body['performanceNote_' + lang];
 					</div>
 					<% } %>
 				</div>
-				<% if (programNote != '') { %>
+				<% if (programNote && programNote !== '') { %>
 				<div class="program-note">
 					<h3>Program Note</h3>
 					<p><%- programNote %></p>
 				</div>
-				<% } %> <% if (performanceNote != '') { %>
+				<% } %> <% if (performanceNote && performanceNote !== '') { %>
 				<div class="performance-note">
 					<hr />
 					<h3>Performance Note</h3>
@@ -99,12 +99,14 @@ const performanceNote = body['performanceNote_' + lang];
 	} from '../js/utils.js';
 
 	// Convert time to 12 hour format
-	document.querySelector( 'span.time' )
-		.innerText = convertTime( document.querySelector( 'span.time' )
-			.innerText );
+	const timeElement = document.querySelector( 'span.time' );
+	if ( timeElement ) {
+		timeElement.innerText = convertTime( timeElement.innerText );
+	}
 
 	// Format date
-	document.querySelector( 'span.date' )
-		.innerText = formatDate( document.querySelector( 'span.date' )
-			.innerText );
+	const dateElement = document.querySelector( 'span.date' );
+	if ( dateElement ) {
+		dateElement.innerText = formatDate( dateElement.innerText );
+	}
 </script>

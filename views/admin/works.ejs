@@ -35,18 +35,28 @@
 				</tr>
 
 				<% for( let i = 0; i < works.length; i++ ) { %>
-				<tr data-work-id="<%= works[i]._id %>">
+
+				<% 
+						const id = works[i]._id;
+						const body = JSON.parse(works[i].body);
+						const title = body.title;
+						const slug = body.slug;
+						const date = works[i].date.toDateString();
+						
+						%>
+
+				<tr data-work-id="<%= id %>">
 					<td>
-						<a href="/work/<%= JSON.parse(works[i].body).slug_en %>" target="_blank" class="table-link"><%= JSON.parse(works[i].body).title_en %></a>
+						<a href="/work/<%= slug %>" target="_blank" class="table-link"><%= title %></a>
 					</td>
-					<td><%= works[i].date.toDateString() %></td>
+					<td><%= date %></td>
 					<td>
-						<a href="/dashboard/works/<%= works[i]._id %>/edit" class="icon">
+						<a href="/dashboard/works/<%= id %>/edit" class="icon">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</a>
 					</td>
 					<td>
-						<form data-method="delete" action="/dashboard/works/<%= works[i]._id %>/delete" class="handle-form-submission" name="work">
+						<form data-method="delete" action="/dashboard/works/<%= id %>/delete" class="handle-form-submission" name="work">
 							<button type="submit" class="icon">
 								<i class="fa-solid fa-trash"></i>
 							</button>

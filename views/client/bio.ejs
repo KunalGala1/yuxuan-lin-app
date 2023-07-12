@@ -1,4 +1,5 @@
-<% const id = data._id;
+<%
+const id = data._id;
 const body = JSON.parse(data.body);
 const quote = body['quote_' + lang];
 const bio = body['bio_' + lang];
