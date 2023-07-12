@@ -10,27 +10,25 @@
 	</head>
 
 	<body>
-		<%- include('../partials/header') %> <%- include('../partials/nav') %>
+		<%- include('../partials/header') %>
+		<%- include('../partials/nav') %>
 		<script>
 			document.querySelector( 'nav ul li:nth-child(5) a' )
 				.classList.add( 'active' );
 		</script>
-
 		<main id="events" data-cli>
 			<div class="container">
-				<% for( let i = 0; i < events.length; i++ ) { %>
+				<% for (let i = 0; i < events.length; i++) { %>
 				<% 
-						const body = JSON.parse(events[i].body);
-						const title = body.title;
-						const slug = body.slug;
-						const image = body.file.filename;
-						const date = body.date;
-						const time = body.time;
-						const location = body.location;
-						const shortDescription = body['shortDescription_' + lang];
-
-						%>
-
+          const body = JSON.parse(events[i].body);
+          const title = body.title;
+          const slug = body.slug;
+          const image = body.file.filename;
+          const date = body.date;
+          const time = body.time;
+          const location = body.location;
+          const shortDescription = body['shortDescription_' + lang];
+        %>
 				<div class="card">
 					<a href="/event/<%= slug %>">
 						<div class="image-container">
@@ -43,7 +41,6 @@
 						</h3>
 						<span class="date"><%= date.toLocaleString('en-US') %></span>
 						<span class="time"><%= time %></span>
-
 						<span class="location"><%= location %></span>
 						<p><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></p>
 					</div>
@@ -51,30 +48,26 @@
 				<% } %>
 			</div>
 		</main>
-
 		<%- include('../partials/footer') %>
+		<script type="module">
+			import {
+				convertTime,
+				formatDate
+			} from '../js/utils.js';
+
+			document.querySelectorAll( '#events[data-cli] .card' )
+				.forEach( card => {
+					// Convert time to 12 hour format
+					card.querySelector( 'span.time' )
+						.innerText = convertTime( card.querySelector( 'span.time' )
+							.innerText );
+
+					// Format date
+					card.querySelector( 'span.date' )
+						.innerText = formatDate( card.querySelector( 'span.date' )
+							.innerText );
+				} );
+		</script>
 	</body>
-
-	<script type="module">
-		import {
-			convertTime
-		} from '../js/utils.js';
-		import {
-			formatDate
-		} from '../js/utils.js';
-
-		document.querySelectorAll( '#events[data-cli] .card' )
-			.forEach( card => {
-				// Convert time to 12 hour format
-				card.querySelector( 'span.time' )
-					.innerText = convertTime( card.querySelector( 'span.time' )
-						.innerText );
-
-				// Format date
-				card.querySelector( 'span.date' )
-					.innerText = formatDate( card.querySelector( 'span.date' )
-						.innerText );
-			} );
-	</script>
 
 </html>
