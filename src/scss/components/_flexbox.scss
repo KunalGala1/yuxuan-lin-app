@@ -6,19 +6,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &.start {
+  /* Direction */
+  &.row {
+    flex-direction: row;
+  }
+  &.row-reverse {
+    flex-direction: row-reverse;
+  }
+  &.column {
+    flex-direction: column;
+  }
+  &.column-reverse {
+    flex-direction: column-reverse;
+  }
+  /* Justify Content */
+  &.justify-start {
     justify-content: flex-start;
   }
-  &.between {
+  &.justify-end {
+    justify-content: flex-end;
+  }
+  &.justify-between {
     justify-content: space-between;
   }
-  &.gap {
-    gap: 30px;
+  &.justify-around {
+    justify-content: space-around;
   }
-  &.stretch {
+  &.justify-evenly {
+    justify-content: space-evenly;
+  }
+  /* Align Items */
+  &.align-start {
+    align-items: flex-start;
+  }
+  &.align-end {
+    align-items: flex-end;
+  }
+  &.align-basline {
+    align-items: basline;
+  }
+  &.align-stretch {
     align-items: stretch;
   }
-  &.top {
-    align-items: flex-start;
+  /* Gap */
+  &.gap {
+    gap: 30px;
   }
 }

@@ -8,6 +8,8 @@
 
   outline: none;
   border: none;
+
+  transition: all 0.2s ease-in-out;
 }
 
 /* Remove default margin */
@@ -41,7 +43,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(245, 245, 245);
 }
 
 /* A elements that don't have a class get default styles */

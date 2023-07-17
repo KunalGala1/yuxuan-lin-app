@@ -18,7 +18,7 @@
 		<main id="events" data-dashboard class="db-table">
 			<div class="heading">
 				<h1 class="secondary-header">Events</h1>
-				<a class="btn-primary" href="/dashboard/events/new">Add New</a>
+				<a class="btn btn-primary" href="/dashboard/events/new">Add New</a>
 			</div>
 			<table class="primary-table">
 				<colgroup>
@@ -50,7 +50,7 @@
 
 				<tr data-event-id="<%= id %>">
 					<td>
-						<a href="/event/<%= slug %>" target="_blank" class="table-link"><%= JSON.parse(events[i].body).title_en %></a>
+						<a href="/event/<%= slug %>" target="_blank" class="table-link"><%= title %></a>
 					</td>
 					<td><%= events[i].date.toDateString() %></td>
 					<td class="box no-padding">

@@ -1,19 +1,42 @@
-<% const action = metadata.action %> <% const method = metadata.method ? metadata.method : 'GET' %> <% const id = metadata.id ? metadata.id : '' %> <% const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-urlencoded' %> <% const name = metadata.name ? metadata.name : '' %>
+<% const action = metadata.action %>
+<% const method = metadata.method ? metadata.method : 'GET' %>
+<% const id = metadata.id ? metadata.id : '' %>
+<% const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-urlencoded' %>
+<% const name = metadata.name ? metadata.name : '' %>
+
 <form class="dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>">
-	<% fields.forEach(field => { %> <% const tag = field.tag ? field.tag : 'input' %> <% const type = field.type ? field.type : 'text' %> <% const name = field.name ? field.name : type %> <% const required = field.required ? true : false %> <% const label = field.label ? field.label : name %> <% const height = field.height ? field.height : 300 %> <% const value = field.value ? field.value : '' %> <% const file = field.file ? field.file : {} %> <% const lang = field.lang ? field.lang : 'en' %> <% const selector = field.selector ? field.selector : name %> <% if (tag === 'input') { %> <% if (type === 'hidden') { %>
+	<% fields.forEach(field => { %>
+	<% const tag = field.tag ? field.tag : 'input' %>
+	<% const type = field.type ? field.type : 'text' %>
+	<% const name = field.name ? field.name : type %>
+	<% const required = field.required ? true : false %>
+	<% const label = field.label ? field.label : name %>
+	<% const height = field.height ? field.height : 300 %>
+	<% const value = field.value ? field.value : '' %>
+	<% const file = field.file ? field.file : {} %>
+	<% const lang = field.lang ? field.lang : 'en' %>
+	<% const selector = field.selector ? field.selector : name %>
+
+	<% if (tag === 'input') { %>
+	<% if (type === 'hidden') { %>
 	<input type="hidden" name="<%= name %>" lang="<%= lang %>" />
 	<% } else { %>
 	<div class="item">
 		<div class="subitem">
 			<label for="<%= name %>"><%= label %></label>
-			<input type="<%= type %>" name="<%= name %>" value="<%= value %>" <%= required ? 'required' : '' %> lang="<%= lang %>" /> <% if (type === 'file') { %>
+			<input type="<%= type %>" name="<%= name %>" value="<%= value %>" <%= required ? 'required' : '' %> lang="<%= lang %>" />
+
+			<% if (type === 'file') { %>
 			<div class="preview">
 				<img src="/uploads/<%= file.filename %>" alt="" />
 			</div>
 			<% } %>
 		</div>
 	</div>
-	<% } %> <% } %> <% if (tag === 'textarea') { %>
+	<% } %>
+	<% } %>
+
+	<% if (tag === 'textarea') { %>
 	<div class="item">
 		<div class="subitem">
 			<label for="<%= name %>"><%= label %></label>
@@ -37,7 +60,9 @@
 			</script>
 		</div>
 	</div>
-	<% } %> <% if (tag === 'select') { %>
+	<% } %>
+
+	<% if (tag === 'select') { %>
 	<div class="item">
 		<div class="subitem">
 			<label for="<%= name %>"><%= label %></label>
@@ -46,21 +71,27 @@
 				<option value="" selected>Please Choose An Option</option>
 				<% } else { %>
 				<option value="">Please Choose An Option</option>
-				<% } %> <% for( let i = 0; i < field.options.length; i++ ) { %> <% if (value === field.options[i].toLowerCase()) { %>
+				<% } %>
+
+				<% for (let i = 0; i < field.options.length; i++) { %>
+				<% if (value === field.options[i].toLowerCase()) { %>
 				<option value="<%= field.options[i].toLowerCase() %>" selected><%= field.options[i] %></option>
 				<% } else { %>
 				<option value="<%= field.options[i].toLowerCase() %>"><%= field.options[i] %></option>
-				<% } %> <% } %>
+				<% } %>
+				<% } %>
 			</select>
 		</div>
 	</div>
-	<% } %> <% }) %>
+	<% } %>
+	<% }) %>
+
 	<div class="item flex">
 		<div class="subitem">
-			<button type="submit" class="success-btn">Save</button>
+			<button type="submit" class="btn success-btn">Save</button>
 		</div>
 		<div class="subitem">
-			<button type="reset" class="danger-btn">Cancel</button>
+			<button type="reset" class="btn danger-btn">Cancel</button>
 		</div>
 	</div>
 </form>

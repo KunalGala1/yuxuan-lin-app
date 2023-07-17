@@ -2,6 +2,8 @@
 @use '../layout' as l;
 @use '../theme/' as t;
 
+/* Quotes */
+
 blockquote {
   font-style: italic;
   @include t.serif;
@@ -17,8 +19,13 @@ blockquote {
   text-align: left;
 }
 
+/* Headers */
+
+.header {
+  text-transform: capitalize;
+}
+
 .main-header {
-  padding-top: 60px;
   padding-bottom: 30px;
   color: var(--grey);
   text-align: center;
@@ -45,6 +52,12 @@ blockquote {
   font-size: 24px;
 }
 
+.fourth-header {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--main);
+}
+
 .event-header {
   @include t.serif;
   color: var(--off-white);
@@ -52,6 +65,8 @@ blockquote {
   text-align: center;
   margin: 100px 0;
 }
+
+/* Links */
 
 .table-link {
   color: var(--form);

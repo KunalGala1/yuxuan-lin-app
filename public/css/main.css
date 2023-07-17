@@ -37,9 +37,7 @@
   --third: rgb(68, 105, 160);
 }
 
-.btn-primary {
-  background-color: var(--btn-primary);
-  color: var(--main-light);
+.btn {
   font-family: "MuseoModerno", sans-serif;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -47,29 +45,21 @@
   padding-right: 15px;
   border-radius: 5px;
   transition: all 0.1s ease-in-out;
-  margin: 0 auto;
-  display: block;
-  width: max-content;
+}
+
+.btn-primary {
+  background-color: var(--btn-primary);
+  color: var(--main-light);
 }
 .btn-primary:hover {
   background-color: var(--btn-primary-hover);
-  outline: solid 1px black;
+  outline: solid 1px rgba(0, 0, 0, 0.1);
   color: white;
 }
 
 .success-btn {
   background-color: var(--success);
   color: var(--main-light);
-  font-family: "MuseoModerno", sans-serif;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
-  transition: all 0.1s ease-in-out;
-  margin: 0 auto;
-  display: block;
-  width: max-content;
 }
 .success-btn:hover {
   background-color: var(--success-hover);
@@ -79,16 +69,6 @@
 .danger-btn {
   background-color: transparent;
   color: var(--60);
-  font-family: "MuseoModerno", sans-serif;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
-  transition: all 0.1s ease-in-out;
-  margin: 0 auto;
-  display: block;
-  width: max-content;
 }
 .danger-btn:hover {
   color: black;
@@ -98,21 +78,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Direction */
+  /* Justify Content */
+  /* Align Items */
+  /* Gap */
 }
-.flex.start {
+.flex.row {
+  flex-direction: row;
+}
+.flex.row-reverse {
+  flex-direction: row-reverse;
+}
+.flex.column {
+  flex-direction: column;
+}
+.flex.column-reverse {
+  flex-direction: column-reverse;
+}
+.flex.justify-start {
   justify-content: flex-start;
 }
-.flex.between {
+.flex.justify-end {
+  justify-content: flex-end;
+}
+.flex.justify-between {
   justify-content: space-between;
+}
+.flex.justify-around {
+  justify-content: space-around;
+}
+.flex.justify-evenly {
+  justify-content: space-evenly;
+}
+.flex.align-start {
+  align-items: flex-start;
+}
+.flex.align-end {
+  align-items: flex-end;
+}
+.flex.align-basline {
+  align-items: basline;
+}
+.flex.align-stretch {
+  align-items: stretch;
 }
 .flex.gap {
   gap: 30px;
-}
-.flex.stretch {
-  align-items: stretch;
-}
-.flex.top {
-  align-items: flex-start;
 }
 
 .primary-form .item:first-child {
@@ -129,16 +140,15 @@
   margin-top: 17.5px;
 }
 .primary-form .item:last-child {
-  margin-top: 60px;
-}
-.primary-form .item:last-child button {
-  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
 }
 .primary-form .item .subitem label {
   display: block;
   margin-bottom: 5px;
   color: var(--main-dark);
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
 }
 .primary-form .item .subitem input,
@@ -185,7 +195,7 @@
   display: block;
   margin-bottom: 5px;
   color: var(--main);
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
 }
 .dashboard-form .item .subitem label,
@@ -203,7 +213,7 @@
   border: 1px solid rgba(210, 210, 210, 0.15);
   background-color: var(--main-dark);
   color: var(--247);
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   border-radius: 5px;
   font-size: 18px;
   resize: none;
@@ -234,7 +244,7 @@
   border: 1px solid var(--200);
   border-radius: 4px;
   overflow: hidden;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .primary-table td,
 .primary-table th {
@@ -259,6 +269,7 @@
   width: 100%;
 }
 
+/* Quotes */
 blockquote {
   font-style: italic;
   font-family: "Playfair Display", serif;
@@ -274,8 +285,12 @@ blockquote {
   text-align: left;
 }
 
+/* Headers */
+.header {
+  text-transform: capitalize;
+}
+
 .main-header {
-  padding-top: 60px;
   padding-bottom: 30px;
   color: var(--grey);
   text-align: center;
@@ -302,6 +317,12 @@ blockquote {
   font-size: 24px;
 }
 
+.fourth-header {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--main);
+}
+
 .event-header {
   font-family: "Playfair Display", serif;
   color: var(--off-white);
@@ -310,6 +331,7 @@ blockquote {
   margin: 100px 0;
 }
 
+/* Links */
 .table-link {
   color: var(--form);
   text-decoration: underline;
@@ -503,13 +525,20 @@ header h2 {
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 13px;
+  font-size: 16px;
   padding: 5px;
   color: var(--200);
 }
+#language a {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+}
 #language a:hover,
 #language a.active {
-  color: var(--247);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 footer {
@@ -541,7 +570,7 @@ footer ul a:hover {
   transition: all 0.2s ease-in-out;
 }
 footer span {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   margin-top: 30px;
 }
@@ -650,9 +679,6 @@ aside .bottom {
 }
 #intro .card .text h2 {
   margin-bottom: 8px;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--main);
 }
 #intro .card .text h3 {
   margin-bottom: 8px;
@@ -763,7 +789,7 @@ aside .bottom {
   padding-right: 15px;
   width: 100%;
   border-radius: 10px 0 0 10px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 18px;
 }
 #search .search-bar span {
@@ -807,7 +833,7 @@ aside .bottom {
 }
 
 #works {
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 #work-list {
@@ -818,9 +844,23 @@ aside .bottom {
 }
 #work-list .main-header {
   text-transform: capitalize;
+  color: var(--main-dark);
+}
+#work-list .subsection {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+  border-radius: 10px;
+  background-color: rgb(235, 235, 235);
 }
 #work-list .cards-wrapper {
   flex-wrap: wrap;
+  max-width: 1199.98px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 #work-list .card {
   max-width: 400px;
@@ -829,7 +869,7 @@ aside .bottom {
   padding-bottom: 30px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: var(--main-lighter);
+  background-color: var(--main-light);
   border-radius: 15px;
 }
 #work-list .card .heading {
@@ -843,7 +883,7 @@ aside .bottom {
 #work-list .card .description {
   color: var(--main-dark);
   line-height: 1.5;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 main[name=work] .wrapper {
@@ -911,7 +951,7 @@ main[name=work] .wrapper .metadata {
   margin-top: 60px;
   background-color: rgba(150, 150, 150, 0.1);
   box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 main[name=work] .wrapper .metadata .metadata-wrapper {
   padding-top: 30px;
@@ -997,27 +1037,27 @@ main[name=work] .wrapper .btn-wrapper .btn-primary {
 }
 
 #events[data-cli] .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
   padding-top: 60px;
   padding-bottom: 60px;
   padding-left: 60px;
   padding-right: 60px;
-  max-width: 1399.98px;
+  max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 #events[data-cli] .card {
-  max-width: 360px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  max-width: 400px;
+  padding-top: 0;
+  padding-bottom: 0;
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 50px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--8);
@@ -1050,8 +1090,8 @@ main[name=work] .wrapper .btn-wrapper .btn-primary {
   font-style: italic;
 }
 #events[data-cli] .card p {
-  margin-top: 30px;
-  font-family: "MuseoModerno", sans-serif;
+  margin-top: 10px;
+  font-family: "Inter", sans-serif;
 }
 
 #event {
@@ -1102,6 +1142,30 @@ main[name=work] .wrapper .btn-wrapper .btn-primary {
   margin-top: 30px;
 }
 
+main[name=arranger] .wrapper {
+  max-width: 991.98px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+main[name=contact] .wrapper {
+  max-width: 767.98px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
 #login {
   width: 100vw;
   height: 100vh;
@@ -1138,9 +1202,9 @@ main[name=work] .wrapper .btn-wrapper .btn-primary {
 /* Home */
 /* Bio */
 /* Works */
-/* Contact */
 /* Events */
 /* Arranger */
+/* Contact */
 /* Login */
 #events[data-dashboard] .no-padding {
   padding: 0;

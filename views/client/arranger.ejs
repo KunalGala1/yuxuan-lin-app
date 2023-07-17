@@ -1,20 +1,33 @@
+<%
+const body = JSON.parse( data.body );
+const id = data._id;
+%>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head') %>
-    <title>Yuxuan Lin | Arranger</title>
-  </head>
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <script>
-      document.querySelector('nav ul li:nth-child(6) a').classList.add('active');
-    </script>
 
-    <main></main>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('../partials/head') %>
+		<title>Yuxuan Lin | Arranger</title>
+	</head>
 
-    <%- include('../partials/footer') %>
-  </body>
+	<body>
+		<%- include('../partials/header') %> <%- include('../partials/nav') %>
+		<script>
+			document.querySelector( 'nav ul li:nth-child(5) a' )
+				.classList.add( 'active' );
+		</script>
+
+		<main name="arranger">
+			<div class="wrapper">
+				<%- body['arranger_' + lang] %>
+			</div>
+		</main>
+
+		<%- include('../partials/footer') %>
+	</body>
+
 </html>

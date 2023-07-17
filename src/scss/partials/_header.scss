@@ -42,12 +42,17 @@ header {
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 13px;
+  font-size: 16px;
   padding: 5px;
   color: var(--200);
 
+  a {
+    @include l.padding(0, xs);
+    @include l.radius(sm);
+  }
+
   a:hover,
   a.active {
-    color: var(--247);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }

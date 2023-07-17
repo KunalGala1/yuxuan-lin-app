@@ -20,10 +20,9 @@
     }
 
     &:last-child {
-      margin-top: 60px;
-      button {
-        width: 100%;
-      }
+      margin-top: 30px;
+      display: flex;
+      justify-content: flex-end;
     }
 
     .subitem {

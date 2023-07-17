@@ -6,7 +6,7 @@ $mw: (
   sm: 767.98px,
   md: 991.98px,
   lg: 1199.98px,
-  xl: 1399.98px,
+  xl: 1500px,
 ) !default;
 
 @mixin max-width($key, $margin-horitonzal: auto, $margin-vertical: 0) {

@@ -37,11 +37,23 @@ const longDescription = body['longDescription_' + lang];
 			</div>
 			<div class="header">
 				<h1 class="event-header"><%= title %></h1>
+
+				<% if (date) { %>
 				<span class="date"><%= date %></span>
+				<% } %>
+
+				<% if (time) { %>
 				<span class="time"><%= time %></span>
+				<% } %>
+
+				<% if (location) { %>
 				<span class="location"><%= location %></span>
+				<% } %>
+
 			</div>
+
 			<div class="content"><%- longDescription || '' %></div>
+
 		</main>
 		<%- include('../partials/footer') %>
 	</body>

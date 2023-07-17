@@ -1,0 +1,10 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+main[name='contact'] {
+  .wrapper {
+    @include l.max-width(sm);
+    @include l.padding(lg);
+  }
+}

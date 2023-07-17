@@ -13,7 +13,7 @@
 		<%- include('../partials/header') %>
 		<%- include('../partials/nav') %>
 		<script>
-			document.querySelector( 'nav ul li:nth-child(5) a' )
+			document.querySelector( 'nav ul li:nth-child(4) a' )
 				.classList.add( 'active' );
 		</script>
 		<main id="events" data-cli>
@@ -39,10 +39,20 @@
 						<h3 class="title">
 							<a href="/event/<%= slug %>"><%= title %></a>
 						</h3>
+
+						<% if (date) { %>
 						<span class="date"><%= date.toLocaleString('en-US') %></span>
+						<% } %>
+
+						<% if (time) { %>
 						<span class="time"><%= time %></span>
+						<% } %>
+
+						<% if (location) { %>
 						<span class="location"><%= location %></span>
-						<p><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></p>
+						<% } %>
+
+						<div><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></div>
 					</div>
 				</div>
 				<% } %>
@@ -58,14 +68,16 @@
 			document.querySelectorAll( '#events[data-cli] .card' )
 				.forEach( card => {
 					// Convert time to 12 hour format
-					card.querySelector( 'span.time' )
-						.innerText = convertTime( card.querySelector( 'span.time' )
-							.innerText );
+					const time = card.querySelector( 'span.time' );
+					if ( time ) {
+						time.innerText = convertTime( time.innerText );
+					}
 
 					// Format date
-					card.querySelector( 'span.date' )
-						.innerText = formatDate( card.querySelector( 'span.date' )
-							.innerText );
+					const date = card.querySelector( 'span.date' );
+					if ( date ) {
+						date.innerText = formatDate( date.innerText );
+					}
 				} );
 		</script>
 	</body>

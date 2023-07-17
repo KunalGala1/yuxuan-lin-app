@@ -1,32 +1,23 @@
 <section id="search">
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" />
-      <span><i class="fa-solid fa-search"></i></span>
-    </div>
-  </div>
-  <div class="container">
-    <ul class="forces">
-      <li>
-        Orchestral
-        <span><i class="fa-solid fa-xmark"></i></span>
-      </li>
-      <li>
-        Chamber
-        <span><i class="fa-solid fa-xmark"></i></span>
-      </li>
-      <li>
-        Solo
-        <span><i class="fa-solid fa-xmark"></i></span>
-      </li>
-      <li>
-        Dance
-        <span><i class="fa-solid fa-xmark"></i></span>
-      </li>
-      <li>
-        Choral
-        <span><i class="fa-solid fa-xmark"></i></span>
-      </li>
-    </ul>
-  </div>
+	<div class="container">
+		<div class="search-bar">
+			<input type="text" id="search-bar" />
+			<span><i class="fa-solid fa-search"></i></span>
+		</div>
+	</div>
+	<div class="container">
+		<ul class="forces">
+			<% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
+			<% for (let i = 0; i < tags.length; i++) { %>
+			<% const tag = tags[i].toLowerCase(); %>
+			<% const hasDocsWithTag = works.some(doc => JSON.parse(doc.body).tag === tag); %>
+			<% if (hasDocsWithTag) { %>
+			<li>
+				<%= tags[i] %>
+				<span><i class="fa-solid fa-xmark"></i></span>
+			</li>
+			<% } %>
+			<% } %>
+		</ul>
+	</div>
 </section>

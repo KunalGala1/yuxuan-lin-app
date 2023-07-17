@@ -1,0 +1,8 @@
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
+
+main[name='arranger'] .wrapper {
+  @include l.max-width(md);
+  @include l.padding(md);
+}

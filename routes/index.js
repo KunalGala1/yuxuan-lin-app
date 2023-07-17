@@ -59,8 +59,9 @@ router.get('/event/:slug', async (req, res) => {
 });
 
 router.get('/arranger', async (req, res) => {
-  res.render('client/arranger');
+  const data = await Content.findOne({ name: 'arranger' });
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
+  res.render('client/arranger', { data, lang });
 });
 
 module.exports = router;

@@ -6,6 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%- include('../partials/head') %>
+		<script src="/js/search.js" defer></script>
 		<title>Yuxuan Lin | Works</title>
 	</head>
 
@@ -18,30 +19,29 @@
 		</script>
 		<main id="works">
 			<%- include('../sections/search') %>
-			<% const tags = ['orchestral', 'chamber', 'solo', 'dance', 'choral'] %>
-			<section id="work-list">
+			<% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
+			<section id="work-list" class="flex wrap gap column align-stretch">
 				<% for (let j = 0; j < tags.length; j++) { %>
+				<% const worksWithTag = works.filter(work => JSON.parse(work.body).tag === tags[j].toLowerCase()) %>
+				<% if (worksWithTag.length > 0) { %>
 				<div class="subsection">
 					<h2 class="main-header"><%= tags[j] %></h2>
-					<div class="cards-wrapper flex gap">
-						<% for (let i = 0; i < works.length; i++) { %>
-						<% const body = JSON.parse(works[i].body) %>
-						<% if (body.tag === tags[j]) { %>
-						<%
-						const slug = body.slug;
-						const title = body.title;
-						const subtitle = body.subtitle;
-						const programNote = body['programNote_' + lang];
-						%>
+					<div class="cards-wrapper flex gap align-start">
+						<% for (let i = 0; i < worksWithTag.length; i++) { %>
+						<% const body = JSON.parse(worksWithTag[i].body) %>
+						<% const slug = body.slug %>
+						<% const title = body.title %>
+						<% const subtitle = body.subtitle %>
+						<% const programNote = body['programNote_' + lang] %>
 						<div class="card">
 							<a href="/work/<%= slug %>">
 								<div class="heading">
 									<h3 class="third-header"><%= title %></h3>
-									<% if (subtitle != '') { %>
+									<% if (subtitle !== '') { %>
 									<p><%= subtitle %></p>
 									<% } %>
 								</div>
-								<% if (programNote != '') { %>
+								<% if (programNote !== '') { %>
 								<div class="description">
 									<p><%- programNote %></p>
 								</div>
@@ -49,9 +49,9 @@
 							</a>
 						</div>
 						<% } %>
-						<% } %>
 					</div>
 				</div>
+				<% } %>
 				<% } %>
 			</section>
 		</main>

@@ -3,7 +3,7 @@
 @use '../../theme/' as t;
 
 #works {
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 
 #work-list {
@@ -11,10 +11,18 @@
 
   .main-header {
     text-transform: capitalize;
+    color: var(--main-dark);
+  }
+
+  .subsection {
+    @include l.padding(lg);
+    @include l.radius(md);
+    background-color: rgba(235, 235, 235, 1);
   }
 
   .cards-wrapper {
     flex-wrap: wrap;
+    @include l.max-width(lg);
   }
 
   .card {
@@ -22,7 +30,7 @@
     min-width: 200px;
 
     @include l.padding(md);
-    background-color: var(--main-lighter);
+    background-color: var(--main-light);
     @include l.radius(lg);
 
     .heading {
