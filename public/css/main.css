@@ -35,6 +35,7 @@
   --main-dark: rgb(18, 25, 62);
   --second: rgb(50, 81, 126);
   --third: rgb(68, 105, 160);
+  --accent: #231815;
 }
 
 .btn {

@@ -1,7 +1,9 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
 <% const id = work._id;
 const body = JSON.parse(work.body);
-const title = body.title;
-const subtitle = body.subtitle;
+const title = body['title_' + lang];
+const subtitle = body['subtitle_' + lang];
 const instrumentation = body.instrumentation;
 const duration = body.duration;
 const year = body.year;
@@ -14,99 +16,99 @@ const performanceNote = body['performanceNote_' + lang];
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | <%= title %></title>
-		<%- include('../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= yuxuan %> | <%= title %></title>
+  <%- include('../partials/head') %>
+</head>
 
-	<body>
-		<%- include('../partials/header') %> <%- include('../partials/nav') %>
-		<script>
-			document.querySelector( 'nav ul li:nth-child(3) a' )
-				.classList.add( 'active' );
-		</script>
-		<main name="work">
-			<div class="wrapper">
-				<div class="heading">
-					<h1 class="title"><%= title %></h1>
-					<% if (subtitle && subtitle !== '') { %>
-					<h2 class="subtitle"><%= subtitle %></h2>
-					<% } %>
-				</div>
-				<div class="metadata">
-					<div class="metadata-wrapper">
-						<% if (instrumentation && instrumentation !== '') { %>
-						<p class="detailed-info">
-							<span>Instrumentation:</span>
-							<%= instrumentation %>
-						</p>
-						<% } %> <% if (duration && duration !== '') { %>
-						<p class="duration">
-							<span>Duration:</span>
-							<%= duration %>
-						</p>
-						<% } %> <% if (year && year !== '') { %>
-						<p class="year">
-							<span>Year(s) of Composition:</span>
-							<%= year %>
-						</p>
-						<% } %> <% if (commission && commission !== '') { %>
-						<div class="commission-info"><%- commission %></div>
-						<% } %>
-					</div>
-					<% if (url && url !== '') { %>
-					<div class="purchase-link-wrapper">
-						<p>
-							Available for purchase at:
-							<a href="<%= url %>" target="_blank"><%= url %></a>
-						</p>
-					</div>
-					<% } %>
-				</div>
-				<% if (programNote && programNote !== '') { %>
-				<div class="program-note">
-					<h3>Program Note</h3>
-					<p><%- programNote %></p>
-				</div>
-				<% } %> <% if (performanceNote && performanceNote !== '') { %>
-				<div class="performance-note">
-					<hr />
-					<h3>Performance Note</h3>
-					<p><%- performanceNote %></p>
-				</div>
-				<% } %>
-				<div class="btn-wrapper">
-					<a href="/works" class="btn btn-primary">Back to Works</a>
-				</div>
-			</div>
-		</main>
-		<%- include('../partials/footer') %>
-	</body>
+<body>
+  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+  <script>
+    document.querySelector('nav ul li:nth-child(3) a')
+      .classList.add('active');
+  </script>
+  <main name="work">
+    <div class="wrapper">
+      <div class="heading">
+        <h1 class="title"><%= title %></h1>
+        <% if (subtitle && subtitle !== '') { %>
+        <h2 class="subtitle"><%= subtitle %></h2>
+        <% } %>
+      </div>
+      <div class="metadata">
+        <div class="metadata-wrapper">
+          <% if (instrumentation && instrumentation !== '') { %>
+          <p class="detailed-info">
+            <span><%= lang == 'zh' ? '配器 :' : 'Instrumentation:' %></span>
+            <%= instrumentation %>
+          </p>
+          <% } %> <% if (duration && duration !== '') { %>
+          <p class="duration">
+            <span><%= lang == 'zh' ? '时长 :' : 'Duration:' %></span>
+            <%= duration %>
+          </p>
+          <% } %> <% if (year && year !== '') { %>
+          <p class="year">
+            <span><%= lang == 'zh' ? '创作年份 :' : 'Year(s) of Composition:' %></span>
+            <%= year %>
+          </p>
+          <% } %> <% if (commission && commission !== '') { %>
+          <div class="commission-info"><%- commission %></div>
+          <% } %>
+        </div>
+        <% if (url && url !== '') { %>
+        <div class="purchase-link-wrapper">
+          <p>
+            Available for purchase at:
+            <a href="<%= url %>" target="_blank"><%= url %></a>
+          </p>
+        </div>
+        <% } %>
+      </div>
+      <% if (programNote && programNote !== '') { %>
+      <div class="program-note">
+        <h3><%= lang == 'zh' ? '节目说明' : 'Program Note' %></h3>
+        <p><%- programNote %></p>
+      </div>
+      <% } %> <% if (performanceNote && performanceNote !== '') { %>
+      <div class="performance-note">
+        <hr />
+        <h3><%= lang == 'zh' ? '演出说明' : 'Performance Note' %></h3>
+        <p><%- performanceNote %></p>
+      </div>
+      <% } %>
+      <div class="btn-wrapper">
+        <a href="<%= lang == 'zh' ? '/works?lang=zh' : '/works' %>" class="btn btn-primary"><%= lang == 'zh' ? '返回作品' : 'Back to Works' %></a>
+      </div>
+    </div>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
 
-	<script></script>
+<script></script>
 
 </html>
 
 <script type="module">
-	import {
-		convertTime
-	} from '../js/utils.js';
-	import {
-		formatDate
-	} from '../js/utils.js';
+  import {
+    convertTime
+  } from '../js/utils.js';
+  import {
+    formatDate
+  } from '../js/utils.js';
 
-	// Convert time to 12 hour format
-	const timeElement = document.querySelector( 'span.time' );
-	if ( timeElement ) {
-		timeElement.innerText = convertTime( timeElement.innerText );
-	}
+  // Convert time to 12 hour format
+  const timeElement = document.querySelector('span.time');
+  if (timeElement) {
+    timeElement.innerText = convertTime(timeElement.innerText);
+  }
 
-	// Format date
-	const dateElement = document.querySelector( 'span.date' );
-	if ( dateElement ) {
-		dateElement.innerText = formatDate( dateElement.innerText );
-	}
+  // Format date
+  const dateElement = document.querySelector('span.date');
+  if (dateElement) {
+    dateElement.innerText = formatDate(dateElement.innerText);
+  }
 </script>

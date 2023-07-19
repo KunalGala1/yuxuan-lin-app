@@ -1,11 +1,11 @@
-import { convertToSlug } from './utils.js';
-import { toastNotification } from './utils.js';
-import { responseAction } from './actions.js';
+import { convertToSlug } from "./utils.js";
+import { toastNotification } from "./utils.js";
+import { responseAction } from "./actions.js";
 
-const forms = document.querySelectorAll('form.handle-form-submission');
+const forms = document.querySelectorAll("form.handle-form-submission");
 
-forms.forEach(form => {
-  form.addEventListener('submit', async e => {
+forms.forEach((form) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Metadata
@@ -43,7 +43,7 @@ forms.forEach(form => {
         const res = await fetch(action, {
           method: method,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body,
         });
@@ -57,26 +57,29 @@ forms.forEach(form => {
         if (data.success) {
           // Flash Message
           const methodMessages = {
-            post: 'created',
-            put: 'updated',
-            delete: 'deleted',
+            post: "created",
+            put: "updated",
+            delete: "deleted",
           };
 
-          toastNotification(`${name} ${methodMessages[method.toLowerCase()]} successfully`, 'success');
+          toastNotification(
+            `${name} ${methodMessages[method.toLowerCase()]} successfully`,
+            "success"
+          );
 
           responseAction(name, method, data);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   });
 });
 
 // Update textarea values with TinyMCE content
-const updateTextareaValues = form => {
-  const textareas = form.querySelectorAll('textarea');
-  textareas.forEach(textarea => {
+const updateTextareaValues = (form) => {
+  const textareas = form.querySelectorAll("textarea");
+  textareas.forEach((textarea) => {
     const editor = tinymce.get(textarea.id);
     if (editor) {
       textarea.value = editor.getContent();
@@ -85,10 +88,13 @@ const updateTextareaValues = form => {
 };
 
 // Convert titles to slugs and update slug values
-const updateSlugs = form => {
+const updateSlugs = (form) => {
   const slug = form.querySelector('input[name="slug"]');
   if (slug) {
-    const title = form.querySelector('input[name="title"]');
+    let title = form.querySelector('input[name="title"]');
+    if (!title || title.value.trim() === "") {
+      title = form.querySelector('input[name="title_en"]');
+    }
     slug.value = convertToSlug(title.value);
   }
 };
@@ -97,9 +103,9 @@ const updateSlugs = form => {
 const uploadFile = async (fileInput, formObject) => {
   const file = fileInput.files[0];
   const formData = new FormData();
-  formData.append('file', file);
-  const res = await fetch('/upload', {
-    method: 'post',
+  formData.append("file", file);
+  const res = await fetch("/upload", {
+    method: "post",
     body: formData,
   });
   const data = await res.json();
@@ -108,31 +114,38 @@ const uploadFile = async (fileInput, formObject) => {
 
 const persistFile = async (endpoint, formObject, nestedProperty) => {
   const res = await fetch(endpoint, {
-    method: 'get',
+    method: "get",
   });
   const data = await res.json();
   const body = JSON.parse(accessNestedProperty(data, nestedProperty));
   formObject.file = body.file;
 };
 
-const handleFileUploads = (form, method, action, name, formObject, promises) => {
+const handleFileUploads = (
+  form,
+  method,
+  action,
+  name,
+  formObject,
+  promises
+) => {
   const fileInputs = form.querySelectorAll('input[type="file"]');
 
   for (const fileInput of fileInputs) {
-    if (method == 'post') {
+    if (method == "post") {
       // upload file
       if (fileInput.files.length > 0) {
         promises.push(uploadFile(fileInput, formObject));
       } else {
-        alert('Please upload a file');
+        alert("Please upload a file");
         return;
       }
-    } else if (method == 'put') {
+    } else if (method == "put") {
       if (fileInput.files.length > 0) {
         promises.push(uploadFile(fileInput, formObject));
       } else {
         // No changes were made to the file input
-        promises.push(persistFile(action, formObject, [name, 'body']));
+        promises.push(persistFile(action, formObject, [name, "body"]));
       }
     }
   }

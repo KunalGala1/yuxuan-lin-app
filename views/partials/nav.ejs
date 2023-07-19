@@ -1,20 +1,28 @@
+<%
+console.log('lang', lang);
+const navLinks = [
+  { href: lang == 'zh' ? '/?lang=zh' : '/', text: lang == 'zh' ? '首页' : 'home' },
+  { href: lang == 'zh' ? '/bio?lang=zh' : '/bio', text: lang == 'zh' ? '个人简介' : 'bio' },
+  { href: lang == 'zh' ? '/works?lang=zh' : '/works', text: lang == 'zh' ? '作品' : 'works' },
+  { href: lang == 'zh' ? '/events?lang=zh' : '/events', text: lang == 'zh' ? '事件' : 'events' },
+  { href: lang == 'zh' ? '/arranger?lang=zh' : '/arranger', text: lang == 'zh' ? '编曲师' : 'arranger' },
+  { href: lang == 'zh' ? '/contact?lang=zh' : '/contact', text: lang == 'zh' ? '联系' : 'contact', class: 'last-child' },]
+%>
+
 <nav>
-	<ul role="list">
-		<li><a href="/">Home</a></li>
-		<li><a href="/bio">Bio</a></li>
-		<li><a href="/works">Works</a></li>
-		<li><a href="/events">Events</a></li>
-		<li><a href="/arranger">Arranger</a></li>
-		<li class="last-child"><a href="/contact">Contact</a></li>
+  <ul role="list">
+    <% for( let i = 0; i < navLinks.length; i++ ) { %>
+    <li class="<%= navLinks[i].class ? navLinks[i].class : '' %>"><a href="<%= navLinks[i].href %>"><%= navLinks[i].text %></a></li>
+    <% } %>
 
-		<div id="gradient"></div>
-		<script src="/js/gradient-no-scroll.js" defer></script>
-	</ul>
+    <div id="gradient"></div>
+    <script src="/js/gradient-no-scroll.js" defer></script>
+  </ul>
 
-	<div id="burger">
-		<div></div>
-		<div></div>
-		<div></div>
-	</div>
-	<script src="/js/burger.js" defer></script>
+  <div id="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <script src="/js/burger.js" defer></script>
 </nav>

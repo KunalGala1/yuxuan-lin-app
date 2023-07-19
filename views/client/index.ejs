@@ -1,18 +1,27 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head') %>
-    <title>Yuxuan Lin | Home</title>
-  </head>
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <script>
-      document.querySelector('nav ul li:nth-child(1) a').classList.add('active');
-    </script>
-    <main><%- include('../sections/intro') %><%- include('../sections/hero') %></main>
-    <%- include('../partials/footer') %>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('../partials/head') %>
+  <title><%= yuxuan %> | Home</title>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
+  <%- include('../partials/nav') %>
+  <script>
+    document.querySelector('nav ul li:nth-child(1) a').classList.add('active');
+  </script>
+  <main>
+    <%- include('../sections/intro') %>
+    <%- include('../sections/hero') %>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
+
 </html>

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js & gulp & sass src/scss:public/css --no-source-map --watch",
+    "dev": "concurrently \"nodemon server.js\" \"gulp\" \"sass src/scss:public/css --no-source-map --watch\"",
     "kill": "killall node"
   },
   "author": "Kunal Gala",
@@ -26,6 +26,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "nodemon": "^2.0.22",
     "sass": "^1.62.0"
   }

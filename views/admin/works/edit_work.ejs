@@ -2,8 +2,10 @@
 const id = work._id;
 const body = JSON.parse(work.body);
 const slug = body.slug;
-const title = body.title;
-const subtitle = body.subtitle;
+const title_en = body.title_en;
+const title_zh = body.title_zh;
+const subtitle_en = body.subtitle_en;
+const subtitle_zh = body.subtitle_zh;
 const tag = body.tag;
 const instrumentation = body.instrumentation;
 const duration = body.duration;
@@ -20,51 +22,54 @@ const url = body.url;
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | Dashboard | Edit Event</title>
-		<%- include('../../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | Dashboard | Edit Event</title>
+  <%- include('../../partials/head') %>
+</head>
 
-	<body class="dashboard">
-		<%- include('../../partials/aside') %>
-		<script>
-			document.querySelector( 'aside .middle ul li:nth-child(2) a' )
-				.classList.add( 'active' );
-		</script>
-		<main>
-			<h1 class="secondary-header">Edit Work</h1>
-			<a href="/work/<%= slug %>" class="edit-link" target="_blank">
-				<%= slug %>
-				<i class="fa-solid fa-up-right-from-square"></i>
-			</a>
-			<%- include('../../partials/form', {
+<body class="dashboard">
+  <%- include('../../partials/aside') %>
+  <script>
+    document.querySelector('aside .middle ul li:nth-child(2) a')
+      .classList.add('active');
+  </script>
+  <main>
+    <h1 class="secondary-header">Edit Work</h1>
+    <a class="btn btn-primary" href="/dashboard/works/new">Add New</a>
+    <a href="/work/<%= slug %>" class="edit-link" target="_blank">
+      <%= slug %>
+      <i class="fa-solid fa-up-right-from-square"></i>
+    </a>
+    <%- include('../../partials/form', {
         metadata: {
           method: 'put',
           action: '/dashboard/works/' + id,
           name: 'work'
         },
         fields: [
-          { name: 'title', required: true, value: title },
-          { type: 'hidden', name: 'slug' },
-          { name: 'subtitle', value: subtitle },
-          { tag: 'select', name: 'tag', options: ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'], value: tag },
-          { name: 'instrumentation', label: 'detailed insturmentation (fl.cl...)', value: instrumentation },
-          { name: 'duration', value: duration },
-          { name: 'year', value: year },
-          { tag: 'textarea', name: 'commission_en', label: 'commission information (EN)', value: commission_en },
-          { tag: 'textarea', name: 'commission_zh', label: 'commission information (ZH)', value: commission_zh },
-          { tag: 'textarea', name: 'programNote_en', label: 'program note (EN)', value: programNote_en },
-          { tag: 'textarea', name: 'programNote_zh', label: 'program note (ZH)', value: programNote_zh },
-          { tag: 'textarea', name: 'performanceNote_en', label: 'performance note (EN)', value: performanceNote_en },
-          { tag: 'textarea', name: 'performanceNote_zh', label: 'performance note (ZH)', value: performanceNote_zh },
-          { type: 'url', name: 'url', label: 'URL to purchase music', value: url }
-        ]
+			{ name: 'title_en', required: true, label: 'title', value: title_en },
+			{ name: 'title_zh', required: true, label: '标题', value: title_zh },
+			{ type: 'hidden', name: 'slug' },
+			{ name: 'subtitle_en', label: 'subtitle', value: subtitle_en },
+			{ name: 'subtitle_zh', label: '副标题', value: subtitle_zh },
+			{ tag: 'select', name: 'tag', options: ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'], value: tag },
+			{ name: 'instrumentation', label: 'detailed insturmentation (3.2.2...)', value: instrumentation  },
+			{ name: 'duration', value: duration },
+			{ name: 'year', value: year },
+			{ tag: 'textarea', name: 'commission_en', label: 'commission information', value: commission_en },
+			{ tag: 'textarea', name: 'commission_zh', label: '委托信息', value: commission_zh },
+			{ tag: 'textarea', name: 'programNote_en', label: 'program note', value: programNote_en },
+			{ tag: 'textarea', name: 'programNote_zh', label: '节目说明', value: programNote_zh },
+			{ tag: 'textarea', name: 'performanceNote_en', label: 'performance note', value: performanceNote_en },
+			{ tag: 'textarea', name: 'performanceNote_zh', label: '演出说明', value: performanceNote_zh },
+			{ type: 'url', name: 'url', label: 'URL to purchase music', value: url }
+		]
       }) %>
-		</main>
-		<script src="/js/previewImage.js" defer></script>
-	</body>
+  </main>
+  <script src="/js/previewImage.js" defer></script>
+</body>
 
 </html>

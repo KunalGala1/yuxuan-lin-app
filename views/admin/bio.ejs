@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | Dashboard | Bio</title>
-		<%- include('../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | Dashboard | Bio</title>
+  <%- include('../partials/head') %>
+</head>
 
-	<body class="dashboard">
-		<%- include('../partials/aside') %>
-		<script>
-			document.querySelector( 'aside .middle ul li:nth-child(1) a' )
-				.classList.add( 'active' );
-		</script>
-		<main class="">
-			<%- include('../partials/form', {
+<body class="dashboard">
+  <%- include('../partials/aside') %>
+  <script>
+    document.querySelector('aside .middle ul li:nth-child(1) a')
+      .classList.add('active');
+  </script>
+  <main class="">
+    <%- include('../partials/form', {
       metadata: {
         method: 'PUT',
         action: '/dashboard/bio/' + id,
@@ -31,13 +31,13 @@
           name: 'quote_en',
           value: body.quote_en,
           lang: 'en',
-          label: 'quote (EN)'
+          label: 'quote'
         },
         {
           name: 'quote_zh',
           value: body.quote_zh,
           lang: 'zh',
-          label: 'quote (ZH)'
+          label: '引用'
         },
         {
           tag: 'textarea',
@@ -45,7 +45,7 @@
           value: body.bio_en,
           height: 500,
           lang: 'en',
-          label: 'bio (EN)'
+          label: 'bio'
         },
         {
           tag: 'textarea',
@@ -53,11 +53,11 @@
           value: body.bio_zh,
           height: 500,
           lang: 'zh',
-          label: 'bio (ZH)'
+          label: '个人简介'
         }
       ]
     }) %>
-		</main>
-	</body>
+  </main>
+</body>
 
 </html>

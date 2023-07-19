@@ -1,3 +1,5 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
 <%
 const body = JSON.parse(event.body);
 const title = body.title;
@@ -12,73 +14,73 @@ const longDescription = body['longDescription_' + lang];
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | <%= title %></title>
-		<%- include('../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | <%= title %></title>
+  <%- include('../partials/head') %>
+</head>
 
-	<body>
-		<%- include('../partials/header') %>
-		<%- include('../partials/nav') %>
-		<script>
-			document.querySelector( 'nav ul li:nth-child(5) a' )
-				.classList.add( 'active' );
-		</script>
-		<main id="event">
-			<div class="banner">
-				<div class="image-container">
-					<% if (image) { %>
-					<img src="/uploads/<%= image %>" alt="" />
-					<% } %>
-				</div>
-			</div>
-			<div class="header">
-				<h1 class="event-header"><%= title %></h1>
+<body>
+  <%- include('../partials/header') %>
+  <%- include('../partials/nav') %>
+  <script>
+    document.querySelector('nav ul li:nth-child(5) a')
+      .classList.add('active');
+  </script>
+  <main id="event">
+    <div class="banner">
+      <div class="image-container">
+        <% if (image) { %>
+        <img src="/uploads/<%= image %>" alt="" />
+        <% } %>
+      </div>
+    </div>
+    <div class="header">
+      <h1 class="event-header"><%= title %></h1>
 
-				<% if (date) { %>
-				<span class="date"><%= date %></span>
-				<% } %>
+      <% if (date) { %>
+      <span class="date"><%= date %></span>
+      <% } %>
 
-				<% if (time) { %>
-				<span class="time"><%= time %></span>
-				<% } %>
+      <% if (time) { %>
+      <span class="time"><%= time %></span>
+      <% } %>
 
-				<% if (location) { %>
-				<span class="location"><%= location %></span>
-				<% } %>
+      <% if (location) { %>
+      <span class="location"><%= location %></span>
+      <% } %>
 
-			</div>
+    </div>
 
-			<div class="content"><%- longDescription || '' %></div>
+    <div class="content"><%- longDescription || '' %></div>
 
-		</main>
-		<%- include('../partials/footer') %>
-	</body>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
 
-	<script></script>
+<script></script>
 
 </html>
 
 <script type="module">
-	import {
-		convertTime
-	} from '../js/utils.js';
-	import {
-		formatDate
-	} from '../js/utils.js';
+  import {
+    convertTime
+  } from '../js/utils.js';
+  import {
+    formatDate
+  } from '../js/utils.js';
 
-	// Convert time to 12 hour format
-	const timeElement = document.querySelector( 'span.time' );
-	if ( timeElement ) {
-		timeElement.innerText = convertTime( timeElement.innerText );
-	}
+  // Convert time to 12 hour format
+  const timeElement = document.querySelector('span.time');
+  if (timeElement) {
+    timeElement.innerText = convertTime(timeElement.innerText);
+  }
 
-	// Format date
-	const dateElement = document.querySelector( 'span.date' );
-	if ( dateElement ) {
-		dateElement.innerText = formatDate( dateElement.innerText );
-	}
+  // Format date
+  const dateElement = document.querySelector('span.date');
+  if (dateElement) {
+    dateElement.innerText = formatDate(dateElement.innerText);
+  }
 </script>

@@ -1,63 +1,65 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<%- include('../partials/head') %>
-		<title>Yuxuan Lin | Contact</title>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('../partials/head') %>
+  <title><%= yuxuan %> | Contact</title>
+</head>
 
-	<body>
-		<%- include('../partials/header') %> <%- include('../partials/nav') %>
-		<script>
-			document.querySelector( 'nav ul li:nth-child(6) a' )
-				.classList.add( 'active' );
-		</script>
+<body>
+  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+  <script>
+    document.querySelector('nav ul li:nth-child(6) a')
+      .classList.add('active');
+  </script>
 
-		<main name="contact">
-			<div class="wrapper flex column gap">
-				<h2 class="header fourth-header">Contact me</h2>
-				<form action="/nodemailer" method="post" class="primary-form">
-					<div class="item">
-						<div class="subitem">
-							<label for="name">Name*</label>
-							<input type="text" name="name" required />
-						</div>
-						<div class="subitem">
-							<label for="email">Email*</label>
-							<input type="text" name="email" required />
-						</div>
-					</div>
-					<div class="item">
-						<div class="subitem">
-							<label for="subject">Subject*</label>
-							<input type="text" name="subject" required />
-						</div>
-					</div>
-					<div class="item">
-						<div class="subitem">
-							<label for="message">Message</label>
-							<textarea name="message" id="" cols="30" rows="10"></textarea>
-						</div>
-					</div>
-					<div class="item">
-						<div class="subitem">
-							<label for="auth">2 + 1 = ?</label>
-							<input type="text" name="auth" required />
-						</div>
-					</div>
-					<div class="item">
-						<div class="subitem">
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</main>
+  <main name="contact">
+    <div class="wrapper flex column gap">
+      <h2 class="header fourth-header"><%= lang == 'zh' ? '联系我' : 'Contact Me' %></h2>
+      <form action="/nodemailer" method="post" class="primary-form">
+        <div class="item">
+          <div class="subitem">
+            <label for="name">Name*</label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="subitem">
+            <label for="email">Email*</label>
+            <input type="text" name="email" required />
+          </div>
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <label for="subject">Subject*</label>
+            <input type="text" name="subject" required />
+          </div>
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <label for="message">Message</label>
+            <textarea name="message" id="" cols="30" rows="10"></textarea>
+          </div>
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <label for="auth">2 + 1 = ?</label>
+            <input type="text" name="auth" required />
+          </div>
+        </div>
+        <div class="item">
+          <div class="subitem">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
 
-		<%- include('../partials/footer') %>
-	</body>
+  <%- include('../partials/footer') %>
+</body>
 
 </html>

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | Dashboard | New Event</title>
-		<%- include('../../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | Dashboard | New Event</title>
+  <%- include('../../partials/head') %>
+</head>
 
-	<body class="dashboard">
-		<%- include('../../partials/aside') %>
-		<script>
-			document.querySelector( 'aside .middle ul li:nth-child(1) a' )
-				.classList.add( 'active' );
-		</script>
-		<main>
-			<h1 class="secondary-header">New Event</h1>
+<body class="dashboard">
+  <%- include('../../partials/aside') %>
+  <script>
+    document.querySelector('aside .middle ul li:nth-child(1) a')
+      .classList.add('active');
+  </script>
+  <main>
+    <h1 class="secondary-header">New Event</h1>
 
-			<!-- New Event Form -->
-			<%- include('../../partials/form', {
+    <!-- New Event Form -->
+    <%- include('../../partials/form', {
         metadata: {
           method: 'post',
           action: '/dashboard/events',
@@ -40,9 +40,9 @@
           { tag: 'textarea', name: 'longDescription_zh', label: 'long description (ZH)' },
         ]
       }) %>
-		</main>
+  </main>
 
-		<script src="/js/previewImage.js" defer></script>
-	</body>
+  <script src="/js/previewImage.js" defer></script>
+</body>
 
 </html>

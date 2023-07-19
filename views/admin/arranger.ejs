@@ -1,3 +1,5 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
 <%
 const body = JSON.parse( data.body );
 const id = data._id;
@@ -8,22 +10,22 @@ const arranger_zh = body.arranger_zh;
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Yuxuan Lin | Dashboard | Arranger</title>
-		<%- include('../partials/head') %>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | Dashboard | Arranger</title>
+  <%- include('../partials/head') %>
+</head>
 
-	<body class="dashboard">
-		<%- include('../partials/aside') %>
-		<script>
-			document.querySelector( 'aside .middle ul li:nth-child(4) a' )
-				.classList.add( 'active' );
-		</script>
-		<main class="">
-			<%- include('../partials/form', {
+<body class="dashboard">
+  <%- include('../partials/aside') %>
+  <script>
+    document.querySelector('aside .middle ul li:nth-child(4) a')
+      .classList.add('active');
+  </script>
+  <main class="">
+    <%- include('../partials/form', {
       metadata: {
         method: 'put',
         action: '/dashboard/arranger/' + id,
@@ -45,7 +47,7 @@ const arranger_zh = body.arranger_zh;
         },
       ]
     }) %>
-		</main>
-	</body>
+  </main>
+</body>
 
 </html>

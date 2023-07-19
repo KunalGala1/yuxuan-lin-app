@@ -1,9 +1,12 @@
+<% let title = "Yuxuan Lin"; let subtitle = "Composer"; if (lang === "zh") {
+title = "林榆璇"; subtitle = "作曲家"; } %>
+
 <header>
-	<h1><a href="/">Yuxuan Lin</a></h1>
-	<h2>Composer</h2>
-	<div id="language">
-		<span><a href="#">🇺🇸</a></span>
-		<span>|</span>
-		<span><a href="#">🇨🇳</a></span>
-	</div>
+  <h1><a href="<%= lang == 'zh' ? '/?lang=zh' : '/' %>"><%= title %></a></h1>
+  <h2><%= subtitle %></h2>
+  <div id="language">
+    <span><a href="#">🇺🇸</a></span>
+    <span>|</span>
+    <span><a href="#">🇨🇳</a></span>
+  </div>
 </header>
