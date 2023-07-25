@@ -27,17 +27,19 @@
           name: 'event'
         },
         fields: [
-          { name: 'title', required: true },
+          { name: 'title_en', required: true, label: 'title', role: 'slug-source' },
+          { name: 'title_zh', required: true, label: '标题' },
           { type: 'hidden', name: 'slug' },
-          { tag: 'textarea', name: 'shortDescription_en', label: 'short description (EN)' },
-          { tag: 'textarea', name: 'shortDescription_zh', label: 'short description (ZH)' },
+          { tag: 'textarea', name: 'shortDescription_en', label: 'short description' },
+          { tag: 'textarea', name: 'shortDescription_zh', label: '登月之旅' },
           { type: 'date' },
           { type: 'time' },
           { type: 'url', label: 'URL' },
-          { name: 'location' },
+          { name: 'location_en', label: 'location' },
+          { name: 'location_zh', label: '位置' },
           { type: 'file', label: 'image' },
-          { tag: 'textarea', name: 'longDescription_en', label: 'long description (EN)' },
-          { tag: 'textarea', name: 'longDescription_zh', label: 'long description (ZH)' },
+          { tag: 'textarea', name: 'longDescription_en', label: 'long description' },
+          { tag: 'textarea', name: 'longDescription_zh', label: '详细描述' },
         ]
       }) %>
   </main>

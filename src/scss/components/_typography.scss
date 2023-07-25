@@ -1,6 +1,6 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 /* Quotes */
 
@@ -37,7 +37,7 @@ blockquote {
   text-align: center;
   @include t.serif;
   &:after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 1px;
@@ -96,4 +96,12 @@ blockquote {
   i {
     margin-left: 5px;
   }
+}
+
+// text
+
+.main-text {
+  @include t.util;
+  color: var(--40);
+  line-height: 2;
 }

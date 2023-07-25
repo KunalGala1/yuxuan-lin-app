@@ -7,6 +7,9 @@ const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
 const multer = require("multer");
+const multerS3 = require("multer-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
+const { ListBucketsCommand } = require("@aws-sdk/client-s3");
 
 // db
 const connectDB = require("./config/db");
@@ -14,14 +17,45 @@ connectDB();
 
 const app = express();
 
-// Multer
-const storage = multer.diskStorage({
-  destination: "public/uploads",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+process.env.AWS_SDK_LOAD_CONFIG = "1";
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
+  region: "us-east-2",
 });
-const upload = multer({ storage: storage });
+
+/* Test Credentials */
+async function testS3Credentials() {
+  try {
+    // Call the `listBuckets` operation to check if the credentials are valid
+    const response = await s3.send(new ListBucketsCommand({}));
+    console.log("Credentials are valid. Buckets in your account:");
+    console.log(response.Buckets);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+testS3Credentials();
+
+/* ======================== */
+
+// Multer
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "yuxuan-lin", // Replace with your S3 bucket name
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(null, "uploads/" + Date.now().toString() + "-" + file.originalname);
+    },
+  }),
+});
+
 app.post("/upload", upload.single("file"), (req, res) => {
   console.log(req.file);
   res.json({ success: true, file: req.file });

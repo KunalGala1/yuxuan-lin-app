@@ -14,8 +14,10 @@ const { ensureAuthenticated } = require("../config/auth");
 
 /* Dashboard */
 router.get("/", ensureAuthenticated, async (req, res) => {
+  const intro = await Content.findOne({ name: "intro" });
   res.render("admin/dashboard", {
     name: req.user.username,
+    intro,
   });
 });
 
@@ -39,7 +41,11 @@ router.get("/arranger", ensureAuthenticated, async (req, res) => {
 
 // ====================================================================================================
 
-const ContentDocuments = [{ name: "bio" }, { name: "arranger" }];
+const ContentDocuments = [
+  { name: "bio" },
+  { name: "arranger" },
+  { name: "intro" },
+];
 
 ContentDocuments.forEach((document) => {
   const name = document.name;

@@ -1,6 +1,10 @@
 <section id="hero">
-  <div class="content">
-    <img src="img/placeholder.jpg" alt="" />
-    <blockquote class="engraved">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, eum.</blockquote>
+  <div class="wrapper">
+    <div class="container">
+      <img src="/img/main.jpg" alt="">
+    </div>
+    <div class="container main-text">
+      <%- JSON.parse(intro.body)['intro_' + lang] %>
+    </div>
   </div>
 </section>

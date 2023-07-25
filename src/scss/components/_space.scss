@@ -1,0 +1,7 @@
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
+
+.space {
+  @include l.padding(md);
+}

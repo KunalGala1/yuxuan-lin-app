@@ -7,7 +7,6 @@
   margin: 0;
   outline: none;
   border: none;
-  transition: all 0.2s ease-in-out;
 }
 
 /* Remove default margin */
@@ -89,4 +88,8 @@ button {
 img[src=""],
 img:not([src]) {
   border: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+iframe {
+  aspect-ratio: 16/9;
 }

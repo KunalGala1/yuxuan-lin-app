@@ -2,9 +2,10 @@
 
 <%
 const body = JSON.parse(event.body);
-const title = body.title;
+const title = body['title_' + lang];
 const image = body.file ? body.file.filename : null;
 const date = body.date;
+const dateObject = new Date(date);
 const time = body.time;
 const location = body.location;
 const shortDescription = body['shortDescription_' + lang];
@@ -12,7 +13,7 @@ const longDescription = body['longDescription_' + lang];
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
 
 <head>
   <meta charset="UTF-8" />
@@ -41,7 +42,21 @@ const longDescription = body['longDescription_' + lang];
       <h1 class="event-header"><%= title %></h1>
 
       <% if (date) { %>
-      <span class="date"><%= date %></span>
+      <span class="date">
+        <% if (lang === 'en') { %>
+        <%= dateObject.toLocaleString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+}) %>
+        <% } else { %>
+        <%= dateObject.toLocaleString('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) %>
+        <% } %>
+      </span>
       <% } %>
 
       <% if (time) { %>
@@ -66,16 +81,13 @@ const longDescription = body['longDescription_' + lang];
 
 <script type="module">
   import {
-    convertTime
-  } from '../js/utils.js';
-  import {
-    formatDate
+    formatTime
   } from '../js/utils.js';
 
   // Convert time to 12 hour format
   const timeElement = document.querySelector('span.time');
   if (timeElement) {
-    timeElement.innerText = convertTime(timeElement.innerText);
+    timeElement.innerText = formatTime(timeElement.innerText, document.querySelector('html').lang);
   }
 
   // Format date

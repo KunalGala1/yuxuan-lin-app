@@ -1,7 +1,9 @@
-<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+<%
+const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
+%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
 
 <head>
   <meta charset="UTF-8" />
@@ -22,15 +24,16 @@
     <div class="container">
       <% for (let i = 0; i < events.length; i++) { %>
       <% 
-          const body = JSON.parse(events[i].body);
-          const title = body.title;
-          const slug = body.slug;
-          const image = body.file.filename;
-          const date = body.date;
-          const time = body.time;
-          const location = body.location;
-          const shortDescription = body['shortDescription_' + lang];
-        %>
+      const body = JSON.parse(events[i].body);
+      const title = body['title_' + lang];
+      const slug = body.slug;
+      const image = body.file.filename;
+      const date = body.date;
+      const dateObject = new Date(date);
+      const time = body.time;
+      const location = body.location;
+      const shortDescription = body['shortDescription_' + lang];
+      %>
       <div class="card">
         <a href="/event/<%= slug %>">
           <div class="image-container">
@@ -43,7 +46,13 @@
           </h3>
 
           <% if (date) { %>
-          <span class="date"><%= date.toLocaleString('en-US') %></span>
+          <span class="date">
+            <% if (lang === 'en') { %>
+            <%= dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
+            <% } else { %>
+            <%= dateObject.toLocaleString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+            <% } %>
+          </span>
           <% } %>
 
           <% if (time) { %>
@@ -63,24 +72,16 @@
   <%- include('../partials/footer') %>
   <script type="module">
     import {
-      convertTime,
-      formatDate
+      formatTime
     } from '../js/utils.js';
 
-    document.querySelectorAll('#events[data-cli] .card')
-      .forEach(card => {
-        // Convert time to 12 hour format
-        const time = card.querySelector('span.time');
-        if (time) {
-          time.innerText = convertTime(time.innerText);
-        }
-
-        // Format date
-        const date = card.querySelector('span.date');
-        if (date) {
-          date.innerText = formatDate(date.innerText);
-        }
-      });
+    document.querySelectorAll('#events[data-cli] .card').forEach(card => {
+      // Convert time to 12-hour format
+      const time = card.querySelector('span.time');
+      if (time) {
+        time.innerText = formatTime(time.innerText, document.querySelector('html').lang);
+      }
+    });
   </script>
 </body>
 

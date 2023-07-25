@@ -11,10 +11,11 @@ const url = body.url;
 const commission = body['commission_' + lang];
 const programNote = body['programNote_' + lang];
 const performanceNote = body['performanceNote_' + lang];
+const recording = body.recording || '';
 %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
 
 <head>
   <meta charset="UTF-8" />
@@ -73,11 +74,17 @@ const performanceNote = body['performanceNote_' + lang];
         <h3><%= lang == 'zh' ? '节目说明' : 'Program Note' %></h3>
         <p><%- programNote %></p>
       </div>
-      <% } %> <% if (performanceNote && performanceNote !== '') { %>
+      <% } %>
+      <% if (performanceNote && performanceNote !== '') { %>
       <div class="performance-note">
         <hr />
         <h3><%= lang == 'zh' ? '演出说明' : 'Performance Note' %></h3>
         <p><%- performanceNote %></p>
+      </div>
+      <% } %>
+      <% if (recording && recording !== '') { %>
+      <div class="recording">
+        <div><%- recording %></div>
       </div>
       <% } %>
       <div class="btn-wrapper">
@@ -91,24 +98,3 @@ const performanceNote = body['performanceNote_' + lang];
 <script></script>
 
 </html>
-
-<script type="module">
-  import {
-    convertTime
-  } from '../js/utils.js';
-  import {
-    formatDate
-  } from '../js/utils.js';
-
-  // Convert time to 12 hour format
-  const timeElement = document.querySelector('span.time');
-  if (timeElement) {
-    timeElement.innerText = convertTime(timeElement.innerText);
-  }
-
-  // Format date
-  const dateElement = document.querySelector('span.date');
-  if (dateElement) {
-    dateElement.innerText = formatDate(dateElement.innerText);
-  }
-</script>

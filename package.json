@@ -5,12 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "concurrently \"nodemon server.js\" \"gulp\" \"sass src/scss:public/css --no-source-map --watch\"",
+    "dev": "nodemon server.js & gulp & sass src/scss:public/css --no-source-map --watch",
+    "dev_win": "concurrently \"nodemon server.js\" \"gulp\" \"sass src/scss:public/css --no-source-map --watch\"",
     "kill": "killall node"
   },
   "author": "Kunal Gala",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.373.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -21,11 +23,13 @@
     "gulp-terser": "^2.1.0",
     "mongoose": "^7.0.4",
     "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "node": "^19.8.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "aws-sdk": "^2.1422.0",
     "concurrently": "^8.2.0",
     "nodemon": "^2.0.22",
     "sass": "^1.62.0"

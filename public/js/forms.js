@@ -26,13 +26,8 @@ forms.forEach((form) => {
     /* ====================================================== */
 
     // Create form object
-
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData.entries());
-
-    console.log(formObject);
-    // return;
-
     const promises = [];
 
     handleFileUploads(form, method, action, name, formObject, promises);
@@ -91,10 +86,9 @@ const updateTextareaValues = (form) => {
 const updateSlugs = (form) => {
   const slug = form.querySelector('input[name="slug"]');
   if (slug) {
-    let title = form.querySelector('input[name="title"]');
-    if (!title || title.value.trim() === "") {
-      title = form.querySelector('input[name="title_en"]');
-    }
+    const title = form.querySelector(
+      'input[role="slug-source"], input[name="title"], textarea[role="slug-source"], textarea[name="title"]'
+    );
     slug.value = convertToSlug(title.value);
   }
 };

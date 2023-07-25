@@ -8,7 +8,9 @@ const Work = require("../models/Work");
 
 router.get("/", async (req, res) => {
   const lang = new URLSearchParams(req.query).get("lang") || "en";
-  res.render("client/index", { lang });
+  const work = await Work.findOne();
+  const intro = await Content.findOne({ name: "intro" });
+  res.render("client/index", { lang, work, intro });
 });
 
 router.get("/bio", async (req, res) => {

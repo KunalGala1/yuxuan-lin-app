@@ -1,8 +1,8 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
-main[name='work'] {
+main[name="work"] {
   .wrapper {
     // Layout
 
@@ -127,6 +127,12 @@ main[name='work'] {
         font-weight: 900;
         font-size: 20px;
       }
+    }
+
+    .recording {
+      background-color: rgba(0, 0, 0, 0.1);
+      @include l.padding(sm);
+      @include l.radius(sm);
     }
 
     // Btn Wrapper

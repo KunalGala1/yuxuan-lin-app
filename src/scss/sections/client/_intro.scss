@@ -1,6 +1,6 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
 #intro {
   padding: 30px;
@@ -10,6 +10,10 @@
     display: flex;
 
     margin-bottom: 30px;
+
+    .block {
+      flex: 1;
+    }
 
     img {
       aspect-ratio: 1/1;

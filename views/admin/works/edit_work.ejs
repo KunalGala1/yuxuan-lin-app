@@ -10,13 +10,14 @@ const tag = body.tag;
 const instrumentation = body.instrumentation;
 const duration = body.duration;
 const year = body.year;
+const url = body.url;
 const commission_en = body.commission_en;
 const commission_zh = body.commission_zh;
 const programNote_en = body.programNote_en;
 const programNote_zh = body.programNote_zh;
 const performanceNote_en = body.performanceNote_en;
 const performanceNote_zh = body.performanceNote_zh;
-const url = body.url;
+const recording = body.recording || '';
 %>
 
 <!DOCTYPE html>
@@ -59,13 +60,14 @@ const url = body.url;
 			{ name: 'instrumentation', label: 'detailed insturmentation (3.2.2...)', value: instrumentation  },
 			{ name: 'duration', value: duration },
 			{ name: 'year', value: year },
+			{ type: 'url', name: 'url', label: 'URL to purchase music', value: url },
 			{ tag: 'textarea', name: 'commission_en', label: 'commission information', value: commission_en },
 			{ tag: 'textarea', name: 'commission_zh', label: '委托信息', value: commission_zh },
 			{ tag: 'textarea', name: 'programNote_en', label: 'program note', value: programNote_en },
 			{ tag: 'textarea', name: 'programNote_zh', label: '节目说明', value: programNote_zh },
 			{ tag: 'textarea', name: 'performanceNote_en', label: 'performance note', value: performanceNote_en },
 			{ tag: 'textarea', name: 'performanceNote_zh', label: '演出说明', value: performanceNote_zh },
-			{ type: 'url', name: 'url', label: 'URL to purchase music', value: url }
+      {tag: 'textarea', name: 'recording', value: recording},
 		]
       }) %>
   </main>
