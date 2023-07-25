@@ -20,3 +20,23 @@ date and time - different formats for en and zh
 Yuxuan Lin:
 林榆璇
 
+arranging - zh fix
+(music arranging?)
+
+编曲
+
+arranging - structured like works page but with emphasis on type of arr.
+
+email for contact form
+contact@yuxuan-lin.com
+
+---
+home page
+    new piece
+    short intro (with pic)
+    video
+arr page
+logo
+zh
+drop down for works, listen and arranging?
+    
