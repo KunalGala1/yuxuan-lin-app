@@ -3,11 +3,11 @@
 <%
 const body = JSON.parse(event.body);
 const title = body['title_' + lang];
-const image = body.file ? body.file.filename : null;
+const image = body.file ? body.file.location : null;
 const date = body.date;
 const dateObject = new Date(date);
 const time = body.time;
-const location = body.location;
+const location = body['location_' + lang];
 const shortDescription = body['shortDescription_' + lang];
 const longDescription = body['longDescription_' + lang];
 %>
@@ -34,7 +34,7 @@ const longDescription = body['longDescription_' + lang];
     <div class="banner">
       <div class="image-container">
         <% if (image) { %>
-        <img src="/uploads/<%= image %>" alt="" />
+        <img src="<%= image %>" alt="" />
         <% } %>
       </div>
     </div>

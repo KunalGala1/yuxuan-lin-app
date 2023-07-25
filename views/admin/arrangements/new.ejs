@@ -5,26 +5,26 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yuxuan Lin | Dashboard | New Event</title>
+  <title>Yuxuan Lin | Dashboard | New Arrangement</title>
   <%- include('../../partials/head') %>
 </head>
 
 <body class="dashboard">
   <%- include('../../partials/aside') %>
   <script>
-    document.querySelector('aside .middle ul li:nth-child(2) a')
+    document.querySelector('aside .middle ul li:nth-child(4) a')
       .classList.add('active');
   </script>
   <main>
-    <h1 class="secondary-header">New Work</h1>
+    <h1 class="secondary-header">New Arrangement</h1>
     <%- include('../../partials/form', {
         metadata: {
           method: 'post',
-          action: '/dashboard/works',
-          name: 'work'
+          action: '/dashboard/arrangements',
+          name: 'arrangement'
         },
         fields: [
-          { name: 'title_en', required: true, label: 'title' },
+          { name: 'title_en', required: true, label: 'title', role: 'slug-source' },
           { name: 'title_zh', required: true, label: '标题' },
           { type: 'hidden', name: 'slug' },
           { name: 'subtitle_en', label: 'subtitle' },
@@ -44,7 +44,6 @@
         ]
       }) %>
   </main>
-  <script src="/js/previewImage.js" defer></script>
 </body>
 
 </html>

@@ -7,21 +7,27 @@ const passport = require("passport");
 const Content = require("../models/Content");
 const Event = require("../models/Event");
 const Work = require("../models/Work");
+const Arrangement = require("../models/Arrangement");
+
+const map = {
+  Content,
+  Event,
+  Arrangement,
+  Work,
+};
 
 /* Import Auth Configs */
 const { forwardAuthenticated } = require("../config/auth");
 const { ensureAuthenticated } = require("../config/auth");
 
-/* Dashboard */
+/* Simple Get Routes */
 router.get("/", ensureAuthenticated, async (req, res) => {
   const intro = await Content.findOne({ name: "intro" });
   res.render("admin/dashboard", {
-    name: req.user.username,
     intro,
   });
 });
 
-/* Bio */
 router.get("/bio", ensureAuthenticated, async (req, res) => {
   const data = await Content.findOne({ name: "bio" });
   const body = JSON.parse(data.body);
@@ -31,27 +37,126 @@ router.get("/bio", ensureAuthenticated, async (req, res) => {
   });
 });
 
-/* Arranger */
-router.get("/arranger", ensureAuthenticated, async (req, res) => {
-  const data = await Content.findOne({ name: "arranger" });
-  res.render("admin/arranger", {
-    data,
-  });
+/* Content Model Put Routes */
+const documents = [{ name: "bio" }, { name: "arranger" }, { name: "intro" }];
+
+documents.forEach((document) => {
+  router.put(
+    "/" + document.name + "/:id",
+    ensureAuthenticated,
+    async (req, res) => {
+      try {
+        const updatedDocument = await Content.findByIdAndUpdate(
+          req.params.id,
+          {
+            body: JSON.stringify(req.body),
+          },
+          {
+            new: true,
+          }
+        );
+        res.json({
+          success: true,
+          updatedDocument,
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          error: "Something went wrong",
+        });
+      }
+    }
+  );
 });
 
 // ====================================================================================================
 
-const ContentDocuments = [
-  { name: "bio" },
-  { name: "arranger" },
-  { name: "intro" },
+const lists = [
+  { name: "events" },
+  { name: "works" },
+  {
+    name: "arrangements",
+    content: ["arranger"],
+  },
 ];
 
-ContentDocuments.forEach((document) => {
-  const name = document.name;
+const Model_Nomenclature = (string) => {
+  return (
+    string.slice(0, -1).charAt(0).toUpperCase() + string.slice(0, -1).slice(1)
+  );
+};
+
+lists.forEach((list) => {
+  /* Define Variables */
+  const { name, model, content } = list;
+  const Model = map[Model_Nomenclature(model || name)];
+
+  /* Get Table of Complete Data Page*/
+  router.get("/" + name, ensureAuthenticated, async (req, res) => {
+    // Initialize variables
+    let documents = [],
+      options = {};
+
+    if (content) {
+      for (let i = 0; i < content.length; i++) {
+        const data = await Content.findOne({ name: content[i] });
+        documents.push(data);
+      }
+      options.content = documents;
+    }
+
+    const data = await Model.find({});
+    options.data = data;
+
+    res.render("admin/" + name, options);
+  });
+
+  /* Get Add New Document Page */
+  router.get("/" + name + "/new", ensureAuthenticated, (req, res) => {
+    res.render("admin/" + name + "/new");
+  });
+
+  /* Post New Document */
+  router.post("/" + name, ensureAuthenticated, async (req, res) => {
+    try {
+      const newDocument = await Model.create({
+        body: JSON.stringify(req.body),
+      });
+      res.json({
+        success: true,
+        newDocument,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: "Something went wrong",
+      });
+    }
+  });
+
+  /* Get Edit Document Page */
+  router.get(
+    "/" + name + "/:id/edit",
+    ensureAuthenticated,
+    async (req, res) => {
+      const document = await Model.findById(req.params.id);
+      res.render("admin/" + name + "/edit", { document });
+    }
+  );
+
+  /* Get Document */
+  router.get("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
+    const document = await Model.findById(req.params.id);
+    res.json({
+      success: true,
+      document,
+    });
+  });
+
+  /* Put Document */
   router.put("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
     try {
-      const updatedDocument = await Content.findByIdAndUpdate(
+      const updatedDocument = await Model.findByIdAndUpdate(
         req.params.id,
         {
           body: JSON.stringify(req.body),
@@ -71,101 +176,15 @@ ContentDocuments.forEach((document) => {
       });
     }
   });
-});
 
-// ====================================================================================================
-
-const Models = [
-  {
-    name: "events",
-  },
-  {
-    name: "works",
-  },
-];
-
-const Singular_and_Uppercase = (string) => {
-  return (
-    string.slice(0, -1).charAt(0).toUpperCase() + string.slice(0, -1).slice(1)
-  );
-};
-
-Models.forEach((model) => {
-  /* Define variables */
-  const name = model.name;
-  const collection = model.model ? model.model : name;
-  const modelName = Singular_and_Uppercase(collection);
-  const singularDocument = modelName.toLowerCase();
-  const content = model.content ? model.content : "";
-
-  /* Get collection page */
-  router.get("/" + name, ensureAuthenticated, async (req, res) => {
-    let contentDocument;
-    if (content) {
-      contentDocument = await Content.findOne({ name: model.content });
-    }
-
-    const data = await eval(modelName).find({});
-    const renderOptions = { [collection]: data };
-
-    if (contentDocument) {
-      renderOptions[content] = contentDocument;
-    }
-
-    res.render("admin/" + name, renderOptions);
-  });
-
-  /* Add new document page */
-  router.get("/" + name + "/new", ensureAuthenticated, (req, res) => {
-    res.render("admin/" + name + "/new_" + singularDocument);
-  });
-
-  /* Add new document */
-  router.post("/" + name, ensureAuthenticated, async (req, res) => {
+  /* Delete Document */
+  router.delete("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
     try {
-      const newDocument = await eval(modelName).create({
-        body: JSON.stringify(req.body),
-      });
+      const deletedDocument = await Model.findByIdAndDelete(req.params.id);
       res.json({
         success: true,
-        newDocument,
+        deletedDocument,
       });
-    } catch (error) {
-      res.status(500).json({ success: false, error: "Something went wrong" });
-    }
-  });
-
-  /* Edit document page */
-  router.get(
-    "/" + name + "/:id/edit",
-    ensureAuthenticated,
-    async (req, res) => {
-      const document = await eval(modelName).findById(req.params.id);
-      res.render("admin/" + name + "/edit_" + singularDocument, {
-        [singularDocument]: document,
-      });
-    }
-  );
-
-  /* Get document */
-  router.get("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
-    const document = await eval(modelName).findById(req.params.id);
-    res.json({ success: true, document });
-  });
-
-  /* Edit document */
-  router.put("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
-    try {
-      const updatedDocument = await eval(modelName).findByIdAndUpdate(
-        req.params.id,
-        {
-          body: JSON.stringify(req.body),
-        },
-        {
-          new: true,
-        }
-      );
-      res.json({ success: true, updatedDocument });
     } catch (error) {
       res.status(500).json({
         success: false,
@@ -173,28 +192,6 @@ Models.forEach((model) => {
       });
     }
   });
-
-  /* Delete document */
-  router.delete(
-    "/" + name + "/:id/delete",
-    ensureAuthenticated,
-    async (req, res) => {
-      try {
-        const deletedDocument = await eval(modelName).findByIdAndDelete(
-          req.params.id
-        );
-        res.json({
-          success: true,
-          deletedDocument,
-        });
-      } catch (error) {
-        res.status(500).json({
-          success: false,
-          error: "Something went wrong",
-        });
-      }
-    }
-  );
 });
 
 module.exports = router;

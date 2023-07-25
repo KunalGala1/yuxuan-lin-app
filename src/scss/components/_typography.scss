@@ -66,6 +66,22 @@ blockquote {
   margin: 100px 0;
 }
 
+.dashboard-table-header {
+  @include t.util;
+  font-size: 20px;
+  color: var(--dashboard);
+  text-transform: capitalize;
+}
+
+/* Subheaders */
+.dashboard-table-subheader {
+  @include t.util;
+  font-size: 16px;
+  color: var(--100);
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
 /* Links */
 
 .table-link {
@@ -95,6 +111,26 @@ blockquote {
 
   i {
     margin-left: 5px;
+  }
+}
+
+.icon-link {
+  @include a.transition;
+  @include l.radius(50%);
+  height: 25px;
+  width: 25px;
+
+  i {
+    font-size: 13px;
+    color: var(--140);
+    @include a.transition;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    i {
+      color: var(--20);
+    }
   }
 }
 

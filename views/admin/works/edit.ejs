@@ -1,6 +1,6 @@
 <%
-const id = work._id;
-const body = JSON.parse(work.body);
+const id = document._id;
+const body = JSON.parse(document.body);
 const slug = body.slug;
 const title_en = body.title_en;
 const title_zh = body.title_zh;
@@ -27,7 +27,7 @@ const recording = body.recording || '';
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yuxuan Lin | Dashboard | Edit Event</title>
+  <title>Yuxuan Lin | Dashboard | Edit Work</title>
   <%- include('../../partials/head') %>
 </head>
 
@@ -51,7 +51,7 @@ const recording = body.recording || '';
           name: 'work'
         },
         fields: [
-			{ name: 'title_en', required: true, label: 'title', value: title_en },
+			{ name: 'title_en', required: true, label: 'title', value: title_en, role: 'slug-source' },
 			{ name: 'title_zh', required: true, label: '标题', value: title_zh },
 			{ type: 'hidden', name: 'slug' },
 			{ name: 'subtitle_en', label: 'subtitle', value: subtitle_en },
@@ -71,7 +71,6 @@ const recording = body.recording || '';
 		]
       }) %>
   </main>
-  <script src="/js/previewImage.js" defer></script>
 </body>
 
 </html>

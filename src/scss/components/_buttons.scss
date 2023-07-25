@@ -1,12 +1,16 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 .btn {
-  @include t.sans;
+  @include a.transition;
+  @include a.boxshadow(sm);
   @include l.padding(xs, sm);
-  @include l.radius(sm);
-  @include a.transition($duration: 0.1s);
+  @include l.radius(xs);
+  @include t.sans;
+
+  display: inline-block;
+  color: white;
 }
 
 .btn-primary {
@@ -16,25 +20,28 @@
   &:hover {
     background-color: var(--btn-primary-hover);
     outline: solid 1px rgb(0, 0, 0, 0.1);
-    color: white;
   }
 }
 
-.success-btn {
+.btn-success {
   background-color: var(--success);
-  color: var(--main-light);
-
   &:hover {
     background-color: var(--success-hover);
-    color: white;
   }
 }
 
-.danger-btn {
-  background-color: transparent;
-  color: var(--60);
-
+.btn-danger {
+  background-color: var(--danger);
+  color: black;
+  box-shadow: none;
   &:hover {
-    color: black;
+    background-color: var(--danger-hover);
+  }
+}
+
+.btn-dashboard {
+  background-color: var(--dashboard);
+  &:hover {
+    background-color: var(--dashboard-hover);
   }
 }

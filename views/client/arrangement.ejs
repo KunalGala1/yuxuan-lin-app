@@ -1,0 +1,100 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
+<% const id = doc._id;
+const body = JSON.parse(doc.body);
+const title = body['title_' + lang];
+const subtitle = body['subtitle_' + lang];
+const instrumentation = body.instrumentation;
+const duration = body.duration;
+const year = body.year;
+const url = body.url;
+const commission = body['commission_' + lang];
+const programNote = body['programNote_' + lang];
+const performanceNote = body['performanceNote_' + lang];
+const recording = body.recording || '';
+%>
+
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= yuxuan %> | <%= title %></title>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+  <script>
+    document.querySelector('nav ul li:nth-child(5) a')
+      .classList.add('active');
+  </script>
+  <main name="work">
+    <div class="wrapper">
+      <div class="heading">
+        <h1 class="title"><%= title %></h1>
+        <% if (subtitle && subtitle !== '') { %>
+        <h2 class="subtitle"><%= subtitle %></h2>
+        <% } %>
+      </div>
+      <div class="metadata">
+        <div class="metadata-wrapper">
+          <% if (instrumentation && instrumentation !== '') { %>
+          <p class="detailed-info">
+            <span><%= lang == 'zh' ? '配器 :' : 'Instrumentation:' %></span>
+            <%= instrumentation %>
+          </p>
+          <% } %> <% if (duration && duration !== '') { %>
+          <p class="duration">
+            <span><%= lang == 'zh' ? '时长 :' : 'Duration:' %></span>
+            <%= duration %>
+          </p>
+          <% } %> <% if (year && year !== '') { %>
+          <p class="year">
+            <span><%= lang == 'zh' ? '创作年份 :' : 'Year(s) of Composition:' %></span>
+            <%= year %>
+          </p>
+          <% } %> <% if (commission && commission !== '') { %>
+          <div class="commission-info"><%- commission %></div>
+          <% } %>
+        </div>
+        <% if (url && url !== '') { %>
+        <div class="purchase-link-wrapper">
+          <p>
+            Available for purchase at:
+            <a href="<%= url %>" target="_blank"><%= url %></a>
+          </p>
+        </div>
+        <% } %>
+      </div>
+      <% if (programNote && programNote !== '') { %>
+      <div class="program-note">
+        <h3><%= lang == 'zh' ? '节目说明' : 'Program Note' %></h3>
+        <p><%- programNote %></p>
+      </div>
+      <% } %>
+      <% if (performanceNote && performanceNote !== '') { %>
+      <div class="performance-note">
+        <hr />
+        <h3><%= lang == 'zh' ? '演出说明' : 'Performance Note' %></h3>
+        <p><%- performanceNote %></p>
+      </div>
+      <% } %>
+      <% if (recording && recording !== '') { %>
+      <div class="recording">
+        <div><%- recording %></div>
+      </div>
+      <% } %>
+      <div class="btn-wrapper">
+        <a href="<%= lang == 'zh' ? '/arranger?lang=zh' : '/arranger' %>" class="btn btn-primary"><%= lang == 'zh' ? '返回到编曲者' : 'Back to Arranger' %></a>
+      </div>
+    </div>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
+
+<script></script>
+
+</html>

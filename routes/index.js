@@ -5,6 +5,7 @@ const router = app.Router();
 const Content = require("../models/Content");
 const Event = require("../models/Event");
 const Work = require("../models/Work");
+const Arrangement = require("../models/Arrangement");
 
 router.get("/", async (req, res) => {
   const lang = new URLSearchParams(req.query).get("lang") || "en";
@@ -68,6 +69,17 @@ router.get("/arranger", async (req, res) => {
   const data = await Content.findOne({ name: "arranger" });
   const lang = new URLSearchParams(req.query).get("lang") || "en";
   res.render("client/arranger", { data, lang });
+});
+
+router.get("/arrangement/:slug", async (req, res) => {
+  const data = await Arrangement.find();
+  const doc = data.find((doc) => JSON.parse(doc.body).slug === req.params.slug);
+  const lang = new URLSearchParams(req.query).get("lang") || "en";
+
+  if (doc == undefined) res.redirect("/arranger");
+  else {
+    res.render("client/arrangement", { doc, lang });
+  }
 });
 
 module.exports = router;

@@ -30,7 +30,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
       <input type="<%= type %>" name="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'required' : '' %> />
       <% if (type === 'file') { %>
       <div class="preview">
-        <img src="/uploads/<%= file.filename %>" alt="" />
+        <img src="<%= file.location %>" alt="" />
       </div>
       <% } %>
     </div>
@@ -72,7 +72,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
   <div class="item">
     <div class="subitem">
       <label for="<%= name %>"><%= label %></label>
-      <select name="<%= name %>" autocomplete="off" lang="<%= lang %>">
+      <select name="<%= name %>" autocomplete="off">
         <% if (value === '') { %>
         <option value="" selected>Please Choose An Option</option>
         <% } else { %>
@@ -93,7 +93,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
     }
 
   }) %>
-  <div class="item flex justify-end gap">
+  <div class="item flex justify-end gap-sm">
     <div class="subitem">
       <button type="submit" class="btn btn-success">Save</button>
     </div>

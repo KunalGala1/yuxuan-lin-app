@@ -29,7 +29,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.1422.0",
     "concurrently": "^8.2.0",
     "nodemon": "^2.0.22",
     "sass": "^1.62.0"

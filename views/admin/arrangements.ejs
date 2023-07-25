@@ -1,8 +1,6 @@
-<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
-
 <%
-const body = JSON.parse( data.body );
-const id = data._id;
+const body = JSON.parse(content[0].body);
+const id = content[0]._id;
 const arranger_en = body.arranger_en;
 const arranger_zh = body.arranger_zh;
 %>
@@ -14,7 +12,7 @@ const arranger_zh = body.arranger_zh;
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yuxuan Lin | Dashboard | Arranger</title>
+  <title>Yuxuan Lin | Dashboard | Arrangements</title>
   <%- include('../partials/head') %>
 </head>
 
@@ -25,6 +23,16 @@ const arranger_zh = body.arranger_zh;
       .classList.add('active');
   </script>
   <main class="">
+
+    <%- include('../partials/table', {
+      name: 'arrangements',
+      data,
+      map: {
+        thead: ['title'],
+        tbody: ['title_en']
+      }
+    }) %>
+
     <%- include('../partials/form', {
       metadata: {
         method: 'put',

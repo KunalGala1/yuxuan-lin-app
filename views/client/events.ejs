@@ -27,17 +27,17 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
       const body = JSON.parse(events[i].body);
       const title = body['title_' + lang];
       const slug = body.slug;
-      const image = body.file.filename;
+      const image = body.file.location;
       const date = body.date;
       const dateObject = new Date(date);
       const time = body.time;
-      const location = body.location;
+      const location = body['location_' + lang];
       const shortDescription = body['shortDescription_' + lang];
       %>
       <div class="card">
         <a href="/event/<%= slug %>">
           <div class="image-container">
-            <img src="/uploads/<%= image %>" alt="" />
+            <img src="<%= image %>" alt="" />
           </div>
         </a>
         <div class="content">
