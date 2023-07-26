@@ -484,6 +484,10 @@ blockquote {
   line-height: 2;
 }
 
+.zh-text {
+  font-style: normal !important;
+}
+
 .toast-notification {
   position: fixed;
   top: 10px;
@@ -841,6 +845,7 @@ aside .bottom {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 30px;
   }
 }
 #bio img {

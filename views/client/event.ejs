@@ -27,7 +27,7 @@ const longDescription = body['longDescription_' + lang];
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
   <script>
-    document.querySelector('nav ul li:nth-child(5) a')
+    document.querySelector('nav ul li:nth-child(4) a')
       .classList.add('active');
   </script>
   <main id="event">
@@ -42,29 +42,29 @@ const longDescription = body['longDescription_' + lang];
       <h1 class="event-header"><%= title %></h1>
 
       <% if (date) { %>
-      <span class="date">
+      <span class="date <%= lang %>-text">
         <% if (lang === 'en') { %>
         <%= dateObject.toLocaleString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric'
-}) %>
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        }) %>
         <% } else { %>
         <%= dateObject.toLocaleString('zh-TW', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-}) %>
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) %>
         <% } %>
       </span>
       <% } %>
 
       <% if (time) { %>
-      <span class="time"><%= time %></span>
+      <span class="time <%= lang %>-text"><%= time %></span>
       <% } %>
 
       <% if (location) { %>
-      <span class="location"><%= location %></span>
+      <span class="location <%= lang %>-text"><%= location %></span>
       <% } %>
 
     </div>

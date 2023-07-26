@@ -36,7 +36,7 @@ const recording = body.recording || '';
       <div class="heading">
         <h1 class="title"><%= title %></h1>
         <% if (subtitle && subtitle !== '') { %>
-        <h2 class="subtitle"><%= subtitle %></h2>
+        <h2 class="subtitle <%= lang %>-text"><%= subtitle %></h2>
         <% } %>
       </div>
       <div class="metadata">

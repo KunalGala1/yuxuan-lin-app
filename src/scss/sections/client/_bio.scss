@@ -1,6 +1,6 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
 #bio {
   --gap: 40px;
@@ -12,6 +12,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 30px;
     }
 
     @include l.max-width(md);

@@ -46,7 +46,7 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
           </h3>
 
           <% if (date) { %>
-          <span class="date">
+          <span class="date <%= lang %>-text">
             <% if (lang === 'en') { %>
             <%= dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
             <% } else { %>
@@ -56,11 +56,11 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
           <% } %>
 
           <% if (time) { %>
-          <span class="time"><%= time %></span>
+          <span class="time <%= lang %>-text"><%= time %></span>
           <% } %>
 
           <% if (location) { %>
-          <span class="location"><%= location %></span>
+          <span class="location <%= lang %>-text"><%= location %></span>
           <% } %>
 
           <div><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></div>
