@@ -5,3 +5,7 @@
 .space {
   @include l.padding(md);
 }
+
+.padding-btm {
+  padding-bottom: 60px;
+}

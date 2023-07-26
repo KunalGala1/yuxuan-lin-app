@@ -1,10 +1,5 @@
 <% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
 
-<%
-const body = JSON.parse( data.body );
-const id = data._id;
-%>
-
 <!DOCTYPE html>
 <html lang="<%= lang %>">
 
@@ -14,21 +9,61 @@ const id = data._id;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%- include('../partials/head') %>
   <title>Yuxuan Lin | Arranger</title>
+  <script src="/js/search.js" defer></script>
 </head>
 
 <body>
-  <%- include('../partials/header') %> <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(5) a')
-      .classList.add('active');
-  </script>
+  <%- include('../partials/header') %>
+  <%- include('../partials/nav') %>
 
-  <main name="arranger">
+  <section name="arranger">
     <div class="wrapper">
-      <%- body['arranger_' + lang] %>
+      <%- JSON.parse(doc.body)['arranger_' + lang] %>
     </div>
-  </main>
+  </section>
 
+  <main class="padding-btm">
+
+
+
+    <%- include('../sections/search') %>
+    <% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
+    <% const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; %>
+    <section class="work-list flex wrap gap column align-stretch">
+      <% for (let j = 0; j < tags.length; j++) { %>
+      <% const docsWithTag = data.filter(doc => JSON.parse(doc.body).tag === tags[j].toLowerCase()) %>
+      <% if (docsWithTag.length > 0) { %>
+      <div class="subsection">
+        <h2 class="main-header"><%= lang == 'zh' ? tags_zh[j] : tags[j] %></h2>
+        <div class="cards-wrapper flex gap align-start">
+          <% for (let i = 0; i < docsWithTag.length; i++) { %>
+          <% const body = JSON.parse(docsWithTag[i].body) %>
+          <% const slug = body.slug %>
+          <% const title = body['title_' + lang] %>
+          <% const subtitle = body['subtitle_' + lang] %>
+          <% const programNote = body['programNote_' + lang] %>
+          <div class="card">
+            <a href="/arrangement/<%= slug %>?lang=<%= lang %>">
+              <div class="heading">
+                <h3 class="third-header"><%= title %></h3>
+                <% if (subtitle !== '') { %>
+                <p class="<%= lang %>-text"><%= subtitle %></p>
+                <% } %>
+              </div>
+              <% if (programNote !== '') { %>
+              <div class="description">
+                <p><%- programNote %></p>
+              </div>
+              <% } %>
+            </a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+      <% } %>
+    </section>
+  </main>
   <%- include('../partials/footer') %>
 </body>
 

@@ -14,7 +14,9 @@ const slug = workBody.slug;
     </div>
     <div class="block">
       <div class="text">
-        <h2 class="title fourth-header">Introducing...</h2>
+        <h2 class="title fourth-header">
+          <%= lang == 'zh' ? '介绍...' : 'Introducing...' %>
+        </h2>
         <h3 class="subtitle <%= lang %>-text"><%= title %></h3>
         <p class="description">
           <%- programNote %>
@@ -22,5 +24,7 @@ const slug = workBody.slug;
       </div>
     </div>
   </div>
-  <a href="/work/<%= slug %>">Read more...</a>
+  <a href="/work/<%= slug %>">
+    <%= lang == 'zh' ? '阅读更多...' : 'Read more...' %>
+  </a>
 </section>

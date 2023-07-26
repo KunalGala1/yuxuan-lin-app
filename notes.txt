@@ -7,6 +7,4 @@ logo
 zh
 drop down for works, listen and arranging?
 
-mandarin - no italics***
-
-new a name in namecheap - instance restarted...
+new 'a' name in namecheap - instance restarted...

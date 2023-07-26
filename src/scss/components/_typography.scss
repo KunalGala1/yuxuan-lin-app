@@ -84,6 +84,16 @@ blockquote {
 
 /* Links */
 
+.nav-link {
+  color: var(--200);
+  &:hover,
+  &.active {
+    color: white;
+    @include a.transition;
+    font-weight: bolder;
+  }
+}
+
 .table-link {
   color: var(--form);
   text-decoration: underline;

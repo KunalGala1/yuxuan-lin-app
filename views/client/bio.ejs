@@ -22,10 +22,6 @@ const bio = body['bio_' + lang];
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(2) a')
-      .classList.add('active');
-  </script>
   <main id="bio">
     <div class="img-parent">
       <img src="<%= image %>" alt="headshot" />

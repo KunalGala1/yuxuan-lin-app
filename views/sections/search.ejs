@@ -11,7 +11,7 @@
       <% const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; %>
       <% for (let i = 0; i < tags.length; i++) { %>
       <% const tag = tags[i].toLowerCase(); %>
-      <% const hasDocsWithTag = works.some(doc => JSON.parse(doc.body).tag === tag); %>
+      <% const hasDocsWithTag = data.some(doc => JSON.parse(doc.body).tag === tag); %>
       <% if (hasDocsWithTag) { %>
       <li>
         <%= lang == 'zh' ? tags_zh[i] : tags[i] %>

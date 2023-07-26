@@ -16,10 +16,6 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(4) a')
-      .classList.add('active');
-  </script>
   <main id="events" data-cli>
     <div class="container">
       <% for (let i = 0; i < events.length; i++) { %>

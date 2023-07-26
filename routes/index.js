@@ -21,9 +21,9 @@ router.get("/bio", async (req, res) => {
 });
 
 router.get("/works", async (req, res) => {
-  const works = await Work.find();
+  const data = await Work.find();
   const lang = new URLSearchParams(req.query).get("lang") || "en";
-  res.render("client/works", { works, lang });
+  res.render("client/works", { data, lang });
 });
 
 router.get("/work/:slug", async (req, res) => {
@@ -66,9 +66,10 @@ router.get("/event/:slug", async (req, res) => {
 });
 
 router.get("/arranger", async (req, res) => {
-  const data = await Content.findOne({ name: "arranger" });
+  const doc = await Content.findOne({ name: "arranger" });
+  const data = await Arrangement.find();
   const lang = new URLSearchParams(req.query).get("lang") || "en";
-  res.render("client/arranger", { data, lang });
+  res.render("client/arranger", { data, doc, lang });
 });
 
 router.get("/arrangement/:slug", async (req, res) => {

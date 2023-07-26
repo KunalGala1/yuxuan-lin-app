@@ -1,12 +1,8 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
-#works {
-  padding-bottom: 60px;
-}
-
-#work-list {
+.work-list {
   @include l.padding(0, md);
 
   .main-header {

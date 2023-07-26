@@ -38,6 +38,11 @@ const id = intro._id;
           name: 'intro_zh',
           value: body.intro_zh || '',
           label: '简介'
+        },
+        {
+          type: 'file',
+          label: 'image',
+          file: body.file || {}
         }
       ]
     }) %>
