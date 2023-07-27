@@ -1,24 +1,28 @@
 /* Home */
-@forward 'hero';
-@forward 'intro';
+@forward "hero";
+@forward "intro";
 
 /* Bio */
-@forward 'bio';
-
-/* Works */
-@forward 'search';
-@forward 'works';
-@forward 'work';
+@forward "bio";
 
 /* Events */
-@forward 'events';
-@forward 'event';
+@forward "events";
+@forward "event";
+
+/* Works */
+@forward "search";
+@forward "works";
+@forward "work";
+
+/* Media */
+@forward "media";
+@forward "media_page";
 
 /* Arranger */
-@forward 'arranger';
+@forward "arranger";
 
 /* Contact */
-@forward 'contact';
+@forward "contact";
 
 /* Login */
-@forward 'login';
+@forward "login";

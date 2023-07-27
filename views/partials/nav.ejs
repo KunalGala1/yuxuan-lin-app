@@ -4,7 +4,7 @@ const nav = {
     {name: 'home', text: lang === 'zh' ? '首页' : 'home'},
     {name: 'bio', text: lang === 'zh' ? '个人简介' : 'bio'},
     {name: 'events', text: lang === 'zh' ? '事件' : 'events'},
-    {name: 'music', menu: 'drop-down-menu', link_classes: 'drop-down-link', liClass: 'd-sm-none', map: [
+    {name: 'music', text: lang === 'zh' ? '音乐' : 'music', menu: 'drop-down-menu', link_classes: 'drop-down-link', liClass: 'd-sm-none', map: [
       {name: 'works', text: lang === 'zh' ? '作品' : 'works'},
       {name: 'media', text: lang === 'zh' ? '媒体' : 'media'},
       {name: 'arranger', text: lang === 'zh' ? '编曲' : 'arranger'},
@@ -24,7 +24,6 @@ const generateMenu = data => {
     const liClass = item.liClass || '';
     let href = (item.name === 'home' || name === '首页') ? '/' : (item.href || `/${name}`);
     href += '?lang=' + lang;
-    console.log(name, href);
     if (!item.menu) html += `<li class="${liClass}"><a href='${href}' class="${data.link_classes}">${text}</a></li>`;
     else { html += `<li class="${item.menu + '--parent'} ${liClass}"><span>${text}</span>${generateMenu(item)}</li>`}
   })

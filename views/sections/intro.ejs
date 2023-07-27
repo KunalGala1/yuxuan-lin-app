@@ -1,30 +1,30 @@
 <%
-const workBody = JSON.parse(work.body);
-const id = work._id;
-const title = workBody['title_' + lang];
-const subtitle = workBody['subtitle_' + lang];
-const programNote = workBody['programNote_' + lang];
-const slug = workBody.slug;
+const mediaDoc = JSON.parse(media.body);
+const id = media._id;
+const title = mediaDoc['title_' + lang];
+const subtitle = mediaDoc['subtitle_' + lang];
+const shortDescription = mediaDoc['shortDescription_' + lang];
+const slug = mediaDoc.slug;
 %>
 
 <section id="intro">
   <div class="card">
     <div class="block">
-      <img src="img/placeholder.jpg" alt="" />
+      <img src="<%= mediaDoc.file.location %>" alt="" />
     </div>
     <div class="block">
       <div class="text">
         <h2 class="title fourth-header">
           <%= lang == 'zh' ? '介绍...' : 'Introducing...' %>
         </h2>
-        <h3 class="subtitle <%= lang %>-text"><%= title %></h3>
+        <h3 class="subtitle <%= lang %>-txt"><%= title %></h3>
         <p class="description">
-          <%- programNote %>
+          <%- shortDescription %>
         </p>
       </div>
     </div>
   </div>
-  <a href="/work/<%= slug %>?lang=<%= lang %>">
+  <a href="/media/<%= slug %>?lang=<%= lang %>">
     <%= lang == 'zh' ? '阅读更多...' : 'Read more...' %>
   </a>
 </section>

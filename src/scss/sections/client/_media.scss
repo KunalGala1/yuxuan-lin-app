@@ -1,0 +1,41 @@
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
+
+main[name="media"] {
+  .wrapper {
+    @include l.max-width(md);
+  }
+
+  .card {
+    max-width: 300px;
+    background-color: rgba(100, 100, 100, 0.1);
+    @include l.radius(sm);
+    @include a.boxshadow;
+
+    .image-container {
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+    }
+    img {
+      border-radius: 5px 5px 0 0;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      width: 100%;
+      @include a.transition;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .txt {
+      @include l.padding(sm);
+      @include t.util;
+      color: var(--80);
+      h2 {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

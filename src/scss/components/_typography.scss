@@ -107,6 +107,26 @@ blockquote {
   }
 }
 
+.aside-link {
+  color: var(--200);
+  display: block;
+  @include l.padding(sm);
+  span {
+    margin-left: 5px;
+  }
+
+  &:hover {
+    background-color: var(--dashboard-hover);
+    color: white;
+  }
+
+  &.active {
+    border-left: solid 5px var(--dashboard-hover);
+  }
+
+  @include a.transition;
+}
+
 .table-link {
   color: var(--form);
   text-decoration: underline;
@@ -159,12 +179,12 @@ blockquote {
 
 // text
 
-.main-text {
+.main-txt {
   @include t.util;
   color: var(--40);
   line-height: 2;
 }
 
-.zh-text {
+.zh-txt {
   font-style: normal !important;
 }

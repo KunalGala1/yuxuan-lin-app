@@ -1,0 +1,50 @@
+<%
+const id = document._id;
+const body = JSON.parse(document.body);
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuxuan Lin | Dashboard | Edit Media</title>
+  <%- include('../../partials/head') %>
+</head>
+
+<body class="dashboard">
+  <%- include('../../partials/aside') %>
+  <script>
+    document.querySelector('aside .middle ul li:nth-child(4) a')
+      .classList.add('active');
+  </script>
+  <main>
+    <h1 class="secondary-header">Edit Media Item</h1>
+
+    <%- include('../../partials/form', {
+        metadata: {
+          method: 'put',
+          action: '/dashboard/media/' + id,
+          enctype: 'multipart/form-data',
+          name: 'media',
+          id
+        },
+        fields: [
+          { name: 'title_en', required: true, label: 'title', role: 'slug-source', value: body.title_en },
+          { name: 'title_zh', required: true, label: '标题', value: body.title_zh },
+          { type: 'hidden', name: 'slug' },
+          { tag: 'textarea', name: 'shortDescription_en', label: 'short description', value: body.shortDescription_en },
+          { tag: 'textarea', name: 'shortDescription_zh', label: '登月之旅', value: body.shortDescription_zh },
+          { type: 'file', label: 'image', file: body.file },
+          { tag: 'textarea', name: 'description_en', label: 'description', value: body.description_en },
+          { tag: 'textarea', name: 'description_zh', label: '描述', value: body.description_zh },
+          { tag: 'textarea', name: 'recording', value: body.recording }
+        ]
+      }) %>
+  </main>
+
+</body>
+
+</html>

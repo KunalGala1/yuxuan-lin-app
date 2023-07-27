@@ -36,6 +36,18 @@ export const responseAction = (name, method, data) => {
           .remove();
       },
     },
+    media: {
+      post: () => {
+        window.location.replace(
+          `/dashboard/media/${data.newDocument._id}/edit`
+        );
+      },
+      delete: () => {
+        document
+          .querySelector(`[data-id="${data.deletedDocument._id}"]`)
+          .remove();
+      },
+    },
   };
 
   if (actions[name] && actions[name][method]) {

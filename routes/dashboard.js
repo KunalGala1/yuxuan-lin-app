@@ -8,12 +8,14 @@ const Content = require("../models/Content");
 const Event = require("../models/Event");
 const Work = require("../models/Work");
 const Arrangement = require("../models/Arrangement");
+const Media = require("../models/Media");
 
 const map = {
   Content,
   Event,
   Arrangement,
   Work,
+  Media,
 };
 
 /* Import Auth Configs */
@@ -78,6 +80,7 @@ const lists = [
     name: "arrangements",
     content: ["arranger"],
   },
+  { name: "media", model: "Media" },
 ];
 
 const Model_Nomenclature = (string) => {
@@ -89,7 +92,7 @@ const Model_Nomenclature = (string) => {
 lists.forEach((list) => {
   /* Define Variables */
   const { name, model, content } = list;
-  const Model = map[Model_Nomenclature(model || name)];
+  const Model = map[model || Model_Nomenclature(name)];
 
   /* Get Table of Complete Data Page*/
   router.get("/" + name, ensureAuthenticated, async (req, res) => {

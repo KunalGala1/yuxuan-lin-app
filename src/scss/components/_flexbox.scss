@@ -1,11 +1,12 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+
   /* Direction */
   &.row {
     flex-direction: row;
@@ -19,6 +20,18 @@
   &.column-reverse {
     flex-direction: column-reverse;
   }
+
+  /* Wrap */
+  &.wrap {
+    flex-wrap: wrap;
+  }
+  &.wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+  &.nowrap {
+    flex-wrap: nowrap;
+  }
+
   /* Justify Content */
   &.justify-start {
     justify-content: flex-start;
@@ -35,6 +48,7 @@
   &.justify-evenly {
     justify-content: space-evenly;
   }
+
   /* Align Items */
   &.align-start {
     align-items: flex-start;
@@ -42,14 +56,24 @@
   &.align-end {
     align-items: flex-end;
   }
-  &.align-basline {
-    align-items: basline;
-  }
   &.align-stretch {
     align-items: stretch;
   }
+  &.align-basline {
+    align-items: baseline;
+  }
+
   /* Gap */
   &.gap {
     gap: 30px;
+  }
+  &.gap-sm {
+    gap: 10px;
+  }
+  &.gap-md {
+    gap: 40px;
+  }
+  &.gap-lg {
+    gap: 60px;
   }
 }

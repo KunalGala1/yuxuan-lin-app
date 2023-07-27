@@ -1,0 +1,48 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
+<% const id = doc._id;
+const body = JSON.parse(doc.body);
+const title = body['title_' + lang];
+const slug = doc.slug;
+const description = body['description_' + lang];
+const recording = body.recording;
+%>
+
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= yuxuan %> | <%= title %></title>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+
+
+  <main name="media-page">
+    <div class="wrapper space">
+      <div class="flex align-start gap">
+        <div class="image-container"><img src="<%= body.file.location %>" alt=""></div>
+        <div class="txt-container">
+          <h2 class="header third-header"><%= title %></h2>
+          <div class="description"><%- description %></div>
+        </div>
+      </div>
+      <div class="recording margin-top">
+        <%- recording %>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+  <%- include('../partials/footer') %>
+</body>
+
+</html>

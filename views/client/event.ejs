@@ -38,7 +38,7 @@ const longDescription = body['longDescription_' + lang];
       <h1 class="event-header"><%= title %></h1>
 
       <% if (date) { %>
-      <span class="date <%= lang %>-text">
+      <span class="date <%= lang %>-txt">
         <% if (lang === 'en') { %>
         <%= dateObject.toLocaleString('en-US', {
           month: 'long',
@@ -56,11 +56,11 @@ const longDescription = body['longDescription_' + lang];
       <% } %>
 
       <% if (time) { %>
-      <span class="time <%= lang %>-text"><%= time %></span>
+      <span class="time <%= lang %>-txt"><%= time %></span>
       <% } %>
 
       <% if (location) { %>
-      <span class="location <%= lang %>-text"><%= location %></span>
+      <span class="location <%= lang %>-txt"><%= location %></span>
       <% } %>
 
     </div>
