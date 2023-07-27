@@ -4,10 +4,14 @@ const nav = {
     {name: 'home', text: lang === 'zh' ? '首页' : 'home'},
     {name: 'bio', text: lang === 'zh' ? '个人简介' : 'bio'},
     {name: 'events', text: lang === 'zh' ? '事件' : 'events'},
-    
-    {name: 'works', text: lang === 'zh' ? '作品' : 'works'},
-    {name: 'media', text: lang === 'zh' ? '媒体' : 'media'},
-    {name: 'arranger', text: lang === 'zh' ? '编曲' : 'arranger'},
+    {name: 'music', menu: 'drop-down-menu', link_classes: 'drop-down-link', liClass: 'd-sm-none', map: [
+      {name: 'works', text: lang === 'zh' ? '作品' : 'works'},
+      {name: 'media', text: lang === 'zh' ? '媒体' : 'media'},
+      {name: 'arranger', text: lang === 'zh' ? '编曲' : 'arranger'},
+    ]},
+    {name: 'works', text: lang === 'zh' ? '作品' : 'works', liClass: 'd-none d-sm-block'},
+    {name: 'media', text: lang === 'zh' ? '媒体' : 'media', liClass: 'd-none d-sm-block'},
+    {name: 'arranger', text: lang === 'zh' ? '编曲' : 'arranger', liClass: 'd-none d-sm-block'},
     {name: 'contact', text: lang === 'zh' ? '联系' : 'contact', liClass: 'last-child'},
   ]
 }
@@ -22,14 +26,9 @@ const generateMenu = data => {
     href += '?lang=' + lang;
     console.log(name, href);
     if (!item.menu) html += `<li class="${liClass}"><a href='${href}' class="${data.link_classes}">${text}</a></li>`;
-    else { html += `<li class="${item.menu + '--parent'}"><span>${text}</span>${generateMenu(item)}</li>`}
+    else { html += `<li class="${item.menu + '--parent'} ${liClass}"><span>${text}</span>${generateMenu(item)}</li>`}
   })
-  html +=
-  `
-  <div id="gradient"></div>
-  <script src="/js/gradient-no-scroll.js" defer></script>
-  </ul>
-  `
+  html +=`</ul>`
   return html;
 }
 %>
@@ -62,5 +61,30 @@ const generateMenu = data => {
         break;
       }
     }
+
+    // add gradient html
+    let ul = document.querySelector('.nav-menu');
+    let html = `<div id="gradient"></div>`;
+    ul.insertAdjacentHTML('beforeend', html);
+
+    // drop down
+    document.querySelectorAll('.drop-down-menu--parent').forEach(parent => {
+      parent.addEventListener('mouseenter', function(ev) {
+        let dropdown = this.querySelector('.drop-down-menu');
+        let rect = this.getBoundingClientRect();
+        dropdown.style.top = `${window.scrollY + rect.top + rect.height}px`;
+        dropdown.style.left = `${window.scrollX + rect.left}px`;
+        dropdown.style.minWidth = `calc(${rect.width}px + (15px * 2))`; // set min-width
+        dropdown.style.display = 'flex';
+      });
+      parent.addEventListener('mouseleave', function(ev) {
+        this.querySelector('.drop-down-menu').style.display = 'none';
+      });
+    });
+
+
+
   });
 </script>
+
+<script src="/js/gradient-no-scroll.js" defer></script>

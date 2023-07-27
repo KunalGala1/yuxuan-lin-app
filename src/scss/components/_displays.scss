@@ -1,0 +1,23 @@
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
+
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-sm-none {
+  @include l.max(sm) {
+    display: none !important;
+  }
+}
+
+.d-sm-block {
+  @include l.max(sm) {
+    display: block !important;
+  }
+}

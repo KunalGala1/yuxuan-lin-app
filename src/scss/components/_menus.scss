@@ -11,15 +11,15 @@
   width: 100%;
   overflow-x: scroll;
   scroll-behavior: smooth;
-  overflow-y: hidden;
   @include a.hide_scrollbar;
 
   $fade-amount: 2%;
 
+  & > li + li {
+    margin-left: 50px;
+  }
+
   li {
-    & + li {
-      margin-left: 50px;
-    }
     &:first-child {
       margin-left: $fade-amount;
     }
@@ -62,7 +62,8 @@
   flex-direction: column;
   align-items: stretch;
 
-  position: absolute;
+  // position: absolute;
+  position: fixed;
   top: 100%;
   left: -15px;
 

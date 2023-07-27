@@ -94,6 +94,19 @@ blockquote {
   }
 }
 
+.drop-down-link {
+  color: white;
+
+  @include l.radius(xs);
+  @include l.padding(xs, sm);
+
+  display: block; // fill width of <li> and apply padding
+
+  &:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+  }
+}
+
 .table-link {
   color: var(--form);
   text-decoration: underline;
