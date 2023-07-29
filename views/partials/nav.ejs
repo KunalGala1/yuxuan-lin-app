@@ -81,8 +81,13 @@ const generateMenu = data => {
       });
     });
 
+  });
+</script>
 
-
+<script>
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === currentPath || (link.getAttribute('href') === '/' && currentPath === ''));
   });
 </script>
 

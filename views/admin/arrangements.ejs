@@ -1,10 +1,3 @@
-<%
-const body = JSON.parse(content[0].body);
-const id = content[0]._id;
-const arranger_en = body.arranger_en;
-const arranger_zh = body.arranger_zh;
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,43 +11,10 @@ const arranger_zh = body.arranger_zh;
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside .middle ul li:nth-child(5) a')
-      .classList.add('active');
-  </script>
-  <main class="">
 
-    <%- include('../partials/table', {
-      name: 'arrangements',
-      data,
-      map: {
-        thead: ['title'],
-        tbody: ['title_en']
-      }
-    }) %>
+  <main class="sp-aside-left">
 
-    <%- include('../partials/form', {
-      metadata: {
-        method: 'put',
-        action: '/dashboard/arranger/' + id,
-        name: 'arranger',
-        id: id
-      },
-      fields: [
-        {
-          tag: 'textarea',
-          name: 'arranger_en',
-          label: 'Arranger',
-          value: arranger_en
-        },
-        {
-          tag: 'textarea',
-          name: 'arranger_zh',
-          label: '編曲',
-          value: arranger_zh
-        },
-      ]
-    }) %>
+    <%- include('../partials/table', formData) %>
   </main>
 </body>
 

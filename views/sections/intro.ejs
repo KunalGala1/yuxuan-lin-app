@@ -1,5 +1,7 @@
 <%
 const mediaDoc = JSON.parse(media.body);
+const mediaImage = mediaDoc.file.location;
+const mediaAlt = mediaDoc.file.alt;
 const id = media._id;
 const title = mediaDoc['title_' + lang];
 const subtitle = mediaDoc['subtitle_' + lang];
@@ -10,7 +12,7 @@ const slug = mediaDoc.slug;
 <section id="intro">
   <div class="card">
     <div class="block">
-      <img src="<%= mediaDoc.file.location %>" alt="" />
+      <img src="<%= mediaImage %>" alt="<%= mediaAlt %>" />
     </div>
     <div class="block">
       <div class="text">

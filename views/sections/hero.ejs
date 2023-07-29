@@ -1,12 +1,13 @@
 <%
 const introBody = JSON.parse(intro.body);
-const image = introBody.file.location;
+const introImage = introBody.file.location;
+const introAlt = introBody.file.alt;
 %>
 
 <section id="hero">
   <div class="wrapper">
     <div class="container">
-      <img src="<%= image %>" alt="">
+      <img src="<%= introImage %>" alt="<%= introAlt %>">
     </div>
     <div class="container main-txt">
       <%- introBody['intro_' + lang] %>

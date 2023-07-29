@@ -1,8 +1,17 @@
+<%
+const handleTableObject = (j, k) => {
+  const obj = map.tbody[k];
+  const key = obj.key;
+  const body = JSON.parse(data[j].body);
+  return body[key];
+}
+%>
+
 <div class="dashboard-table--container">
   <div class="table-header">
     <div class="flex justify-between">
-      <h2 class="dashboard-table-header"><%= name %></h2>
-      <h3 class="dashboard-table-subheader"><%= data.length %> document<%= data.length > 1 ? 's' : '' %></h3>
+      <h2 class="dashboard-header"><%= name %></h2>
+      <h3 class="dashboard-subheader"><%= data.length %> document<%= data.length !== 1 ? 's' : '' %></h3>
     </div>
     <hr>
     <a href="/dashboard/<%= name %>/new" class="btn btn-dashboard"><i class="fa-solid fa-circle-plus"></i> ADD DATA</a>
@@ -22,7 +31,13 @@
       <tr data-id="<%= data[j]._id %>">
         <td><%= j + 1 %></td>
         <% for( let k = 0; k < map.tbody.length; k++ ) { %>
-        <td><%= JSON.parse(data[j].body)[map.tbody[k]] %></td>
+        <% if (typeof map.tbody[k] === 'object') { %>
+        <td><%= handleTableObject(j, k) %></td>
+        <% } else { %>
+        <td>
+          <div><%- JSON.parse(data[j].body)[map.tbody[k]] %></div>
+        </td>
+        <% } %>
         <% } %>
         <td>
           <ul class="flex gap-sm">
@@ -58,7 +73,8 @@
             `<%= name.slice(0, -1) %> deleted successfully`,
             "success"
           );
-          responseAction(`<%= name.slice(0, -1) %>`, 'delete', data);
+          responseAction(`<%= name %>`, 'delete', data);
+          // todo - recount table rows and update documents # in header
         }
       });
     });

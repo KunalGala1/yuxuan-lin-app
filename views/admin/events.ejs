@@ -11,11 +11,8 @@
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside .middle ul li:nth-child(2) a')
-      .classList.add('active');
-  </script>
-  <main id="events" data-dashboard class="db-table">
+
+  <main class="sp-aside-left">
 
     <%- include('../partials/table', {
       name: 'events',

@@ -1,6 +1,23 @@
-<% 
-const body = JSON.parse(intro.body);
-const id = intro._id;
+<%
+formData.metadata.method = 'PUT';
+const baseURL = formData.metadata.action;
+formData.metadata.action = baseURL + '/' + doc._id;
+
+let parsedBody = JSON.parse(doc.body);
+
+formData.fields.forEach(field => {
+  switch (field.type) {
+    case 'hidden':
+      // Do nothing
+      break;
+    case 'file':
+      field.file = parsedBody.file;
+      break;
+    default:
+      field.value = parsedBody[field.name || field.type];
+  }
+});
+
 %>
 
 <!DOCTYPE html>
@@ -16,36 +33,9 @@ const id = intro._id;
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside ul li:nth-child(2) a').classList.add('active');
-  </script>
-  <main>
-    <%- include('../partials/form', {
-      metadata : {
-        method: 'put',
-        action: 'dashboard/intro/' + id,
-        name: 'intro'
-      },
-      fields: [
-        {
-          tag: 'textarea',
-          name: 'intro_en',
-          value: body.intro_en || '',
-          label: 'intro'
-        },
-        {
-          tag: 'textarea',
-          name: 'intro_zh',
-          value: body.intro_zh || '',
-          label: '简介'
-        },
-        {
-          type: 'file',
-          label: 'image',
-          file: body.file || {}
-        }
-      ]
-    }) %>
+
+  <main class="sp-aside-left">
+    <%- include('../partials/form', formData) %>
   </main>
 </body>
 

@@ -1,3 +1,25 @@
+<%
+formData.metadata.method = 'PUT';
+const baseURL = formData.metadata.action;
+formData.metadata.action = baseURL + '/' + doc._id;
+
+let parsedBody = JSON.parse(doc.body);
+
+formData.fields.forEach(field => {
+  switch (field.type) {
+    case 'hidden':
+      // Do nothing
+      break;
+    case 'file':
+      field.file = parsedBody.file;
+      break;
+    default:
+      field.value = parsedBody[field.name || field.type];
+  }
+});
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,53 +33,9 @@
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside .middle ul li:nth-child(1) a')
-      .classList.add('active');
-  </script>
-  <main class="">
-    <%- include('../partials/form', {
-      metadata: {
-        method: 'PUT',
-        action: '/dashboard/bio/' + id,
-        name: 'bio'
-      },
-      fields: [
-        {
-          type: 'file',
-          label: 'image',
-          file: body.file
-        },
-        {
-          name: 'quote_en',
-          value: body.quote_en,
-          lang: 'en',
-          label: 'quote'
-        },
-        {
-          name: 'quote_zh',
-          value: body.quote_zh,
-          lang: 'zh',
-          label: '引用'
-        },
-        {
-          tag: 'textarea',
-          name: 'bio_en',
-          value: body.bio_en,
-          height: 500,
-          lang: 'en',
-          label: 'bio'
-        },
-        {
-          tag: 'textarea',
-          name: 'bio_zh',
-          value: body.bio_zh,
-          height: 500,
-          lang: 'zh',
-          label: '个人简介'
-        }
-      ]
-    }) %>
+
+  <main class="sp-aside-left">
+    <%- include('../partials/form', formData) %>
   </main>
 
 </body>
