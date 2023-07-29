@@ -6,7 +6,7 @@ aside {
   position: fixed;
   top: 0;
   left: 0;
-  width: map-get(l.$width, aside);
+  width: map-get(l.$size, aside);
   height: 100vh;
   background-color: var(--dashboard);
   display: flex;
