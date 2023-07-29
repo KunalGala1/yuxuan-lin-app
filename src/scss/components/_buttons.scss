@@ -3,19 +3,18 @@
 @use "../theme/" as t;
 
 .btn {
-  @include a.transition;
   @include a.boxshadow(sm);
   @include l.padding(xs, sm);
   @include l.radius(xs);
   @include t.sans;
 
   display: inline-block;
-  color: white;
 }
 
 .btn-primary {
   background-color: var(--btn-primary);
   color: var(--main-light);
+  @include a.transition;
 
   &:hover {
     background-color: var(--btn-primary-hover);
@@ -25,6 +24,8 @@
 
 .btn-success {
   background-color: var(--success);
+  color: white;
+
   &:hover {
     background-color: var(--success-hover);
   }
@@ -32,15 +33,23 @@
 
 .btn-danger {
   background-color: var(--danger);
-  color: black;
-  box-shadow: none;
   &:hover {
     background-color: var(--danger-hover);
   }
 }
 
+.no-btn {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--40);
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.1);
+  }
+}
+
 .btn-dashboard {
   background-color: var(--dashboard);
+  color: white;
   &:hover {
     background-color: var(--dashboard-hover);
   }

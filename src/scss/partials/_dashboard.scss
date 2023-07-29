@@ -1,11 +1,8 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 .dashboard {
   background-color: var(--247);
-  main {
-    margin-left: map-get(l.$size, aside);
-    padding: 30px;
-  }
+  color: var(--40);
 }

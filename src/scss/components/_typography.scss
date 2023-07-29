@@ -2,23 +2,6 @@
 @use "../layout" as l;
 @use "../theme/" as t;
 
-/* Quotes */
-
-blockquote {
-  font-style: italic;
-  @include t.serif;
-}
-
-.engraved {
-  @include t.fancy();
-  color: var(--engraved);
-  font-weight: 600;
-  font-size: 25px;
-  font-style: italic;
-  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
-  text-align: left;
-}
-
 /* Headers */
 
 .header {
@@ -50,10 +33,16 @@ blockquote {
   color: var(--main);
   @include t.serif;
   font-size: 24px;
+  @include l.max(md) {
+    font-size: 18px;
+  }
 }
 
 .fourth-header {
   font-size: 24px;
+  @include l.max(md) {
+    font-size: 18px;
+  }
   font-weight: 700;
   color: var(--main);
 }
@@ -62,11 +51,19 @@ blockquote {
   @include t.serif;
   color: var(--off-white);
   font-size: 80px;
-  text-align: center;
   margin: 100px 0;
+  @include l.max(md) {
+    font-size: 60px;
+    margin: 80px 0;
+  }
+  @include l.max(sm) {
+    margin: 60px 0;
+    font-size: 40px;
+  }
+  text-align: center;
 }
 
-.dashboard-table-header {
+.dashboard-header {
   @include t.util;
   font-size: 20px;
   color: var(--dashboard);
@@ -91,6 +88,20 @@ blockquote {
     color: white;
     @include a.transition;
     font-weight: bolder;
+  }
+}
+
+.dashboard-table-link {
+  color: var(--form);
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+  display: block;
+  width: max-content;
+  margin: 15px 0 30px;
+  i {
+    margin-left: 5px;
   }
 }
 
@@ -187,4 +198,26 @@ blockquote {
 
 .zh-txt {
   font-style: normal !important;
+}
+
+/* Quotes */
+
+blockquote {
+  font-style: italic;
+  @include t.serif;
+}
+
+.engraved {
+  @include t.fancy();
+  color: var(--engraved);
+  font-weight: 400;
+  font-size: 24px;
+  @include l.max(md) {
+    font-size: 18px;
+  }
+  @include l.max(sm) {
+    font-size: 16px;
+  }
+  font-style: italic;
+  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
 }

@@ -2,6 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const fs = require("fs");
+const path = require("path");
 
 /* Import Models */
 const Content = require("../models/Content");
@@ -18,61 +20,76 @@ const map = {
   Media,
 };
 
+const fetchFormData = () => {
+  return (formData = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../data/formData.json"), "utf8")
+  ));
+};
+
 /* Import Auth Configs */
 const { forwardAuthenticated } = require("../config/auth");
 const { ensureAuthenticated } = require("../config/auth");
 
 /* Simple Get Routes */
 router.get("/", ensureAuthenticated, async (req, res) => {
-  const intro = await Content.findOne({ name: "intro" });
-  res.render("admin/dashboard", {
-    intro,
-  });
+  let options = {};
+  const doc = await Content.findOne({ name: "intro" });
+  const formData = fetchFormData();
+  options.formData = formData["intro"];
+  options.doc = doc;
+  res.render("admin/dashboard", options);
 });
 
 router.get("/bio", ensureAuthenticated, async (req, res) => {
-  const data = await Content.findOne({ name: "bio" });
-  const body = JSON.parse(data.body);
-  res.render("admin/bio", {
-    id: data._id,
-    body,
-  });
+  let options = {};
+  const doc = await Content.findOne({ name: "bio" });
+  const formData = fetchFormData();
+  options.formData = formData["bio"];
+  options.doc = doc;
+  res.render("admin/bio", options);
 });
 
 /* Content Model Put Routes */
-const documents = [{ name: "bio" }, { name: "arranger" }, { name: "intro" }];
+const docs = [{ name: "bio" }, { name: "arranger" }, { name: "intro" }];
 
-documents.forEach((document) => {
-  router.put(
-    "/" + document.name + "/:id",
-    ensureAuthenticated,
-    async (req, res) => {
-      try {
-        const updatedDocument = await Content.findByIdAndUpdate(
-          req.params.id,
-          {
-            body: JSON.stringify(req.body),
-          },
-          {
-            new: true,
-          }
-        );
-        res.json({
-          success: true,
-          updatedDocument,
-        });
-      } catch (error) {
-        res.status(500).json({
-          success: false,
-          error: "Something went wrong",
-        });
-      }
+docs.forEach((doc) => {
+  router.put("/" + doc.name + "/:id", ensureAuthenticated, async (req, res) => {
+    try {
+      const updatedDoc = await Content.findByIdAndUpdate(
+        req.params.id,
+        {
+          body: JSON.stringify(req.body),
+        },
+        {
+          new: true,
+        }
+      );
+      res.json({
+        success: true,
+        updatedDoc,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: "Something went wrong",
+      });
     }
-  );
+  });
+
+  router.get("/" + doc.name + "/:id", ensureAuthenticated, async (req, res) => {
+    const doc = await Content.findById(req.params.id);
+    res.json({
+      success: true,
+      doc,
+    });
+  });
 });
 
-// ====================================================================================================
-
+/* List Model Routes */
+// Options:
+// name: String (required) -- name of the route
+// model: String (optional) -- name of the model
+// content: Array (optional) -- additional content to be displayed on the page
 const lists = [
   { name: "events" },
   { name: "works" },
@@ -97,15 +114,15 @@ lists.forEach((list) => {
   /* Get Table of Complete Data Page*/
   router.get("/" + name, ensureAuthenticated, async (req, res) => {
     // Initialize variables
-    let documents = [],
+    let docs = [],
       options = {};
 
     if (content) {
       for (let i = 0; i < content.length; i++) {
         const data = await Content.findOne({ name: content[i] });
-        documents.push(data);
+        docs.push(data);
       }
-      options.content = documents;
+      options.content = docs;
     }
 
     const data = await Model.find({});
@@ -116,18 +133,23 @@ lists.forEach((list) => {
 
   /* Get Add New Document Page */
   router.get("/" + name + "/new", ensureAuthenticated, (req, res) => {
-    res.render("admin/" + name + "/new");
+    // Initialize variables
+    let options = {};
+    const formData = fetchFormData();
+    options.formData = formData[name];
+
+    res.render("admin/operations/new", options);
   });
 
   /* Post New Document */
   router.post("/" + name, ensureAuthenticated, async (req, res) => {
     try {
-      const newDocument = await Model.create({
+      const newDoc = await Model.create({
         body: JSON.stringify(req.body),
       });
       res.json({
         success: true,
-        newDocument,
+        newDoc,
       });
     } catch (error) {
       res.status(500).json({
@@ -142,24 +164,30 @@ lists.forEach((list) => {
     "/" + name + "/:id/edit",
     ensureAuthenticated,
     async (req, res) => {
-      const document = await Model.findById(req.params.id);
-      res.render("admin/" + name + "/edit", { document });
+      // Initialize variables
+      let options = {};
+
+      const formData = fetchFormData();
+
+      options.doc = await Model.findById(req.params.id);
+      options.formData = formData[name];
+      res.render("admin/operations/edit", options);
     }
   );
 
   /* Get Document */
   router.get("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
-    const document = await Model.findById(req.params.id);
+    const doc = await Model.findById(req.params.id);
     res.json({
       success: true,
-      document,
+      doc,
     });
   });
 
   /* Put Document */
   router.put("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
     try {
-      const updatedDocument = await Model.findByIdAndUpdate(
+      const updatedDoc = await Model.findByIdAndUpdate(
         req.params.id,
         {
           body: JSON.stringify(req.body),
@@ -170,7 +198,7 @@ lists.forEach((list) => {
       );
       res.json({
         success: true,
-        updatedDocument,
+        updatedDoc,
       });
     } catch (error) {
       res.status(500).json({
@@ -183,10 +211,10 @@ lists.forEach((list) => {
   /* Delete Document */
   router.delete("/" + name + "/:id", ensureAuthenticated, async (req, res) => {
     try {
-      const deletedDocument = await Model.findByIdAndDelete(req.params.id);
+      const deletedDoc = await Model.findByIdAndDelete(req.params.id);
       res.json({
         success: true,
-        deletedDocument,
+        deletedDoc,
       });
     } catch (error) {
       res.status(500).json({

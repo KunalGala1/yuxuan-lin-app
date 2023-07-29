@@ -12,6 +12,7 @@ forms.forEach((form) => {
     const method = form.dataset.method.toLowerCase();
     const name = form.name;
     const action = form.action;
+    const notification = form.dataset.notification;
 
     /* ====================================================== */
 
@@ -58,11 +59,17 @@ forms.forEach((form) => {
           };
 
           toastNotification(
-            `${name} ${methodMessages[method.toLowerCase()]} successfully`,
+            `${notification} ${
+              methodMessages[method.toLowerCase()]
+            } successfully`,
             "success"
           );
 
-          responseAction(name, method, data);
+          responseAction(
+            name,
+            e.submitter.dataset.responseAction || method,
+            data
+          );
         }
       })
       .catch((error) => {
@@ -94,7 +101,7 @@ const updateSlugs = (form) => {
 };
 
 // File upload
-const uploadFile = async (fileInput, formObject) => {
+const uploadFile = async (fileInput, formObject, alt) => {
   const file = fileInput.files[0];
   const formData = new FormData();
   formData.append("file", file);
@@ -104,15 +111,17 @@ const uploadFile = async (fileInput, formObject) => {
   });
   const data = await res.json();
   formObject.file = data.file;
+  formObject.file.alt = alt.value;
 };
 
-const persistFile = async (endpoint, formObject, nestedProperty) => {
+const persistFile = async (endpoint, formObject, nestedProperty, alt) => {
   const res = await fetch(endpoint, {
-    method: "get",
+    method: "GET",
   });
   const data = await res.json();
   const body = JSON.parse(accessNestedProperty(data, nestedProperty));
   formObject.file = body.file;
+  formObject.file.alt = alt.value;
 };
 
 const handleFileUploads = (
@@ -124,23 +133,23 @@ const handleFileUploads = (
   promises
 ) => {
   const fileInputs = form.querySelectorAll('input[type="file"]');
-  console.log(fileInputs);
 
   for (const fileInput of fileInputs) {
+    const alt = document.querySelector(`[name="${fileInput.name}-alt"]`);
     if (method == "post") {
       // upload file
       if (fileInput.files.length > 0) {
-        promises.push(uploadFile(fileInput, formObject));
+        promises.push(uploadFile(fileInput, formObject, alt));
       } else {
         alert("Please upload a file");
         return;
       }
     } else if (method == "put") {
       if (fileInput.files.length > 0) {
-        promises.push(uploadFile(fileInput, formObject));
+        promises.push(uploadFile(fileInput, formObject, alt));
       } else {
         // No changes were made to the file input
-        promises.push(persistFile(action, formObject, ["document", "body"]));
+        promises.push(persistFile(action, formObject, ["doc", "body"], alt));
       }
     }
   }

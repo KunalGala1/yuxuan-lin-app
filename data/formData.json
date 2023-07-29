@@ -1,0 +1,259 @@
+{
+  "arrangements": {
+    "metadata": {
+      "action": "/dashboard/arrangements",
+      "name": "arrangements"
+    },
+    "fields": [
+      {
+        "name": "title_en",
+        "required": true,
+        "label": "title",
+        "role": "slug-source"
+      },
+      { "name": "title_zh", "required": true, "label": "标题" },
+      { "type": "hidden", "name": "slug" },
+      { "name": "subtitle_en", "label": "subtitle" },
+      { "name": "subtitle_zh", "label": "副标题" },
+      {
+        "tag": "select",
+        "name": "tag",
+        "options": [
+          "Orchestral",
+          "Chamber",
+          "Solo",
+          "Dance",
+          "Choral",
+          "Vocal",
+          "Electroacoustic",
+          "Film",
+          "Theatre",
+          "Installation",
+          "Other"
+        ]
+      },
+      {
+        "name": "instrumentation",
+        "label": "detailed insturmentation (3.2.2...)"
+      },
+      { "name": "duration" },
+      { "name": "year" },
+      { "type": "url", "name": "url", "label": "URL to purchase music" },
+      {
+        "tag": "textarea",
+        "name": "commission_en",
+        "label": "commission information"
+      },
+      { "tag": "textarea", "name": "commission_zh", "label": "委托信息" },
+      { "tag": "textarea", "name": "programNote_en", "label": "program note" },
+      { "tag": "textarea", "name": "programNote_zh", "label": "节目说明" },
+      {
+        "tag": "textarea",
+        "name": "performanceNote_en",
+        "label": "performance note"
+      },
+      { "tag": "textarea", "name": "performanceNote_zh", "label": "演出说明" },
+      { "tag": "textarea", "name": "recording" }
+    ]
+  },
+  "arranger": {
+    "metadata": {
+      "action": "/dashboard/arranger",
+      "name": "arranger",
+      "heading": "arranger page",
+      "notification": "arranger page",
+      "flag": "content"
+    },
+    "fields": [
+      {
+        "tag": "textarea",
+        "name": "arranger_en",
+        "label": "Arranger"
+      },
+      {
+        "tag": "textarea",
+        "name": "arranger_zh",
+        "label": "編曲"
+      }
+    ]
+  },
+  "bio": {
+    "metadata": {
+      "action": "/dashboard/bio",
+      "name": "bio",
+      "heading": "bio",
+      "notification": "bio",
+      "flag": "content"
+    },
+    "fields": [
+      {
+        "type": "file",
+        "label": "image"
+      },
+      {
+        "name": "quote_en",
+        "label": "quote"
+      },
+      {
+        "name": "quote_zh",
+        "label": "引用"
+      },
+      {
+        "tag": "textarea",
+        "name": "bio_en",
+        "label": "bio"
+      },
+      {
+        "tag": "textarea",
+        "name": "bio_zh",
+        "label": "个人简介"
+      }
+    ]
+  },
+  "events": {
+    "metadata": {
+      "action": "/dashboard/events",
+      "enctype": "multipart/form-data",
+      "name": "events"
+    },
+    "fields": [
+      {
+        "name": "title_en",
+        "required": true,
+        "label": "title",
+        "role": "slug-source"
+      },
+      { "name": "title_zh", "required": true, "label": "标题" },
+      { "type": "hidden", "name": "slug" },
+      {
+        "tag": "textarea",
+        "name": "shortDescription_en",
+        "label": "short description"
+      },
+      { "tag": "textarea", "name": "shortDescription_zh", "label": "登月之旅" },
+      { "type": "date" },
+      { "type": "time" },
+      { "type": "url", "label": "URL" },
+      { "name": "location_en", "label": "location" },
+      { "name": "location_zh", "label": "位置" },
+      { "type": "file", "label": "image" },
+      {
+        "tag": "textarea",
+        "name": "longDescription_en",
+        "label": "long description"
+      },
+      { "tag": "textarea", "name": "longDescription_zh", "label": "详细描述" }
+    ]
+  },
+  "intro": {
+    "metadata": {
+      "action": "dashboard/intro",
+      "name": "intro",
+      "heading": "intro",
+      "notification": "intro",
+      "flag": "content"
+    },
+    "fields": [
+      {
+        "tag": "textarea",
+        "name": "intro_en",
+        "label": "intro"
+      },
+      {
+        "tag": "textarea",
+        "name": "intro_zh",
+        "label": "简介"
+      },
+      {
+        "type": "file",
+        "label": "image"
+      }
+    ]
+  },
+  "media": {
+    "metadata": {
+      "action": "/dashboard/media",
+      "enctype": "multipart/form-data",
+      "name": "media",
+      "heading": "media",
+      "notification": "media"
+    },
+    "fields": [
+      {
+        "name": "title_en",
+        "required": true,
+        "label": "title",
+        "role": "slug-source"
+      },
+      { "name": "title_zh", "required": true, "label": "标题" },
+      { "type": "hidden", "name": "slug" },
+      {
+        "tag": "textarea",
+        "name": "shortDescription_en",
+        "label": "short description"
+      },
+      { "tag": "textarea", "name": "shortDescription_zh", "label": "登月之旅" },
+      { "type": "file", "label": "image" },
+      { "tag": "textarea", "name": "description_en", "label": "description" },
+      { "tag": "textarea", "name": "description_zh", "label": "描述" },
+      { "tag": "textarea", "name": "recording" }
+    ]
+  },
+  "works": {
+    "metadata": {
+      "action": "/dashboard/works",
+      "name": "work"
+    },
+    "fields": [
+      {
+        "name": "title_en",
+        "required": true,
+        "label": "title",
+        "role": "slug-source"
+      },
+      { "name": "title_zh", "required": true, "label": "标题" },
+      { "type": "hidden", "name": "slug" },
+      { "name": "subtitle_en", "label": "subtitle" },
+      { "name": "subtitle_zh", "label": "副标题" },
+      {
+        "tag": "select",
+        "name": "tag",
+        "options": [
+          "Orchestral",
+          "Chamber",
+          "Solo",
+          "Dance",
+          "Choral",
+          "Vocal",
+          "Electroacoustic",
+          "Film",
+          "Theatre",
+          "Installation",
+          "Other"
+        ]
+      },
+      {
+        "name": "instrumentation",
+        "label": "detailed insturmentation (3.2.2...)"
+      },
+      { "name": "duration" },
+      { "name": "year" },
+      { "type": "url", "name": "url", "label": "URL to purchase music" },
+      {
+        "tag": "textarea",
+        "name": "commission_en",
+        "label": "commission information"
+      },
+      { "tag": "textarea", "name": "commission_zh", "label": "委托信息" },
+      { "tag": "textarea", "name": "programNote_en", "label": "program note" },
+      { "tag": "textarea", "name": "programNote_zh", "label": "节目说明" },
+      {
+        "tag": "textarea",
+        "name": "performanceNote_en",
+        "label": "performance note"
+      },
+      { "tag": "textarea", "name": "performanceNote_zh", "label": "演出说明" },
+      { "tag": "textarea", "name": "recording" }
+    ]
+  }
+}

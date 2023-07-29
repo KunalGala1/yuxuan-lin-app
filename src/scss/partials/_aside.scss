@@ -6,19 +6,19 @@ aside {
   position: fixed;
   top: 0;
   left: 0;
-  width: map-get(l.$size, aside);
+  width: map-get(l.$width, aside);
   height: 100vh;
   background-color: var(--dashboard);
   display: flex;
   flex-direction: column;
   @include t.sans;
-  padding: 10px 0;
+
   text-transform: capitalize;
 
-  .top {
+  @include l.max(md) {
+    display: none;
   }
-  .middle {
-  }
+
   .bottom {
     margin-top: auto;
   }

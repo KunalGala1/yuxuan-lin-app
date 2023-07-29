@@ -11,13 +11,13 @@
 }
 
 .d-sm-none {
-  @include l.max(sm) {
+  @include l.max(navBar) {
     display: none !important;
   }
 }
 
 .d-sm-block {
-  @include l.max(sm) {
+  @include l.max(navBar) {
     display: block !important;
   }
 }

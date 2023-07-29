@@ -11,7 +11,7 @@
   width: 100%;
   overflow-x: scroll;
   scroll-behavior: smooth;
-  @include a.hide_scrollbar;
+  @include a.hide-scrollbar;
 
   $fade-amount: 2%;
 
