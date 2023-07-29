@@ -211,12 +211,12 @@ blockquote {
   @include t.fancy();
   color: var(--engraved);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 26px;
   @include l.max(md) {
-    font-size: 18px;
+    font-size: 20px;
   }
   @include l.max(sm) {
-    font-size: 16px;
+    font-size: 18px;
   }
   font-style: italic;
   text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);

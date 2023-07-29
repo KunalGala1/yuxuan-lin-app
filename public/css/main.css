@@ -1113,18 +1113,18 @@ blockquote {
   font-family: "EB Garamond", serif;
   color: var(--engraved);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 26px;
   font-style: italic;
   text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
 }
 @media (max-width: 768px) {
   .engraved {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 @media (max-width: 576px) {
   .engraved {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -1317,30 +1317,23 @@ aside .bottom {
 }
 
 #intro {
-  padding: 30px;
   max-width: 767.98px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
 }
-#intro .card {
-  display: flex;
-  margin-bottom: 30px;
+@media (max-width: 768px) {
+  #intro .card.flex {
+    flex-direction: column-reverse;
+  }
 }
 #intro .card .block {
   flex: 1;
 }
 #intro .card img {
-  aspect-ratio: 1/1;
   width: 100%;
   box-shadow: 0px 8px 24px 0px rgba(149, 157, 165, 0.2);
-}
-#intro .card .block:first-child {
-  width: 90%;
-}
-#intro .card .block + .block {
-  padding-left: 20px;
 }
 #intro .card .text {
   font-family: "Playfair Display", serif;
@@ -1363,6 +1356,7 @@ aside .bottom {
   display: block;
   width: max-content;
   margin: 0 auto;
+  margin-top: 15px;
   color: var(--link);
   text-decoration: underline;
 }
@@ -1370,102 +1364,67 @@ aside .bottom {
   text-decoration: none;
 }
 
-#bio {
-  --gap: 40px;
-  line-height: var(--gap);
+@media (max-width: 768px) {
+  section[name=video] .wrapper {
+    padding: 0;
+    margin-bottom: -5px;
+  }
 }
+
 #bio .img-parent {
-  padding: 50px;
   max-width: 991.98px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
 }
-@media (min-width: 768px) {
-  #bio .img-parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+@media (max-width: 768px) {
+  #bio .img-parent.flex {
+    flex-direction: column;
   }
 }
 #bio img {
   width: 100%;
-  aspect-ratio: 1/1;
   object-fit: contain;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+  border-radius: 5px;
 }
-@media (max-width: 767px) {
-  #bio img {
-    margin-bottom: 15px;
-  }
-}
-#bio blockquote {
-  width: 70%;
-  text-align: center;
-  margin: 0 auto;
-}
-#bio .text {
-  padding: 100px 0;
+#bio .txt--wrapper {
   background-color: var(--main-lighter);
 }
-#bio p {
-  font-family: "Playfair Display", serif;
-  font-size: 18px;
-  color: var(--main-dark);
+#bio .txt {
   max-width: 767.98px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  padding: 0 var(--gap);
-}
-#bio p + p {
-  margin-top: var(--gap);
-}
-#bio div + div {
-  margin-top: var(--gap);
+  font-family: "Playfair Display", serif;
+  line-height: 1.5;
+  font-size: 18px;
+  color: var(--main-dark);
 }
 
 #events[data-cli] .container {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 60px;
-  padding-right: 60px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
 }
 #events[data-cli] .card {
   max-width: 400px;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 50px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
   color: var(--8);
 }
 #events[data-cli] .card .image-container {
   width: 100%;
   height: 200px;
-  background-color: rgba(100, 100, 100, 0.1);
-  border-radius: 10px;
 }
 #events[data-cli] .card .image-container img {
   height: 100%;
   width: 100%;
   object-position: center;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 #events[data-cli] .card .title {
   font-family: "Playfair Display", serif;
@@ -1486,9 +1445,6 @@ aside .bottom {
   font-family: "Inter", sans-serif;
 }
 
-#event {
-  padding-bottom: 60px;
-}
 #event .banner {
   background-color: rgba(50, 50, 50, 0.5);
   overflow: hidden;
@@ -1516,6 +1472,12 @@ aside .bottom {
   display: block;
   font-style: italic;
   color: var(--8);
+  font-size: 20px;
+}
+@media (max-width: 576px) {
+  #event .header span {
+    font-size: 18px;
+  }
 }
 #event .content {
   max-width: 991.98px;
@@ -1613,6 +1575,14 @@ aside .bottom {
   padding-left: 30px;
   padding-right: 30px;
 }
+@media (max-width: 576px) {
+  .work-list {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
 .work-list .main-header {
   text-transform: capitalize;
   color: var(--main-dark);
@@ -1624,6 +1594,22 @@ aside .bottom {
   padding-right: 60px;
   border-radius: 10px;
   background-color: rgb(235, 235, 235);
+}
+@media (max-width: 768px) {
+  .work-list .subsection {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media (max-width: 340px) {
+  .work-list .subsection {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 .work-list .cards-wrapper {
   flex-wrap: wrap;
@@ -1668,6 +1654,7 @@ main[name=work] .wrapper {
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 120px;
+  padding-bottom: 60px;
 }
 @media (max-width: 768px) {
   main[name=work] .wrapper {
@@ -1675,6 +1662,8 @@ main[name=work] .wrapper {
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
+    padding-top: 100px;
+    padding-bottom: 60px;
   }
 }
 @media (max-width: 576px) {
@@ -1683,6 +1672,8 @@ main[name=work] .wrapper {
     padding-bottom: 15px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 80px;
+    padding-bottom: 60px;
   }
 }
 main[name=work] .wrapper .heading {
@@ -1718,13 +1709,15 @@ main[name=work] .wrapper .heading .subtitle {
 }
 main[name=work] .wrapper .metadata {
   color: rgb(50, 50, 50);
-  border-radius: 10px;
+  padding: 0 5%;
   margin-top: 60px;
-  background-color: rgba(150, 150, 150, 0.1);
-  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
   font-family: "Inter", sans-serif;
 }
 main[name=work] .wrapper .metadata .metadata-wrapper {
+  background-color: rgba(150, 150, 150, 0.1);
+  box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+  border-radius: 10px;
+  line-height: 1.5;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 30px;
@@ -1862,6 +1855,11 @@ main[name=media-page] {
   margin-top: 0;
   margin-bottom: 0;
 }
+@media (max-width: 576px) {
+  main[name=media-page] .flex {
+    flex-direction: column;
+  }
+}
 main[name=media-page] .image-container {
   aspect-ratio: 1/1;
   flex: 1;
@@ -1895,6 +1893,12 @@ main[name=media-page] .txt-container .description hr {
 main[name=media-page] .recording {
   width: 100%;
 }
+@media (max-width: 576px) {
+  main[name=media-page] .recording {
+    padding: 0;
+    margin-bottom: -5px;
+  }
+}
 main[name=media-page] .recording iframe {
   width: 100%;
   height: 100%;
@@ -1923,6 +1927,26 @@ main[name=contact] .wrapper {
   padding-bottom: 60px;
   padding-left: 60px;
   padding-right: 60px;
+}
+@media (max-width: 768px) {
+  main[name=contact] .wrapper {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+@media (max-width: 340px) {
+  main[name=contact] .wrapper {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 
 #login {

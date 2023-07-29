@@ -23,11 +23,13 @@ const bio = body['bio_' + lang];
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
   <main id="bio">
-    <div class="img-parent">
+    <div class="img-parent flex gap pd-md">
       <img src="<%= image %>" alt="headshot" />
       <blockquote class="engraved <%= lang %>-txt">&ldquo;<%= quote %>&rdquo;</blockquote>
     </div>
-    <div class="text"><%- bio %></div>
+    <div class="txt--wrapper pd-md">
+      <div class="txt flex gap column align-stretch"><%- bio %></div>
+    </div>
   </main>
   <%- include('../partials/footer') %>
 </body>

@@ -202,7 +202,7 @@
   "works": {
     "metadata": {
       "action": "/dashboard/works",
-      "name": "work"
+      "name": "works"
     },
     "fields": [
       {

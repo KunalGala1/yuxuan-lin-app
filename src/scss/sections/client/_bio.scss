@@ -3,56 +3,31 @@
 @use "../../theme/" as t;
 
 #bio {
-  --gap: 40px;
-  line-height: var(--gap);
-
   .img-parent {
-    padding: 50px;
-    @include l.min(md) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-    }
-
     @include l.max-width(md);
+    @include l.max(md) {
+      &.flex {
+        flex-direction: column;
+      }
+    }
   }
 
   img {
     width: 100%;
-    aspect-ratio: 1 / 1;
     object-fit: contain;
-    @include l.max(md, -1px) {
-      margin-bottom: 15px;
-    }
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    @include l.radius(sm);
   }
 
-  blockquote {
-    width: 70%;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .text {
-    padding: 100px 0;
+  .txt--wrapper {
     background-color: var(--main-lighter);
   }
 
-  p {
+  .txt {
+    @include l.max-width(sm);
     @include t.serif;
+    line-height: 1.5;
     font-size: 18px;
     color: var(--main-dark);
-    @include l.max-width(sm);
-
-    & + p {
-      margin-top: var(--gap);
-    }
-
-    padding: 0 var(--gap);
-  }
-
-  div + div {
-    margin-top: var(--gap);
   }
 }

@@ -1,3 +1,25 @@
+<%
+formData["arranger"].metadata.method = 'PUT';
+const baseURL = formData["arranger"].metadata.action;
+formData["arranger"].metadata.action = baseURL + '/' + docs[0]._id;
+
+let parsedBody = JSON.parse(docs[0].body);
+
+formData["arranger"].fields.forEach(field => {
+  switch (field.type) {
+    case 'hidden':
+      // Do nothing
+      break;
+    case 'file':
+      field.file = parsedBody.file;
+      break;
+    default:
+      field.value = parsedBody[field.name || field.type];
+  }
+});
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +36,15 @@
 
   <main class="sp-aside-left">
 
-    <%- include('../partials/table', formData) %>
+    <%- include('../partials/table', {
+      name: 'arrangements',
+      data,
+      map: {
+        thead: ['title'],
+        tbody: ['title_en']
+      }
+    }) %>
+    <%- include('../partials/form', formData["arranger"]) %>
   </main>
 </body>
 

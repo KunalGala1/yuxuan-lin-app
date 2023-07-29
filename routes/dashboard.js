@@ -122,11 +122,13 @@ lists.forEach((list) => {
         const data = await Content.findOne({ name: content[i] });
         docs.push(data);
       }
-      options.content = docs;
+      options.docs = docs;
     }
 
     const data = await Model.find({});
     options.data = data;
+    const formData = fetchFormData();
+    options.formData = formData;
 
     res.render("admin/" + name, options);
   });

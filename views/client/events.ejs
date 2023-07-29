@@ -17,7 +17,7 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
   <main id="events" data-cli>
-    <div class="container">
+    <div class="container pd-md flex gap align-start wrap">
       <% for (let i = 0; i < events.length; i++) { %>
       <% 
       const body = JSON.parse(events[i].body);

@@ -26,7 +26,7 @@ const longDescription = body['longDescription_' + lang];
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <main id="event">
+  <main id="event" class="pd-b-lg">
     <div class="banner">
       <div class="image-container">
         <% if (image) { %>
@@ -36,7 +36,7 @@ const longDescription = body['longDescription_' + lang];
     </div>
     <div class="header">
       <h1 class="event-header"><%= title %></h1>
-      <div class="info">
+      <div class="info flex column">
 
         <% if (date) { %>
         <span class="date <%= lang %>-txt">
