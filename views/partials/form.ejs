@@ -3,17 +3,16 @@ const id = metadata.id ? metadata.id : '';
 const method = metadata.method ? metadata.method : 'GET';
 const action = metadata.action;
 const name = metadata.name ? metadata.name : '';
-const heading = metadata.heading ? metadata.heading : name.slice(0, -1);
-const notification = metadata.notification ? metadata.notification : name.slice(0, -1);
+const display = metadata.display ? metadata.display : name.slice(0, -1);
 const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-urlencoded';
 %>
 
 <div class="dashboard-form--wrapper pd-md">
-  <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-notification="<%= notification %>" novalidate>
+  <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-display="<%= display %>" novalidate>
 
     <div class="header flex justify-between pd-sm">
       <div>
-        <h2 class="dashboard-header"><%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %> <%= heading %></h2>
+        <h2 class="dashboard-header"><%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %> <%= display %></h2>
       </div>
       <div class="flex justify-end gap-sm">
         <div>
@@ -22,7 +21,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
         <div>
           <button type="submit" class="btn btn-success">Save</button>
         </div>
-        <% if (metadata.flag !== 'content') { %>
+        <% if (metadata.saveAndAddNew !== false) { %>
         <div>
           <button type="submit" class="btn btn-success" data-response-action="save_and_add_new">Save and Add New</button>
         </div>
@@ -50,7 +49,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
       <div class="item">
         <div class="subitem">
           <label for="<%= name %>" <% if (type === 'file') { %> class="file-upload" <% } %>><%= label %><% if (type === 'file') { %> <i class="mg-l-xs fa fa-upload"></i> <% } %></label>
-          <input type="<%= type %>" name="<%= name %>" id="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'required' : '' %> autocomplete="off" />
+          <input type="<%= type %>" name="<%= name %>" id="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'data-required' : '' %> autocomplete="off" <% if (type === 'file') { %> accept="image/*" <% } %> />
           <% if (type === 'file') { %>
           <div class="preview">
             <img src="<%= file.location %>" alt="" />
@@ -67,12 +66,12 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
       <div class="item">
         <div class="subitem">
           <label for="<%= name %>"><%= label %></label>
-          <textarea name="<%= name %>" role="<%= role %>" data-tinymce="<%= name %>"></textarea>
+          <textarea name="<%= name %>" role="<%= role %>" data-tinymce="<%= name %>" <%= required ? 'data-required' : '' %>></textarea>
           <script>
             tinymce.init({
               selector: 'textarea[data-tinymce="<%= name %>"]',
               height: '<%= height %>',
-              plugins: 'advlist anchor autolink autoresize charmap code emoticons fullscreen help image insertdatetime media nonbreaking link lists quickbars searchreplace table visualblocks visualchars wordcount',
+              plugins: 'advlist anchor autolink charmap code emoticons fullscreen help image insertdatetime media nonbreaking link lists quickbars searchreplace table visualblocks visualchars wordcount',
               quickbars_insert_toolbar: false,
               toolbar: 'undo redo | formatselect | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | link image media | removeformat | fullscreen',
               default_link_target: '_blank',
@@ -92,7 +91,7 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
       <div class="item">
         <div class="subitem">
           <label for="<%= name %>"><%= label %></label>
-          <select name="<%= name %>" autocomplete="off">
+          <select name="<%= name %>" autocomplete="off" <%= required ? 'data-required' : '' %>>
             <% if (value === '') { %>
             <option value="" selected>Please Choose An Option</option>
             <% } else { %>

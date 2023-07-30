@@ -2,7 +2,8 @@
   "arrangements": {
     "metadata": {
       "action": "/dashboard/arrangements",
-      "name": "arrangements"
+      "name": "arrangements",
+      "display": "Arrangement"
     },
     "fields": [
       {
@@ -60,9 +61,7 @@
     "metadata": {
       "action": "/dashboard/arranger",
       "name": "arranger",
-      "heading": "arranger page",
-      "notification": "arranger page",
-      "flag": "content"
+      "display": "Arranger page"
     },
     "fields": [
       {
@@ -81,9 +80,7 @@
     "metadata": {
       "action": "/dashboard/bio",
       "name": "bio",
-      "heading": "bio",
-      "notification": "bio",
-      "flag": "content"
+      "display": "Bio"
     },
     "fields": [
       {
@@ -114,7 +111,8 @@
     "metadata": {
       "action": "/dashboard/events",
       "enctype": "multipart/form-data",
-      "name": "events"
+      "name": "events",
+      "display": "Event"
     },
     "fields": [
       {
@@ -149,9 +147,7 @@
     "metadata": {
       "action": "dashboard/intro",
       "name": "intro",
-      "heading": "intro",
-      "notification": "intro",
-      "flag": "content"
+      "display": "Intro"
     },
     "fields": [
       {
@@ -175,8 +171,7 @@
       "action": "/dashboard/media",
       "enctype": "multipart/form-data",
       "name": "media",
-      "heading": "media",
-      "notification": "media"
+      "display": "Media"
     },
     "fields": [
       {
@@ -202,7 +197,8 @@
   "works": {
     "metadata": {
       "action": "/dashboard/works",
-      "name": "works"
+      "name": "works",
+      "display": "Work"
     },
     "fields": [
       {

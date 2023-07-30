@@ -207,6 +207,9 @@ form {
     top: 0;
     z-index: 5;
     border-radius: 5px 5px 0 0;
+    @include l.max(xs) {
+      font-size: 12px;
+    }
   }
 
   .content {

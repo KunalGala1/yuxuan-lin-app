@@ -1,25 +1,3 @@
-<%
-formData.metadata.method = 'PUT';
-const baseURL = formData.metadata.action;
-formData.metadata.action = baseURL + '/' + doc._id;
-
-let parsedBody = JSON.parse(doc.body);
-
-formData.fields.forEach(field => {
-  switch (field.type) {
-    case 'hidden':
-      // Do nothing
-      break;
-    case 'file':
-      field.file = parsedBody.file;
-      break;
-    default:
-      field.value = parsedBody[field.name || field.type];
-  }
-});
-
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 

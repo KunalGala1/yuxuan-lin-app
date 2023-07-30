@@ -16,7 +16,9 @@ aside {
   text-transform: capitalize;
 
   @include l.max(md) {
-    display: none;
+    position: static;
+    width: 100%;
+    height: max-content;
   }
 
   .bottom {

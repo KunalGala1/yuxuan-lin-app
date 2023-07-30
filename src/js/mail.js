@@ -2,6 +2,7 @@ import { toastNotification } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const forms = document.querySelectorAll(".contact-form");
+  const lang = document.documentElement.lang;
 
   forms.forEach((form) => {
     form.addEventListener("submit", async (e) => {
@@ -22,17 +23,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!name || !email || !subject || !auth) {
         toastNotification(
-          "All required fields must be filled out",
+          `${
+            lang === "zh"
+              ? "所有必填字段必须填写完整"
+              : "All required fields must be filled out"
+          }`,
           "danger",
           5000
         );
         return false;
       } else if (!emailRegex.test(email)) {
-        toastNotification("Please enter a valid email address", "danger", 5000);
+        toastNotification(
+          `${
+            lang === "zh"
+              ? "请输入一个有效的电子邮件地址"
+              : "Please enter a valid email address"
+          }`,
+          "danger",
+          5000
+        );
         return false;
       } else if (auth.toLowerCase() !== "3" && auth.toLowerCase() !== "three") {
         toastNotification(
-          "Security question was answered incorrectly",
+          `${
+            lang === "zh"
+              ? "安全问题回答错误"
+              : "Security question was answered incorrectly"
+          }`,
           "danger",
           5000
         );

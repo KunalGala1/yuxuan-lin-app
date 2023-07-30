@@ -12,7 +12,7 @@ forms.forEach((form) => {
     const method = form.dataset.method.toLowerCase();
     const name = form.name;
     const action = form.action;
-    const notification = form.dataset.notification;
+    const display = form.dataset.display;
 
     /* ====================================================== */
 
@@ -25,6 +25,9 @@ forms.forEach((form) => {
     updateSlugs(form);
 
     /* ====================================================== */
+
+    /* Validation */
+    if (!formValidation(form)) return;
 
     // Create form object
     const formData = new FormData(form);
@@ -59,9 +62,7 @@ forms.forEach((form) => {
           };
 
           toastNotification(
-            `${notification} ${
-              methodMessages[method.toLowerCase()]
-            } successfully`,
+            `${display} ${methodMessages[method.toLowerCase()]} successfully`,
             "success"
           );
 
@@ -155,11 +156,52 @@ const handleFileUploads = (
   }
 };
 
-function accessNestedProperty(object, keys) {
+const accessNestedProperty = (object, keys) => {
   return keys.reduce((nestedObj, key) => {
     if (nestedObj && nestedObj.hasOwnProperty(key)) {
       return nestedObj[key];
     }
     return undefined;
   }, object);
-}
+};
+
+const formValidation = (form) => {
+  let errors = [];
+
+  const requiredFields = form.querySelectorAll("[data-required]");
+  requiredFields.forEach((field) => {
+    if (field.value === "") {
+      if (field.type === "file") {
+        if (
+          field.parentNode
+            .querySelector(".preview")
+            .classList.contains("active")
+        ) {
+          return;
+        }
+      }
+
+      errors.push("Please fill out all required fields");
+
+      // Add error class
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.add("error");
+      } else {
+        // Remove error class
+        field.classList.add("error");
+      }
+    } else {
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.remove("error");
+      } else {
+        field.classList.remove("error");
+      }
+    }
+  });
+  if (errors.length) {
+    toastNotification(errors[0], "danger");
+    return false;
+  } else {
+    return true;
+  }
+};

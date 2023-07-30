@@ -20,10 +20,56 @@ const map = {
   Media,
 };
 
-const fetchFormData = () => {
-  return (formData = JSON.parse(
+/* Fetch and Prepare Form Data */
+const fetchFormData = (key, method, doc) => {
+  /* Parse specfic key json */
+  const formData = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/formData.json"), "utf8")
-  ));
+  )[key];
+
+  /* Prepare formData based on method */
+  switch (method.toLowerCase()) {
+    case "post":
+      formData.metadata.method = "POST";
+      break;
+    case "put":
+      if (!doc) {
+        console.error("error: doc is not defined");
+        break;
+      }
+      formData.metadata.method = "PUT";
+      formData.metadata.action += "/" + doc._id;
+      /* Prepare formData based on model constructor */
+      formData.metadata.saveAndAddNew = ["Content"].includes(
+        doc.constructor.modelName
+      )
+        ? false
+        : true;
+
+      const body = JSON.parse(doc.body);
+
+      formData.fields.forEach((field) => {
+        switch (field.type) {
+          case "hidden":
+            // Do nothing
+            break;
+          case "file":
+            field.file = body.file;
+            break;
+          default:
+            field.value = body[field.name];
+        }
+      });
+      break;
+    default:
+      break;
+  }
+
+  // Check on display name
+  formData.metadata.display =
+    formData.metadata.display ?? formData.metadata.name;
+
+  return formData;
 };
 
 /* Import Auth Configs */
@@ -34,8 +80,8 @@ const { ensureAuthenticated } = require("../config/auth");
 router.get("/", ensureAuthenticated, async (req, res) => {
   let options = {};
   const doc = await Content.findOne({ name: "intro" });
-  const formData = fetchFormData();
-  options.formData = formData["intro"];
+  const formData = fetchFormData("intro", "put", doc);
+  options.formData = formData;
   options.doc = doc;
   res.render("admin/dashboard", options);
 });
@@ -43,8 +89,8 @@ router.get("/", ensureAuthenticated, async (req, res) => {
 router.get("/bio", ensureAuthenticated, async (req, res) => {
   let options = {};
   const doc = await Content.findOne({ name: "bio" });
-  const formData = fetchFormData();
-  options.formData = formData["bio"];
+  const formData = fetchFormData("bio", "put", doc);
+  options.formData = formData;
   options.doc = doc;
   res.render("admin/bio", options);
 });
@@ -115,20 +161,22 @@ lists.forEach((list) => {
   router.get("/" + name, ensureAuthenticated, async (req, res) => {
     // Initialize variables
     let docs = [],
-      options = {};
+      options = {},
+      formData = [];
 
     if (content) {
       for (let i = 0; i < content.length; i++) {
-        const data = await Content.findOne({ name: content[i] });
-        docs.push(data);
+        const doc = await Content.findOne({ name: content[i] });
+        const formDataItem = fetchFormData(content[i], "put", doc);
+        formData.push(formDataItem);
+        docs.push(doc);
       }
       options.docs = docs;
+      options.formData = formData;
     }
 
     const data = await Model.find({});
     options.data = data;
-    const formData = fetchFormData();
-    options.formData = formData;
 
     res.render("admin/" + name, options);
   });
@@ -137,8 +185,8 @@ lists.forEach((list) => {
   router.get("/" + name + "/new", ensureAuthenticated, (req, res) => {
     // Initialize variables
     let options = {};
-    const formData = fetchFormData();
-    options.formData = formData[name];
+    const formData = fetchFormData(name, "post");
+    options.formData = formData;
 
     res.render("admin/operations/new", options);
   });
@@ -169,10 +217,10 @@ lists.forEach((list) => {
       // Initialize variables
       let options = {};
 
-      const formData = fetchFormData();
-
-      options.doc = await Model.findById(req.params.id);
-      options.formData = formData[name];
+      const doc = await Model.findById(req.params.id);
+      const formData = fetchFormData(name, "put", doc);
+      options.doc = doc;
+      options.formData = formData;
       res.render("admin/operations/edit", options);
     }
   );
