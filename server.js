@@ -77,6 +77,7 @@ app.set("view engine", "ejs");
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/users"));
 app.use("/", require("./routes/mail"));
+app.use("/", require("./routes/sitemap"));
 app.use("/dashboard", require("./routes/dashboard"));
 
 app.listen(PORT, () => {

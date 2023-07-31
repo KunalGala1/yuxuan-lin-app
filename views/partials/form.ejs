@@ -5,10 +5,11 @@ const action = metadata.action;
 const name = metadata.name ? metadata.name : '';
 const display = metadata.display ? metadata.display : name.slice(0, -1);
 const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-urlencoded';
+const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
 %>
 
 <div class="dashboard-form--wrapper pd-md">
-  <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-display="<%= display %>" novalidate>
+  <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-display="<%= display %>" data-sitemap="<%= sitemap %>" novalidate>
 
     <div class="header flex justify-between pd-sm">
       <div>

@@ -31,14 +31,14 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
       const shortDescription = body['shortDescription_' + lang];
       %>
       <div class="card">
-        <a href="/event/<%= slug %>">
+        <a href="/events/<%= slug %>">
           <div class="image-container">
             <img src="<%= image %>" alt="" />
           </div>
         </a>
         <div class="content">
           <h3 class="title">
-            <a href="/event/<%= slug %>"><%= title %></a>
+            <a href="/events/<%= slug %>"><%= title %></a>
           </h3>
 
           <% if (date) { %>

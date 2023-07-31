@@ -3,7 +3,11 @@
     "metadata": {
       "action": "/dashboard/arrangements",
       "name": "arrangements",
-      "display": "Arrangement"
+      "display": "Arrangement",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
     },
     "fields": [
       {
@@ -112,7 +116,11 @@
       "action": "/dashboard/events",
       "enctype": "multipart/form-data",
       "name": "events",
-      "display": "Event"
+      "display": "Event",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
     },
     "fields": [
       {
@@ -171,7 +179,11 @@
       "action": "/dashboard/media",
       "enctype": "multipart/form-data",
       "name": "media",
-      "display": "Media"
+      "display": "Media",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
     },
     "fields": [
       {
@@ -198,7 +210,11 @@
     "metadata": {
       "action": "/dashboard/works",
       "name": "works",
-      "display": "Work"
+      "display": "Work",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
     },
     "fields": [
       {

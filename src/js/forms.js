@@ -13,6 +13,7 @@ forms.forEach((form) => {
     const name = form.name;
     const action = form.action;
     const display = form.dataset.display;
+    const sitemap = form.dataset.sitemap;
 
     /* ====================================================== */
 
@@ -22,16 +23,19 @@ forms.forEach((form) => {
     updateTextareaValues(form);
 
     // Update slugs
-    updateSlugs(form);
+    const slug = updateSlugs(form);
 
     /* ====================================================== */
 
     /* Validation */
     if (!formValidation(form)) return;
 
+    /* ====================================================== */
+
     // Create form object
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData.entries());
+    if (sitemap) handleSitemap(formObject, name, slug, sitemap);
     const promises = [];
 
     handleFileUploads(form, method, action, name, formObject, promises);
@@ -98,6 +102,7 @@ const updateSlugs = (form) => {
       'input[role="slug-source"], input[name="title"], textarea[role="slug-source"], textarea[name="title"]'
     );
     slug.value = convertToSlug(title.value);
+    return slug.value;
   }
 };
 
@@ -204,4 +209,12 @@ const formValidation = (form) => {
   } else {
     return true;
   }
+};
+
+const handleSitemap = (formObject, name, slug, sitemap) => {
+  formObject.sitemap = {};
+  formObject.sitemap.loc = `https://yuxuan-lin.com/${name}/${slug}`;
+  formObject.sitemap.lastmod = new Date();
+  formObject.sitemap.changefreq = JSON.parse(sitemap).changefreq;
+  formObject.sitemap.priority = JSON.parse(sitemap).priority;
 };

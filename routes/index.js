@@ -38,7 +38,7 @@ router.get("/events", async (req, res) => {
 });
 
 /* GET event page. */
-router.get("/event/:slug", async (req, res) => {
+router.get("/events/:slug", async (req, res) => {
   const events = await Event.find();
   const event = events.find(
     (event) => JSON.parse(event.body).slug === req.params.slug
@@ -59,7 +59,7 @@ router.get("/works", async (req, res) => {
 });
 
 /* GET work page. */
-router.get("/work/:slug", async (req, res) => {
+router.get("/works/:slug", async (req, res) => {
   const works = await Work.find();
   const work = works.find(
     (work) => JSON.parse(work.body).slug === req.params.slug
@@ -73,7 +73,7 @@ router.get("/work/:slug", async (req, res) => {
 });
 
 /* GET arranger page. */
-router.get("/arranger", async (req, res) => {
+router.get("/arrangements", async (req, res) => {
   const doc = await Content.findOne({ name: "arranger" });
   const data = await Arrangement.find();
   const lang = new URLSearchParams(req.query).get("lang") || "en";
@@ -81,7 +81,7 @@ router.get("/arranger", async (req, res) => {
 });
 
 /* GET arrangement page. */
-router.get("/arrangement/:slug", async (req, res) => {
+router.get("/arrangements/:slug", async (req, res) => {
   const data = await Arrangement.find();
   const doc = data.find((doc) => JSON.parse(doc.body).slug === req.params.slug);
   const lang = new URLSearchParams(req.query).get("lang") || "en";

@@ -53,4 +53,15 @@ export const responseAction = (name, method, data) => {
   } else {
     // Default action or error handling
   }
+
+  if (method === "delete") recountDocuments();
+};
+
+const recountDocuments = () => {
+  const dashboardSubheader = document.querySelector(".dashboard-subheader");
+  if (!dashboardSubheader) return;
+
+  const length = document.querySelectorAll("tbody tr").length;
+  dashboardSubheader.innerText =
+    length + " document" + `${length === 1 ? "" : "s"}`;
 };

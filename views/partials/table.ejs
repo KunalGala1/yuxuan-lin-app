@@ -69,8 +69,9 @@ const handleTableObject = (j, k) => {
         });
         const data = await res.json();
         if (data.success) {
+          const display = `<%= name %>`.charAt(0).toUpperCase() + `<%= name %>`.slice(1, -1);
           toastNotification(
-            `<%= name.slice(0, -1) %> deleted successfully`,
+            `${display} deleted successfully`,
             "success"
           );
           responseAction(`<%= name %>`, 'delete', data);

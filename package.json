@@ -28,7 +28,8 @@
     "node": "^19.8.1",
     "nodemailer": "^6.9.4",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "xml": "^1.0.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
