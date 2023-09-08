@@ -1,42 +1,10 @@
-date and time - different format
-
-film, solo, chamber, orchestral (ensemble?), dance, electronic?, 
-
-dynamic tags
-
-Yuxuan Lin:
-林榆璇
-
-flag icons instead of en | ...
-
-======================
-f̶l̶a̶g̶s̶ i̶n̶s̶t̶e̶a̶d̶ o̶f̶ t̶e̶x̶t̶ f̶o̶r̶ l̶a̶n̶g̶
-h̶a̶n̶d̶l̶e̶ n̶o̶ t̶i̶m̶e̶ o̶r̶ d̶a̶t̶e̶ i̶n̶ e̶v̶e̶n̶t̶s̶
-e̶v̶e̶n̶t̶s̶ a̶l̶i̶g̶n̶t̶o̶p̶/̶c̶a̶r̶d̶s̶ s̶p̶a̶c̶i̶n̶g̶
-c̶o̶n̶t̶a̶c̶t̶ p̶a̶g̶e̶
-a̶r̶r̶a̶n̶g̶e̶r̶ p̶a̶g̶e̶
-dynamic tags
-date and time - different formats for en and zh
-Yuxuan Lin:
-林榆璇
-
-arranging - zh fix
-(music arranging?)
-
-编曲
-
 arranging - structured like works page but with emphasis on type of arr.
 
 email for contact form
 contact@yuxuan-lin.com
 
----
-home page
-    new piece
-    short intro (with pic)
-    video
-arr page
 logo
 zh
 drop down for works, listen and arranging?
-    
+
+new 'a' name in namecheap - instance restarted...

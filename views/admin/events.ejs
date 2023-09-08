@@ -11,68 +11,18 @@
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside .middle ul li:nth-child(3) a')
-      .classList.add('active');
-  </script>
-  <main id="events" data-dashboard class="db-table">
-    <div class="heading">
-      <h1 class="secondary-header">Events</h1>
-      <a class="btn btn-primary" href="/dashboard/events/new">Add New</a>
-    </div>
-    <table class="primary-table">
-      <colgroup>
-        <col />
-        <col />
-        <col />
-        <col class="icon" />
-        <col class="icon" />
-      </colgroup>
-      <tr>
-        <th>Title</th>
-        <th>Date</th>
-        <th class="box">Image</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
 
-      <% for (let i = 0; i < events.length; i++) { %>
+  <main class="sp-aside-left">
 
-      <% 
-						const id = events[i]._id;
-						const body = JSON.parse(events[i].body);
-						const title = body.title_en;
-						const slug = body.slug;
-						const date = events[i].date.toDateString();
-						const image = body.file.filename;
-						
-						%>
+    <%- include('../partials/table', {
+      name: 'events',
+      data,
+      map: {
+        thead: ['title'],
+        tbody: ['title_en']
+      }
+    }) %>
 
-      <tr data-event-id="<%= id %>">
-        <td>
-          <a href="/event/<%= slug %>" target="_blank" class="table-link"><%= title %></a>
-        </td>
-        <td><%= events[i].date.toDateString() %></td>
-        <td class="box no-padding">
-          <div class="image-container">
-            <img src="/uploads/<%= image %>" alt="" />
-          </div>
-        </td>
-        <td>
-          <a href="/dashboard/events/<%= id %>/edit" class="icon">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </a>
-        </td>
-        <td>
-          <form data-method="delete" action="/dashboard/events/<%= id %>/delete" class="handle-form-submission" name="event">
-            <button type="submit" class="icon">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </form>
-        </td>
-      </tr>
-      <% } %>
-    </table>
   </main>
 </body>
 

@@ -1,11 +1,14 @@
 :root {
-  /* Utility */
-  --success: #198754;
-  --success-hover: #198754;
+  /* UTILITY */
+  --success: #3b916d;
+  --success-hover: #2a654c;
   --danger: #b00020;
   --danger-hover: #b00020;
 
-  /* Components */
+  /* COMPONENTS */
+  --dashboard-form: rgb(48, 66, 85);
+  --dashboard: #2a654c;
+  --dashboard-hover: #3b916d;
 
   // Buttons
   --btn-primary: rgb(40, 76, 92);

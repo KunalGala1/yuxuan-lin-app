@@ -1,0 +1,40 @@
+<%
+const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
+%>
+
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('../partials/head') %>
+  <title><%= yuxuan %> | Media</title>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
+  <%- include('../partials/nav') %>
+
+  <main name="media">
+    <div class="wrapper pd-md flex align-start wrap gap-lg">
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <% const doc = JSON.parse(data[i].body) %>
+      <div class="card">
+        <a href="/media/<%= doc.slug %>?lang=<%= lang %>">
+          <div class="image-container"><img src="<%= doc.file.location %>" alt=""></div>
+          <div class="txt">
+            <h2 class="third-header"><%= doc['title_' + lang] %></h2>
+            <div><%- doc['shortDescription_' + lang] %></div>
+          </div>
+        </a>
+      </div>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+
+</html>

@@ -10,11 +10,16 @@ main[name="work"] {
 
     @include l.padding(lg);
     padding-top: 120px;
+    padding-bottom: 60px;
     @include l.max(md) {
       @include l.padding(md);
+      padding-top: 100px;
+      padding-bottom: 60px;
     }
     @include l.max(sm) {
       @include l.padding(sm);
+      padding-top: 80px;
+      padding-bottom: 60px;
     }
 
     // Heading
@@ -47,14 +52,16 @@ main[name="work"] {
     // Metadata
     .metadata {
       color: rgb(50, 50, 50);
-      border-radius: 10px;
+      padding: 0 5%;
       margin-top: 60px;
-      background-color: rgba(150, 150, 150, 0.1);
-      @include a.boxshadow(dark);
 
       @include t.util;
 
       .metadata-wrapper {
+        background-color: rgba(150, 150, 150, 0.1);
+        @include a.boxshadow(dark);
+        border-radius: 10px;
+        line-height: 1.5;
         @include l.padding(md);
         @include l.max(md) {
           @include l.padding(sm);

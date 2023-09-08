@@ -3,30 +3,21 @@
 @use "../../theme/" as t;
 
 #intro {
-  padding: 30px;
   @include l.max-width(sm);
 
   .card {
-    display: flex;
-
-    margin-bottom: 30px;
-
+    &.flex {
+      @include l.max(md) {
+        flex-direction: column-reverse;
+      }
+    }
     .block {
       flex: 1;
     }
 
     img {
-      aspect-ratio: 1/1;
       width: 100%;
       @include a.boxshadow(md);
-    }
-
-    .block:first-child {
-      width: 90%;
-    }
-
-    .block + .block {
-      padding-left: 20px;
     }
 
     .text {
@@ -55,7 +46,7 @@
     display: block;
     width: max-content;
     margin: 0 auto;
-
+    margin-top: 15px;
     color: var(--link);
 
     text-decoration: underline;

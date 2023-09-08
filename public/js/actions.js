@@ -1,19 +1,49 @@
 export const responseAction = (name, method, data) => {
   const actions = {
-    event: {
+    events: {
       post: () => {
-        window.location.replace(`/dashboard/events/${data.newDocument._id}/edit`);
+        window.location.replace(`/dashboard/events/${data.newDoc._id}/edit`);
       },
       delete: () => {
-        document.querySelector(`[data-event-id="${data.deletedDocument._id}"]`).remove();
+        document.querySelector(`[data-id="${data.deletedDoc._id}"]`).remove();
+      },
+      save_and_add_new: () => {
+        window.location.replace("/dashboard/events/new");
       },
     },
-    work: {
+    works: {
       post: () => {
-        window.location.replace(`/dashboard/works/${data.newDocument._id}/edit`);
+        window.location.replace(`/dashboard/works/${data.newDoc._id}/edit`);
       },
       delete: () => {
-        document.querySelector(`[data-work-id="${data.deletedDocument._id}"]`).remove();
+        document.querySelector(`[data-id="${data.deletedDoc._id}"]`).remove();
+      },
+      save_and_add_new: () => {
+        window.location.replace("/dashboard/works/new");
+      },
+    },
+    arrangements: {
+      post: () => {
+        window.location.replace(
+          `/dashboard/arrangements/${data.newDoc._id}/edit`
+        );
+      },
+      delete: () => {
+        document.querySelector(`[data-id="${data.deletedDoc._id}"]`).remove();
+      },
+      save_and_add_new: () => {
+        window.location.replace("/dashboard/arrangements/new");
+      },
+    },
+    media: {
+      post: () => {
+        window.location.replace(`/dashboard/media/${data.newDoc._id}/edit`);
+      },
+      delete: () => {
+        document.querySelector(`[data-id="${data.deletedDoc._id}"]`).remove();
+      },
+      save_and_add_new: () => {
+        window.location.replace("/dashboard/media/new");
       },
     },
   };
@@ -23,4 +53,15 @@ export const responseAction = (name, method, data) => {
   } else {
     // Default action or error handling
   }
+
+  if (method === "delete") recountDocuments();
+};
+
+const recountDocuments = () => {
+  const dashboardSubheader = document.querySelector(".dashboard-subheader");
+  if (!dashboardSubheader) return;
+
+  const length = document.querySelectorAll("tbody tr").length;
+  dashboardSubheader.innerText =
+    length + " document" + `${length === 1 ? "" : "s"}`;
 };

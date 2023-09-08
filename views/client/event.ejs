@@ -3,11 +3,11 @@
 <%
 const body = JSON.parse(event.body);
 const title = body['title_' + lang];
-const image = body.file ? body.file.filename : null;
+const image = body.file ? body.file.location : null;
 const date = body.date;
 const dateObject = new Date(date);
 const time = body.time;
-const location = body.location;
+const location = body['location_' + lang];
 const shortDescription = body['shortDescription_' + lang];
 const longDescription = body['longDescription_' + lang];
 %>
@@ -26,46 +26,44 @@ const longDescription = body['longDescription_' + lang];
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(5) a')
-      .classList.add('active');
-  </script>
-  <main id="event">
+  <main id="event" class="pd-b-lg">
     <div class="banner">
       <div class="image-container">
         <% if (image) { %>
-        <img src="/uploads/<%= image %>" alt="" />
+        <img src="<%= image %>" alt="" />
         <% } %>
       </div>
     </div>
     <div class="header">
       <h1 class="event-header"><%= title %></h1>
+      <div class="info flex column">
 
-      <% if (date) { %>
-      <span class="date">
-        <% if (lang === 'en') { %>
-        <%= dateObject.toLocaleString('en-US', {
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric'
-}) %>
-        <% } else { %>
-        <%= dateObject.toLocaleString('zh-TW', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-}) %>
+        <% if (date) { %>
+        <span class="date <%= lang %>-txt">
+          <% if (lang === 'en') { %>
+          <%= dateObject.toLocaleString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          }) %>
+          <% } else { %>
+          <%= dateObject.toLocaleString('zh-TW', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) %>
+          <% } %>
+        </span>
         <% } %>
-      </span>
-      <% } %>
 
-      <% if (time) { %>
-      <span class="time"><%= time %></span>
-      <% } %>
+        <% if (time) { %>
+        <span class="time <%= lang %>-txt"><%= time %></span>
+        <% } %>
 
-      <% if (location) { %>
-      <span class="location"><%= location %></span>
-      <% } %>
+        <% if (location) { %>
+        <span class="location <%= lang %>-txt"><%= location %></span>
+        <% } %>
+      </div>
 
     </div>
 

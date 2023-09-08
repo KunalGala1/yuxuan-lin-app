@@ -1,0 +1,83 @@
+<%
+const handleTableObject = (j, k) => {
+  const obj = map.tbody[k];
+  const key = obj.key;
+  const body = JSON.parse(data[j].body);
+  return body[key];
+}
+%>
+
+<div class="dashboard-table--container">
+  <div class="table-header">
+    <div class="flex justify-between">
+      <h2 class="dashboard-header"><%= name %></h2>
+      <h3 class="dashboard-subheader"><%= data.length %> document<%= data.length !== 1 ? 's' : '' %></h3>
+    </div>
+    <hr>
+    <a href="/dashboard/<%= name %>/new" class="btn btn-dashboard"><i class="fa-solid fa-circle-plus"></i> ADD DATA</a>
+  </div>
+  <table class="table dashboard-table">
+    <thead>
+      <tr>
+        <th></th>
+        <% for (let i = 0; i < map.thead.length; i++) { %>
+        <th><%= map.thead[i] %></th>
+        <% } %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let j = 0; j < data.length; j++ ) { %>
+      <tr data-id="<%= data[j]._id %>">
+        <td><%= j + 1 %></td>
+        <% for( let k = 0; k < map.tbody.length; k++ ) { %>
+        <% if (typeof map.tbody[k] === 'object') { %>
+        <td><%= handleTableObject(j, k) %></td>
+        <% } else { %>
+        <td>
+          <div><%- JSON.parse(data[j].body)[map.tbody[k]] %></div>
+        </td>
+        <% } %>
+        <% } %>
+        <td>
+          <ul class="flex gap-sm">
+            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/edit` %>" class="icon-link flex"><i class="fa-solid fa-pen"></i></a></li>
+            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/delete` %>" class="icon-link flex delete-link" data-id="<%= data[j]._id %>"><i class="fa-solid fa-trash"></i></a></li>
+          </ul>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<script type="module">
+  import {
+    toastNotification
+  } from "/js/utils.js";
+  import {
+    responseAction
+  } from "/js/actions.js";
+  document.addEventListener('DOMContentLoaded', () => {
+    const deleteLinks = document.querySelectorAll('.delete-link');
+    deleteLinks.forEach(link => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const dataId = link.getAttribute('data-id');
+        const res = await fetch(`/dashboard/<%= name %>/${dataId}`, {
+          method: 'delete',
+        });
+        const data = await res.json();
+        if (data.success) {
+          const display = `<%= name %>`.charAt(0).toUpperCase() + `<%= name %>`.slice(1, -1);
+          toastNotification(
+            `${display} deleted successfully`,
+            "success"
+          );
+          responseAction(`<%= name %>`, 'delete', data);
+          // todo - recount table rows and update documents # in header
+        }
+      });
+    });
+  });
+</script>

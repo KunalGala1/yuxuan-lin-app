@@ -1,37 +1,25 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
 #events[data-cli] {
   .container {
-    @include l.padding(lg);
     @include l.max-width(xl);
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
   }
 
   .card {
     max-width: 400px;
-    @include l.padding(0, md);
-    padding-bottom: 50px;
-    @include l.radius(md);
-    background-color: rgba(255, 255, 255, 0.1);
     color: var(--8);
 
     .image-container {
       width: 100%;
       height: 200px;
-      background-color: rgba(100, 100, 100, 0.1);
-      @include l.radius(md);
       img {
         height: 100%;
         width: 100%;
         object-position: center;
         object-fit: cover;
-        @include l.radius(md);
+        @include l.radius(sm);
       }
     }
 

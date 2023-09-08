@@ -9,15 +9,12 @@ const passport = require("passport");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const { S3Client } = require("@aws-sdk/client-s3");
-const { ListBucketsCommand } = require("@aws-sdk/client-s3");
 
 // db
 const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
-
-process.env.AWS_SDK_LOAD_CONFIG = "1";
 
 const s3 = new S3Client({
   credentials: {
@@ -26,22 +23,6 @@ const s3 = new S3Client({
   },
   region: "us-east-2",
 });
-
-/* Test Credentials */
-async function testS3Credentials() {
-  try {
-    // Call the `listBuckets` operation to check if the credentials are valid
-    const response = await s3.send(new ListBucketsCommand({}));
-    console.log("Credentials are valid. Buckets in your account:");
-    console.log(response.Buckets);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-testS3Credentials();
-
-/* ======================== */
 
 // Multer
 
@@ -95,6 +76,8 @@ app.set("view engine", "ejs");
 // routes
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/users"));
+app.use("/", require("./routes/mail"));
+app.use("/", require("./routes/sitemap"));
 app.use("/dashboard", require("./routes/dashboard"));
 
 app.listen(PORT, () => {

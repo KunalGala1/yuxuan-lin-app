@@ -1,8 +1,3 @@
-<% 
-const body = JSON.parse(intro.body);
-const id = intro._id;
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,31 +11,9 @@ const id = intro._id;
 
 <body class="dashboard">
   <%- include('../partials/aside') %>
-  <script>
-    document.querySelector('aside ul li:nth-child(2) a').classList.add('active');
-  </script>
-  <main>
-    <%- include('../partials/form', {
-      metadata : {
-        method: 'put',
-        action: 'dashboard/intro/' + id,
-        name: 'intro'
-      },
-      fields: [
-        {
-          tag: 'textarea',
-          name: 'intro_en',
-          value: body.intro_en || '',
-          label: 'intro'
-        },
-        {
-          tag: 'textarea',
-          name: 'intro_zh',
-          value: body.intro_zh || '',
-          label: '简介'
-        }
-      ]
-    }) %>
+
+  <main class="sp-aside-left">
+    <%- include('../partials/form', formData) %>
   </main>
 </body>
 

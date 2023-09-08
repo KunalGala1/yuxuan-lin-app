@@ -2,13 +2,13 @@
   <div class="top">
     <ul>
       <li>
-        <a href="/">
+        <a href="/" class="link aside-link">
           <i class="fa-solid fa-house"></i>
           <span>home</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard">
+        <a href="/dashboard" class="link aside-link">
           <i class="fa-solid fa-gauge"></i>
           <span>dashboard</span>
         </a>
@@ -18,28 +18,34 @@
   <div class="middle">
     <ul>
       <li>
-        <a href="/dashboard/bio">
+        <a href="/dashboard/bio" class="link aside-link">
           <i class="fa-solid fa-book"></i>
           <span>bio</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/works">
+        <a href="/dashboard/events" class="link aside-link">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>events</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/works" class="link aside-link">
           <i class="fa-solid fa-music"></i>
           <span>works</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/events">
-          <i class="fa-solid fa-calendar-days"></i>
-          <span>events</span>
+        <a href="/dashboard/media" class="link aside-link">
+          <i class="fa-solid fa-photo-video"></i>
+          <span>media</span>
         </a>
       </li>
 
       <li>
-        <a href="/dashboard/arranger">
+        <a href="/dashboard/arrangements" class="link aside-link">
           <i class="fa-solid fa-pen"></i>
-          <span>arranger</span>
+          <span>arrangements</span>
         </a>
       </li>
     </ul>
@@ -47,7 +53,7 @@
   <div class="bottom">
     <ul>
       <li>
-        <a href="/logout">
+        <a href="/logout" class="link aside-link">
           <i class="fa-solid fa-right-from-bracket"></i>
           <span>log out</span>
         </a>
@@ -55,3 +61,39 @@
     </ul>
   </div>
 </aside>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Get current path
+    const path = window.location.pathname;
+
+    // Split the path into parts
+    const pathParts = path.split('/').filter(part => part !== '');
+
+    // Get all aside links
+    const links = document.querySelectorAll('.aside-link');
+
+    let found = false;
+
+    // Start from the end of the pathParts array
+    for (let i = pathParts.length - 1; i >= 0; i--) {
+      // Construct a path to search for
+      let searchPath = '/' + pathParts.slice(0, i + 1).join('/');
+
+      // Iterate over each link
+      for (let link of links) {
+        // If the link's href matches the search path, add the active class
+        if (link.getAttribute('href') === searchPath) {
+          link.classList.add('active');
+          found = true;
+          break;
+        }
+      }
+
+      // If we found a match, we can stop searching
+      if (found) {
+        break;
+      }
+    }
+  });
+</script>

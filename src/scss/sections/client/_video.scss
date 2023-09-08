@@ -1,0 +1,10 @@
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
+
+section[name="video"] .wrapper {
+  @include l.max(md) {
+    padding: 0;
+    margin-bottom: -5px;
+  }
+}

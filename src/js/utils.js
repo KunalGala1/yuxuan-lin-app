@@ -32,7 +32,7 @@ export const convertToSlug = (inputString) => {
     .replace(/^-|-$/g, ""); // Remove leading and trailing hyphens
 };
 
-export const toastNotification = (message, type) => {
+export const toastNotification = (message, type, duration = 1000) => {
   const toastNotification = document.createElement("div");
   toastNotification.classList.add("toast-notification", "active", type);
   toastNotification.textContent = message;
@@ -42,5 +42,5 @@ export const toastNotification = (message, type) => {
     setTimeout(() => {
       toastNotification.remove();
     }, 250);
-  }, 1000);
+  }, duration);
 };

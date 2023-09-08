@@ -1,9 +1,8 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
 #event {
-  padding-bottom: 60px;
   .banner {
     background-color: rgba(50, 50, 50, 0.5);
     overflow: hidden;
@@ -21,6 +20,10 @@
       display: block;
       font-style: italic;
       color: var(--8);
+      font-size: 20px;
+      @include l.max(sm) {
+        font-size: 18px;
+      }
     }
     margin-bottom: 60px;
 

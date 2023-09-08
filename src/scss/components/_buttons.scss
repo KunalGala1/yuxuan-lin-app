@@ -1,40 +1,56 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 .btn {
-  @include t.sans;
+  @include a.boxshadow(sm);
   @include l.padding(xs, sm);
-  @include l.radius(sm);
-  @include a.transition($duration: 0.1s);
+  @include l.radius(xs);
+  @include t.sans;
+
+  display: inline-block;
 }
 
 .btn-primary {
   background-color: var(--btn-primary);
   color: var(--main-light);
+  @include a.transition;
 
   &:hover {
     background-color: var(--btn-primary-hover);
     outline: solid 1px rgb(0, 0, 0, 0.1);
-    color: white;
   }
 }
 
-.success-btn {
+.btn-success {
   background-color: var(--success);
-  color: var(--main-light);
+  color: white;
 
   &:hover {
     background-color: var(--success-hover);
-    color: white;
   }
 }
 
-.danger-btn {
-  background-color: transparent;
-  color: var(--60);
-
+.btn-danger {
+  background-color: var(--danger);
   &:hover {
-    color: black;
+    background-color: var(--danger-hover);
+  }
+}
+
+.no-btn {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--40);
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.1);
+  }
+}
+
+.btn-dashboard {
+  background-color: var(--dashboard);
+  color: white;
+  &:hover {
+    background-color: var(--dashboard-hover);
   }
 }

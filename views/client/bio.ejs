@@ -3,6 +3,7 @@
 <%
 const id = data._id;
 const body = JSON.parse(data.body);
+const image = body.file.location;
 const quote = body['quote_' + lang];
 const bio = body['bio_' + lang];
 %>
@@ -21,16 +22,14 @@ const bio = body['bio_' + lang];
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(2) a')
-      .classList.add('active');
-  </script>
   <main id="bio">
-    <div class="img-parent">
-      <img src="/img/main.jpg" alt="headshot" />
-      <blockquote class="engraved">&ldquo;<%= quote %>&rdquo;</blockquote>
+    <div class="img-parent flex gap pd-md">
+      <img src="<%= image %>" alt="headshot" />
+      <blockquote class="engraved <%= lang %>-txt">&ldquo;<%= quote %>&rdquo;</blockquote>
     </div>
-    <div class="text"><%- bio %></div>
+    <div class="txt--wrapper pd-md">
+      <div class="txt flex gap column align-stretch"><%- bio %></div>
+    </div>
   </main>
   <%- include('../partials/footer') %>
 </body>

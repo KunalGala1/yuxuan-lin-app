@@ -13,34 +13,38 @@
 
 <body>
   <%- include('../partials/header') %> <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(6) a')
-      .classList.add('active');
-  </script>
 
   <main name="contact">
     <div class="wrapper flex column gap">
-      <h2 class="header fourth-header"><%= lang == 'zh' ? '联系我' : 'Contact Me' %></h2>
-      <form action="/nodemailer" method="post" class="primary-form">
+      <h2 class="header third-header"><%= lang == 'zh' ? '请使用这个表格与我联系！' : 'Use this form to contact me!' %></h2>
+      <form action="/mailsend" method="post" class="form contact-form" novalidate>
         <div class="item">
           <div class="subitem">
-            <label for="name">Name*</label>
+            <label for="name">
+              <%= lang == 'zh' ? '姓名*' : 'Name*' %>
+            </label>
             <input type="text" name="name" required />
           </div>
           <div class="subitem">
-            <label for="email">Email*</label>
+            <label for="email">
+              <%= lang == 'zh' ? '邮箱*' : 'Email*' %>
+            </label>
             <input type="text" name="email" required />
           </div>
         </div>
         <div class="item">
           <div class="subitem">
-            <label for="subject">Subject*</label>
+            <label for="subject">
+              <%= lang == 'zh' ? '主题*' : 'Subject*' %>
+            </label>
             <input type="text" name="subject" required />
           </div>
         </div>
         <div class="item">
           <div class="subitem">
-            <label for="message">Message</label>
+            <label for="message">
+              <%= lang == 'zh' ? '信息' : 'Message' %>
+            </label>
             <textarea name="message" id="" cols="30" rows="10"></textarea>
           </div>
         </div>
@@ -52,7 +56,9 @@
         </div>
         <div class="item">
           <div class="subitem">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">
+              <%= lang == 'zh' ? '发送' : 'Send' %> <i class="fa-solid fa-paper-plane"></i>
+            </button>
           </div>
         </div>
       </form>

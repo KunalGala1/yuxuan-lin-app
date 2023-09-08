@@ -27,16 +27,12 @@ const recording = body.recording || '';
 
 <body>
   <%- include('../partials/header') %> <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(3) a')
-      .classList.add('active');
-  </script>
   <main name="work">
     <div class="wrapper">
       <div class="heading">
         <h1 class="title"><%= title %></h1>
         <% if (subtitle && subtitle !== '') { %>
-        <h2 class="subtitle"><%= subtitle %></h2>
+        <h2 class="subtitle <%= lang %>-txt"><%= subtitle %></h2>
         <% } %>
       </div>
       <div class="metadata">

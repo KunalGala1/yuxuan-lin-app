@@ -16,37 +16,33 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-  <script>
-    document.querySelector('nav ul li:nth-child(4) a')
-      .classList.add('active');
-  </script>
   <main id="events" data-cli>
-    <div class="container">
+    <div class="container pd-md flex gap align-start wrap">
       <% for (let i = 0; i < events.length; i++) { %>
       <% 
       const body = JSON.parse(events[i].body);
       const title = body['title_' + lang];
       const slug = body.slug;
-      const image = body.file.filename;
+      const image = body.file.location;
       const date = body.date;
       const dateObject = new Date(date);
       const time = body.time;
-      const location = body.location;
+      const location = body['location_' + lang];
       const shortDescription = body['shortDescription_' + lang];
       %>
       <div class="card">
-        <a href="/event/<%= slug %>">
+        <a href="/events/<%= slug %>">
           <div class="image-container">
-            <img src="/uploads/<%= image %>" alt="" />
+            <img src="<%= image %>" alt="" />
           </div>
         </a>
         <div class="content">
           <h3 class="title">
-            <a href="/event/<%= slug %>"><%= title %></a>
+            <a href="/events/<%= slug %>"><%= title %></a>
           </h3>
 
           <% if (date) { %>
-          <span class="date">
+          <span class="date <%= lang %>-txt">
             <% if (lang === 'en') { %>
             <%= dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
             <% } else { %>
@@ -56,11 +52,11 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
           <% } %>
 
           <% if (time) { %>
-          <span class="time"><%= time %></span>
+          <span class="time <%= lang %>-txt"><%= time %></span>
           <% } %>
 
           <% if (location) { %>
-          <span class="location"><%= location %></span>
+          <span class="location <%= lang %>-txt"><%= location %></span>
           <% } %>
 
           <div><%- JSON.parse(events[i].body)['shortDescription_' + lang] %></div>

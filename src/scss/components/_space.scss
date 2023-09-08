@@ -2,6 +2,52 @@
 @use "../layout" as l;
 @use "../theme/" as t;
 
-.space {
-  @include l.padding(md);
+/* Components */
+.sp-aside-left {
+  margin-left: map-get(l.$size, aside);
+  @include l.max(md) {
+    margin-left: 0;
+  }
+}
+
+/* Utilities */
+// Define the size variables in a map
+$sizes: (
+  "xs": 5px,
+  "sm": 15px,
+  "md": 30px,
+  "lg": 60px,
+  "xl": 90px,
+);
+
+// Define the directions in a map
+$directions: (
+  "": "",
+  // For all around
+  "t": "-top",
+  "r": "-right",
+  "b": "-bottom",
+  "l": "-left",
+);
+
+// Iterate over each size
+@each $sizeKey, $sizeValue in $sizes {
+  // Generate margin and padding classes for each size
+  .mg-#{$sizeKey} {
+    margin: $sizeValue;
+  }
+  .pd-#{$sizeKey} {
+    padding: $sizeValue;
+  }
+
+  // Iterate over each direction
+  @each $directionKey, $directionValue in $directions {
+    // Generate margin and padding classes for each direction
+    .mg-#{$directionKey}-#{$sizeKey} {
+      margin#{nth($directionValue, 1)}: $sizeValue;
+    }
+    .pd-#{$directionKey}-#{$sizeKey} {
+      padding#{nth($directionValue, 1)}: $sizeValue;
+    }
+  }
 }

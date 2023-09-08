@@ -1,13 +1,12 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../abstracts/" as a;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
-#works {
-  padding-bottom: 60px;
-}
-
-#work-list {
+.work-list {
   @include l.padding(0, md);
+  @include l.max(sm) {
+    @include l.padding(0, sm);
+  }
 
   .main-header {
     text-transform: capitalize;
@@ -16,6 +15,12 @@
 
   .subsection {
     @include l.padding(lg);
+    @include l.max(md) {
+      @include l.padding(md);
+    }
+    @include l.max(xs) {
+      @include l.padding(sm);
+    }
     @include l.radius(md);
     background-color: rgba(235, 235, 235, 1);
   }

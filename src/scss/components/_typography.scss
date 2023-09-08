@@ -2,23 +2,6 @@
 @use "../layout" as l;
 @use "../theme/" as t;
 
-/* Quotes */
-
-blockquote {
-  font-style: italic;
-  @include t.serif;
-}
-
-.engraved {
-  @include t.fancy();
-  color: var(--engraved);
-  font-weight: 600;
-  font-size: 25px;
-  font-style: italic;
-  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
-  text-align: left;
-}
-
 /* Headers */
 
 .header {
@@ -50,10 +33,16 @@ blockquote {
   color: var(--main);
   @include t.serif;
   font-size: 24px;
+  @include l.max(md) {
+    font-size: 18px;
+  }
 }
 
 .fourth-header {
   font-size: 24px;
+  @include l.max(md) {
+    font-size: 18px;
+  }
   font-weight: 700;
   color: var(--main);
 }
@@ -62,11 +51,95 @@ blockquote {
   @include t.serif;
   color: var(--off-white);
   font-size: 80px;
-  text-align: center;
   margin: 100px 0;
+  @include l.max(md) {
+    font-size: 60px;
+    margin: 80px 0;
+  }
+  @include l.max(sm) {
+    margin: 60px 0;
+    font-size: 40px;
+  }
+  text-align: center;
+}
+
+.dashboard-header {
+  @include t.util;
+  font-size: 20px;
+  @include l.max(xs) {
+    font-size: 16px;
+  }
+  color: var(--dashboard);
+  text-transform: capitalize;
+}
+
+/* Subheaders */
+.dashboard-subheader {
+  @include t.util;
+  font-size: 16px;
+  color: var(--100);
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 /* Links */
+
+.nav-link {
+  color: var(--200);
+  &:hover,
+  &.active {
+    color: white;
+    @include a.transition;
+    font-weight: bolder;
+  }
+}
+
+.dashboard-table-link {
+  color: var(--form);
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+  display: block;
+  width: max-content;
+  margin: 15px 0 30px;
+  i {
+    margin-left: 5px;
+  }
+}
+
+.drop-down-link {
+  color: white;
+
+  @include l.radius(xs);
+  @include l.padding(xs, sm);
+
+  display: block; // fill width of <li> and apply padding
+
+  &:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+  }
+}
+
+.aside-link {
+  color: var(--200);
+  display: block;
+  @include l.padding(sm);
+  span {
+    margin-left: 5px;
+  }
+
+  &:hover {
+    background-color: var(--dashboard-hover);
+    color: white;
+  }
+
+  &.active {
+    border-left: solid 5px var(--dashboard-hover);
+  }
+
+  @include a.transition;
+}
 
 .table-link {
   color: var(--form);
@@ -98,10 +171,56 @@ blockquote {
   }
 }
 
+.icon-link {
+  @include a.transition;
+  @include l.radius(50%);
+  height: 25px;
+  width: 25px;
+
+  i {
+    font-size: 13px;
+    color: var(--140);
+    @include a.transition;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    i {
+      color: var(--20);
+    }
+  }
+}
+
 // text
 
-.main-text {
+.main-txt {
   @include t.util;
   color: var(--40);
   line-height: 2;
+}
+
+.zh-txt {
+  font-style: normal !important;
+}
+
+/* Quotes */
+
+blockquote {
+  font-style: italic;
+  @include t.serif;
+}
+
+.engraved {
+  @include t.fancy();
+  color: var(--engraved);
+  font-weight: 400;
+  font-size: 26px;
+  @include l.max(md) {
+    font-size: 20px;
+  }
+  @include l.max(sm) {
+    font-size: 18px;
+  }
+  font-style: italic;
+  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
 }

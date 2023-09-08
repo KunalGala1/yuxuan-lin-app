@@ -9,9 +9,11 @@ forms.forEach((form) => {
     e.preventDefault();
 
     // Metadata
-    const method = form.dataset.method;
+    const method = form.dataset.method.toLowerCase();
     const name = form.name;
     const action = form.action;
+    const display = form.dataset.display;
+    const sitemap = form.dataset.sitemap;
 
     /* ====================================================== */
 
@@ -21,13 +23,19 @@ forms.forEach((form) => {
     updateTextareaValues(form);
 
     // Update slugs
-    updateSlugs(form);
+    const slug = updateSlugs(form);
+
+    /* ====================================================== */
+
+    /* Validation */
+    if (!formValidation(form)) return;
 
     /* ====================================================== */
 
     // Create form object
     const formData = new FormData(form);
     const formObject = Object.fromEntries(formData.entries());
+    if (sitemap) handleSitemap(formObject, name, slug, sitemap);
     const promises = [];
 
     handleFileUploads(form, method, action, name, formObject, promises);
@@ -58,11 +66,15 @@ forms.forEach((form) => {
           };
 
           toastNotification(
-            `${name} ${methodMessages[method.toLowerCase()]} successfully`,
+            `${display} ${methodMessages[method.toLowerCase()]} successfully`,
             "success"
           );
 
-          responseAction(name, method, data);
+          responseAction(
+            name,
+            e.submitter.dataset.responseAction || method,
+            data
+          );
         }
       })
       .catch((error) => {
@@ -90,11 +102,12 @@ const updateSlugs = (form) => {
       'input[role="slug-source"], input[name="title"], textarea[role="slug-source"], textarea[name="title"]'
     );
     slug.value = convertToSlug(title.value);
+    return slug.value;
   }
 };
 
 // File upload
-const uploadFile = async (fileInput, formObject) => {
+const uploadFile = async (fileInput, formObject, alt) => {
   const file = fileInput.files[0];
   const formData = new FormData();
   formData.append("file", file);
@@ -104,15 +117,17 @@ const uploadFile = async (fileInput, formObject) => {
   });
   const data = await res.json();
   formObject.file = data.file;
+  formObject.file.alt = alt.value;
 };
 
-const persistFile = async (endpoint, formObject, nestedProperty) => {
+const persistFile = async (endpoint, formObject, nestedProperty, alt) => {
   const res = await fetch(endpoint, {
-    method: "get",
+    method: "GET",
   });
   const data = await res.json();
   const body = JSON.parse(accessNestedProperty(data, nestedProperty));
   formObject.file = body.file;
+  formObject.file.alt = alt.value;
 };
 
 const handleFileUploads = (
@@ -126,30 +141,80 @@ const handleFileUploads = (
   const fileInputs = form.querySelectorAll('input[type="file"]');
 
   for (const fileInput of fileInputs) {
+    const alt = document.querySelector(`[name="${fileInput.name}-alt"]`);
     if (method == "post") {
       // upload file
       if (fileInput.files.length > 0) {
-        promises.push(uploadFile(fileInput, formObject));
+        promises.push(uploadFile(fileInput, formObject, alt));
       } else {
         alert("Please upload a file");
         return;
       }
     } else if (method == "put") {
       if (fileInput.files.length > 0) {
-        promises.push(uploadFile(fileInput, formObject));
+        promises.push(uploadFile(fileInput, formObject, alt));
       } else {
         // No changes were made to the file input
-        promises.push(persistFile(action, formObject, [name, "body"]));
+        promises.push(persistFile(action, formObject, ["doc", "body"], alt));
       }
     }
   }
 };
 
-function accessNestedProperty(object, keys) {
+const accessNestedProperty = (object, keys) => {
   return keys.reduce((nestedObj, key) => {
     if (nestedObj && nestedObj.hasOwnProperty(key)) {
       return nestedObj[key];
     }
     return undefined;
   }, object);
-}
+};
+
+const formValidation = (form) => {
+  let errors = [];
+
+  const requiredFields = form.querySelectorAll("[data-required]");
+  requiredFields.forEach((field) => {
+    if (field.value === "") {
+      if (field.type === "file") {
+        if (
+          field.parentNode
+            .querySelector(".preview")
+            .classList.contains("active")
+        ) {
+          return;
+        }
+      }
+
+      errors.push("Please fill out all required fields");
+
+      // Add error class
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.add("error");
+      } else {
+        // Remove error class
+        field.classList.add("error");
+      }
+    } else {
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.remove("error");
+      } else {
+        field.classList.remove("error");
+      }
+    }
+  });
+  if (errors.length) {
+    toastNotification(errors[0], "danger");
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const handleSitemap = (formObject, name, slug, sitemap) => {
+  formObject.sitemap = {};
+  formObject.sitemap.loc = `https://yuxuan-lin.com/${name}/${slug}`;
+  formObject.sitemap.lastmod = new Date();
+  formObject.sitemap.changefreq = JSON.parse(sitemap).changefreq;
+  formObject.sitemap.priority = JSON.parse(sitemap).priority;
+};
