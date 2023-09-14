@@ -71,7 +71,7 @@ const generateMenu = data => {
       parent.addEventListener('mouseenter', function(ev) {
         let dropdown = this.querySelector('.drop-down-menu');
         let rect = this.getBoundingClientRect();
-        dropdown.style.top = `${window.scrollY + rect.top + rect.height}px`;
+        dropdown.style.top = `${rect.top + rect.height}px`;
         dropdown.style.left = `${window.scrollX + rect.left}px`;
         dropdown.style.minWidth = `calc(${rect.width}px + (15px * 2))`; // set min-width
         dropdown.style.display = 'flex';

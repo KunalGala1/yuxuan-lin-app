@@ -460,6 +460,7 @@ hr {
   flex-direction: column;
   align-items: stretch;
   position: fixed;
+  z-index: 100;
   top: 100%;
   left: -15px;
   min-width: calc(100% + 30px);
@@ -467,6 +468,7 @@ hr {
 
 .drop-down-menu--parent {
   position: relative;
+  z-index: 100;
 }
 .drop-down-menu--parent span {
   cursor: pointer;
@@ -480,6 +482,7 @@ hr {
 }
 .drop-down-menu--parent ul {
   display: none;
+  z-index: 100;
 }
 .drop-down-menu--parent:hover ul {
   display: flex;
@@ -1131,7 +1134,7 @@ nav {
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 100;
   text-shadow: 1px 1px 1px var(--main-dark);
   box-shadow: 1px 1px 1px var(--main-dark);
 }

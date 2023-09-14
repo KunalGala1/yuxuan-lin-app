@@ -64,6 +64,7 @@
 
   // position: absolute;
   position: fixed;
+  z-index: 100;
   top: 100%;
   left: -15px;
 
@@ -85,10 +86,12 @@
 
   ul {
     display: none;
+    z-index: 100;
   }
   &:hover ul {
     display: flex;
   }
 
   position: relative;
+  z-index: 100;
 }
