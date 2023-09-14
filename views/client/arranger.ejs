@@ -29,20 +29,20 @@
     <%- include('../sections/search') %>
     <% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
     <% const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; %>
-    <section class="work-list flex wrap gap column align-stretch">
+    <section class="work-list flex justify-center items-stretch flex-wrap gap column">
       <% for (let j = 0; j < tags.length; j++) { %>
       <% const docsWithTag = data.filter(doc => JSON.parse(doc.body).tag === tags[j].toLowerCase()) %>
       <% if (docsWithTag.length > 0) { %>
-      <div class="subsection">
-        <h2 class="main-header"><%= lang == 'zh' ? tags_zh[j] : tags[j] %></h2>
-        <div class="cards-wrapper flex gap align-start">
+      <div class="subsection bg-slate-800">
+        <h2 class="main-header text-2xl text-slate-300"><%= lang == 'zh' ? tags_zh[j] : tags[j] %></h2>
+        <div class="cards-wrapper flex justify-center gap items-start">
           <% for (let i = 0; i < docsWithTag.length; i++) { %>
           <% const body = JSON.parse(docsWithTag[i].body) %>
           <% const slug = body.slug %>
           <% const title = body['title_' + lang] %>
           <% const subtitle = body['subtitle_' + lang] %>
           <% const programNote = body['programNote_' + lang] %>
-          <div class="card">
+          <div class="card bg-slate-600">
             <a href="/arrangements/<%= slug %>?lang=<%= lang %>">
               <div class="heading">
                 <h3 class="third-header"><%= title %></h3>

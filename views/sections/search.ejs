@@ -1,11 +1,11 @@
 <section id="search">
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" id="search-bar" />
-      <span><i class="fa-solid fa-search"></i></span>
+  <div class="wrapper">
+    <div class="search-bar bg-gray-50 rounded">
+      <input type="text" id="search-bar" class="rounded outline-none text-slate-700" />
+      <span><i class="fa-solid fa-search text-black"></i></span>
     </div>
   </div>
-  <div class="container">
+  <div class="wrapper">
     <ul class="forces">
       <% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
       <% const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; %>
@@ -13,7 +13,7 @@
       <% const tag = tags[i].toLowerCase(); %>
       <% const hasDocsWithTag = data.some(doc => JSON.parse(doc.body).tag === tag); %>
       <% if (hasDocsWithTag) { %>
-      <li>
+      <li class="bg-slate-600 font-sans rounded font-light">
         <%= lang == 'zh' ? tags_zh[i] : tags[i] %>
         <span><i class="fa-solid fa-xmark"></i></span>
       </li>

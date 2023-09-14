@@ -10,13 +10,11 @@
 
 .main-header {
   padding-bottom: 30px;
-  color: var(--grey);
   text-align: center;
   @include t.sans;
 }
 
 .secondary-header {
-  color: var(--mid-grey);
   text-align: center;
   @include t.serif;
   &:after {
@@ -30,7 +28,6 @@
 }
 
 .third-header {
-  color: var(--main);
   @include t.serif;
   font-size: 24px;
   @include l.max(md) {
@@ -44,12 +41,10 @@
     font-size: 18px;
   }
   font-weight: 700;
-  color: var(--main);
 }
 
 .event-header {
   @include t.serif;
-  color: var(--off-white);
   font-size: 80px;
   margin: 100px 0;
   @include l.max(md) {
@@ -64,7 +59,7 @@
 }
 
 .dashboard-header {
-  @include t.util;
+  @include t.sans;
   font-size: 20px;
   @include l.max(xs) {
     font-size: 16px;
@@ -75,7 +70,7 @@
 
 /* Subheaders */
 .dashboard-subheader {
-  @include t.util;
+  @include t.sans;
   font-size: 16px;
   color: var(--100);
   font-weight: 300;
@@ -194,8 +189,7 @@
 // text
 
 .main-txt {
-  @include t.util;
-  color: var(--40);
+  @include t.sans;
   line-height: 2;
 }
 
@@ -211,16 +205,13 @@ blockquote {
 }
 
 .engraved {
-  @include t.fancy();
-  color: var(--engraved);
-  font-weight: 400;
-  font-size: 26px;
+  font-weight: 100;
+  font-size: 20px;
   @include l.max(md) {
-    font-size: 20px;
-  }
-  @include l.max(sm) {
     font-size: 18px;
   }
+  @include l.max(sm) {
+    font-size: 16px;
+  }
   font-style: italic;
-  text-shadow: 2px 3px 5px rgba(255, 255, 255, 0.5);
 }

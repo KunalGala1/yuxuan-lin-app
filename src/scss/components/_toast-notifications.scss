@@ -14,7 +14,7 @@
   @include a.boxshadow(sm);
   @include l.padding(xs, sm);
   @include l.radius(xs);
-  @include t.util;
+  @include t.sans;
 
   color: var(--247);
   font-size: 14px;

@@ -9,7 +9,6 @@
 
   .card {
     max-width: 400px;
-    color: var(--8);
 
     .image-container {
       width: 100%;
@@ -19,16 +18,12 @@
         width: 100%;
         object-position: center;
         object-fit: cover;
-        @include l.radius(sm);
       }
     }
 
     .title {
       @include t.serif;
       font-size: 25px;
-      &:hover {
-        color: black;
-      }
 
       line-height: 1.25;
       margin: 15px 0;
@@ -42,7 +37,7 @@
 
     p {
       margin-top: 10px;
-      @include t.util;
+      @include t.sans;
     }
   }
 }

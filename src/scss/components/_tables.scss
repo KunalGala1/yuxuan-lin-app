@@ -15,7 +15,7 @@ table {
   border-radius: 4px;
   overflow: hidden;
 
-  @include t.util;
+  @include t.sans;
 
   td,
   th {
@@ -50,7 +50,7 @@ table {
 }
 
 .dashboard-table {
-  @include t.util;
+  @include t.sans;
   width: 100%;
   thead {
     background-color: rgba(150, 150, 150, 0.1);

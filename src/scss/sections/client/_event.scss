@@ -19,7 +19,6 @@
       @include t.serif;
       display: block;
       font-style: italic;
-      color: var(--8);
       font-size: 20px;
       @include l.max(sm) {
         font-size: 18px;
@@ -31,7 +30,6 @@
   }
   .content {
     @include l.max-width(md);
-    color: var(--8);
     font-size: 18px;
     p + p {
       margin-top: 30px;

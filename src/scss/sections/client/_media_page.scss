@@ -17,8 +17,6 @@ main[name="media-page"] {
     width: 100%;
     object-fit: cover;
     img {
-      @include a.boxshadow;
-      @include l.radius(sm);
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -30,8 +28,7 @@ main[name="media-page"] {
 
     .description {
       margin-top: 10px;
-      @include t.util;
-      color: var(--40);
+      @include t.sans;
       font-size: 15px;
       h2 {
         font-size: 17px;

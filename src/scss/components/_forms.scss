@@ -9,7 +9,7 @@ form {
   input,
   select,
   textarea {
-    @include t.util;
+    @include t.sans;
   }
 
   label,
@@ -70,7 +70,7 @@ form {
         display: block;
         margin-bottom: 5px;
         color: var(--main-dark);
-        @include t.util;
+        @include t.sans;
         font-size: 12px;
       }
 
@@ -125,7 +125,7 @@ form {
         display: block;
         margin-bottom: 5px;
         color: var(--main-dark);
-        @include t.util;
+        @include t.sans;
         font-size: 12px;
       }
 
@@ -161,7 +161,7 @@ form {
 }
 
 .dashboard-form {
-  @include t.util;
+  @include t.sans;
   @include l.radius(xs);
   @include a.boxshadow;
   overflow: auto;

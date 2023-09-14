@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js & gulp & sass src/scss:public/css --no-source-map --watch",
-    "dev_win": "concurrently \"nodemon server.js\" \"gulp\" \"sass src/scss:public/css --no-source-map --watch\"",
+    "dev": "concurrently \"nodemon server.js\" \"gulp\" \"sass src/scss:public/css --no-source-map --watch\" \"tailwind -i src/css/input.css -o public/css/tailwind.css -w\"",
     "kill": "killall node"
   },
   "author": "Kunal Gala",

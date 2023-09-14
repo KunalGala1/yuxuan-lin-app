@@ -10,7 +10,6 @@
 
   .main-header {
     text-transform: capitalize;
-    color: var(--main-dark);
   }
 
   .subsection {
@@ -21,8 +20,6 @@
     @include l.max(xs) {
       @include l.padding(sm);
     }
-    @include l.radius(md);
-    background-color: rgba(235, 235, 235, 1);
   }
 
   .cards-wrapper {
@@ -35,8 +32,6 @@
     min-width: 200px;
 
     @include l.padding(md);
-    background-color: var(--main-light);
-    @include l.radius(lg);
 
     .heading {
       margin-bottom: 15px;
@@ -44,14 +39,12 @@
       p {
         font-style: italic;
         @include t.serif;
-        color: var(--main-dark);
       }
     }
 
     .description {
-      color: var(--main-dark);
       line-height: 1.5;
-      @include t.util;
+      @include t.sans;
     }
   }
 }

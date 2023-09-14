@@ -1,6 +1,6 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../abstracts/" as a;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 footer {
   .content {
@@ -13,7 +13,6 @@ footer {
   }
   padding: 60px;
   background-color: var(--main);
-  color: var(--main-dark);
 
   ul {
     display: flex;
@@ -31,7 +30,7 @@ footer {
   }
 
   span {
-    @include t.util;
+    @include t.sans;
     font-size: 12px;
     margin-top: 30px;
   }

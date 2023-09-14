@@ -19,13 +19,13 @@
     }
   }
 
-  background-color: var(--main-light);
+  background-color: var(--main);
 
   img {
     margin: 0 auto;
     width: 100%;
 
-    @include a.boxshadow(md);
+    // @include a.boxshadow(md);
 
     margin-bottom: 30px;
 

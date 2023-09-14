@@ -3,10 +3,9 @@
 @use "../theme/" as t;
 
 .btn {
-  @include a.boxshadow(sm);
   @include l.padding(xs, sm);
-  @include l.radius(xs);
   @include t.sans;
+  border-radius: 4px;
 
   display: inline-block;
 }
@@ -18,7 +17,6 @@
 
   &:hover {
     background-color: var(--btn-primary-hover);
-    outline: solid 1px rgb(0, 0, 0, 0.1);
   }
 }
 

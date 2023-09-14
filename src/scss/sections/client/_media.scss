@@ -10,8 +10,6 @@ main[name="media"] {
   .card {
     max-width: 300px;
     background-color: rgba(100, 100, 100, 0.1);
-    @include l.radius(sm);
-    @include a.boxshadow;
 
     .image-container {
       overflow: hidden;
@@ -31,8 +29,7 @@ main[name="media"] {
 
     .txt {
       @include l.padding(sm);
-      @include t.util;
-      color: var(--80);
+      @include t.sans;
       h2 {
         margin-bottom: 5px;
       }
