@@ -12,7 +12,6 @@
 
 .btn-primary {
   background-color: var(--btn-primary);
-  color: var(--main-light);
   @include a.transition;
 
   &:hover {

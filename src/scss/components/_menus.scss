@@ -38,10 +38,10 @@
     height: 100%;
     background: linear-gradient(
       to right,
-      var(--second),
+      var(--main),
       transparent $fade-amount,
       transparent 98%,
-      var(--second)
+      var(--main)
     );
 
     pointer-events: none;
@@ -73,7 +73,7 @@
 .drop-down-menu--parent {
   span {
     cursor: pointer;
-    color: var(--200);
+    color: rgb(150, 150, 150);
     &:hover {
       color: white;
     }

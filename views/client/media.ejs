@@ -18,7 +18,7 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
   <%- include('../partials/nav') %>
 
   <main name="media">
-    <div class="wrapper pd-md flex align-start wrap gap-lg">
+    <div class="wrapper pd-md flex justify-center items-start wrap gap-lg">
       <% for( let i = 0; i < data.length; i++ ) { %>
       <% const doc = JSON.parse(data[i].body) %>
       <div class="card">

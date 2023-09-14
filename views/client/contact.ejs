@@ -15,7 +15,7 @@
   <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
   <main name="contact">
-    <div class="wrapper flex column gap">
+    <div class="wrapper flex flex-col justify-center items-center gap">
       <h2 class="header third-header"><%= lang == 'zh' ? '请使用这个表格与我联系！' : 'Use this form to contact me!' %></h2>
       <form action="/mailsend" method="post" class="form contact-form" novalidate>
         <div class="item">

@@ -17,7 +17,7 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
   <main id="events" data-cli>
-    <div class="container pd-md flex gap align-start wrap">
+    <div class="wrapper pd-md flex justify-center items-start gap wrap">
       <% for (let i = 0; i < events.length; i++) { %>
       <% 
       const body = JSON.parse(events[i].body);
@@ -30,7 +30,7 @@ const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin';
       const location = body['location_' + lang];
       const shortDescription = body['shortDescription_' + lang];
       %>
-      <div class="card p-8 bg-pink-200/10">
+      <div class="card p-8 bg-gray-500/5">
         <a href="/events/<%= slug %>">
           <div class="image-container">
             <img src="<%= image %>" alt="" />

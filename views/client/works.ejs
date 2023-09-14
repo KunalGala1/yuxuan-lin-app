@@ -19,13 +19,13 @@
     <%- include('../sections/search') %>
     <% const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'] %>
     <% const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; %>
-    <section class="work-list flex wrap gap column align-stretch">
+    <section class="work-list flex flex-col justify-center items-stretch wrap gap column">
       <% for (let j = 0; j < tags.length; j++) { %>
       <% const worksWithTag = data.filter(doc => JSON.parse(doc.body).tag === tags[j].toLowerCase()) %>
       <% if (worksWithTag.length > 0) { %>
       <div class="subsection bg-slate-800">
         <h2 class="main-header text-2xl text-slate-300"><%= lang == 'zh' ? tags_zh[j] : tags[j] %></h2>
-        <div class="cards-wrapper flex gap align-start">
+        <div class="cards-wrapper flex justify-center items-start gap">
           <% for (let i = 0; i < worksWithTag.length; i++) { %>
           <% const body = JSON.parse(worksWithTag[i].body) %>
           <% const slug = body.slug %>

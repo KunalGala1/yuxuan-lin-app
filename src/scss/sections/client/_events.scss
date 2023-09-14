@@ -3,7 +3,7 @@
 @use "../../theme/" as t;
 
 #events[data-cli] {
-  .container {
+  .wrapper {
     @include l.max-width(xl);
   }
 

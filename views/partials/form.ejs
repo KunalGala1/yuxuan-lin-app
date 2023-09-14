@@ -11,11 +11,11 @@ const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
 <div class="dashboard-form--wrapper pd-md">
   <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-display="<%= display %>" data-sitemap="<%= sitemap %>" novalidate>
 
-    <div class="header flex justify-between pd-sm">
+    <div class="header flex justify-between items-center pd-sm">
       <div>
-        <h2 class="dashboard-header"><%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %> <%= display %></h2>
+        <h2 class="dashboard-header font-bold"><%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %> <%= display %></h2>
       </div>
-      <div class="flex justify-end gap-sm">
+      <div class="flex justify-end items-center gap-sm">
         <div>
           <button type="button" class="btn no-btn" onclick="window.history.back()">Cancel</button>
         </div>

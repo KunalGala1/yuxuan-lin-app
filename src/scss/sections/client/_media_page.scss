@@ -28,7 +28,7 @@ main[name="media-page"] {
 
     .description {
       margin-top: 10px;
-      @include t.sans;
+      @include t.serif;
       font-size: 15px;
       h2 {
         font-size: 17px;

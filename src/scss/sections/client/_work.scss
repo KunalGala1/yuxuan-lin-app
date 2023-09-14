@@ -26,7 +26,6 @@ main[name="work"] {
     .heading {
       text-align: center;
       .title {
-        font-size: 110px;
         @include t.serif;
         @include l.max(md) {
           font-size: 40px;

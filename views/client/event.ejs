@@ -36,7 +36,7 @@ const longDescription = body['longDescription_' + lang];
     </div>
     <div class="header">
       <h1 class="event-header"><%= title %></h1>
-      <div class="info flex column">
+      <div class="info flex flex-col justify-center items-center">
 
         <% if (date) { %>
         <span class="date <%= lang %>-txt">
@@ -67,7 +67,7 @@ const longDescription = body['longDescription_' + lang];
 
     </div>
 
-    <div class="content"><%- longDescription || '' %></div>
+    <div class="content font-serif"><%- longDescription || '' %></div>
 
   </main>
   <%- include('../partials/footer') %>

@@ -3,11 +3,6 @@
 @use "../../theme/" as t;
 
 #search {
-  @include l.padding(md);
-  .wrapper + .wrapper {
-    margin-top: 50px;
-  }
-
   .search-bar {
     display: flex;
     justify-content: space-between;

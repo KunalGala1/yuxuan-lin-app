@@ -80,13 +80,12 @@
 /* Links */
 
 .nav-link {
-  color: var(--200);
+  color: rgb(150, 150, 150);
   &:hover,
   &.active {
     color: white;
-    @include a.transition;
-    font-weight: bolder;
   }
+  text-transform: capitalize;
 }
 
 .dashboard-table-link {

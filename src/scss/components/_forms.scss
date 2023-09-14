@@ -3,8 +3,6 @@
 @use "../theme/" as t;
 
 form {
-  @include l.radius(xs);
-
   label,
   input,
   select,
@@ -31,7 +29,6 @@ form {
     resize: none;
     border: none;
     @include l.padding(sm);
-    @include l.radius(xs);
     &:focus {
       outline: solid 1px var(--200);
     }
@@ -69,7 +66,6 @@ form {
       label {
         display: block;
         margin-bottom: 5px;
-        color: var(--main-dark);
         @include t.sans;
         font-size: 12px;
       }
@@ -80,7 +76,6 @@ form {
         padding: 10px;
         border: 1px solid rgba(210, 210, 210, 0.15);
         background-color: var(--second);
-        color: var(--main-light);
         @include t.sans;
         font-size: 18px;
         resize: none;
@@ -124,7 +119,6 @@ form {
       label {
         display: block;
         margin-bottom: 5px;
-        color: var(--main-dark);
         @include t.sans;
         font-size: 12px;
       }
@@ -135,7 +129,6 @@ form {
         padding: 10px;
         border: 1px solid rgba(210, 210, 210, 0.15);
         background-color: var(--second);
-        color: var(--main-light);
         @include t.sans;
         font-size: 18px;
         resize: none;

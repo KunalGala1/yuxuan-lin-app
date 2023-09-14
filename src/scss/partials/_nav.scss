@@ -3,7 +3,7 @@
 @use "../theme/" as t;
 
 nav {
-  background-color: var(--main);
+  background-color: var(--main-light);
   @include t.sans;
   height: 50px;
 
