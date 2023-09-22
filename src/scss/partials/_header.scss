@@ -1,14 +1,11 @@
-@use "../abstracts/" as a;
-@use "../layout" as l;
-@use "../theme/" as t;
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
 
 header {
   position: relative;
-  height: 140px;
+  // height: 140px;
   @include a.transition;
-  @include l.max(sm) {
-    height: 175px;
-  }
 
   --border-color: rgba(255, 255, 255, 0.1);
 

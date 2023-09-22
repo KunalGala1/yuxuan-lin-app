@@ -1,6 +1,6 @@
-@use "../abstracts/" as a;
-@use "../layout" as l;
-@use "../theme/" as t;
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
 
 .nav-menu {
   display: flex;
@@ -38,10 +38,10 @@
     height: 100%;
     background: linear-gradient(
       to right,
-      var(--main),
+      var(--main-light),
       transparent $fade-amount,
       transparent 98%,
-      var(--main)
+      var(--main-light)
     );
 
     pointer-events: none;

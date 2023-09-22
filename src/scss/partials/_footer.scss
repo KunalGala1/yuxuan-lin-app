@@ -1,6 +1,6 @@
-@use "../abstracts/" as a;
-@use "../layout" as l;
-@use "../theme/" as t;
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
 
 footer {
   .content {
@@ -11,7 +11,6 @@ footer {
     align-items: center;
     flex-direction: column;
   }
-  padding: 32px;
   background-color: var(--main);
 
   ul {

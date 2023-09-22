@@ -1,6 +1,6 @@
-@use "../abstracts/" as a;
-@use "../layout" as l;
-@use "../theme/" as t;
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
 
 form {
   label,
@@ -75,7 +75,7 @@ form {
         width: 100%;
         padding: 10px;
         border: 1px solid rgba(210, 210, 210, 0.15);
-        background-color: var(--second);
+        background-color: var(--main-light);
         @include t.sans;
         font-size: 18px;
         resize: none;
@@ -127,14 +127,13 @@ form {
       textarea {
         width: 100%;
         padding: 10px;
-        border: 1px solid rgba(210, 210, 210, 0.15);
-        background-color: var(--second);
+        // border: 1px solid rgba(210, 210, 210, 0.15);
+        background-color: var(--main-light);
         @include t.sans;
         font-size: 18px;
         resize: none;
         &:focus {
-          outline: none;
-          border-color: var(--60);
+          outline: solid 1px var(--60);
         }
       }
 
@@ -172,7 +171,7 @@ form {
     background-color: rgba(200, 200, 200, 0.1);
   }
 
-  input[type="file"] {
+  input[type='file'] {
     display: none;
   }
 
@@ -189,7 +188,7 @@ form {
     }
   }
 
-  input[type="hidden"] + .item {
+  input[type='hidden'] + .item {
     margin-top: 30px;
   }
 

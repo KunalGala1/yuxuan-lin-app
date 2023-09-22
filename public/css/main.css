@@ -33,18 +33,18 @@
   --20: rgb(20, 20, 20);
   --8: rgb(8, 8, 8);
   /* Theme Colors */
-  --main: rgb(16, 4, 34);
-  --main-light: rgb(27, 8, 56);
+  --main: rgb(5, 18, 36);
+  --main-light: rgb(17, 37, 78);
   --main-lighter: rgba(213, 226, 232, 0.5);
-  --main-dark: rgb(18, 25, 62);
+  --main-dark: rgb(2, 6, 29);
   --second: rgb(6, 30, 40);
   --third: rgb(68, 105, 160);
   --accent: #231815;
 }
 
 body {
-  background-color: rgb(5, 5, 5);
-  color: rgb(250, 250, 250);
+  background-color: var(--main);
+  color: rgb(206, 206, 206);
 }
 
 .btn {
@@ -251,7 +251,7 @@ form .item + .item {
   width: 100%;
   padding: 10px;
   border: 1px solid rgba(210, 210, 210, 0.15);
-  background-color: var(--second);
+  background-color: var(--main-light);
   font-family: "Inter", sans-serif;
   font-size: 18px;
   resize: none;
@@ -293,16 +293,14 @@ form .item + .item {
 .contact-form .item .subitem textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid rgba(210, 210, 210, 0.15);
-  background-color: var(--second);
+  background-color: var(--main-light);
   font-family: "Inter", sans-serif;
   font-size: 18px;
   resize: none;
 }
 .contact-form .item .subitem input:focus,
 .contact-form .item .subitem textarea:focus {
-  outline: none;
-  border-color: var(--60);
+  outline: solid 1px var(--60);
 }
 .contact-form .item .subitem textarea {
   height: 200px;
@@ -438,7 +436,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, var(--main), transparent 2%, transparent 98%, var(--main));
+  background: linear-gradient(to right, var(--main-light), transparent 2%, transparent 98%, var(--main-light));
   pointer-events: none;
 }
 @media (min-width: 650px) {
@@ -1169,18 +1167,12 @@ nav {
 
 header {
   position: relative;
-  height: 140px;
   transition: all 0.3s ease-in-out;
   --border-color: rgba(255, 255, 255, 0.1);
   border-bottom: solid 1px var(--border-color);
   font-family: "EB Garamond", serif;
   text-shadow: 1px 1px 1px var(--main-dark);
   background-color: var(--main);
-}
-@media (max-width: 576px) {
-  header {
-    height: 175px;
-  }
 }
 
 #language {
@@ -1204,7 +1196,6 @@ header {
 }
 
 footer {
-  padding: 32px;
   background-color: var(--main);
 }
 footer .content {
@@ -1824,10 +1815,6 @@ section[name=arranger] .wrapper {
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
 main[name=contact] .wrapper {
