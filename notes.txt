@@ -43,6 +43,18 @@ make less complex background - simple pattern, or get rid of it completely
 
 give video max-width
 
+===
+
+9.27.23
+
+bio page chrome bug
+
+warning about size bug, size to big
+
+full size image quality linked
+
+
+
 
 
 

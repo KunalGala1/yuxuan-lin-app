@@ -136,7 +136,7 @@
         "name": "shortDescription_en",
         "label": "short description"
       },
-      { "tag": "textarea", "name": "shortDescription_zh", "label": "登月之旅" },
+      { "tag": "textarea", "name": "shortDescription_zh", "label": "简介" },
       { "type": "date" },
       { "type": "time" },
       { "type": "url", "label": "URL" },
