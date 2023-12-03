@@ -1,8 +1,8 @@
-@use "../../abstracts/" as a;
-@use "../../layout" as l;
-@use "../../theme/" as t;
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
 
-main[name="work"] {
+main[name='work'] {
   .wrapper {
     // Layout
 
@@ -25,6 +25,7 @@ main[name="work"] {
     // Heading
     .heading {
       text-align: center;
+      margin-bottom: 30px;
       .title {
         @include t.serif;
         @include l.max(md) {
@@ -33,7 +34,7 @@ main[name="work"] {
         @include l.max(sm) {
           font-size: 30px;
         }
-        font-weight: 900;
+        font-weight: 500;
       }
       .subtitle {
         margin-top: 30px;
@@ -51,11 +52,12 @@ main[name="work"] {
     .metadata {
       padding: 0 5%;
       margin-top: 60px;
+      margin-bottom: 30px;
 
-      @include t.sans;
+      // @include t.sans;
 
       .metadata-wrapper {
-        line-height: 1.5;
+        line-height: 2;
         @include l.padding(md);
         @include l.max(md) {
           @include l.padding(sm);
@@ -127,6 +129,9 @@ main[name="work"] {
 
     .recording {
       @include l.padding(sm);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     // Btn Wrapper

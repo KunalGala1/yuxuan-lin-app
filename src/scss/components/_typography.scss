@@ -1,6 +1,6 @@
-@use "../abstracts/" as a;
-@use "../layout" as l;
-@use "../theme/" as t;
+@use '../abstracts/' as a;
+@use '../layout' as l;
+@use '../theme/' as t;
 
 /* Headers */
 
@@ -18,7 +18,7 @@
   text-align: center;
   @include t.serif;
   &:after {
-    content: "";
+    content: '';
     display: block;
     width: 100%;
     height: 1px;
@@ -30,6 +30,8 @@
 .third-header {
   @include t.serif;
   font-size: 24px;
+  font-weight: 600;
+  color: white;
   @include l.max(md) {
     font-size: 18px;
   }
@@ -45,8 +47,8 @@
 
 .event-header {
   @include t.serif;
-  font-size: 80px;
-  margin: 100px 0;
+  font-size: 60px;
+  margin: 60px 0;
   @include l.max(md) {
     font-size: 60px;
     margin: 80px 0;
@@ -55,7 +57,7 @@
     margin: 60px 0;
     font-size: 40px;
   }
-  text-align: center;
+  // text-align: center;
 }
 
 .dashboard-header {
@@ -188,7 +190,8 @@
 // text
 
 .main-txt {
-  @include t.sans;
+  // @include t.sans;
+  @include t.serif;
   line-height: 2;
 }
 

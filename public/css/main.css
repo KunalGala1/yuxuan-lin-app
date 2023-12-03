@@ -932,6 +932,8 @@ table {
 .third-header {
   font-family: "Playfair Display", serif;
   font-size: 24px;
+  font-weight: 600;
+  color: white;
 }
 @media (max-width: 768px) {
   .third-header {
@@ -951,9 +953,8 @@ table {
 
 .event-header {
   font-family: "Playfair Display", serif;
-  font-size: 80px;
-  margin: 100px 0;
-  text-align: center;
+  font-size: 60px;
+  margin: 60px 0;
 }
 @media (max-width: 768px) {
   .event-header {
@@ -1092,7 +1093,7 @@ table {
 }
 
 .main-txt {
-  font-family: "Inter", sans-serif;
+  font-family: "Playfair Display", serif;
   line-height: 2;
 }
 
@@ -1287,7 +1288,7 @@ aside .bottom {
   margin-top: 0;
   margin-bottom: 0;
 }
-@media (max-width: 768px) {
+@media (max-width: 340px) {
   #intro .card.flex {
     flex-direction: column-reverse;
   }
@@ -1297,6 +1298,7 @@ aside .bottom {
 }
 #intro .card img {
   width: 100%;
+  aspect-ratio: 1/1;
 }
 #intro .card .text {
   font-family: "Playfair Display", serif;
@@ -1395,7 +1397,6 @@ aside .bottom {
 }
 
 #event .banner {
-  background-color: rgba(50, 50, 50, 0.5);
   overflow: hidden;
 }
 #event .banner img {
@@ -1403,6 +1404,8 @@ aside .bottom {
   object-position: center;
   object-fit: cover;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 #event .header {
   max-width: 991.98px;
@@ -1544,7 +1547,7 @@ aside .bottom {
   margin-bottom: 0;
 }
 .work-list .card {
-  max-width: 400px;
+  max-width: 375px;
   min-width: 200px;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -1561,6 +1564,7 @@ aside .bottom {
 .work-list .card .description {
   line-height: 1.5;
   font-family: "Inter", sans-serif;
+  font-size: 14px;
 }
 
 main[name=work] .wrapper {
@@ -1598,10 +1602,11 @@ main[name=work] .wrapper {
 }
 main[name=work] .wrapper .heading {
   text-align: center;
+  margin-bottom: 30px;
 }
 main[name=work] .wrapper .heading .title {
   font-family: "Playfair Display", serif;
-  font-weight: 900;
+  font-weight: 500;
 }
 @media (max-width: 768px) {
   main[name=work] .wrapper .heading .title {
@@ -1628,10 +1633,10 @@ main[name=work] .wrapper .heading .subtitle {
 main[name=work] .wrapper .metadata {
   padding: 0 5%;
   margin-top: 60px;
-  font-family: "Inter", sans-serif;
+  margin-bottom: 30px;
 }
 main[name=work] .wrapper .metadata .metadata-wrapper {
-  line-height: 1.5;
+  line-height: 2;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 30px;
@@ -1708,6 +1713,9 @@ main[name=work] .wrapper .recording {
   padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 main[name=work] .wrapper .btn-wrapper {
   margin-top: 60px;

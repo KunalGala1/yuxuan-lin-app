@@ -1,16 +1,18 @@
-@use "../../abstracts/" as a;
-@use "../../layout" as l;
-@use "../../theme/" as t;
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
 
 #event {
   .banner {
-    background-color: rgba(50, 50, 50, 0.5);
+    // background-color: rgba(50, 50, 50, 0.5);
     overflow: hidden;
     img {
       max-height: 100vh;
       object-position: center;
       object-fit: cover;
       width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
     }
   }
   .header {

@@ -1,13 +1,13 @@
-@use "../../abstracts/" as a;
-@use "../../layout" as l;
-@use "../../theme/" as t;
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
 
 #intro {
   @include l.max-width(sm);
 
   .card {
     &.flex {
-      @include l.max(md) {
+      @include l.max(xs) {
         flex-direction: column-reverse;
       }
     }
@@ -17,6 +17,7 @@
 
     img {
       width: 100%;
+      aspect-ratio: 1/1;
       // @include a.boxshadow(md);
     }
 

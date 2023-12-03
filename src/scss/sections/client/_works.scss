@@ -1,6 +1,6 @@
-@use "../../abstracts/" as a;
-@use "../../layout" as l;
-@use "../../theme/" as t;
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
 
 .work-list {
   @include l.padding(0, md);
@@ -28,7 +28,7 @@
   }
 
   .card {
-    max-width: 400px;
+    max-width: 375px;
     min-width: 200px;
 
     @include l.padding(md);
@@ -45,6 +45,7 @@
     .description {
       line-height: 1.5;
       @include t.sans;
+      font-size: 14px;
     }
   }
 }
