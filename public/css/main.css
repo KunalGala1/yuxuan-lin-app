@@ -1709,10 +1709,6 @@ main[name=work] .wrapper .performance-note h3 {
   font-size: 20px;
 }
 main[name=work] .wrapper .recording {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
