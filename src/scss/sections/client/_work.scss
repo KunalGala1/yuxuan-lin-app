@@ -132,6 +132,11 @@ main[name='work'] {
       display: flex;
       justify-content: center;
       align-items: center;
+      max-width: 100%;
+      div,
+      iframe {
+        max-width: 100%;
+      }
     }
 
     // Btn Wrapper
