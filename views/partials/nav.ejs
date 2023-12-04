@@ -50,6 +50,7 @@ const generateMenu = data => {
     // Getting the current path and removing query parameters
     let path = window.location.pathname;
     let links = document.getElementsByClassName('nav-link');
+    let activeLink = null;
 
     for (let i = 0; i < links.length; i++) {
       let href = links[i].getAttribute('href');
@@ -59,8 +60,14 @@ const generateMenu = data => {
       if (href === path) {
         // Add 'active' class to the matching link
         links[i].classList.add('active');
+        activeLink = links[i];
         break;
       }
+    }
+
+    // Scroll the active link into view
+    if (activeLink) {
+      activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     // add gradient html
