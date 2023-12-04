@@ -8,20 +8,6 @@ main[name='work'] {
 
     @include l.max-width(md);
 
-    @include l.padding(lg);
-    padding-top: 120px;
-    padding-bottom: 60px;
-    @include l.max(md) {
-      @include l.padding(md);
-      padding-top: 100px;
-      padding-bottom: 60px;
-    }
-    @include l.max(sm) {
-      @include l.padding(sm);
-      padding-top: 80px;
-      padding-bottom: 60px;
-    }
-
     // Heading
     .heading {
       text-align: center;

@@ -1190,7 +1190,7 @@ header {
 }
 #language a:hover,
 #language a.active {
-  background-color: rgba(228, 193, 232, 0.407);
+  background-color: rgba(228, 193, 232, 0.2);
 }
 
 footer {
@@ -1281,7 +1281,7 @@ aside .bottom {
   margin-top: 0;
   margin-bottom: 0;
 }
-@media (max-width: 340px) {
+@media (max-width: 576px) {
   #intro .card.flex {
     flex-direction: column-reverse;
   }
@@ -1527,32 +1527,6 @@ main[name=work] .wrapper {
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 120px;
-  padding-bottom: 60px;
-}
-@media (max-width: 768px) {
-  main[name=work] .wrapper {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 100px;
-    padding-bottom: 60px;
-  }
-}
-@media (max-width: 576px) {
-  main[name=work] .wrapper {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 80px;
-    padding-bottom: 60px;
-  }
 }
 main[name=work] .wrapper .heading {
   text-align: center;
