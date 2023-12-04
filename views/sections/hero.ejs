@@ -1,15 +1,12 @@
-<%
-const introBody = JSON.parse(intro.body);
-const introImage = introBody.file.location;
-const introAlt = introBody.file.alt;
-%>
+<% const introBody = JSON.parse(intro.body); const introImage =
+introBody.file.location; const introAlt = introBody.file.alt; %>
 
 <section id="hero">
-  <div class="wrapper">
-    <div class="wrapper-item">
-      <img src="<%= introImage %>" alt="<%= introAlt %>">
+  <div class="wrapper flex-col sm:flex-row-reverse">
+    <div class="wrapper-item max-w-[350px]">
+      <img src="<%= introImage %>" alt="<%= introAlt %>" />
     </div>
-    <div class="wrapper-item main-txt">
+    <div class="wrapper-item main-txt max-w-[500px]">
       <%- introBody['intro_' + lang] %>
     </div>
   </div>

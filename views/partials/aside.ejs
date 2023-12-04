@@ -35,17 +35,28 @@
           <span>works</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/dashboard/media" class="link aside-link">
           <i class="fa-solid fa-photo-video"></i>
           <span>media</span>
         </a>
-      </li>
-
+      </li> -->
       <li>
         <a href="/dashboard/arrangements" class="link aside-link">
           <i class="fa-solid fa-pen"></i>
           <span>arrangements</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/images" class="link aside-link">
+          <i class="fa-solid fa-photo-video"></i>
+          <span>images</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/links" class="link aside-link">
+          <i class="fa-solid fa-link"></i>
+          <span>links</span>
         </a>
       </li>
     </ul>
@@ -68,7 +79,7 @@
     const path = window.location.pathname;
 
     // Split the path into parts
-    const pathParts = path.split('/').filter(part => part !== '');
+    const pathParts = path.split('/').filter((part) => part !== '');
 
     // Get all aside links
     const links = document.querySelectorAll('.aside-link');

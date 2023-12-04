@@ -1,9 +1,20 @@
-<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %> <% const body =
-JSON.parse(event.body); const title = body['title_' + lang]; const image =
-body.file ? body.file.location : null; const date = body.date; const dateObject
-= new Date(date); const time = body.time; const location = body['location_' +
-lang]; const shortDescription = body['shortDescription_' + lang]; const
-longDescription = body['longDescription_' + lang]; %>
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+<% 
+  const body = JSON.parse(event.body); 
+  const title = body['title_' + lang]; 
+  const image = body.file ? body.file.location : null; 
+  const date = body.date; 
+  const dateObject = new Date(date); 
+  const time = body.time; 
+  const location = body['location_' + lang];
+  const url = body.url;
+  const work = body['work_' + lang];
+  const performers = body['performers_' + lang];
+  const order = body.order;
+
+  const shortDescription = body['shortDescription_' + lang]; 
+  const longDescription = body['longDescription_' + lang]; 
+%>
 
 <!DOCTYPE html>
 <html lang="<%= lang %>">
@@ -16,33 +27,46 @@ longDescription = body['longDescription_' + lang]; %>
   </head>
 
   <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
+    <%- include('../partials/header') %> 
+    <%- include('../partials/nav') %>
     <main id="event" class="pd-b-lg">
       <div class="banner">
         <div class="image-container">
           <% if (image) { %>
-          <img src="<%= image %>" alt="" />
+            <img src="<%= image %>" alt="" />
           <% } %>
         </div>
       </div>
       <div class="header">
         <h1 class="event-header"><%= title %></h1>
-        <div class="info">
-          <% if (date) { %>
-          <span class="date <%= lang %>-txt">
-            <% if (lang === 'en') { %> <%= dateObject.toLocaleString('en-US', {
-            month: 'long', day: 'numeric', year: 'numeric' }) %> <% } else { %>
-            <%= dateObject.toLocaleString('zh-TW', { year: 'numeric', month:
-            'long', day: 'numeric' }) %> <% } %>
-          </span>
-          <% } %> <% if (time) { %>
-          <span class="time <%= lang %>-txt"><%= time %></span>
-          <% } %> <% if (location) { %>
-          <span class="location <%= lang %>-txt"><%= location %></span>
+        <div class="info space-y-8">
+          <% if (date || time || location) { %>
+            <div>
+              <% if (date) { %>
+                <span class="date"><%= date.toLocaleString('en-US') %></span>
+              <% } %>
+              <% if (time) { %>
+                <span class="time"><%= time %></span>
+              <% } %>
+              <% if (location) { %>
+                <span><%= location %></span>
+              <% } %>
+            </div>
+          <% } %>
+          <% if (url) { %>
+            <a href="<%= url %>" target='_blank' class='inline-block bg-purple-500 text-white font-sans text-sm rounded py-2 px-3 my-4 hover:bg-purple-400'>Event Link</a>
+          <% } %>
+          <% if (work) { %>
+            <div class='font-sans'>Featured work: <strong><%= work %></strong></div>
+          <% } %>
+          <% if (performers) { %>
+            <div class='font-sans'><%- performers %></div>
+          <% } %>
+          <% if (order) { %>
+            <div class='font-sans'>Order on program: <strong><%= order %></strong></div>
           <% } %>
         </div>
       </div>
-
       <div class="content font-serif"><%- longDescription || '' %></div>
     </main>
     <%- include('../partials/footer') %>
@@ -52,19 +76,17 @@ longDescription = body['longDescription_' + lang]; %>
 </html>
 
 <script type="module">
-  import { formatTime } from '../js/utils.js';
+  import { convertTime } from '../js/utils.js';
+  import { formatDate } from '../js/utils.js';
 
   // Convert time to 12 hour format
-  const timeElement = document.querySelector('span.time');
+  let timeElement = document.querySelector('span.time');
   if (timeElement) {
-    timeElement.innerText = formatTime(
-      timeElement.innerText,
-      document.querySelector('html').lang
-    );
+    timeElement.innerText = convertTime(timeElement.innerText);
   }
 
   // Format date
-  const dateElement = document.querySelector('span.date');
+  let dateElement = document.querySelector('span.date');
   if (dateElement) {
     dateElement.innerText = formatDate(dateElement.innerText);
   }

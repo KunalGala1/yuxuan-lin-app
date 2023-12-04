@@ -1,0 +1,30 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head') %>
+    <title><%= yuxuan %> | Gallery</title>
+  </head>
+
+  <body>
+    <%- include('../partials/header') %> <%- include('../partials/nav') %>
+
+    <main class="p-4 flex gap-4 flex-wrap justify-center items-center">
+      <% images.forEach(image => { %>
+      <div class="image-container max-w-[300px] overflow-hidden">
+        <img
+          src="<%= JSON.parse(image.body).file.location %>"
+          alt=""
+          class="hover:scale-105 transition duration-300 cursor-pointer"
+        />
+      </div>
+      <% }) %>
+    </main>
+
+    <%- include('../partials/footer') %>
+  </body>
+</html>

@@ -2,6 +2,7 @@
   "arrangements": {
     "metadata": {
       "action": "/dashboard/arrangements",
+      "enctype": "multipart/form-data",
       "name": "arrangements",
       "display": "Arrangement",
       "sitemap": {
@@ -38,18 +39,55 @@
         ]
       },
       {
+        "name": "createDetailedPage",
+        "type": "checkbox",
+        "label": "Create linked works page?"
+      },
+      {
         "name": "instrumentation",
         "label": "detailed insturmentation (3.2.2...)"
       },
       { "name": "duration" },
       { "name": "year" },
+      { "name": "date", "type": "date" },
       { "type": "url", "name": "url", "label": "URL to purchase music" },
+      { "type": "file", "label": "image" },
       {
         "tag": "textarea",
         "name": "commission_en",
         "label": "commission information"
       },
       { "tag": "textarea", "name": "commission_zh", "label": "委托信息" },
+      {
+        "tag": "textarea",
+        "name": "premiereInformation_en",
+        "label": "Premiere Information"
+      },
+      {
+        "tag": "textarea",
+        "name": "premiereInformation_zh",
+        "label": "首演信息"
+      },
+      {
+        "tag": "textarea",
+        "name": "performanceInformation_en",
+        "label": "Performance Information"
+      },
+      {
+        "tag": "textarea",
+        "name": "performanceInformation_zh",
+        "label": "表演信息"
+      },
+      {
+        "tag": "textarea",
+        "name": "shortProgramNote_en",
+        "label": "Short Program Note"
+      },
+      {
+        "tag": "textarea",
+        "name": "shortProgramNote_zh",
+        "label": "短小的节目注释"
+      },
       { "tag": "textarea", "name": "programNote_en", "label": "program note" },
       { "tag": "textarea", "name": "programNote_zh", "label": "节目说明" },
       {
@@ -58,7 +96,13 @@
         "label": "performance note"
       },
       { "tag": "textarea", "name": "performanceNote_zh", "label": "演出说明" },
-      { "tag": "textarea", "name": "recording" }
+      { "tag": "textarea", "name": "recording" },
+      {
+        "tag": "textarea",
+        "name": "moreInfo_en",
+        "label": "Additional Information"
+      },
+      { "tag": "textarea", "name": "moreInfo_zh", "label": "更多信息" }
     ]
   },
   "arranger": {
@@ -131,18 +175,28 @@
       },
       { "name": "title_zh", "required": true, "label": "标题" },
       { "type": "hidden", "name": "slug" },
+
+      { "type": "date", "name": "date" },
+      { "type": "time", "name": "time" },
+      { "name": "location_en", "label": "location" },
+      { "name": "location_zh", "label": "位置" },
+      { "type": "url", "label": "URL", "name": "url" },
+      { "name": "work_en", "label": "Featured Work" },
+      { "name": "work_zh", "label": "特色作品" },
+      {
+        "tag": "textarea",
+        "name": "performers_en",
+        "label": "Featured Performers"
+      },
+      { "tag": "textarea", "name": "performers_zh", "label": "特色表演者" },
+      { "name": "order", "label": "Order on the program" },
+      { "type": "file", "label": "image" },
       {
         "tag": "textarea",
         "name": "shortDescription_en",
         "label": "short description"
       },
       { "tag": "textarea", "name": "shortDescription_zh", "label": "简介" },
-      { "type": "date" },
-      { "type": "time" },
-      { "type": "url", "label": "URL" },
-      { "name": "location_en", "label": "location" },
-      { "name": "location_zh", "label": "位置" },
-      { "type": "file", "label": "image" },
       {
         "tag": "textarea",
         "name": "longDescription_en",
@@ -209,6 +263,7 @@
   "works": {
     "metadata": {
       "action": "/dashboard/works",
+      "enctype": "multipart/form-data",
       "name": "works",
       "display": "Work",
       "sitemap": {
@@ -245,18 +300,55 @@
         ]
       },
       {
+        "name": "createDetailedPage",
+        "type": "checkbox",
+        "label": "Create linked works page?"
+      },
+      {
         "name": "instrumentation",
         "label": "detailed insturmentation (3.2.2...)"
       },
       { "name": "duration" },
       { "name": "year" },
+      { "name": "date", "type": "date" },
       { "type": "url", "name": "url", "label": "URL to purchase music" },
+      { "type": "file", "label": "image" },
       {
         "tag": "textarea",
         "name": "commission_en",
         "label": "commission information"
       },
       { "tag": "textarea", "name": "commission_zh", "label": "委托信息" },
+      {
+        "tag": "textarea",
+        "name": "premiereInformation_en",
+        "label": "Premiere Information"
+      },
+      {
+        "tag": "textarea",
+        "name": "premiereInformation_zh",
+        "label": "首演信息"
+      },
+      {
+        "tag": "textarea",
+        "name": "performanceInformation_en",
+        "label": "Performance Information"
+      },
+      {
+        "tag": "textarea",
+        "name": "performanceInformation_zh",
+        "label": "表演信息"
+      },
+      {
+        "tag": "textarea",
+        "name": "shortProgramNote_en",
+        "label": "Short Program Note"
+      },
+      {
+        "tag": "textarea",
+        "name": "shortProgramNote_zh",
+        "label": "短小的节目注释"
+      },
       { "tag": "textarea", "name": "programNote_en", "label": "program note" },
       { "tag": "textarea", "name": "programNote_zh", "label": "节目说明" },
       {
@@ -265,7 +357,66 @@
         "label": "performance note"
       },
       { "tag": "textarea", "name": "performanceNote_zh", "label": "演出说明" },
-      { "tag": "textarea", "name": "recording" }
+      { "tag": "textarea", "name": "recording" },
+      {
+        "tag": "textarea",
+        "name": "moreInfo_en",
+        "label": "Additional Information"
+      },
+      { "tag": "textarea", "name": "moreInfo_zh", "label": "更多信息" }
+    ]
+  },
+  "images": {
+    "metadata": {
+      "action": "/dashboard/images",
+      "enctype": "multipart/form-data",
+      "name": "images",
+      "display": "Image",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
+    },
+    "fields": [
+      { "name": "title" },
+      { "type": "file", "label": "image", "name": "image" },
+      { "name": "order", "label": "Order on the page" },
+      {
+        "tag": "textarea",
+        "name": "description_en",
+        "label": "description"
+      },
+      {
+        "tag": "textarea",
+        "name": "description_zh",
+        "label": "描述"
+      }
+    ]
+  },
+  "links": {
+    "metadata": {
+      "action": "/dashboard/links",
+      "enctype": "multipart/form-data",
+      "name": "links",
+      "display": "Link",
+      "sitemap": {
+        "changefreq": "daily",
+        "priority": 0.5
+      }
+    },
+    "fields": [
+      { "name": "title" },
+      { "type": "url", "label": "URL", "name": "url" },
+      {
+        "tag": "textarea",
+        "name": "description_en",
+        "label": "description"
+      },
+      {
+        "tag": "textarea",
+        "name": "description_zh",
+        "label": "描述"
+      }
     ]
   }
 }

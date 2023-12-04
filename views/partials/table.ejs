@@ -3,7 +3,18 @@ const handleTableObject = (j, k) => {
   const obj = map.tbody[k];
   const key = obj.key;
   const body = JSON.parse(data[j].body);
-  return body[key];
+  
+  // Function to handle nested keys
+  const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  }
+
+  if (obj.type === 'image') {
+    const imageSrc = getNestedValue(body, key);
+    return `<img class='h-32' src="${imageSrc}" alt="${key}">`;
+  }
+
+  return getNestedValue(body, key);
 }
 %>
 
@@ -32,7 +43,7 @@ const handleTableObject = (j, k) => {
         <td><%= j + 1 %></td>
         <% for( let k = 0; k < map.tbody.length; k++ ) { %>
         <% if (typeof map.tbody[k] === 'object') { %>
-        <td><%= handleTableObject(j, k) %></td>
+        <td><%- handleTableObject(j, k) %></td>
         <% } else { %>
         <td>
           <div><%- JSON.parse(data[j].body)[map.tbody[k]] %></div>

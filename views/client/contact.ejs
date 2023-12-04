@@ -14,9 +14,10 @@
 <body>
   <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
-  <main name="contact">
-    <div class="wrapper flex flex-col justify-center items-center gap">
-      <h2 class="header third-header"><%= lang == 'zh' ? '请使用这个表格与我联系！' : 'Use this form to contact me!' %></h2>
+  <main name="contact" class='max-w-[1000px] mx-auto'>
+    <div class="space-y-8 p-8">
+      <h2 class="text-center font-bold text-xl font-serif"><%= lang == 'zh' ? '使用此表格联系我们' : 'Use This Form to Get in Touch' %></h2>
+      <p class='text-center'><%= lang == 'zh' ? '用于委托新作品、合作和/或其他咨询' : 'for commissioning new work, collaborations and/or other inquiries' %></p>
       <form action="/mailsend" method="post" class="form contact-form" novalidate>
         <div class="item">
           <div class="subitem">

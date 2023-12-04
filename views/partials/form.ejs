@@ -38,6 +38,7 @@ const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
         const role = field.role ? field.role : '';
         const label = field.label ? field.label : name;
         const value = field.value ? field.value : '';
+        console.log(name, value);
         const required = field.required ? true : false;
         const file = field.file ? field.file : {};
         const selector = field.selector ? field.selector : name;
@@ -50,7 +51,7 @@ const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
       <div class="item">
         <div class="subitem">
           <label for="<%= name %>" <% if (type === 'file') { %> class="file-upload" <% } %>><%= label %><% if (type === 'file') { %> <i class="mg-l-xs fa fa-upload"></i> <% } %></label>
-          <input type="<%= type %>" name="<%= name %>" id="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'data-required' : '' %> autocomplete="off" <% if (type === 'file') { %> accept="image/*" <% } %> />
+          <input type="<%= type %>" name="<%= name %>" id="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'data-required' : '' %> autocomplete="off" <% if (type === 'file') { %> accept="image/*" <% } %> <% if (type === "checkbox" && value) { %> checked <% } %> />
           <% if (type === 'file') { %>
           <div class="preview">
             <img src="<%= file.location %>" alt="" />

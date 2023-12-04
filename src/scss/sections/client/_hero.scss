@@ -1,21 +1,18 @@
-@use "../../abstracts/" as a;
-@use "../../layout" as l;
-@use "../../theme/" as t;
+@use '../../abstracts/' as a;
+@use '../../layout' as l;
+@use '../../theme/' as t;
 
 #hero {
   padding: 30px;
   .wrapper {
     @include l.max-width(lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 
-    @include l.min(md) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-
-      .wrapper-item {
-        flex: 1;
-      }
+    .wrapper-item {
+      flex: 1;
     }
   }
 

@@ -11,59 +11,168 @@
   </head>
 
   <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
-    <main id="events" data-cli>
-      <div class="wrapper pd-md flex justify-center items-start gap wrap">
-        <% for (let i = 0; i < events.length; i++) { %> <% const body =
-        JSON.parse(events[i].body); const title = body['title_' + lang]; const
-        slug = body.slug; const image = body.file.location; const date =
-        body.date; const dateObject = new Date(date); const time = body.time;
-        const location = body['location_' + lang]; const shortDescription =
-        body['shortDescription_' + lang]; %>
-        <div class="card p-8 bg-gray-500/5">
-          <a href="/events/<%= slug %>?lang=<%= lang %>">
-            <div class="image-container">
-              <img src="<%= image %>" alt="" />
-            </div>
-          </a>
-          <div class="content">
-            <h3 class="title">
-              <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
-            </h3>
+    <%- include('../partials/header') %> 
+    <%- include('../partials/nav') %>
 
-            <% if (date) { %>
-            <span class="date <%= lang %>-txt">
-              <% if (lang === 'en') { %> <%= dateObject.toLocaleString('en-US',
-              { month: 'long', day: 'numeric', year: 'numeric' }) %> <% } else {
-              %> <%= dateObject.toLocaleString('zh-TW', { year: 'numeric',
-              month: 'long', day: 'numeric' }) %> <% } %>
-            </span>
-            <% } %> <% if (time) { %>
-            <span class="time <%= lang %>-txt"><%= time %></span>
-            <% } %> <% if (location) { %>
-            <span class="location <%= lang %>-txt"><%= location %></span>
-            <% } %>
 
-            <div>
-              <%- JSON.parse(events[i].body)['shortDescription_' + lang] %>
-            </div>
-          </div>
+    <main id="events" data-cli class='p-8'>
+  <!-- Upcoming Events -->
+    <h2 class='text-xl text-center font-serif'>Upcoming Events</h2>
+  <div class="wrapper pd-md flex justify-center items-start gap wrap">
+    <% events.filter(e => new Date(JSON.parse(e.body).date) >= new Date())
+      .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
+      .forEach(event => { 
+        const body = JSON.parse(event.body); 
+        const title = body['title_' + lang]; 
+        const slug = body.slug; 
+        const image = body.file.location; 
+        const date = body.date; 
+        const time = body.time; 
+        const location = body['location_' + lang];
+        const url = body.url;
+        const work = body['work_' + lang];
+        const performers = body['performers_' + lang];
+        const order = body.order;
+    %>
+    <div class="card p-8 bg-gray-500/5">
+      <a href="/events/<%= slug %>?lang=<%= lang %>">
+        <div class="image-container">
+          <img src="<%= image %>" alt="" />
+        </div>
+      </a>
+      <div class="content space-y-6">
+        <h3 class="title">
+          <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
+        </h3>
+
+        <% if (date || time || location) { %>
+        <div>
+
+        <% if (date) { %>
+          <span class="date"><%= date.toLocaleString('en-US') %></span>
+        <% } %>
+
+        <% if (time) { %>
+          <span class="time"><%= time %></span>
+        <% } %>
+
+        <% if (location) { %>
+          <span><%= location %></span>
+        <% } %>
+
         </div>
         <% } %>
+
+        <% if (url) { %>
+          <a href="<%= url %>" target='_blank' class='inline-block bg-purple-500 text-white font-sans text-sm rounded py-2 px-3 my-4 hover:bg-purple-400'>Event Link</a>
+        <% } %>
+
+        <% if (work) { %>
+          <div class='font-sans text-sm'>Featured work: <strong><%= work %></strong></div>
+        <% } %>
+
+        <% if (performers) { %>
+          <div class='font-sans text-sm'><%- performers %></div>
+        <% } %>
+
+        <% if (order) { %>
+          <div class='font-sans text-sm'>Order on program: <strong><%= order %></strong></div>
+        <% } %>
+
       </div>
-    </main>
+    </div>
+    <% }) %>
+  </div>
+
+  <!-- Past Events -->
+    <h2 class='text-xl text-center font-serif'>Past Events</h2>
+  <div class="wrapper pd-md flex justify-center items-start gap wrap">
+    <% events.filter(e => new Date(JSON.parse(e.body).date) < new Date())
+      .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
+      .forEach(event => { 
+        const body = JSON.parse(event.body); 
+        const title = body['title_' + lang]; 
+        const slug = body.slug; 
+        const image = body.file.location; 
+        const date = body.date; 
+        const time = body.time; 
+        const location = body['location_' + lang];
+        const url = body.url;
+        const work = body['work_' + lang];
+        const performers = body['performers_' + lang];
+        const order = body.order;
+    %>
+    <div class="card p-8 bg-gray-500/5">
+      <a href="/events/<%= slug %>?lang=<%= lang %>">
+        <div class="image-container">
+          <img src="<%= image %>" alt="" />
+        </div>
+      </a>
+      <div class="content space-y-6">
+        <h3 class="title">
+          <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
+        </h3>
+
+        <% if (date || time || location) { %>
+        <div>
+
+        <% if (date) { %>
+          <span class="date"><%= date.toLocaleString('en-US') %></span>
+        <% } %>
+
+        <% if (time) { %>
+          <span class="time"><%= time %></span>
+        <% } %>
+
+        <% if (location) { %>
+          <span><%= location %></span>
+        <% } %>
+
+        </div>
+        <% } %>
+
+        <% if (url) { %>
+          <a href="<%= url %>" target='_blank' class='inline-block bg-purple-500 text-white font-sans text-sm rounded py-2 px-3 my-4 hover:bg-purple-400'>Event Link</a>
+        <% } %>
+
+        <% if (work) { %>
+          <div class='font-sans text-sm'>Featured work: <strong><%= work %></strong></div>
+        <% } %>
+
+        <% if (performers) { %>
+          <div class='font-sans text-sm'><%- performers %></div>
+        <% } %>
+
+        <% if (order) { %>
+          <div class='font-sans text-sm'>Order on program: <strong><%= order %></strong></div>
+        <% } %>
+
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</main>
+
+
+
+
     <%- include('../partials/footer') %>
+
     <script type="module">
-      import { formatTime } from '../js/utils.js';
+      import { convertTime } from '../js/utils.js';
+      import { formatDate } from '../js/utils.js';
 
       document.querySelectorAll('#events[data-cli] .card').forEach((card) => {
-        // Convert time to 12-hour format
-        const time = card.querySelector('span.time');
-        if (time) {
-          time.innerText = formatTime(
-            time.innerText,
-            document.querySelector('html').lang
-          );
+        // Convert time to 12 hour format
+        let timeElement = card.querySelector('span.time');
+        if (timeElement) {
+          timeElement.innerText = convertTime(timeElement.innerText);
+        }
+
+        // Format date
+        let dateElement = card.querySelector('span.date');
+        if (dateElement) {
+          dateElement.innerText = formatDate(dateElement.innerText);
         }
       });
     </script>

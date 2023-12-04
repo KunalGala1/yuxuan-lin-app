@@ -19,47 +19,64 @@
     </section>
 
     <main class="pd-b-lg">
-      <%- include('../sections/search') %> <% const tags = ['Orchestral',
-      'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film',
-      'Theatre', 'Installation', 'Other'] %> <% const tags_zh = ['管弦乐',
-      '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧',
-      '装置', '其他']; %>
-      <section
-        class="work-list flex justify-center items-stretch flex-wrap gap column mt-4"
-      >
-        <% for (let j = 0; j < tags.length; j++) { %> <% const docsWithTag =
-        data.filter(doc => JSON.parse(doc.body).tag === tags[j].toLowerCase())
-        %> <% if (docsWithTag.length > 0) { %>
-        <div class="subsection bg-slate-800">
-          <h2 class="main-header text-2xl text-slate-300">
-            <%= lang == 'zh' ? tags_zh[j] : tags[j] %>
-          </h2>
-          <div class="cards-wrapper flex justify-center gap items-start">
-            <% for (let i = 0; i < docsWithTag.length; i++) { %> <% const body =
-            JSON.parse(docsWithTag[i].body) %> <% const slug = body.slug %> <%
-            const title = body['title_' + lang] %> <% const subtitle =
-            body['subtitle_' + lang] %> <% const programNote =
-            body['programNote_' + lang] %>
-            <div class="card bg-slate-600">
-              <a href="/arrangements/<%= slug %>?lang=<%= lang %>">
-                <div class="heading">
-                  <h3 class="third-header"><%= title %></h3>
-                  <% if (subtitle !== '') { %>
-                  <p class="<%= lang %>-txt"><%= subtitle %></p>
-                  <% } %>
+      <%- include('../sections/search') %>
+      
+      <% 
+    const tags = ['Orchestral', 'Chamber', 'Solo', 'Dance', 'Choral', 'Vocal', 'Electroacoustic', 'Film', 'Theatre', 'Installation', 'Other'];
+    const tags_zh = ['管弦乐', '室内乐', '独奏', '舞蹈', '合唱', '声乐', '电子音乐', '电影', '戏剧', '装置', '其他']; 
+%>
+<section class="work-list flex flex-col justify-center items-stretch wrap gap column mt-4 max-w-[1000px] mx-auto">
+    <% for (let j = 0; j < tags.length; j++) { %> 
+        <% 
+            const worksWithTag = data.filter(doc => JSON.parse(doc.body).tag === tags[j].toLowerCase()); 
+
+            // Sort by date, if no date then place at the end
+            worksWithTag.sort((a, b) => {
+                const dateA = JSON.parse(a.body).date ? new Date(JSON.parse(a.body).date) : new Date(0); // Old date
+                const dateB = JSON.parse(b.body).date ? new Date(JSON.parse(b.body).date) : new Date(0); // Old date
+                return dateB - dateA;
+            });
+
+            if (worksWithTag.length > 0) { 
+        %>
+        <div class="subsection bg-slate-800/50 p-4">
+            <h2 class="text-2xl text-slate-300/50 mb-8 font-sans main-header">
+                <%= lang == 'zh' ? tags_zh[j] : tags[j] %>
+            </h2>
+            <div class="cards-wrapper space-y-8">
+                <% worksWithTag.forEach(work => {
+                    const body = JSON.parse(work.body);
+                    const slug = body.slug;
+                    const title = body['title_' + lang];
+                    const subtitle = body['subtitle_' + lang];
+                    const year = body.year;
+                    const createDetailedPage = body.createDetailedPage;
+                    const programNote = body['programNote_' + lang];
+                %>
+                <div class="card">
+                    <div class="heading">
+
+                        <% if (createDetailedPage) { %>
+                            <a href="/arrangements/<%= slug %>?lang=<%= lang %>">
+                                <h3 class="text-xl text-orange-700 hover:text-orange-400 font-medium"><%= title %> (<%= year %>)</h3>
+                            </a>
+                        <% } else { %>
+                                <h3 class="text-xl font-medium"><%= title %> (<%= year %>)</h3>
+                        <% } %>
+
+                        <% if (subtitle !== '') { %>
+                            <p class="<%= lang %>-txt"><%= subtitle %></p>
+                        <% } %>
+                    </div>
                 </div>
-                <% if (programNote !== '') { %>
-                <div class="description">
-                  <p><%- programNote %></p>
-                </div>
-                <% } %>
-              </a>
+                <% }) %>
             </div>
-            <% } %>
-          </div>
         </div>
-        <% } %> <% } %>
-      </section>
+        <% } %> 
+    <% } %>
+</section>
+
+
     </main>
     <%- include('../partials/footer') %>
   </body>

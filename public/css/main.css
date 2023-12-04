@@ -218,6 +218,10 @@ form textarea:focus,
 form select:focus {
   outline: solid 1px var(--200);
 }
+form input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+}
 form .item + .item {
   margin-top: 30px;
 }
@@ -836,7 +840,6 @@ table {
 .dashboard-table td td,
 .dashboard-table td th,
 .dashboard-table td a,
-.dashboard-table td img,
 .dashboard-table td blockquote,
 .dashboard-table td code,
 .dashboard-table td pre,
@@ -908,12 +911,6 @@ table {
 /* Headers */
 .header {
   text-transform: capitalize;
-}
-
-.main-header {
-  padding-bottom: 30px;
-  text-align: center;
-  font-family: "Inter", sans-serif;
 }
 
 .secondary-header {
@@ -1262,17 +1259,13 @@ aside .bottom {
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
-@media (min-width: 768px) {
-  #hero .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-  }
-  #hero .wrapper .wrapper-item {
-    flex: 1;
-  }
+#hero .wrapper .wrapper-item {
+  flex: 1;
 }
 #hero img {
   margin: 0 auto;
@@ -1318,7 +1311,6 @@ aside .bottom {
 #intro a {
   display: block;
   width: max-content;
-  margin: 0 auto;
   margin-top: 15px;
   color: var(--link);
   text-decoration: underline;
@@ -1515,44 +1507,6 @@ aside .bottom {
 }
 .work-list .main-header {
   text-transform: capitalize;
-}
-.work-list .subsection {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 60px;
-  padding-right: 60px;
-}
-@media (max-width: 768px) {
-  .work-list .subsection {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-}
-@media (max-width: 340px) {
-  .work-list .subsection {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-.work-list .cards-wrapper {
-  flex-wrap: wrap;
-  max-width: 1199.98px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.work-list .card {
-  max-width: 375px;
-  min-width: 200px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 .work-list .card .heading {
   margin-bottom: 15px;

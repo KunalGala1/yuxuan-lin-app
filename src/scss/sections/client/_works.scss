@@ -12,27 +12,7 @@
     text-transform: capitalize;
   }
 
-  .subsection {
-    @include l.padding(lg);
-    @include l.max(md) {
-      @include l.padding(md);
-    }
-    @include l.max(xs) {
-      @include l.padding(sm);
-    }
-  }
-
-  .cards-wrapper {
-    flex-wrap: wrap;
-    @include l.max-width(lg);
-  }
-
   .card {
-    max-width: 375px;
-    min-width: 200px;
-
-    @include l.padding(md);
-
     .heading {
       margin-bottom: 15px;
 

@@ -8,12 +8,6 @@
   text-transform: capitalize;
 }
 
-.main-header {
-  padding-bottom: 30px;
-  text-align: center;
-  @include t.sans;
-}
-
 .secondary-header {
   text-align: center;
   @include t.serif;
