@@ -188,7 +188,7 @@
         "name": "performers_en",
         "label": "Featured Performers"
       },
-      { "tag": "textarea", "name": "performers_zh", "label": "特色表演者" },
+      { "tag": "textarea", "name": "performers_zh", "label": "表演者" },
       { "name": "order", "label": "Order on the program" },
       { "type": "file", "label": "image" },
       {
@@ -406,14 +406,24 @@
     },
     "fields": [
       { "name": "title" },
+      {
+        "tag": "select",
+        "name": "tag",
+        "options": [
+          "Artists in non-music disciplinaries",
+          "Performers",
+          "Conductors",
+          "Formal / Current Teachers",
+          "Schools",
+          "Festivals"
+        ]
+      },
       { "type": "url", "label": "URL", "name": "url" },
       {
-        "tag": "textarea",
         "name": "description_en",
         "label": "description"
       },
       {
-        "tag": "textarea",
         "name": "description_zh",
         "label": "描述"
       }

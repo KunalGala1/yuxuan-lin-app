@@ -14,18 +14,47 @@
     <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
     <main class="max-w-lg mx-auto p-8">
-    <h1 class="text-lg mb-8 font-bold font-serif">Related Links</h1>
-    <section class='space-y-4'>
-      <% links.forEach(link => { %> <% const body = JSON.parse(link.body) %>
     
-        <div>
-            <span class='mr-2'>&#8226;</span>
-            <a href="<%= body.url %>" target='_blank' class='hover:text-white hover:underline text-slate-200 font-sans'><%= body.title %> <span class='text-slate-50/50 font-extralight'>(<%= body.url %>)</span></a>
-            <div class='border-l-2 border-orange-800/50 ml-6 pl-6 mt-4 font-serif text-slate-50/75 font-light'><%- body['description_' + lang] %></div>
-        </div>
+      <section class="space-y-8">
 
-      <%
-      }) %>
+
+        <%
+    let groupedLinks = {};
+    links.forEach(link => {
+        const body = JSON.parse(link.body);
+        const tag = body.tag || 'Additional Links';
+        if (!groupedLinks[tag]) {
+            groupedLinks[tag] = [];
+        }
+        groupedLinks[tag].push(link);
+    });
+
+    for (let tag in groupedLinks) {
+        groupedLinks[tag].sort((a, b) => {
+            const titleA = JSON.parse(a.body).title.toLowerCase();
+            const titleB = JSON.parse(b.body).title.toLowerCase();
+            return titleA < titleB ? -1 : (titleA > titleB ? 1 : 0);
+        });
+    }
+%>
+
+<% for (let tag in groupedLinks) { %>
+    <div class="tag-group flex gap-8">
+        <h2 class="font-sans capitalize text-lg"><%= tag %></h2>
+        <div class="links-container space-y-2"> <!-- Container for flex styling -->
+            <% groupedLinks[tag].forEach(link => { %>
+                <% const body = JSON.parse(link.body); %>
+                <div class="link-item font-sans">
+                    <a href="<%= body.url %>" target='_blank' class='text-blue-400/90'><%= body.title %></a><span class='text-slate-50/50'>, <%= body['description_' + lang] %></span>
+                  </div>
+                  <% }); %>
+                  </div>
+                    </div>
+              
+              <% } %>
+
+
+
       </section>
     </main>
 

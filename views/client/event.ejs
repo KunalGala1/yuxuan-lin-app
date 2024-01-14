@@ -63,7 +63,7 @@
             <div class='font-sans'><%- performers %></div>
           <% } %>
           <% if (order) { %>
-            <div class='font-sans'>Order on program: <strong><%= order %></strong></div>
+            <div class='font-sans'><%= lang == 'zh' ? '节目单序次:' : 'Order on Program:' %> <strong><%= order %></strong></div>
           <% } %>
         </div>
       </div>
