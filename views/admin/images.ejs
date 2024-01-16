@@ -12,7 +12,7 @@
     <%- include('../partials/aside') %>
     <main class="sp-aside-left">
       <%- include('../partials/table', { name: 'images', data, map: { thead:
-      ['title', 'image'], tbody: ['title',{"type": "image", "key": "file.location"}] }
+      ['title', 'image', 'order'], tbody: ['title',{"type": "image", "key": "file.location"}, 'order'] }
       }) %>
     </main>
   </body>

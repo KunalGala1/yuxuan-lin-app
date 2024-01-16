@@ -15,7 +15,7 @@
 
     <main class="p-4 flex gap-4 flex-wrap justify-center items-center">
       <% images.forEach(image => { %>
-      <div class="image-container max-w-[400px] overflow-hidden">
+      <div class="image-container max-w-[400px] overflow-hidden" style="order: <%= JSON.parse(image.body).order || 9999 %>;">
         <img
           src="<%= JSON.parse(image.body).file.location %>"
           alt=""
