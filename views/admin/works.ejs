@@ -15,7 +15,7 @@
     document.querySelector('aside .middle ul li:nth-child(3) a')
       .classList.add('active');
   </script>
-  <main class="sp-aside-left">
+  <main class="sp-aside-left">    
 
     <%- include('../partials/table', {
       name: 'works',
@@ -25,6 +25,121 @@
         tbody: ['title_en']
       }
     }) %>
+
+<section class="p-8">
+  <form action="/dashboard/featuredwork" method="post" class="space-y-2" id="setFeaturedWork">
+      <label for="featuredWork" class="font-bold">Choose a Work:</label>
+      <select name="featuredWork" id="featuredWork" autocomplete="off">
+        <% data.forEach(function(work) { %>
+            <option value="<%= work._id %>" <%= work._id.toString() == select.toString() ? 'selected' : '' %>><%= JSON.parse(work.body).title_en %></option>
+        <% }); %>
+    </select>
+    
+      <button type="submit" class="btn btn-success">Set as Featured</button>
+  </form>
+</section>
+
+<section class="p-8">
+  <form action="/dashboard/featuredrecording" method="post" class="space-y-2" id="setFeaturedRecording">
+      <label for="featuredRecording" class="font-bold">Choose a Recording:</label>
+      <select name="featuredRecording" id="featuredRecording" autocomplete="off">
+        <% data.forEach(function(work) { %>
+            <option value="<%= work._id %>" <%= work._id.toString() == select2.toString() ? 'selected' : '' %>><%= JSON.parse(work.body).title_en %></option>
+        <% }); %>
+    </select>
+    
+      <button type="submit" class="btn btn-success">Set as Featured</button>
+  </form>
+</section>
+
+
+
+
+<script>
+
+const toastNotification = (message, type, duration = 1000) => {
+  const toastNotification = document.createElement('div');
+  toastNotification.classList.add('toast-notification', 'active', type);
+  toastNotification.textContent = message;
+  document.body.appendChild(toastNotification);
+  setTimeout(() => {
+    toastNotification.classList.remove('active');
+    setTimeout(() => {
+      toastNotification.remove();
+    }, 250);
+  }, duration);
+};
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('setFeaturedWork');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const selectedWork = document.getElementById('featuredWork').value;
+      const data = { featuredWork: selectedWork };
+
+      fetch('/dashboard/featuredwork', {
+        method: 'PUT', // Or 'POST', depending on your server setup
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // Handle success. You can redirect or update the UI accordingly.
+        toastNotification('Featured Work Updated', 'success');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle errors here, such as displaying a message to the user.
+        toastNotification('Error: ' + error, 'error');
+      });
+    });
+
+    const form2 = document.getElementById('setFeaturedRecording');
+
+    form2.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const selectedRecording = document.getElementById('featuredRecording').value;
+      const data = { featuredRecording: selectedRecording };
+
+      fetch('/dashboard/featuredrecording', {
+        method: 'PUT', // Or 'POST', depending on your server setup
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // Handle success. You can redirect or update the UI accordingly.
+        toastNotification('Featured Recording Updated', 'success');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle errors here, such as displaying a message to the user.
+        toastNotification('Error: ' + error, 'error');
+      });
+    });
+  });
+</script>
+
+
 
   </main>
 </body>

@@ -5,21 +5,23 @@
         Most Recent Performance
       </h2>
     </div>
-    <div class="flex justify-center items-center max-w-6xl mx-auto">
-      <iframe
+    <div class="flex justify-center items-center max-w-6xl mx-auto [&>p]:w-full">
+      <%- JSON.parse(recording.body).recording %>
+      <!-- <iframe
         width="100%"
         src="https://www.youtube.com/embed/zF8B-xG-IE0?si=GUG0Jcmt5ubirKtC"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
-      ></iframe>
+      ></iframe> -->
 
       <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/zF8B-xG-IE0?si=GUG0Jcmt5ubirKtC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
     </div>
 
     <div class="p-8 space-y-8 text-center">
-      <h2 class="text-xl font-serif">Performed by</h2>
+      <%- JSON.parse(recording.body)['performanceInformation_' + lang] %>
+      <!-- <h2 class="text-xl font-serif">Performed by</h2>
       <ul>
         <li>Jasmin Ward, Soprano</li>
         <li>Xinyue Zoey Zhou, Piano</li>
@@ -29,7 +31,7 @@
       <ul>
         <li>Paul Recital Hall, The Juilliard School</li>
         <li>November, 2023</li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </section>

@@ -9,14 +9,41 @@ const Arrangement = require('../models/Arrangement');
 const Media = require('../models/Media');
 const Image = require('../models/Image');
 const Link = require('../models/Link');
+const FeaturedWork = require('../models/FeaturedWork');
+const FeaturedRecording = require('../models/FeaturedRecording');
 
 /* GET home page. */
 router.get('/', async (req, res) => {
-  const lang = new URLSearchParams(req.query).get('lang') || 'en';
-  const work = await Work.findOne({ _id: '656960785d8f89ecfc445c7d' });
-  const media = await Media.findOne();
-  const intro = await Content.findOne({ name: 'intro' });
-  res.render('client/index', { lang, media, intro, work });
+  try {
+      const lang = new URLSearchParams(req.query).get('lang') || 'en';
+      
+      // Retrieve the featured work
+      const featuredWork = await FeaturedWork.findOne();
+      let work = null;
+
+      const featuredRecording = await FeaturedRecording.findOne();
+      let recording = null;
+      
+      // If a featured work exists, find the corresponding work details
+      if (featuredWork) {
+          work = await Work.findOne({ _id: featuredWork.work });
+      }
+
+      // If a featured recording exists, find the corresponding work details
+      if (featuredRecording) {
+          recording = await Work.findOne({ _id: featuredRecording.work });
+      }
+
+      // Fetch other necessary data
+      const media = await Media.findOne();
+      const intro = await Content.findOne({ name: 'intro' });
+
+      // Render the page with the fetched data
+      res.render('client/index', { lang, media, intro, work, recording });
+  } catch (error) {
+      console.error('Error fetching data for home page:', error);
+      res.status(500).send('Error fetching data for home page');
+  }
 });
 
 /* GET about page. */

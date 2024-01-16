@@ -605,6 +605,10 @@ video {
   height: 100%;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -965,4 +969,8 @@ video {
   .md\:w-1\/2 {
     width: 50%;
   }
+}
+
+.\[\&\>p\]\:w-full>p {
+  width: 100%;
 }
