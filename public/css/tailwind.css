@@ -737,6 +737,11 @@ video {
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 
+.bg-main {
+  --tw-bg-opacity: 1;
+  background-color: rgb(4 19 32 / var(--tw-bg-opacity));
+}
+
 .bg-purple-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(168 85 247 / var(--tw-bg-opacity));
@@ -745,6 +750,10 @@ video {
 .bg-slate-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+}
+
+.bg-slate-600\/50 {
+  background-color: rgb(71 85 105 / 0.5);
 }
 
 .bg-slate-700\/50 {
@@ -962,6 +971,10 @@ video {
 @media (min-width: 640px) {
   .sm\:flex-row-reverse {
     flex-direction: row-reverse;
+  }
+
+  .sm\:pt-16 {
+    padding-top: 4rem;
   }
 }
 
