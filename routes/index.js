@@ -11,6 +11,7 @@ const Image = require('../models/Image');
 const Link = require('../models/Link');
 const FeaturedWork = require('../models/FeaturedWork');
 const FeaturedRecording = require('../models/FeaturedRecording');
+const Post = require('../models/Post');
 
 /* GET home page. */
 router.get('/', async (req, res) => {
@@ -138,18 +139,49 @@ router.get('/media/:slug', async (req, res) => {
   }
 });
 
-/* GET images page. */
+/* GET Gallery Page */
 router.get('/gallery', async (req, res) => {
   const images = await Image.find();
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
   res.render('client/gallery', { images, lang });
 });
 
-/* GET links page. */
+/* GET Links Page */
 router.get('/links', async (req, res) => {
   const links = await Link.find();
   const lang = new URLSearchParams(req.query).get('lang') || 'en';
   res.render('client/links', { links, lang });
+});
+
+/* GET Blog */
+router.get('/blog', async (req, res) => {
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+  try {
+    const unsorted_posts = await Post.find();
+    const posts = unsorted_posts.sort((a, b) => {
+      return new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date);
+    });
+    res.render('client/blog', { posts, lang });
+  }
+  catch (error) {
+    console.error('Error fetching posts:', error);
+    res.status(500).send('Error fetching posts');
+  }
+});
+
+/* GET Blog Post */
+router.get('/blog/:slug', async (req, res) => {
+  const lang = new URLSearchParams(req.query).get('lang') || 'en';
+  try {
+    const unsorted_posts = await Post.find();
+    const raw_post = unsorted_posts.find((post) => JSON.parse(post.body).slug === req.params.slug);
+    const post = JSON.parse(raw_post.body);
+    res.render('client/blog_post', { post, lang });
+  }
+  catch (error) {
+    console.error('Error fetching post:', error);
+    res.status(500).send('Error fetching post');
+  }
 });
 
 module.exports = router;

@@ -1,0 +1,44 @@
+<% const yuxuan = lang == 'zh' ? '林榆璇' : 'Yuxuan Lin' %>
+
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('../partials/head') %>
+  <title><%= yuxuan %> | Blog | <%= post['title_' + lang] %></title>
+</head>
+
+<body>
+  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+
+  <main>
+    <div class='max-w-[24rem] mx-auto py-16 space-y-4 p-4'>
+        <h1 class='font-extrabold text-4xl'><%= post['title_' + lang] %></h1>
+        <div class='text-xl'><%- post['description_' + lang] %></div>
+      </div>
+      <img src="<%= post.file.location %>" alt="<%= post.file.alt %>" class="w-full">
+      
+      <p class='px-4 pt-1 text-gray-400'><%= post.file.alt %></p>
+      <section class='max-w-[24rem] mx-auto py-16 space-y-4 p-4'>
+        <div class='font-sans text-xs text-slate-600'>
+          <h2 class='font-bold'>By <%= post['author_' + lang] %></h2>
+          <span>
+            <%= new Date(post.date).toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'}) %>
+          </span>
+        </div>
+        <div>
+            <%- post['content_' + lang] %>
+        </div>
+        <div className='p-8 flex justify-center'>
+            <a href='/blog'>Return to Blog</a>
+          </footer>
+      </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+
+</html>

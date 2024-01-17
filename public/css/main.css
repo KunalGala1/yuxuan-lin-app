@@ -423,7 +423,7 @@ hr {
   scrollbar-width: none; /* Firefox */
 }
 .nav-menu > li + li {
-  margin-left: 50px;
+  margin-left: 32px;
 }
 .nav-menu li {
   white-space: nowrap;

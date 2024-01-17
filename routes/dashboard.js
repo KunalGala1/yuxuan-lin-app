@@ -15,6 +15,7 @@ const Image = require("../models/Image");
 const Link = require("../models/Link");
 const FeaturedWork = require("../models/FeaturedWork");
 const FeaturedRecording = require("../models/FeaturedRecording");
+const Post = require("../models/Post");
 
 const map = {
   Content,
@@ -26,6 +27,7 @@ const map = {
   Link,
   FeaturedWork,
   FeaturedRecording,
+  Post,
 };
 
 /* Fetch and Prepare Form Data */
@@ -154,6 +156,7 @@ const lists = [
   { name: "media", model: "Media" },
   { name: "images" },
   { name: "links" },
+  { name: "posts" },
 ];
 
 const Model_Nomenclature = (string) => {
@@ -187,7 +190,7 @@ lists.forEach((list) => {
 
     if (select) {
       const Model = map[select];
-      const Model2 = map['FeaturedRecording']
+      const Model2 = map["FeaturedRecording"];
       const data = await Model.findOne();
       const data2 = await Model2.findOne();
       options.select = data.work;
@@ -340,7 +343,9 @@ router.put("/featuredrecording", ensureAuthenticated, async (req, res) => {
       await existingFeaturedRecording.save();
     } else {
       // Create a new featured recording if it doesn't exist
-      const newFeaturedRecording = new FeaturedRecording({ work: featuredRecording });
+      const newFeaturedRecording = new FeaturedRecording({
+        work: featuredRecording,
+      });
       await newFeaturedRecording.save();
     }
 
