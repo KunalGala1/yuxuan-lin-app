@@ -15,18 +15,18 @@
 
     <main class="p-4 flex gap-4 flex-wrap justify-center items-center">
       <!-- spotlight -->
-      <section id="spotlight" style="top: 0px;">
-        <button class="close-btn">
-          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      <section id="spotlight" class="hidden absolute z-[105] h-full w-full top-0 bg-black/70 justify-between items-center">
+        <button class="close-btn hover:transition absolute top-0 left-0 my-3 mx-4 py-2 px-3 bg-transparent hover:bg-white/10">
+          <i class="fa-solid fa-arrow-left text-white text-lg" aria-hidden="true"></i>
         </button>
-        <button class="angle-btn">
-          <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+        <button class="angle-btn hover:transition flex justify-center items-center h-[40px] w-[40px] rounded-full m-8 bg-black/70 hover:bg-black/50">
+          <i class="fa-solid fa-angle-left text-white text-lg" aria-hidden="true"></i>
         </button>
         
-        <img src="<%= JSON.parse(images[0].body).file.location %>" alt="<%= JSON.parse(images[0].body).file.alt %>">
+        <img src="<%= JSON.parse(images[0].body).file.location %>" alt="<%= JSON.parse(images[0].body).file.alt %>" class="max-h-[90%] w-auto h-auto" style="max-width: calc(100% - (40px * 2) - (32px * 4));">
         
-        <button class="angle-btn">
-          <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+        <button class="angle-btn hover:transition flex justify-center items-center h-[40px] w-[40px] rounded-full m-8 bg-black/70 hover:bg-black/50">
+          <i class="fa-solid fa-angle-right text-white text-lg" aria-hidden="true"></i>
         </button>
       </section>
 
@@ -41,6 +41,68 @@
       </div>
       <% }) %>
     </main>
+
+    <script>
+      const spotlight = document.getElementById("spotlight");
+  const imageContainers = document.querySelectorAll(".image-container");
+  const closeBtn = document.querySelector("#spotlight .close-btn");
+  const nextBtn = document.querySelectorAll("#spotlight .angle-btn")[1];
+  const prevBtn = document.querySelectorAll("#spotlight .angle-btn")[0];
+
+  // Sort image containers based on flex order
+  const sortedImageContainers = Array.from(imageContainers)
+    .sort((a, b) => {
+      const orderA = parseInt(window.getComputedStyle(a).order, 10);
+      const orderB = parseInt(window.getComputedStyle(b).order, 10);
+      return orderA - orderB;
+    });
+    
+      // Close spotlight
+      spotlight.addEventListener("click", ev => {
+        if (ev.target !== spotlight && !closeBtn.contains(ev.target)) return;
+        spotlight.classList.add("hidden");
+        document.body.classList.remove("frozen");
+        spotlight.querySelector("img").src = "";
+        spotlight.querySelector("img").alt = "";
+        document.body.style.overflow = "auto";
+        spotlight.style.display = "none";
+      });
+    
+      // Open spotlight
+  sortedImageContainers.forEach(container => {
+    const img = container.querySelector("img");
+    img.addEventListener("click", () => {
+      spotlight.classList.remove("hidden");
+      spotlight.querySelector("img").src = img.src;
+      spotlight.querySelector("img").alt = img.alt;
+      document.body.style.overflow = "hidden";
+      spotlight.style.top = window.scrollY + "px";
+      spotlight.style.display = "flex";
+    });
+  });
+
+      // Resize and reposition spotlight
+      window.addEventListener("resize", () => {
+        spotlight.style.top = window.scrollY + "px";
+      });
+    
+      // Navigate spotlight images
+  const navigateSpotlight = (direction) => {
+    const images = sortedImageContainers.map(container => container.querySelector("img"));
+    let currentIndex = images.findIndex(img => img.src === spotlight.querySelector("img").src);
+    let newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+
+    if (newIndex >= images.length) newIndex = 0;
+    else if (newIndex < 0) newIndex = images.length - 1;
+
+    spotlight.querySelector("img").src = images[newIndex].src;
+    spotlight.querySelector("img").alt = images[newIndex].alt;
+  };
+
+  nextBtn.addEventListener("click", () => navigateSpotlight('next'));
+  prevBtn.addEventListener("click", () => navigateSpotlight('prev'));
+    </script>
+    
 
     <%- include('../partials/footer') %>
   </body>
