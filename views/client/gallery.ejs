@@ -7,18 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('../partials/head') %>
-    <title><%= yuxuan %> | Gallery</title>
+    <title><%= yuxuan %> | <%= lang == 'zh' ? '照片' : 'Gallery' %></title>
   </head>
 
   <body>
     <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
     <main class="p-4 flex gap-4 flex-wrap justify-center items-center">
+      <!-- spotlight -->
+      <section id="spotlight" style="top: 0px;">
+        <button class="close-btn">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button class="angle-btn">
+          <i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+        </button>
+        
+        <img src="<%= JSON.parse(images[0].body).file.location %>" alt="<%= JSON.parse(images[0].body).file.alt %>">
+        
+        <button class="angle-btn">
+          <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </section>
+
+      <!-- gallery -->
       <% images.forEach(image => { %>
       <div class="image-container max-w-[400px] overflow-hidden" style="order: <%= JSON.parse(image.body).order || 9999 %>;">
         <img
           src="<%= JSON.parse(image.body).file.location %>"
-          alt=""
+          alt="<%= JSON.parse(image.body).file.alt %>"
           class="hover:scale-105 transition duration-300 cursor-pointer"
         />
       </div>

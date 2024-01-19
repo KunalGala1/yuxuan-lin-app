@@ -9,7 +9,7 @@ const quote = body['quote_' + lang]; const bio = body['bio_' + lang]; %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('../partials/head') %>
-    <title>Yuxuan Lin | Bio</title>
+    <title><%= yuxuan %> | <%= lang == 'zh' ? '个人简介' : 'Bio' %></title>
   </head>
 
   <body>

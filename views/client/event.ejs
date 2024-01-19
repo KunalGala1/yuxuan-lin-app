@@ -43,7 +43,7 @@
           <% if (date || time || location) { %>
             <div>
               <% if (date) { %>
-                <span class="date"><%= date.toLocaleString('en-US') %></span>
+                <span class="date"><%= date.toLocaleString(lang == 'zh' ? 'zh-CN' : 'en-US') %></span>
               <% } %>
               <% if (time) { %>
                 <span class="time"><%= time %></span>
@@ -54,10 +54,10 @@
             </div>
           <% } %>
           <% if (url) { %>
-            <a href="<%= url %>" target='_blank' class='inline-block bg-purple-500 text-white font-sans text-sm rounded py-2 px-3 my-4 hover:bg-purple-400'>Event Link</a>
+            <a href="<%= url %>" target='_blank' class='inline-block bg-purple-500 text-white font-sans text-sm rounded py-2 px-3 my-4 hover:bg-purple-400'><%= lang == 'zh' ? '活动链接' : 'Event Link'; %></a>
           <% } %>
           <% if (work) { %>
-            <div class='font-sans'>Featured work: <strong><%= work %></strong></div>
+            <div class='font-sans'><%= lang == 'zh' ? '特色作品' : 'Featured Work' %>: <strong><%= work %></strong></div>
           <% } %>
           <% if (performers) { %>
             <div class='font-sans'><%- performers %></div>
