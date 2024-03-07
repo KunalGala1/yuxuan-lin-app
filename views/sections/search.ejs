@@ -18,7 +18,7 @@
       tags.length; i++) { %> <% const tag = tags[i].toLowerCase(); %> <% const
       hasDocsWithTag = data.some(doc => JSON.parse(doc.body).tag === tag); %> <%
       if (hasDocsWithTag) { %>
-      <li class="bg-slate-600 font-sans rounded font-light">
+      <li class="bg-slate-600 font-sans rounded font-light transition">
         <%= lang == 'zh' ? tags_zh[i] : tags[i] %>
         <span><i class="fa-solid fa-xmark"></i></span>
       </li>

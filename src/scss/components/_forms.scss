@@ -1,40 +1,8 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 form {
-  label,
-  input,
-  select,
-  textarea {
-    @include t.sans;
-  }
-
-  label,
-  select,
-  select option {
-    text-transform: capitalize;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 12px;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    resize: none;
-    border: none;
-    @include l.padding(sm);
-    &:focus {
-      outline: solid 1px var(--200);
-    }
-  }
-
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     width: 20px;
     height: 20px;
   }
@@ -149,20 +117,10 @@ form {
   }
 }
 
-.dashboard-form--wrapper {
-  background-color: var(--235);
-  height: 100vh;
-  &.small {
-    height: auto;
-  }
-}
-
 .dashboard-form {
   @include t.sans;
   @include l.radius(xs);
-  @include a.boxshadow;
   overflow: auto;
-  @include a.hide-scrollbar;
   height: 100%;
 
   input,
@@ -176,7 +134,7 @@ form {
     background-color: rgba(200, 200, 200, 0.1);
   }
 
-  input[type='file'] {
+  input[type="file"] {
     display: none;
   }
 
@@ -193,12 +151,11 @@ form {
     }
   }
 
-  input[type='hidden'] + .item {
+  input[type="hidden"] + .item {
     margin-top: 30px;
   }
 
   .header {
-    @include a.boxshadow;
     background-color: rgb(247, 247, 247);
     position: sticky;
     top: 0;
@@ -220,10 +177,6 @@ form {
     display: none;
     &.active {
       display: block;
-    }
-    img {
-      @include l.radius(xs);
-      @include a.boxshadow;
     }
   }
 }

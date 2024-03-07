@@ -1,8 +1,7 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
-main[name='work'] {
+main[name="work"] {
   .wrapper {
     // Layout
 

@@ -1,6 +1,5 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 /* Headers */
 
@@ -12,7 +11,7 @@
   text-align: center;
   @include t.serif;
   &:after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 1px;
@@ -127,8 +126,6 @@
   &.active {
     border-left: solid 5px var(--dashboard-hover);
   }
-
-  @include a.transition;
 }
 
 .table-link {
@@ -162,7 +159,6 @@
 }
 
 .icon-link {
-  @include a.transition;
   @include l.radius(50%);
   height: 25px;
   width: 25px;
@@ -170,7 +166,6 @@
   i {
     font-size: 13px;
     color: var(--140);
-    @include a.transition;
   }
 
   &:hover {

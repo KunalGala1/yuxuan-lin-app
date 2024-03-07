@@ -1,4 +1,3 @@
-@use "../../abstracts/" as a;
 @use "../../layout" as l;
 @use "../../theme/" as t;
 
@@ -21,7 +20,6 @@ main[name="media"] {
       aspect-ratio: 1 / 1;
       object-fit: cover;
       width: 100%;
-      @include a.transition;
       &:hover {
         transform: scale(1.1);
       }

@@ -1,7 +1,7 @@
 <% let title = "Yuxuan Lin"; let subtitle = "Composer"; if (lang === "zh") {
 title = "林榆璇"; subtitle = "作曲"; } %>
 
-<header class="flex items-center justify-between gap-6 p-8 h-40">
+<header class="flex items-center justify-between gap-6 p-8 h-40 transition shadow">
   <a href="/?lang=<%= lang %>" class="block h-3/4 justify-self-start"
     ><img src="/img/logo-dark.svg" alt="logo" class="h-full"
   /></a>
@@ -13,8 +13,7 @@ title = "林榆璇"; subtitle = "作曲"; } %>
   </div>
   <div class="invisible"></div>
   <div id="language">
-    <span><a href="#">🇺🇸</a></span>
-    <span>|</span>
-    <span><a href="#">🇨🇳</a></span>
+    <span><a href="#"><img src="/img/flag/us.svg" alt="" class="w-4 inline"></a></span>
+    <span><a href="#"><img src="/img/flag/cn.svg" alt="" class="w-4 inline"></a></span>
   </div>
 </header>

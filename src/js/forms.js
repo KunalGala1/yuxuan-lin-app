@@ -1,11 +1,11 @@
-import { convertToSlug } from './utils.js';
-import { toastNotification } from './utils.js';
-import { responseAction } from './actions.js';
+import { convertToSlug } from "./utils.js";
+import { toastNotification } from "./utils.js";
+import { responseAction } from "./actions.js";
 
-const forms = document.querySelectorAll('form.handle-form-submission');
+const forms = document.querySelectorAll("form[handle-form-submission]");
 
 forms.forEach((form) => {
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Metadata
@@ -56,7 +56,7 @@ forms.forEach((form) => {
         const res = await fetch(action, {
           method: method,
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body,
         });
@@ -70,14 +70,14 @@ forms.forEach((form) => {
         if (data.success) {
           // Flash Message
           const methodMessages = {
-            post: 'created',
-            put: 'updated',
-            delete: 'deleted',
+            post: "created",
+            put: "updated",
+            delete: "deleted",
           };
 
           toastNotification(
             `${display} ${methodMessages[method.toLowerCase()]} successfully`,
-            'success'
+            "success"
           );
 
           responseAction(
@@ -95,7 +95,7 @@ forms.forEach((form) => {
 
 // Update textarea values with TinyMCE content
 const updateTextareaValues = (form) => {
-  const textareas = form.querySelectorAll('textarea');
+  const textareas = form.querySelectorAll("textarea");
   textareas.forEach((textarea) => {
     const editor = tinymce.get(textarea.id);
     if (editor) {
@@ -120,9 +120,9 @@ const updateSlugs = (form) => {
 const uploadFile = async (fileInput, formObject, alt) => {
   const file = fileInput.files[0];
   const formData = new FormData();
-  formData.append('file', file);
-  const res = await fetch('/upload', {
-    method: 'post',
+  formData.append("file", file);
+  const res = await fetch("/upload", {
+    method: "post",
     body: formData,
   });
   const data = await res.json();
@@ -132,7 +132,7 @@ const uploadFile = async (fileInput, formObject, alt) => {
 
 const persistFile = async (endpoint, formObject, nestedProperty, alt) => {
   const res = await fetch(endpoint, {
-    method: 'GET',
+    method: "GET",
   });
   const data = await res.json();
   const body = JSON.parse(accessNestedProperty(data, nestedProperty));
@@ -152,20 +152,20 @@ const handleFileUploads = (
 
   for (const fileInput of fileInputs) {
     const alt = document.querySelector(`[name="${fileInput.name}-alt"]`);
-    if (method == 'post') {
+    if (method == "post") {
       // upload file
       if (fileInput.files.length > 0) {
         promises.push(uploadFile(fileInput, formObject, alt));
       } else {
-        alert('Please upload a file');
+        alert("Please upload a file");
         return;
       }
-    } else if (method == 'put') {
+    } else if (method == "put") {
       if (fileInput.files.length > 0) {
         promises.push(uploadFile(fileInput, formObject, alt));
       } else {
         // No changes were made to the file input
-        promises.push(persistFile(action, formObject, ['doc', 'body'], alt));
+        promises.push(persistFile(action, formObject, ["doc", "body"], alt));
       }
     }
   }
@@ -183,38 +183,38 @@ const accessNestedProperty = (object, keys) => {
 const formValidation = (form) => {
   let errors = [];
 
-  const requiredFields = form.querySelectorAll('[data-required]');
+  const requiredFields = form.querySelectorAll("[data-required]");
   requiredFields.forEach((field) => {
-    if (field.value === '') {
-      if (field.type === 'file') {
+    if (field.value === "") {
+      if (field.type === "file") {
         if (
           field.parentNode
-            .querySelector('.preview')
-            .classList.contains('active')
+            .querySelector(".preview")
+            .classList.contains("active")
         ) {
           return;
         }
       }
 
-      errors.push('Please fill out all required fields');
+      errors.push("Please fill out all required fields");
 
       // Add error class
-      if (field.type === 'file') {
-        field.parentNode.querySelector('label').classList.add('error');
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.add("error");
       } else {
         // Remove error class
-        field.classList.add('error');
+        field.classList.add("error");
       }
     } else {
-      if (field.type === 'file') {
-        field.parentNode.querySelector('label').classList.remove('error');
+      if (field.type === "file") {
+        field.parentNode.querySelector("label").classList.remove("error");
       } else {
-        field.classList.remove('error');
+        field.classList.remove("error");
       }
     }
   });
   if (errors.length) {
-    toastNotification(errors[0], 'danger');
+    toastNotification(errors[0], "danger");
     return false;
   } else {
     return true;

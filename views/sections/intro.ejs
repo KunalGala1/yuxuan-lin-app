@@ -1,11 +1,13 @@
-<% const workDoc = JSON.parse(work.body);
+<%
+const workDoc = JSON.parse(work.body);
 const workImage = workDoc.file.location;
 const workAlt = workDoc.file.alt;
 const id = work._id;
 const title = workDoc['title_' + lang];
 const subtitle = workDoc['subtitle_' + lang];
 const shortProgramNote = workDoc['shortProgramNote_' + lang];
-const slug = workDoc.slug; %>
+const slug = workDoc.slug;
+%>
 
 <section id="intro" class="pd-md">
   <div class="card flex justify-center items-center gap-8">

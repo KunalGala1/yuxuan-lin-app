@@ -1,6 +1,6 @@
 <%
 const nav = {
-  menu: 'nav-menu', link_classes: 'nav-link', map: [
+  menu: 'nav-menu no-scrollbar', link_classes: 'nav-link', map: [
     {name: 'home', text: lang === 'zh' ? '首页' : 'home'},
     {name: 'bio', text: lang === 'zh' ? '个人简介' : 'bio'},
     {name: 'events', text: lang === 'zh' ? '事件' : 'events'},
@@ -35,11 +35,11 @@ const generateMenu = data => {
 }
 %>
 
-<nav>
+<nav class="shadow">
 
   <%- generateMenu(nav) %>
 
-  <div id="burger">
+  <div id="burger" class="transition shadow">
     <div></div>
     <div></div>
     <div></div>

@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   const fileInputs = document.querySelectorAll("input[type=file]");
-  const preview = document.querySelector(".preview");
+  const preview = document.querySelector("[data-preview]");
 
   if (fileInputs.length === 0 || !preview) {
     return;
   }
 
-  if (preview.querySelector("img").getAttribute("src") !== "") {
-    preview.classList.add("active");
+  if (preview.querySelector("img").getAttribute("src") === "") {
+    preview.style.display = "hidden";
+  } else {
+    preview.style.display = "block";
   }
 
   fileInputs.forEach((fileInput) => {

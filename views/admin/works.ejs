@@ -59,7 +59,7 @@
 
 const toastNotification = (message, type, duration = 1000) => {
   const toastNotification = document.createElement('div');
-  toastNotification.classList.add('toast-notification', 'active', type);
+  toastNotification.classList.add('toast-notification', 'active', type, 'transition', 'shadow');
   toastNotification.textContent = message;
   document.body.appendChild(toastNotification);
   setTimeout(() => {

@@ -1,4 +1,3 @@
-@use "../abstracts/" as a;
 @use "../layout" as l;
 @use "../theme/" as t;
 
@@ -10,8 +9,6 @@
   z-index: 9999;
   width: max-content;
 
-  @include a.transition;
-  @include a.boxshadow(sm);
   @include l.padding(xs, sm);
   @include l.radius(xs);
   @include t.sans;

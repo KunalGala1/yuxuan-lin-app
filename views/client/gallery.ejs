@@ -31,11 +31,17 @@
       </section>
 
       <!-- gallery -->
-      <% images.forEach(image => { %>
-      <div class="image-container max-w-[400px] overflow-hidden" style="order: <%= JSON.parse(image.body).order || 9999 %>;">
+      <% images.forEach(imageDoc => { %>
+        <%
+        const imageParsedBody = JSON.parse(imageDoc.body);
+        const order = imageParsedBody.order || 9999;
+        const image = imageParsedBody.file.location;
+        const imageAlt = imageParsedBody.file.alt;
+        %>
+        <div class="image-container max-w-[400px] overflow-hidden" <%= 'style=order:' + order + ';' %>>
         <img
-          src="<%= JSON.parse(image.body).file.location %>"
-          alt="<%= JSON.parse(image.body).file.alt %>"
+          src="<%= image %>"
+          alt="<%= imageAlt %>"
           class="hover:scale-105 transition duration-300 cursor-pointer"
         />
       </div>

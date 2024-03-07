@@ -52,8 +52,8 @@ const handleTableObject = (j, k) => {
         <% } %>
         <td>
           <ul class="flex justify-center items-center gap-sm">
-            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/edit` %>" class="icon-link flex justify-center items-center"><i class="fa-solid fa-pen"></i></a></li>
-            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/delete` %>" class="icon-link flex justify-center items-center delete-link" data-id="<%= data[j]._id %>"><i class="fa-solid fa-trash"></i></a></li>
+            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/edit` %>" class="icon-link flex justify-center items-center transition"><i class="fa-solid fa-pen transition"></i></a></li>
+            <li><a href="<%= `/dashboard/${name}/${data[j]._id}/delete` %>" class="icon-link flex justify-center items-center delete-link transition" data-id="<%= data[j]._id %>"><i class="fa-solid fa-trash transition"></i></a></li>
           </ul>
         </td>
       </tr>

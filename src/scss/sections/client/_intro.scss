@@ -1,6 +1,5 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
 #intro {
   @include l.max-width(sm);
@@ -18,7 +17,6 @@
     img {
       width: 100%;
       aspect-ratio: 1/1;
-      // @include a.boxshadow(md);
     }
 
     .text {

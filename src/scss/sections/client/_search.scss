@@ -1,4 +1,3 @@
-@use "../../abstracts/" as a;
 @use "../../layout" as l;
 @use "../../theme/" as t;
 
@@ -45,7 +44,6 @@
       &.active,
       &:hover {
         outline: dashed 1px white;
-        @include a.transition($duration: 0.1s);
       }
 
       &.selected {

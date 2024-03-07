@@ -2,13 +2,13 @@
   <div class="top">
     <ul>
       <li>
-        <a href="/" class="link aside-link">
+        <a href="/" class="link aside-link transition">
           <i class="fa-solid fa-house"></i>
           <span>home</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard" class="link aside-link">
+        <a href="/dashboard" class="link aside-link transition">
           <i class="fa-solid fa-gauge"></i>
           <span>dashboard</span>
         </a>
@@ -18,49 +18,49 @@
   <div class="middle">
     <ul>
       <li>
-        <a href="/dashboard/bio" class="link aside-link">
+        <a href="/dashboard/bio" class="link aside-link transition">
           <i class="fa-solid fa-book"></i>
           <span>bio</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/events" class="link aside-link">
+        <a href="/dashboard/events" class="link aside-link transition">
           <i class="fa-solid fa-calendar-days"></i>
           <span>events</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/works" class="link aside-link">
+        <a href="/dashboard/works" class="link aside-link transition">
           <i class="fa-solid fa-music"></i>
           <span>works</span>
         </a>
       </li>
       <!-- <li>
-        <a href="/dashboard/media" class="link aside-link">
+        <a href="/dashboard/media" class="link aside-link transition">
           <i class="fa-solid fa-photo-video"></i>
           <span>media</span>
         </a>
       </li> -->
       <li>
-        <a href="/dashboard/arrangements" class="link aside-link">
+        <a href="/dashboard/arrangements" class="link aside-link transition">
           <i class="fa-solid fa-pen"></i>
           <span>arrangements</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/images" class="link aside-link">
+        <a href="/dashboard/images" class="link aside-link transition">
           <i class="fa-solid fa-photo-video"></i>
           <span>images</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/links" class="link aside-link">
+        <a href="/dashboard/links" class="link aside-link transition">
           <i class="fa-solid fa-link"></i>
           <span>links</span>
         </a>
       </li>
       <li>
-        <a href="/dashboard/posts" class="link aside-link">
+        <a href="/dashboard/posts" class="link aside-link transition">
           <i class="fa-solid fa-newspaper"></i>
           <span>posts</span>
         </a>
@@ -70,7 +70,7 @@
   <div class="bottom">
     <ul>
       <li>
-        <a href="/logout" class="link aside-link">
+        <a href="/logout" class="link aside-link transition">
           <i class="fa-solid fa-right-from-bracket"></i>
           <span>log out</span>
         </a>
@@ -88,7 +88,7 @@
     const pathParts = path.split('/').filter((part) => part !== '');
 
     // Get all aside links
-    const links = document.querySelectorAll('.aside-link');
+    const links = document.querySelectorAll('.aside-link transition');
 
     let found = false;
 

@@ -1,6 +1,5 @@
-@use '../abstracts/' as a;
-@use '../layout' as l;
-@use '../theme/' as t;
+@use "../layout" as l;
+@use "../theme/" as t;
 
 nav {
   background-color: var(--main-light);
@@ -18,13 +17,9 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-
-  @include a.text_shadow;
-  @include a.boxshadow(sharp);
 }
 
 #burger {
-  @include a.boxshadow(sharp);
   margin-left: 12px;
 
   cursor: pointer;
@@ -33,7 +28,6 @@ nav {
   &.active {
     div {
       background-color: white;
-      @include a.transition;
     }
   }
 

@@ -8,111 +8,188 @@ const enctype = metadata.enctype ? metadata.enctype : 'application/x-www-form-ur
 const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
 %>
 
-<div class="dashboard-form--wrapper pd-md">
-  <form class="form dashboard-form handle-form-submission" action="<%= action %>" data-method="<%= method %>" data-id="<%= id %>" enctype="<%= enctype %>" name="<%= name %>" data-display="<%= display %>" data-sitemap="<%= sitemap %>" novalidate>
-
-    <div class="header flex justify-between items-center pd-sm">
-      <div>
-        <h2 class="dashboard-header font-bold"><%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %> <%= display %></h2>
-      </div>
-      <div class="flex justify-end items-center gap-sm">
+<section class="p-8 bg-slate-100 min-h-screen">
+  <form
+    action="<%= action %>"
+    handle-form-submission
+    class="no-scrollbar shadow font-sans"
+    data-method="<%= method %>"
+    data-id="<%= id %>"
+    enctype="<%= enctype %>"
+    name="<%= name %>"
+    data-display="<%= display %>"
+    data-sitemap="<%= sitemap %>"
+    novalidate
+    >
+    <div class="flex justify-between items-center p-4">
+      <!-- Title -->
+      <h2 class="font-bold text-dash capitalize">
+        <%= method.toLowerCase() === 'post' ? 'Add' : 'Edit' %>
+        <%= display %>
+      </h2>
+      
+      <div class="flex justify-end items-center gap-4">
+        <!-- Cancel button -->
         <div>
-          <button type="button" class="btn no-btn" onclick="window.history.back()">Cancel</button>
+          <button type="button" class="py-1 px-2 rounded text-gray-950 hover:bg-gray-200" onclick="window.history.back()">Cancel</button>
         </div>
+        
+        <!-- Save button -->
         <div>
-          <button type="submit" class="btn btn-success">Save</button>
+          <button type="submit" class="py-1 px-2 rounded bg-dash text-white hover:bg-green-700">Save</button>
         </div>
+        
+        <!-- Save and Add New Button, conditionally rendered -->
         <% if (metadata.saveAndAddNew !== false) { %>
-        <div>
-          <button type="submit" class="btn btn-success" data-response-action="save_and_add_new">Save and Add New</button>
+          <div>
+            <button type="submit" class="py-1 px-2 rounded bg-dash text-white hover:bg-green-700" data-response-action="save_and_add_new">Save and Add New</button>
+          </div>       
+          <% } %>
         </div>
-        <% } %>
-      </div>
     </div>
-
-    <div class="content pd-sm">
-      <% fields.forEach(field => {
+        
+    <!-- Fields -->
+    <div class="p-4 space-y-8">
+      <% fields.forEach(field => { %>
+        <!-- Define variables -->
+        <% 
         const tag = field.tag ? field.tag : 'input';
         const type = field.type ? field.type : 'text';
         const name = field.name ? field.name : type;
         const role = field.role ? field.role : '';
         const label = field.label ? field.label : name;
         const value = field.value ? field.value : '';
-        console.log(name, value);
         const required = field.required ? true : false;
         const file = field.file ? field.file : {};
         const selector = field.selector ? field.selector : name;
         const height = field.height ? field.height : 300;
-        if (tag === 'input') {
-          if (type === 'hidden') {
-            %><input type="hidden" name="<%= name %>" /><%
-          } else {
-            %>
-      <div class="item">
-        <div class="subitem">
-          <label for="<%= name %>" <% if (type === 'file') { %> class="file-upload" <% } %>><%= label %><% if (type === 'file') { %> <i class="mg-l-xs fa fa-upload"></i> <% } %></label>
-          <input type="<%= type %>" name="<%= name %>" id="<%= name %>" role="<%= role %>" value="<%= value %>" <%= required ? 'data-required' : '' %> autocomplete="off" <% if (type === 'file') { %> accept="image/*" <% } %> <% if (type === "checkbox" && value) { %> checked <% } %> />
-          <% if (type === 'file') { %>
-          <div class="preview">
-            <img src="<%= file.location %>" alt="" />
-            <input type="text" class="mg-t-sm" value="<%= file.alt %>" placeholder="Image description..." name="<%= name + '-alt' %>" novalidate>
+        %>
+        <!-- Input tags -->
+        <% if (tag === 'input') { %>
+          <!-- Hidden inputs (slugs) -->
+          <% if (type === 'hidden') { %>
+            <input type="hidden" name="<%= name %>">           
+          <% } else { %>
+            <div class="space-y-4">
+              <!-- Label, with conditional logic for file uploads -->
+              <label
+                for="<%= name %>"
+                <% if (type === 'file') { %>
+                  class="inline-block cursor-pointer p-2 border rounded hover:bg-slate-200 capitalize mb-1 text-sm"                 
+                <% } else { %>
+                  class="capitalize block mb-1 text-sm"
+                <% } %>
+              >
+                  <%= label %>
+                  <!-- If file upload, add icon -->
+                  <% if (type === 'file') { %>
+                    <i class="fa fa-upload ml-1"></i>                 
+                  <% } %>
+              </label>
+              <!-- Input -->
+              <input
+                class="
+                  w-full p-4
+                  <% if (type === 'file') { %>
+                    hidden
+                  <% } %>
+                "
+                type="<%= type %>"
+                name="<%= name %>"
+                id="<%= name %>"
+                role="<%= role %>"
+                value="<%= value %>"
+                <%= required ? 'data-required' : '' %>
+                autocomplete="off"
+                <% if (type === 'file') { %>
+                  accept="image/*"               
+                <% } else if (type === 'checkbox' && value) { %>
+                  checked
+                <% } %>
+              >
+              <!-- Preview Image -->
+              <% if (type === 'file') { %>
+                <div class="max-w-[400px] my-8 rounded" data-preview>
+                  <img src="<%= file.location %>" alt="<%= file.alt %>" class="shadow rounded">
+                  <!-- Alternative text input -->
+                  <input
+                    type="text" 
+                    class="mt-2 w-full p-2 rounded"
+                    value="<%= file.alt %>"
+                    placeholder="Image caption..."
+                    name="<%= name + '-alt' %>"
+                    novalidate
+                  >
+                </div>             
+              <% } %>
+            </div>
+          <% } %>         
+
+        <!-- Textarea tags -->
+        <% } else if (tag === 'textarea') { %>
+          <div class="space-y-4">
+            <!-- Label -->
+            <label for="<%= name %>" class="capitalize block mb-1 text-sm"><%= label %></label>
+            <!-- Textarea -->
+            <textarea
+              name="<%= name %>"
+              class="w-full p-4"
+              role="<%= role %>"
+              data-tinymce="<%= name %>"
+              <%= required ? 'data-required' : '' %>
+            >
+            </textarea>
+            <!-- Initiate TinyMCE -->
+            <script>
+              tinymce.init({
+                selector: 'textarea[data-tinymce="<%= name %>"]',
+                height: "<%= height %>",
+                plugins: 'advlist anchor autolink charmap code emoticons fullscreen help image insertdatetime media nonbreaking link lists quickbars searchreplace table visualblocks visualchars wordcount',
+                quickbars_insert_toolbar: false,
+                toolbar: 'undo redo | formatselect | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | link image media | removeformat | fullscreen',
+                default_link_target: '_blank',
+                setup: function(editor) {
+                  editor.on('init', function(){
+                    editor.setContent(`<%- value %>`);
+                  })
+                },
+              })
+            </script>
           </div>
-          <% } %>
-        </div>
-      </div>
-      <%
-          }
-        }
-        if (tag === 'textarea') {
-          %>
-      <div class="item">
-        <div class="subitem">
-          <label for="<%= name %>"><%= label %></label>
-          <textarea name="<%= name %>" role="<%= role %>" data-tinymce="<%= name %>" <%= required ? 'data-required' : '' %>></textarea>
-          <script>
-            tinymce.init({
-              selector: 'textarea[data-tinymce="<%= name %>"]',
-              height: '<%= height %>',
-              plugins: 'advlist anchor autolink charmap code emoticons fullscreen help image insertdatetime media nonbreaking link lists quickbars searchreplace table visualblocks visualchars wordcount',
-              quickbars_insert_toolbar: false,
-              toolbar: 'undo redo | formatselect | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | link image media | removeformat | fullscreen',
-              default_link_target: '_blank',
-              setup: function(editor) {
-                editor.on('init', function() {
-                  editor.setContent(`<%- value %>`);
-                });
-              },
-            });
-          </script>
-        </div>
-      </div>
-      <%
-        }
-        if (tag === 'select') {
-          %>
-      <div class="item">
-        <div class="subitem">
-          <label for="<%= name %>"><%= label %></label>
-          <select name="<%= name %>" autocomplete="off" <%= required ? 'data-required' : '' %>>
-            <% if (value === '') { %>
-            <option value="" selected>Please Choose An Option</option>
-            <% } else { %>
-            <option value="">Please Choose An Option</option>
-            <% }
-                for (let i = 0; i < field.options.length; i++) {
-                  if (value === field.options[i].toLowerCase()) { %>
-            <option value="<%= field.options[i].toLowerCase() %>" selected><%= field.options[i] %></option>
-            <% } else { %>
-            <option value="<%= field.options[i].toLowerCase() %>"><%= field.options[i] %></option>
-            <% }
-                } %>
-          </select>
-        </div>
-      </div>
-      <%
-        }
-      }) %>
+        <!-- Select tags -->
+        <% } else if (tag === 'select') { %>
+          <div class="space-y-4">
+            <!-- Label -->
+            <label for="<%= name %>" class="capitalize block mb-1 text-sm"></label>
+            <!-- Select -->
+            <select
+              name="<%= name %>"
+              class="capitalize w-full p-4"
+              autocomplete="off"
+              <%= required ? 'data-required' : '' %>
+            >
+              <!-- Option selection logic -->
+                <!-- Initial option -->
+                <% if (value === '') { %>
+                  <option value="" class="capitalize" selected>Please Choose An Option</option>
+                <% } else { %>
+                  <option value="" class="capitalize">Please Choose An Option</option>
+                <% } %>
+
+                <!-- Options from field -->
+                <% for( let i = 0; i < field.options.length; i++ ) { %>
+                  <% const element = field.options[i] %>
+                  <% if (value === element.toLowerCase()) { %>
+                    <option value="<%= element.toLowerCase() %>" class="capitalize" selected><%= element %></option>                 
+                  <% } else { %>
+                    <option value="<%= element.toLowerCase() %>" class="capitalize"><%= element %></option>
+                  <% } %>              
+                <% } %>
+            </select>
+          </div>
+        <% } %>
+      <% }) %>
     </div>
 
   </form>
-</div>
+</section>

@@ -1,8 +1,7 @@
-@use '../../abstracts/' as a;
-@use '../../layout' as l;
-@use '../../theme/' as t;
+@use "../../layout" as l;
+@use "../../theme/" as t;
 
-section[name='arranger'] .wrapper {
+section[name="arranger"] .wrapper {
   @include l.max-width(md);
   // @include l.padding(md);
 }
