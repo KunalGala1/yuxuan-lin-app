@@ -1,10 +1,10 @@
 <%
 const nav = {
-  menu: 'nav-menu no-scrollbar flex relative w-full overflow-x-scroll scroll-smooth whitespace-nowrap sm:justify-center', link_classes: 'nav-link text-nuetral-50 hover:text-white active:text-white capitalize text-sm align-text-top', map: [
+  menu: 'nav-menu no-scrollbar flex relative w-full overflow-x-scroll scroll-smooth whitespace-nowrap sm:justify-center', link_classes: 'nav-link text-nuetral-50 hover:text-white hover:bg-slate-100/10 rounded-sm p-1 active:text-white capitalize text-sm align-text-top', map: [
     {name: 'home', text: lang === 'zh' ? '首页' : 'home', liClass: 'ml-[2%]'},
     {name: 'bio', text: lang === 'zh' ? '个人简介' : 'bio'},
     {name: 'events', text: lang === 'zh' ? '事件' : 'events'},
-    {name: 'music', text: lang === 'zh' ? '音乐' : 'Music', menu: 'drop-down-menu hidden z-50 group-hover:flex', menuParent: 'drop-down-menu--parent group relative z-50', link_classes: 'drop-down-link', liClass: 'hidden sm:block text-nuetral-50 hover:text-white active:text-white capitalize text-sm', spanClass: 'cursor-pointer text-nuetral-50 hover:text-white active:text-white capitalize text-sm align-text-top', map: [
+    {name: 'music', text: lang === 'zh' ? '音乐' : 'Music', menu: 'drop-down-menu hidden z-50 group-hover:flex', menuParent: 'drop-down-menu--parent group relative z-50', link_classes: 'drop-down-link', liClass: 'hidden sm:block text-nuetral-50 hover:text-white active:text-white capitalize text-sm', spanClass: 'cursor-pointer text-nuetral-50 hover:text-white hover:bg-slate-100/10 p-1 rounded-sm active:text-white capitalize text-sm align-text-top', map: [
       {name: 'works', text: lang === 'zh' ? '作品' : 'Works'},
       {name: 'arranger', text: lang === 'zh' ? '编曲' : 'Arranger', href: '/arrangements'},
     ]},

@@ -19,7 +19,7 @@ router.post("/mailsend", async (req, res) => {
   const messageHtml = message.replace(/\n/g, "<br>");
 
   const output = `
-    <p>You have a new contact request</p>
+    <p>You have a new contact request from yuxuan-lin.com</p>
     <h3>Contact Details</h3>
     <ul>
         <li>Name: ${name}</li>

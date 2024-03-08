@@ -193,49 +193,6 @@ form .item + .item {
   margin-top: 30px;
 }
 
-.primary-form .item:first-child {
-  display: flex;
-  justify-content: space-between;
-}
-.primary-form .item:first-child .subitem {
-  width: 100%;
-}
-.primary-form .item:first-child .subitem + .subitem {
-  margin-left: 30px;
-}
-.primary-form .item + .item {
-  margin-top: 17.5px;
-}
-.primary-form .item:last-child {
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-end;
-}
-.primary-form .item .subitem label {
-  display: block;
-  margin-bottom: 5px;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-}
-.primary-form .item .subitem input,
-.primary-form .item .subitem textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid rgba(210, 210, 210, 0.15);
-  background-color: var(--main-light);
-  font-family: "Inter", sans-serif;
-  font-size: 18px;
-  resize: none;
-}
-.primary-form .item .subitem input:focus,
-.primary-form .item .subitem textarea:focus {
-  outline: none;
-  border-color: var(--60);
-}
-.primary-form .item .subitem textarea {
-  height: 200px;
-}
-
 .contact-form .item:first-child {
   display: flex;
   justify-content: space-between;
@@ -264,7 +221,9 @@ form .item + .item {
 .contact-form .item .subitem textarea {
   width: 100%;
   padding: 10px;
-  background-color: var(--main-light);
+  background-color: rgb(200, 200, 200);
+  color: var(--main);
+  border-radius: 2px;
   font-family: "Inter", sans-serif;
   font-size: 18px;
   resize: none;

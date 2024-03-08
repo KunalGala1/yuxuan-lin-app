@@ -31,14 +31,14 @@
             <% const post = JSON.parse(obj.body) %>
             <div class='bg-slate-200 rounded shadow md:max-w-[328px]'>
                 <div class='p-4 bg-slate-300/50'>
-                  <a href='/blog/<%= post.slug %>'>
+                  <a href='/blog/<%= post.slug %>?lang=<%= lang %>'>
                     <h2 class="text-slate-800 font-bold text-lg"><%= post['title_' + lang] %></h2>
                   </a>
                 </div>
                 <div class='p-4'>
                   <div class="text-slate-950 font-light"><%- post['description_' + lang] %></div>
                 </div>
-                <a href='/blog/<%= post.slug %>'>
+                <a href='/blog/<%= post.slug %>?lang=<%= lang %>'>
                   <img src="<%= post.file.location %>" alt="<%= post.file.alt %>">
                 </a>
                 <div class='p-4'>

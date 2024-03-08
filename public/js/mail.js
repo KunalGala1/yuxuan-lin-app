@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         formObject[key] = value;
       }
 
-      const { name, email, subject, auth } = formObject;
+      const { name, email, subject } = formObject;
 
       // Regular expression for email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (!name || !email || !subject || !auth) {
+      if (!name || !email || !subject) {
         toastNotification(
           `${
             lang === "zh"
@@ -43,19 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
           5000
         );
         return false;
-      } else if (auth.toLowerCase() !== "3" && auth.toLowerCase() !== "three") {
-        toastNotification(
-          `${
-            lang === "zh"
-              ? "安全问题回答错误"
-              : "Security question was answered incorrectly"
-          }`,
-          "danger",
-          5000
-        );
-        return false;
       }
-
       // If everything is filled out, send the POST request
       try {
         const response = await fetch("/mailsend", {
