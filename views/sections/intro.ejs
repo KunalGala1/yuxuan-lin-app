@@ -9,23 +9,30 @@ const shortProgramNote = workDoc['shortProgramNote_' + lang];
 const slug = workDoc.slug;
 %>
 
-<section id="intro" class="pd-md">
-  <div class="card flex justify-center items-center gap-8">
-    <div class="block">
-      <img src="<%= workImage %>" alt="<%= workAlt %>" />
-    </div>
-    <div class="block">
-      <div class="text">
-        <h2 class="title fourth-header">
-          <%= lang == 'zh' ? '介绍' : 'Introducing' %>
-        </h2>
-        <h3 class="subtitle <%= lang %>-txt"><%= title %></h3>
-        <p class="description"><%- shortProgramNote %></p>
-        <p>
-          <a href="/works/<%= slug %>?lang=<%= lang %>">
-            <%= lang == 'zh' ? '阅读更多...' : 'read more...' %>
-          </a>
-        </p>
+<section class="bg-slate-600/90">
+  <div id="intro" class="px-8 py-16 max-w-4xl mx-auto">
+    <!-- <h2 class="serif font-bold text-lg text-center">
+      <%=
+        // lang == 'zh' ? '介绍' : 'Introducing'
+      %>
+    </h2> -->
+    <div class="card flex justify-center sm:items-center gap-8 md:gap-16 flex-col-reverse sm:flex-row">
+      <div class="sm:w-1/2">
+        <a href="/works/<%= slug %>?lang=<%= lang %>"><img src="<%= workImage %>" alt="<%= workAlt %>" class="aspect-square w-full rounded-sm"/></a>
+      </div>
+      <div class="sm:w-1/2">
+        <div class="font-serif space-y-6 md:space-y-8">
+          
+          <div class="md:text-2xl">
+            <h3 class="subtitle <%= lang %>-txt text-lg italic mb-2"><%= title %></h3>
+            <p class="description"><%- shortProgramNote %></p>
+          </div>
+          <p>
+            <a href="/works/<%= slug %>?lang=<%= lang %>" class="bg-light-blue hover:bg-slate-300 font-sans text-main px-4 py-2 block w-max mt-4 rounded-sm">
+              <%= lang == 'zh' ? '阅读更多...' : 'Read more' %>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   </div>

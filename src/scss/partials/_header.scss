@@ -12,22 +12,3 @@ header {
 
   background-color: var(--main);
 }
-
-#language {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 16px;
-  padding: 8px;
-  color: var(--200);
-
-  a {
-    @include l.padding(0, xs);
-    @include l.radius(sm);
-  }
-
-  a:hover,
-  a.active {
-    background-color: rgba(228, 193, 232, 0.2);
-  }
-}

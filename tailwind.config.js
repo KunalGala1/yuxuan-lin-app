@@ -9,7 +9,7 @@ module.exports = {
     screens: {
       xxs: "360px",
       xs: "540px",
-      sm: "640px",
+      sm: "650px",
       md: "768px",
       lg: "1024px",
       xl: "1280px",
@@ -17,8 +17,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        main: "rgb(4, 19, 32)",
+        main: "rgb(1, 18, 22)",
         dash: "#2a654c",
+        "main-light": "rgb(16,37,68)",
+        "light-blue": "rgb(0,163,223)",
       },
     },
   },

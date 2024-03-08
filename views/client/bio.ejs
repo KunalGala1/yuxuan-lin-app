@@ -15,9 +15,9 @@ const quote = body['quote_' + lang]; const bio = body['bio_' + lang]; %>
   <body>
     <%- include('../partials/header') %> <%- include('../partials/nav') %>
     <main id="bio">
-      <div class="img-parent flex justify-center items-center gap pd-md">
-        <img src="<%= image %>" alt="headshot" class="md:w-1/2" />
-        <blockquote class="engraved leading-loose text-center <%= lang %>-txt">
+      <div class="img-parent flex justify-center items-center gap-8 p-8">
+        <img src="<%= image %>" alt="headshot" class="md:w-2/5 rounded-sm" />
+        <blockquote class="engraved leading-loose text-center <%= lang %>-txt md:w-3/5 px-4">
           &ldquo;<%= quote %>&rdquo;
         </blockquote>
       </div>

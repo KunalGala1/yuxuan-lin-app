@@ -1,5 +1,11 @@
-<% let title = "Yuxuan Lin"; let subtitle = "Composer"; if (lang === "zh") {
-title = "林榆璇"; subtitle = "作曲"; } %>
+<%
+let title = "Yuxuan Lin";
+let subtitle = "Composer";
+if (lang === "zh") {
+  title = "林榆璇";
+  subtitle = "作曲";
+}
+%>
 
 <header class="flex items-center justify-between gap-6 p-8 h-40 transition shadow">
   <a href="/?lang=<%= lang %>" class="block h-3/4 justify-self-start"
@@ -12,8 +18,8 @@ title = "林榆璇"; subtitle = "作曲"; } %>
     <h2 class="text-center text-slate-50/50"><%= subtitle %></h2>
   </div>
   <div class="invisible"></div>
-  <div id="language">
-    <span><a href="#"><img src="/img/flag/us.svg" alt="" class="w-4 inline"></a></span>
-    <span><a href="#"><img src="/img/flag/cn.svg" alt="" class="w-4 inline"></a></span>
+  <div id="language" class="absolute top-0 right-0 flex gap-1 p-2">
+    <span class="w-8"><a href="#" class="w-full block p-1 hover:bg-gray-400/25 rounded-sm"><img src="/img/flag/us.svg" alt="US Flag" class="w-full"></a></span>
+    <span class="w-8"><a href="#" class="w-full block p-1 hover:bg-gray-400/25 rounded-sm"><img src="/img/flag/cn.svg" alt="CN Flag" class="w-full"></a></span>
   </div>
 </header>

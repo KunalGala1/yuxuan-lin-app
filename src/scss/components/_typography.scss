@@ -74,13 +74,8 @@
 
 /* Links */
 
-.nav-link {
-  color: rgb(150, 150, 150);
-  &:hover,
-  &.active {
-    color: white;
-  }
-  text-transform: capitalize;
+.nav-link.active {
+  color: white;
 }
 
 .dashboard-table-link {

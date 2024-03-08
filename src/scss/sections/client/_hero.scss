@@ -2,7 +2,7 @@
 @use "../../theme/" as t;
 
 #hero {
-  padding: 30px;
+  padding: 32px;
   .wrapper {
     @include l.max-width(lg);
     display: flex;
@@ -15,14 +15,10 @@
     }
   }
 
-  background-color: var(--main);
-
   img {
     margin: 0 auto;
     width: 100%;
 
-    margin-bottom: 30px;
-
-    @include l.radius(sm);
+    margin-bottom: 32px;
   }
 }

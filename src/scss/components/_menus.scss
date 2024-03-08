@@ -2,30 +2,10 @@
 @use "../theme/" as t;
 
 .nav-menu {
-  display: flex;
-  position: relative;
-  @include l.min(navBar) {
-    justify-content: center;
-  }
-  width: 100%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-
   $fade-amount: 2%;
 
   & > li + li {
     margin-left: 32px;
-  }
-
-  li {
-    &:first-child {
-      margin-left: $fade-amount;
-    }
-    &.last-child {
-      padding-right: $fade-amount;
-    }
-
-    white-space: nowrap;
   }
 
   #gradient {
@@ -70,26 +50,18 @@
 }
 
 .drop-down-menu--parent {
-  span {
-    cursor: pointer;
-    color: rgb(150, 150, 150);
-    &:hover {
-      color: white;
-    }
-  }
-
   & > li + li {
-    margin-top: 15px;
+    margin-top: 16px;
   }
 
-  ul {
-    display: none;
-    z-index: 100;
-  }
-  &:hover ul {
-    display: flex;
-  }
+  // ul {
+  //   display: none;
+  //   z-index: 100;
+  // }
+  // &:hover ul {
+  //   display: flex;
+  // }
 
-  position: relative;
-  z-index: 100;
+  // position: relative;
+  // z-index: 100;
 }

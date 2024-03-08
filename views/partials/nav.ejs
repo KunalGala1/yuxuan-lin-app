@@ -1,21 +1,19 @@
 <%
 const nav = {
-  menu: 'nav-menu no-scrollbar', link_classes: 'nav-link', map: [
-    {name: 'home', text: lang === 'zh' ? '首页' : 'home'},
+  menu: 'nav-menu no-scrollbar flex relative w-full overflow-x-scroll scroll-smooth whitespace-nowrap sm:justify-center', link_classes: 'nav-link text-nuetral-50 hover:text-white active:text-white capitalize text-sm align-text-top', map: [
+    {name: 'home', text: lang === 'zh' ? '首页' : 'home', liClass: 'ml-[2%]'},
     {name: 'bio', text: lang === 'zh' ? '个人简介' : 'bio'},
     {name: 'events', text: lang === 'zh' ? '事件' : 'events'},
-    {name: 'music', text: lang === 'zh' ? '音乐' : 'Music', menu: 'drop-down-menu', link_classes: 'drop-down-link', liClass: 'd-sm-none', map: [
+    {name: 'music', text: lang === 'zh' ? '音乐' : 'Music', menu: 'drop-down-menu hidden z-50 group-hover:flex', menuParent: 'drop-down-menu--parent group relative z-50', link_classes: 'drop-down-link', liClass: 'hidden sm:block text-nuetral-50 hover:text-white active:text-white capitalize text-sm', spanClass: 'cursor-pointer text-nuetral-50 hover:text-white active:text-white capitalize text-sm align-text-top', map: [
       {name: 'works', text: lang === 'zh' ? '作品' : 'Works'},
-      // {name: 'media', text: lang === 'zh' ? '媒体' : 'Media'},
       {name: 'arranger', text: lang === 'zh' ? '编曲' : 'Arranger', href: '/arrangements'},
     ]},
     {name: 'works', text: lang === 'zh' ? '作品' : 'works', liClass: 'd-none d-sm-block'},
-    // {name: 'media', text: lang === 'zh' ? '媒体' : 'media', liClass: 'd-none d-sm-block'},
     {name: 'arranger', text: lang === 'zh' ? '编曲' : 'arranger', liClass: 'd-none d-sm-block', href: '/arrangements'},
     {name: "gallery", text: lang === 'zh' ? '照片' : 'gallery'},
     {name: 'blog', text: lang === 'zh' ? '博客' : 'blog'},
     {name: 'links', text: lang === 'zh' ? '链接' : 'links'},
-    {name: 'contact', text: lang === 'zh' ? '联系' : 'contact', liClass: 'last-child'},
+    {name: 'contact', text: lang === 'zh' ? '联系' : 'contact', liClass: 'last-child pr-[2%]'},
   ]
 }
 
@@ -25,24 +23,25 @@ const generateMenu = data => {
     const name = item.name;
     const text = item.text || item.name;
     const liClass = item.liClass || '';
+    const spanClass = item.spanClass || '';
     let href = (item.name === 'home' || name === '首页') ? '/' : (item.href || `/${name}`);
     href += '?lang=' + lang;
     if (!item.menu) html += `<li class="${liClass}"><a href='${href}' class="${data.link_classes}">${text}</a></li>`;
-    else { html += `<li class="${item.menu + '--parent'} ${liClass}"><span>${text}</span>${generateMenu(item)}</li>`}
+    else { html += `<li class="${item.menuParent} ${liClass}"><span class="${spanClass}">${text}</span>${generateMenu(item)}</li>`}
   })
   html +=`</ul>`
   return html;
 }
 %>
 
-<nav class="shadow">
+<nav class="shadow bg-main-light font-sans h-[50px] flex justify-center px-6 items-center sticky top-0 z-50">
 
   <%- generateMenu(nav) %>
 
-  <div id="burger" class="transition shadow">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div id="burger" class="transition shadow ml-3 cursor-pointer group space-y-0.5 sm:hidden">
+    <div class="group-hover:bg-white group-active:bg-white bg-neutral-50 w-4 h-0.5 rounded"></div>
+    <div class="group-hover:bg-white group-active:bg-white bg-neutral-50 w-4 h-0.5 rounded"></div>
+    <div class="group-hover:bg-white group-active:bg-white bg-neutral-50 w-4 h-0.5 rounded"></div>
   </div>
 </nav>
 

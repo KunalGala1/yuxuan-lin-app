@@ -5,8 +5,6 @@ main[name="work"] {
   .wrapper {
     // Layout
 
-    @include l.max-width(md);
-
     // Heading
     .heading {
       text-align: center;
@@ -34,13 +32,7 @@ main[name="work"] {
     }
 
     // Metadata
-    .metadata {
-      padding: 0 5%;
-      margin-top: 60px;
-      margin-bottom: 30px;
-
-      // @include t.sans;
-
+    .metadaata {
       .metadata-wrapper {
         line-height: 2;
         @include l.padding(md);

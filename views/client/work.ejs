@@ -23,78 +23,97 @@ body['performanceNote_' + lang]; %> <% const recording = body.recording || '';
     <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
     <main name="work" class="font-serif">
-      <div class="wrapper space-y-8 px-6 xs:px-8 py-[100px]">
-        <div class="heading">
+      <div class="wrapper py-[100px]">
+        <div class="heading px-6 xs:px-8">
           <h1 class="title text-4xl"><%= title %></h1>
           <% if (subtitle && subtitle !== '') { %>
           <h2 class="subtitle <%= lang %>-txt"><%= subtitle %></h2>
           <% } %>
         </div>
 
-        <% if (instrumentation && instrumentation !== '' || duration && duration
-        !== '' || year && year !== '' || commission && commission !== '' || url
-        && url !== '') { %>
-        <div class="metadata">
-          <div class="metadata-wrapper bg-slate-700/50">
-            <% if (instrumentation && instrumentation !== '') { %>
-            <p class="detailed-info">
-              <span><%= lang == 'zh' ? '配器 :' : 'Instrumentation:' %></span>
-              <%= instrumentation %>
-            </p>
-            <% } %> <% if (duration && duration !== '') { %>
-            <p class="duration">
-              <span><%= lang == 'zh' ? '时长 :' : 'Duration:' %></span>
-              <%= duration %>
-            </p>
-            <% } %> <% if (year && year !== '') { %>
-            <p class="year">
-              <span
-                ><%= lang == 'zh' ? '创作年份 :' : 'Year(s) of Composition:'
-                %></span
-              >
-              <%= year %>
-            </p>
-            <% } %> <% if (commission && commission !== '') { %>
-            <div class="commission-info"><%- commission %></div>
-            <% } %> <% if (premiere && premiere !== '') { %>
-            <div class="premiere-info"><%- premiere %></div>
-            <% } %>
+        <% if (
+            instrumentation && instrumentation !== ''
+            || duration && duration !== ''
+            || year && year !== ''
+            || commission && commission !== ''
+            || url && url !== ''
+          ) { %>
+            <div class="metadata bg-slate-600/90 my-16">
+
+              <div class="metadata-wrapper max-w-4xl mx-auto p-8 font-serif">
+                
+                <div class="mb-8 space-y-2">
+                  <% if (instrumentation && instrumentation !== '') { %>
+                    <p class="detailed-info font-bold">
+                      <span class="text-neutral-400 font-normal text-sm font-sans mr-1"><%= lang == 'zh' ? '配器 :' : 'Instrumentation:' %></span>
+                      <%= instrumentation %>
+                    </p>
+                  <% } %>
+                  <% if (duration && duration !== '') { %>
+                    <p class="duration font-bold">
+                      <span class="text-neutral-400 font-normal text-sm font-sans mr-1"><%= lang == 'zh' ? '时长 :' : 'Duration:' %></span>
+                      <%= duration %>
+                    </p>
+                  <% } %>
+                  <% if (year && year !== '') { %>
+                    <p class="year font-bold">
+                      <span class="text-neutral-400 font-normal text-sm font-sans mr-1">
+                        <%= lang == 'zh' ? '创作年份 :' : 'Year(s) of Composition:' %>
+                      </span>
+                      <%= year %>
+                    </p>
+                  <% } %>
+                </div>
+
+
+                <% if (commission && commission !== '') { %>
+                  <div class="commission-info"><%- commission %></div>
+                <% } %>
+                <% if (premiere && premiere !== '') { %>
+                  <div class="premiere-info"><%- premiere %></div>
+                <% } %>
+              </div>
+
+              <% if (url && url !== '') { %>
+                <div class="purchase-link-wrapper">
+                  <p>
+                    Available for purchase at:
+                    <a href="<%= url %>" target="_blank"><%= url %></a>
+                  </p>
+                </div>
+              <% } %>
+
+            </div>
+
+
+        <div class="px-6 xs:px-8 max-w-4xl mx-auto space-y-8">
+          <% } %> <% if (programNote && programNote !== '') { %>
+          <div class="program-note">
+            <h3><%= lang == 'zh' ? '节目说明' : 'Program Note' %></h3>
+            <p><%- programNote %></p>
           </div>
-          <% if (url && url !== '') { %>
-          <div class="purchase-link-wrapper">
-            <p>
-              Available for purchase at:
-              <a href="<%= url %>" target="_blank"><%= url %></a>
-            </p>
+          <% } %> <% if (performanceNote && performanceNote !== '') { %>
+          <div class="performance-note">
+            <hr />
+            <h3><%= lang == 'zh' ? '演出说明' : 'Performance Note' %></h3>
+            <p><%- performanceNote %></p>
+          </div>
+          <% } %> <% if (recording && recording !== '') { %>
+          <div class="recording">
+            <div class="w-full"><%- recording %></div>
+          </div>
+          <% } %> <% if (moreInfo && moreInfo !== '') { %>
+          <div class="more-info">
+            <hr class="border-t border-slate-500/25 mb-16" />
+            <div><%- moreInfo %></div>
           </div>
           <% } %>
         </div>
-        <% } %> <% if (programNote && programNote !== '') { %>
-        <div class="program-note">
-          <h3><%= lang == 'zh' ? '节目说明' : 'Program Note' %></h3>
-          <p><%- programNote %></p>
-        </div>
-        <% } %> <% if (performanceNote && performanceNote !== '') { %>
-        <div class="performance-note">
-          <hr />
-          <h3><%= lang == 'zh' ? '演出说明' : 'Performance Note' %></h3>
-          <p><%- performanceNote %></p>
-        </div>
-        <% } %> <% if (recording && recording !== '') { %>
-        <div class="recording">
-          <div class="w-full"><%- recording %></div>
-        </div>
-        <% } %> <% if (moreInfo && moreInfo !== '') { %>
-        <div class="more-info">
-          <hr class="border-t border-slate-500/25 mb-16" />
-          <div><%- moreInfo %></div>
-        </div>
-        <% } %>
 
-        <div class="btn-wrapper">
+        <div class="btn-wrapper px-6 xs:px-8 max-w-4xl mx-auto">
           <a
             href="<%= lang == 'zh' ? '/works?lang=zh' : '/works' %>"
-            class="btn btn-primary transition"
+            class="bg-light-blue font-sans px-4 py-2 rounded-sm text-black hover:bg-slate-300 active:bg-slate-200"
           >
             <%= lang == 'zh' ? '返回作品' : 'Back to Works' %>
           </a>
