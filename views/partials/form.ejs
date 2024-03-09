@@ -31,18 +31,18 @@ const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
       <div class="flex justify-end items-center gap-4">
         <!-- Cancel button -->
         <div>
-          <button type="button" class="py-1 px-2 rounded text-gray-950 hover:bg-gray-200" onclick="window.history.back()">Cancel</button>
+          <button type="button" class="py-1 px-2 rounded-sm text-gray-950 hover:bg-gray-200" onclick="window.history.back()">Cancel</button>
         </div>
         
         <!-- Save button -->
         <div>
-          <button type="submit" class="py-1 px-2 rounded bg-dash text-white hover:bg-green-700">Save</button>
+          <button type="submit" class="py-1 px-2 rounded-sm bg-dash text-white hover:bg-green-700">Save</button>
         </div>
         
         <!-- Save and Add New Button, conditionally rendered -->
         <% if (metadata.saveAndAddNew !== false) { %>
           <div>
-            <button type="submit" class="py-1 px-2 rounded bg-dash text-white hover:bg-green-700" data-response-action="save_and_add_new">Save and Add New</button>
+            <button type="submit" class="py-1 px-2 rounded-sm bg-dash text-white hover:bg-green-700" data-response-action="save_and_add_new">Save and Add New</button>
           </div>       
           <% } %>
         </div>
@@ -75,7 +75,7 @@ const sitemap = metadata.sitemap ? JSON.stringify(metadata.sitemap) : false;
               <label
                 for="<%= name %>"
                 <% if (type === 'file') { %>
-                  class="inline-block cursor-pointer p-2 border rounded hover:bg-slate-200 capitalize mb-1 text-sm"                 
+                  class="inline-block cursor-pointer p-2 border rounded-sm hover:bg-slate-200 capitalize mb-1 text-sm"                 
                 <% } else { %>
                   class="capitalize block mb-1 text-sm"
                 <% } %>

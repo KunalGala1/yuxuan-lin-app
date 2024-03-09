@@ -774,6 +774,10 @@ video {
   width: 2rem;
 }
 
+.w-\[400px\] {
+  width: 400px;
+}
+
 .w-\[40px\] {
   width: 40px;
 }
@@ -789,10 +793,6 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-\[400px\] {
-  width: 400px;
 }
 
 .max-w-4xl {
@@ -827,12 +827,12 @@ video {
   max-width: 800px;
 }
 
-.max-w-lg {
-  max-width: 32rem;
-}
-
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-lg {
+  max-width: 32rem;
 }
 
 .cursor-pointer {
@@ -1021,11 +1021,6 @@ video {
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
 }
 
-.bg-purple-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 85 247 / var(--tw-bg-opacity));
-}
-
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
@@ -1073,6 +1068,10 @@ video {
   padding: 0.5rem;
 }
 
+.p-2\.5 {
+  padding: 0.625rem;
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -1083,10 +1082,6 @@ video {
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-2\.5 {
-  padding: 0.625rem;
 }
 
 .px-2 {
@@ -1420,9 +1415,8 @@ select:focus {
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-purple-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(192 132 252 / var(--tw-bg-opacity));
+.hover\:bg-slate-100\/10:hover {
+  background-color: rgb(241 245 249 / 0.1);
 }
 
 .hover\:bg-slate-200:hover {
@@ -1437,49 +1431,6 @@ select:focus {
 
 .hover\:bg-white\/10:hover {
   background-color: rgb(255 255 255 / 0.1);
-}
-
-.hover\:bg-slate-50\/50:hover {
-  background-color: rgb(248 250 252 / 0.5);
-}
-
-.hover\:bg-slate-50\/25:hover {
-  background-color: rgb(248 250 252 / 0.25);
-}
-
-.hover\:bg-slate-100\/25:hover {
-  background-color: rgb(241 245 249 / 0.25);
-}
-
-.hover\:bg-slate-100\/20:hover {
-  background-color: rgb(241 245 249 / 0.2);
-}
-
-.hover\:bg-slate-200\/20:hover {
-  background-color: rgb(226 232 240 / 0.2);
-}
-
-.hover\:bg-slate-200\/10:hover {
-  background-color: rgb(226 232 240 / 0.1);
-}
-
-.hover\:bg-slate-100\/10:hover {
-  background-color: rgb(241 245 249 / 0.1);
-}
-
-.hover\:bg-blue-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-white:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .hover\:text-blue-300:hover {

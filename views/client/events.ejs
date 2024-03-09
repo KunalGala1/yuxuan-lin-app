@@ -16,7 +16,7 @@
     <%- include('../partials/nav') %>
 
 
-    <main id="events" data-cli class='p-8'>
+    <main id="events" data-cli class='p-4'>
     <!-- Upcoming Events -->  
     <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '演出信息' : 'Upcoming Events' %></h2>
   <div class="wrapper flex justify-center items-start gap wrap">
@@ -87,7 +87,7 @@
 
   <!-- Past Events -->
     <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '过去的演出' : 'Past Events' %></h2>
-  <div class="wrapper pd-md flex justify-center items-start gap wrap">
+  <div class="wrapper p-4 flex justify-center items-start gap wrap">
     <% events.filter(e => new Date(JSON.parse(e.body).date) < new Date())
       .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
       .forEach(event => { 
