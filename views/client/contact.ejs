@@ -4,69 +4,124 @@
 <html lang="<%= lang %>">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%- include('../partials/head') %>
-  <title><%= yuxuan %> | <%= lang == 'zh' ? '联系' : 'Contact' %></title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head') %>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <script>
+      async function onSubmit(token){
+        const form = document.getElementById("contact-form");
+        if (!form) return;
+        const lang = document.documentElement.lang;            
+
+        const formData = new FormData(form);
+        let formObject = {};
+        for (let [key, value] of formData.entries()) {
+            formObject[key] = value;
+        }
+
+        const { name, email, subject } = formObject;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name || !email || !subject) {
+            toastNotification(lang === "zh" ? "所有必填字段必须填写完整" : "All required fields must be filled out", "danger", 5000);
+            return false;
+        } else if (!emailRegex.test(email)) {
+            toastNotification(lang === "zh" ? "请输入一个有效的电子邮件地址" : "Please enter a valid email address", "danger", 5000);
+            return false;
+        }
+
+        try {
+            const response = await fetch("/mailsend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", },
+                body: JSON.stringify(formObject),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            toastNotification(data.msg, "success", 5000);
+            form.reset();
+        } catch (error) {
+            console.error("There was a problem with the fetch operation:", error);
+            toastNotification(`Error: ${error.message}`, "danger", 5000);
+        }        
+
+        function toastNotification(message, type, duration = 1000) {
+            const notification = document.createElement("div");
+            notification.classList.add("toast-notification", "active", type, "transition", "shadow");
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.classList.remove("active");
+                setTimeout(() => {
+                    notification.remove();
+                }, 250);
+            }, duration);
+        }
+      }        
+    </script>
+
+    <title><%= yuxuan %> | <%= lang == 'zh' ? '联系' : 'Contact' %></title>
 </head>
 
 <body>
-  <%- include('../partials/header') %> <%- include('../partials/nav') %>
+    <%- include('../partials/header') %> <%- include('../partials/nav') %>
 
-  <main name="contact" class='max-w-[800px] mx-auto'>
-    <div class="space-y-8 p-6 xs:p-8">
-      <h2 class="text-center font-bold text-xl font-sans"><%= lang == 'zh' ? '欢迎随时联系' : 'Feel Free to Get in Touch' %></h2>
-      <p class='text-center font-sans'><%= lang == 'zh' ? '此表用于委托新作品、合作项目和/或其他咨询' : 'for commissioning new work, collaborations and/or other inquiries' %></p>
-      <form action="/mailsend" method="post" class="form contact-form" novalidate>
-        <div class="item">
-          <div class="subitem">
-            <label for="name">
-              <%= lang == 'zh' ? '姓名*' : 'Name*' %>
-            </label>
-            <input type="text" name="name" required />
-          </div>
-          <div class="subitem">
-            <label for="email">
-              <%= lang == 'zh' ? '邮箱*' : 'Email*' %>
-            </label>
-            <input type="text" name="email" required />
-          </div>
-        </div>
-        <div class="item">
-          <div class="subitem">
-            <label for="subject">
-              <%= lang == 'zh' ? '主题*' : 'Subject*' %>
-            </label>
-            <input type="text" name="subject" required />
-          </div>
-        </div>
-        <div class="item">
-          <div class="subitem">
-            <label for="message">
-              <%= lang == 'zh' ? '信息' : 'Message' %>
-            </label>
-            <textarea name="message" id="" cols="30" rows="10"></textarea>
-          </div>
-        </div>
-        <!-- <div class="item">
-          <div class="subitem">
-            <label for="auth">2 + 1 = ?</label>
-            <input type="text" name="auth" required />
-          </div>
-        </div> -->
-        <div class="item">
-          <div class="subitem">
-            <button type="submit" class="py-2 px-4 rounded-sm bg-light-blue text-main hover:bg-slate-300 font-sans">
-              <%= lang == 'zh' ? '发送' : 'Send' %> <i class="fa-solid fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </main>
+    <main name="contact" class='max-w-[800px] mx-auto'>
+        <div class="space-y-8 p-6 xs:p-8">
+            <h2 class="text-center font-bold text-xl font-sans"><%= lang == 'zh' ? '欢迎随时联系' : 'Feel Free to Get in Touch' %></h2>
 
-  <%- include('../partials/footer') %>
+            <p class='text-center font-sans'><%= lang == 'zh' ? '此表用于委托新作品、合作项目和/或其他咨询' : 'for commissioning new work, collaborations and/or other inquiries' %></p>
+
+            <form id="contact-form" action="/mailsend" method="post" class="form contact-form" novalidate>
+                <div class="item">
+                    <div class="subitem">
+                        <label for="name">
+                            <%= lang == 'zh' ? '姓名*' : 'Name*' %>
+                        </label>
+                        <input type="text" name="name" required />
+                    </div>
+                    <div class="subitem">
+                        <label for="email">
+                            <%= lang == 'zh' ? '邮箱*' : 'Email*' %>
+                        </label>
+                        <input type="text" name="email" required />
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="subitem">
+                        <label for="subject">
+                            <%= lang == 'zh' ? '主题*' : 'Subject*' %>
+                        </label>
+                        <input type="text" name="subject" required />
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="subitem">
+                        <label for="message">
+                            <%= lang == 'zh' ? '信息' : 'Message' %>
+                        </label>
+                        <textarea name="message" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="subitem">
+                        <button type="submit" class="g-recaptcha py-2 px-4 rounded-sm bg-light-blue text-main hover:bg-slate-300 font-sans" data-sitekey="6LdZh5YpAAAAACtzwCh-P5AIjPha-zDmSIQIGRgB" data-callback="onSubmit" data-action="submit">
+                            <%= lang == 'zh' ? '发送' : 'Send' %> <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
 </body>
 
 </html>

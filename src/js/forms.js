@@ -182,37 +182,48 @@ const accessNestedProperty = (object, keys) => {
 
 const formValidation = (form) => {
   let errors = [];
-
   const requiredFields = form.querySelectorAll("[data-required]");
-  requiredFields.forEach((field) => {
-    if (field.value === "") {
-      if (field.type === "file") {
-        if (
-          field.parentNode
-            .querySelector(".preview")
-            .classList.contains("active")
-        ) {
-          return;
-        }
-      }
 
+  // Function to safely query for a child and apply a class
+  const safelyQueryAndApplyClass = (
+    parent,
+    selector,
+    className,
+    action = "add"
+  ) => {
+    const element = parent.querySelector(selector);
+    if (element) {
+      element.classList[action](className);
+    }
+  };
+
+  requiredFields.forEach((field) => {
+    const isFieldEmpty = field.value === "";
+    const isFileType = field.type === "file";
+    const hasActivePreview =
+      isFileType &&
+      field.parentNode.querySelector("[data-preview]") &&
+      window.getComputedStyle(field.parentNode.querySelector("[data-preview]"))
+        .display === "block";
+
+    if (isFieldEmpty && !hasActivePreview) {
       errors.push("Please fill out all required fields");
 
-      // Add error class
-      if (field.type === "file") {
-        field.parentNode.querySelector("label").classList.add("error");
+      if (isFileType) {
+        safelyQueryAndApplyClass(field.parentNode, "label", "error");
       } else {
-        // Remove error class
         field.classList.add("error");
       }
     } else {
-      if (field.type === "file") {
-        field.parentNode.querySelector("label").classList.remove("error");
+      // No need to check for the presence of parentNode here as it's already covered above
+      if (isFileType) {
+        safelyQueryAndApplyClass(field.parentNode, "label", "error", "remove");
       } else {
         field.classList.remove("error");
       }
     }
   });
+
   if (errors.length) {
     toastNotification(errors[0], "danger");
     return false;
