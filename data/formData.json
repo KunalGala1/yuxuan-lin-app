@@ -406,6 +406,7 @@
     },
     "fields": [
       { "name": "title" },
+      { "name": "title_zh", "label": "标题" },
       {
         "tag": "select",
         "name": "tag",
@@ -449,14 +450,34 @@
       },
       { "name": "title_zh", "required": true, "label": "标题" },
       { "type": "hidden", "name": "slug" },
-      { "tag": "textarea", "name": "description_en", "required": true, "label": "Description" },
-      { "tag": "textarea", "name": "description_zh", "required": true, "label": "描述" },
-      {"name": "author_en", "required": true, "label": "Author"},
-      {"name": "author_zh", "required": true, "label": "作者"},
+      {
+        "tag": "textarea",
+        "name": "description_en",
+        "required": true,
+        "label": "Description"
+      },
+      {
+        "tag": "textarea",
+        "name": "description_zh",
+        "required": true,
+        "label": "描述"
+      },
+      { "name": "author_en", "required": true, "label": "Author" },
+      { "name": "author_zh", "required": true, "label": "作者" },
       { "type": "file", "name": "image", "required": true },
       { "name": "date", "type": "date" },
-      { "tag": "textarea", "name": "content_en", "required": true, "label": "Content" },
-      { "tag": "textarea", "name": "content_zh", "required": true, "label": "内容" }
+      {
+        "tag": "textarea",
+        "name": "content_en",
+        "required": true,
+        "label": "Content"
+      },
+      {
+        "tag": "textarea",
+        "name": "content_zh",
+        "required": true,
+        "label": "内容"
+      }
     ]
   }
 }

@@ -14,145 +14,112 @@
   <body>
     <%- include('../partials/header') %> 
     <%- include('../partials/nav') %>
+    <main id="events" data-cli class='p-4 max-w-[1000px] mx-auto'>
+      <!-- Upcoming Events -->  
+      <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '演出信息' : 'Upcoming Events' %></h2>
+      <div class="wrapper flex justify-center items-start gap wrap">
+        <%
+        events.filter(e => new Date(JSON.parse(e.body).date) >= new Date())
+          .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
+          .forEach(event => {
+        %>
+          <%
+              const body = JSON.parse(event.body); 
+              const title = body['title_' + lang]; 
+              const slug = body.slug; 
+              const image = body.file.location; 
+              const date = body.date; 
+              const time = body.time; 
+              const location = body['location_' + lang];
+              const url = body.url;
+              const work = body['work_' + lang];
+              const performers = body['performers_' + lang];
+              const order = body.order;
+          %>
+          <div class="card p-4 xs:p-8 bg-gray-500/5" data-card>
+            <a href="/events/<%= slug %>?lang=<%= lang %>">
+              <div class="image-container">
+                <img src="<%= image %>" alt="" />
+              </div>
+            </a>
+            <div class="content space-y-6">
+              <h3 class="title">
+                <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
+              </h3>
 
+              <% if (date || time || location) { %>
+                <div>
+                  <% if (date) { %>
+                    <span class="date"><%= date.toLocaleString(lang == 'zh' ? 'zh-CN' : 'en-US')%></span>
+                  <% } %>
 
-    <main id="events" data-cli class='p-4'>
-    <!-- Upcoming Events -->  
-    <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '演出信息' : 'Upcoming Events' %></h2>
-  <div class="wrapper flex justify-center items-start gap wrap">
-    <% events.filter(e => new Date(JSON.parse(e.body).date) >= new Date())
-      .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
-      .forEach(event => { 
-        const body = JSON.parse(event.body); 
-        const title = body['title_' + lang]; 
-        const slug = body.slug; 
-        const image = body.file.location; 
-        const date = body.date; 
-        const time = body.time; 
-        const location = body['location_' + lang];
-        const url = body.url;
-        const work = body['work_' + lang];
-        const performers = body['performers_' + lang];
-        const order = body.order;
-    %>
-    <div class="card p-4 xs:p-8 bg-gray-500/5">
-      <a href="/events/<%= slug %>?lang=<%= lang %>">
-        <div class="image-container">
-          <img src="<%= image %>" alt="" />
-        </div>
-      </a>
-      <div class="content space-y-6">
-        <h3 class="title">
-          <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
-        </h3>
+                  <% if (time) { %>
+                    <span class="time"><%= time %></span>
+                  <% } %>
 
-        <% if (date || time || location) { %>
-        <div>
-
-        <% if (date) { %>
-          <span class="date"><%= date.toLocaleString(lang == 'zh' ? 'zh-CN' : 'en-US')%></span>
-        <% } %>
-
-        <% if (time) { %>
-          <span class="time"><%= time %></span>
-        <% } %>
-
-        <% if (location) { %>
-          <span><%= location %></span>
-        <% } %>
-
-        </div>
-        <% } %>
-
-        <% if (url) { %>
-          <a href="<%= url %>" target='_blank' class='inline-block bg-light-blue text-main font-sans text-sm rounded-sm py-2 px-3 my-4 hover:bg-slate-300'><%= lang == 'zh' ? '活动链接' : 'Event Link'; %></a>
-        <% } %>
-
-        <% if (work) { %>
-          <div class='font-sans text-sm'><%= lang == 'zh' ? '特色作品' : 'Featured Work' %>: <strong><%= work %></strong></div>
-        <% } %>
-
-        <% if (performers) { %>
-          <div class='font-sans text-sm'><%- performers %></div>
-        <% } %>
-
-        <% if (order) { %>
-          <div class='font-sans text-sm'><%= lang == 'zh' ? '节目单序次' : 'Order on program'; %>: <strong><%= order %></strong></div>
-        <% } %>
-
+                  <% if (location) { %>
+                    <span><%= location %></span>
+                  <% } %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
       </div>
-    </div>
-    <% }) %>
-  </div>
 
-  <!-- Past Events -->
-    <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '过去的演出' : 'Past Events' %></h2>
-  <div class="wrapper p-4 flex justify-center items-start gap wrap">
-    <% events.filter(e => new Date(JSON.parse(e.body).date) < new Date())
-      .sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date))
-      .forEach(event => { 
-        const body = JSON.parse(event.body); 
-        const title = body['title_' + lang]; 
-        const slug = body.slug; 
-        const image = body.file.location; 
-        const date = body.date; 
-        const time = body.time; 
-        const location = body['location_' + lang];
-        const url = body.url;
-        const work = body['work_' + lang];
-        const performers = body['performers_' + lang];
-        const order = body.order;
-    %>
-    <div class="card p-8 bg-gray-500/5">
-      <a href="/events/<%= slug %>?lang=<%= lang %>">
-        <div class="image-container">
-          <img src="<%= image %>" alt="" />
-        </div>
-      </a>
-      <div class="content space-y-6">
-        <h3 class="title">
-          <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
-        </h3>
+      <!-- Past Events -->
+      <h2 class='text-xl text-center font-serif my-8'><%= lang == 'zh' ? '过去的演出' : 'Past Events' %></h2>
+      <div class="space-y-8">
+        <%
+        const pastEvents = events.filter((event) => new Date(JSON.parse(event.body).date) < new Date());
+        const orderedPastEvents = pastEvents.sort((a, b) => new Date(JSON.parse(b.body).date) - new Date(JSON.parse(a.body).date));
 
-        <% if (date || time || location) { %>
-        <div>
+        orderedPastEvents.forEach(event => {
+        %>          
+          <%
+              const body = JSON.parse(event.body); 
+              const title = body['title_' + lang]; 
+              const slug = body.slug; 
+              const image = body.file.location; 
+              const date = body.date; 
+              const time = body.time; 
+              const location = body['location_' + lang];
+              const url = body.url;
+              const work = body['work_' + lang];
+              const performers = body['performers_' + lang];
+              const order = body.order;
+          %>
+          <div class="sm:p-8 p-2 flex flex-col sm:flex-row gap-4" data-card>
+            <!-- Image -->
+            <a href="/events/<%= slug %>?lang=<%= lang %>" class="block w-[200px] max-h-[150px]">
+              <img src="<%= image %>" alt="" class="w-full h-full object-cover object-center rounded-sm" />              
+            </a>
 
-        <% if (date) { %>
-          <span class="date"><%= date.toLocaleString(lang == 'zh' ? 'zh-CN' : 'en-US') %></span>
-        <% } %>
+            <div class="font-serif">
+              <h3 class="font-bold">
+                <a href="/events/<%= slug %>?lang=<%= lang %>"><%= title %></a>
+              </h3>
 
-        <% if (time) { %>
-          <span class="time"><%= time %></span>
-        <% } %>
+              <% if (date || time || location) { %>
+                <div class="italic flex flex-col">
+                  <% if (date) { %>
+                    <span class="date"><%= date.toLocaleString(lang == 'zh' ? 'zh-CN' : 'en-US') %></span>
+                  <% } %>
 
-        <% if (location) { %>
-          <span><%= location %></span>
-        <% } %>
+                  <% if (time) { %>
+                    <span class="time"><%= time %></span>
+                  <% } %>
 
-        </div>
-        <% } %>
-
-        <% if (url) { %>
-          <a href="<%= url %>" target='_blank' class='inline-block bg-light-blue text-main font-sans text-sm rounded-sm py-2 px-3 my-4 hover:bg-slate-300'><%= lang == 'zh' ? '活动链接' : 'Event Link'; %></a>
-        <% } %>
-
-        <% if (work) { %>
-          <div class='font-sans text-sm'><%= lang == 'zh' ? '特色作品' : 'Featured Work' %>: <strong><%= work %></strong></div>
-        <% } %>
-
-        <% if (performers) { %>
-          <div class='font-sans text-sm'><%- performers %></div>
-        <% } %>
-
-        <% if (order) { %>
-          <div class='font-sans text-sm'><%= lang == 'zh' ? '节目单序次' : 'Order on program'; %>: <strong><%= order %></strong></div>
-        <% } %>
-
+                  <% if (location) { %>
+                    <span><%= location %></span>
+                  <% } %>
+                </div>
+              <% } %>              
+            </div>
+          </div>
+        <% }) %>
       </div>
-    </div>
-    <% }) %>
-  </div>
-</main>
+    </main>
 
 
 
@@ -163,7 +130,7 @@
       import { convertTime } from '../js/utils.js';
       import { formatDate } from '../js/utils.js';
 
-      document.querySelectorAll('#events[data-cli] .card').forEach((card) => {
+      document.querySelectorAll('[data-card]').forEach((card) => {
         // Convert time to 12 hour format
         let timeElement = card.querySelector('span.time');
         if (timeElement) {

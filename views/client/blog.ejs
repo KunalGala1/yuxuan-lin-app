@@ -29,7 +29,7 @@
     <div class="flex justify-center gap-8 m-8 flex-wrap">
         <% posts.forEach((obj, index) => { %>
             <% const post = JSON.parse(obj.body) %>
-            <div class='bg-slate-200 rounded-sm shadow md:max-w-[328px]'>
+            <div class='bg-slate-200 rounded-sm shadow md:max-w-[328px] md:text-lg'>
                 <div class='p-4 bg-slate-300/50'>
                   <a href='/blog/<%= post.slug %>?lang=<%= lang %>'>
                     <h2 class="text-slate-800 font-bold text-lg"><%= post['title_' + lang] %></h2>

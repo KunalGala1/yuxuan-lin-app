@@ -2,62 +2,80 @@
 
 <!DOCTYPE html>
 <html lang="<%= lang %>">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('../partials/head') %>
     <title><%= yuxuan %> | <%= lang == 'zh' ? '链接' : 'Links' %></title>
-  </head>
-
-  <body>
-    <%- include('../partials/header') %> <%- include('../partials/nav') %>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <%- include('../partials/nav') %>
 
     <main class="max-w-lg mx-auto p-8">
-    
-      <section class="space-y-8">
+        <section class="space-y-8">
+            <%
+                let groupedLinks = {};
+                links.forEach(link => {
+                    const body = JSON.parse(link.body);
+                    const tag = body.tag || 'Additional Links';
+                    if (!groupedLinks[tag]) {
+                        groupedLinks[tag] = [];
+                    }
+                    groupedLinks[tag].push(link);
+                });
 
+                for (let tag in groupedLinks) {
+                    groupedLinks[tag].sort((a, b) => {
+                        const titleA = JSON.parse(a.body).title.toLowerCase();
+                        const titleB = JSON.parse(b.body).title.toLowerCase();
+                        return titleA < titleB ? -1 : (titleA > titleB ? 1 : 0);
+                    });
+                }
+            %>
 
-        <%
-    let groupedLinks = {};
-    links.forEach(link => {
-        const body = JSON.parse(link.body);
-        const tag = body.tag || 'Additional Links';
-        if (!groupedLinks[tag]) {
-            groupedLinks[tag] = [];
-        }
-        groupedLinks[tag].push(link);
-    });
-
-    for (let tag in groupedLinks) {
-        groupedLinks[tag].sort((a, b) => {
-            const titleA = JSON.parse(a.body).title.toLowerCase();
-            const titleB = JSON.parse(b.body).title.toLowerCase();
-            return titleA < titleB ? -1 : (titleA > titleB ? 1 : 0);
-        });
-    }
-%>
-
-<% for (let tag in groupedLinks) { %>
-    <div class="tag-group flex gap-8">
-        <h2 class="font-sans capitalize text-lg"><%= tag %></h2>
-        <div class="links-container space-y-2"> <!-- Container for flex styling -->
-            <% groupedLinks[tag].forEach(link => { %>
-                <% const body = JSON.parse(link.body); %>
-                <div class="link-item font-sans">
-                    <a href="<%= body.url %>" target='_blank' class='text-blue-400/90'><%= body.title %></a><span class='text-slate-50/50'>, <%= body['description_' + lang] %></span>
-                  </div>
-                  <% }); %>
-                  </div>
+            <% for (let tag in groupedLinks) { %>
+                <div class="tag-group flex gap-8">
+                    <h2 class="font-sans capitalize text-lg">
+                        <% if (lang === 'zh') { %>
+                            <% if (tag === 'artists in non-music disciplinaries') { %>
+                                <span>非音乐领域的艺术家</span>
+                            <% } else if (tag === 'performers') { %>
+                                <span>表演者</span>
+                            <% } else if (tag === 'conductors') { %>
+                                <span>指挥</span>
+                            <% } else if (tag === 'formal / current teachers') { %>
+                                <span>正式/现任教师</span>
+                            <% } else if (tag === 'schools') { %>
+                                <span>学校</span>
+                            <% } else if (tag === 'festivals') { %>
+                                <span>节日</span>
+                            <% } %>
+                        <% } else { %>
+                            <%= tag %>
+                        <% } %>
+                    </h2>
+                    <div class="links-container space-y-2">
+                        <% groupedLinks[tag].forEach(link => { %>
+                            <% const body = JSON.parse(link.body); %>
+                            <div class="link-item font-sans">
+                                <a href="<%= body.url %>" target='_blank' class='text-blue-400/90'>
+                                    <% if (lang === 'zh' && body.title_zh !== '') { %>
+                                        <%= body.title_zh %>
+                                    <% } else { %>
+                                        <%= body.title %>
+                                    <% } %>
+                                </a>
+                                <span class='text-slate-400/90 ml-1'><%= body['description_' + lang] %></span>
+                            </div>
+                        <% }); %>
                     </div>
-              
-              <% } %>
-
-
-
-      </section>
+                </div>
+            <% } %>
+        </section>
     </main>
 
     <%- include('../partials/footer') %>
-  </body>
+</body>
 </html>
