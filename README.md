@@ -1,4 +1,4 @@
-![logo](/public/img/logo-dark.svg)
+![logo](/public/img/logo-light.svg)
 
 This is the website of [Yuxuan Lin](https://yuxuan-lin.com/)!
 
