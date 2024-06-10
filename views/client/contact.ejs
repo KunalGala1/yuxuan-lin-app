@@ -8,64 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('../partials/head') %>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-
-    <script>
-      async function onSubmit(token){
-        const form = document.getElementById("contact-form");
-        if (!form) return;
-        const lang = document.documentElement.lang;            
-
-        const formData = new FormData(form);
-        let formObject = {};
-        for (let [key, value] of formData.entries()) {
-            formObject[key] = value;
-        }
-
-        const { name, email, subject } = formObject;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!name || !email || !subject) {
-            toastNotification(lang === "zh" ? "所有必填字段必须填写完整" : "All required fields must be filled out", "danger", 5000);
-            return false;
-        } else if (!emailRegex.test(email)) {
-            toastNotification(lang === "zh" ? "请输入一个有效的电子邮件地址" : "Please enter a valid email address", "danger", 5000);
-            return false;
-        }
-
-        try {
-            const response = await fetch("/mailsend", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", },
-                body: JSON.stringify(formObject),
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            toastNotification(data.msg, "success", 5000);
-            form.reset();
-        } catch (error) {
-            console.error("There was a problem with the fetch operation:", error);
-            toastNotification(`Error: ${error.message}`, "danger", 5000);
-        }        
-
-        function toastNotification(message, type, duration = 1000) {
-            const notification = document.createElement("div");
-            notification.classList.add("toast-notification", "active", type, "transition", "shadow");
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.classList.remove("active");
-                setTimeout(() => {
-                    notification.remove();
-                }, 250);
-            }, duration);
-        }
-      }        
-    </script>
+    <!-- Cloudflare turnstile script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <title><%= yuxuan %> | <%= lang == 'zh' ? '联系' : 'Contact' %></title>
 </head>
@@ -110,9 +54,18 @@
                         <textarea name="message" cols="30" rows="10"></textarea>
                     </div>
                 </div>
+
+                <!-- Cloudflare turnstile -->
+                <div class="item">
+                <div class="subitem flex justify-end">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAcS0F8ubTaR7kgH"></div>
+                </div>
+                </div>
+
+                <!-- Submit button -->
                 <div class="item">
                     <div class="subitem">
-                        <button type="submit" class="g-recaptcha py-2 px-4 rounded-sm bg-light-blue text-main hover:bg-slate-300 font-sans" data-sitekey="6LdZh5YpAAAAACtzwCh-P5AIjPha-zDmSIQIGRgB" data-callback="onSubmit" data-action="submit">
+                        <button type="submit" class="py-2 px-4 rounded-sm bg-light-blue text-main hover:bg-slate-300 font-sans">
                             <%= lang == 'zh' ? '发送' : 'Send' %> <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
